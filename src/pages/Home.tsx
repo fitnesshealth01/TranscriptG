@@ -410,16 +410,16 @@ export const Home: React.FC = () => {
 
       {/* SECTION 7: CLOSING CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <div className="glass-card p-10 sm:p-16 rounded-3xl border border-black/10 text-center relative overflow-hidden bg-gradient-to-br from-[#0d0f12] to-[#1a1e24] text-white">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#ff4d00]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="glass-card p-10 sm:p-16 rounded-3xl border border-black/10 text-center relative overflow-hidden bg-gradient-to-br from-white via-neutral-50 to-amber-50/30 text-black">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#ff4d00]/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <span className="px-3 py-1 rounded-full bg-white/10 text-[#00d9ff] text-xs font-mono font-bold uppercase tracking-widest border border-white/10">
+            <span className="px-3 py-1 rounded-full bg-black/5 text-[#ff4d00] text-xs font-mono font-bold uppercase tracking-widest border border-black/10">
               Instant Access
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-black leading-tight">
               Ready to transform your audio into actionable knowledge?
             </h2>
-            <p className="text-neutral-300 text-base">
+            <p className="text-black text-base font-medium">
               No account, no signups, no watermarks. Experience precision transcription right now.
             </p>
             <div className="pt-2">
