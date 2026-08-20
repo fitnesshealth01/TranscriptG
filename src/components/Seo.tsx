@@ -181,7 +181,17 @@ export const Seo: React.FC<SeoProps> = ({
 
     const finalData = jsonLd ? jsonLd : { "@context": "https://schema.org", "@graph": graph };
     scriptTag.textContent = JSON.stringify(finalData);
-  }, [title, description, type, canonicalUrl, jsonLd, faqs, author, datePublished, siteUrl]);
+
+    // Google Analytics SPA Page View Tracking
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "page_view", {
+        page_title: formattedTitle,
+        page_location: canonicalUrl,
+        page_path: currentPath,
+        send_to: "G-BVZ9V3TN4V",
+      });
+    }
+  }, [title, description, type, canonicalUrl, currentPath, jsonLd, faqs, author, datePublished, siteUrl]);
 
   return null;
 };
