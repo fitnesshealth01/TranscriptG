@@ -78,8 +78,9 @@ export const ConvertPage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="Subtitle Format Converter (SRT ↔ VTT ↔ TXT ↔ JSON) — TranscriptG"
-        description="Convert SRT, VTT, TXT, and JSON subtitle files losslessly. Auto-detect formats and re-export to PDF, DOCX, or Markdown."
+        title="Free SRT Converter & Subtitle Format Translator (SRT, VTT, JSON)"
+        description="Instant closed-caption & subtitle format converter. Convert SRT to VTT, VTT to SRT, JSON, or plain text. Real-time preview, timecode parsing, 100% free."
+        keywords="SRT converter, VTT converter, srt to vtt, vtt to srt, subtitle converter, closed caption converter, srt to json, subtitle timecode editor"
       />
 
       <PageHeader

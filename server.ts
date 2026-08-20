@@ -306,6 +306,7 @@ app.get("/sitemap.xml", (req, res) => {
     "/blog/how-transcriptg-works",
     "/blog/transcription-tips",
     "/blog/srt-vs-vtt",
+    "/blog/ai-meeting-summarizer-guide",
   ];
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -338,6 +339,73 @@ app.get("/robots.txt", (req, res) => {
 Allow: /
 Sitemap: ${baseUrl}/sitemap.xml
 `);
+});
+
+// Ads.txt route for Google AdSense compliance
+app.get("/ads.txt", (_req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.send(`google.com, pub-9246342607636743, DIRECT, f08c47fec0942fa0
+`);
+});
+
+// RSS 2.0 Feed Route for Off-Page Syndication & News Search Indexing
+app.get(["/rss.xml", "/feed.xml"], (req, res) => {
+  const host = req.headers.host || "transcriptg.com";
+  const protocol = req.headers["x-forwarded-proto"] || "https";
+  const baseUrl = `${protocol}://${host}`;
+
+  const posts = [
+    {
+      slug: "how-transcriptg-works",
+      title: "How TranscriptG Works: Inside Our Privacy-First Acoustic Engine",
+      description: "An architectural overview of sub-second speech processing, acoustic timecode generation, and session-private data handling.",
+      pubDate: "Fri, 01 Aug 2026 00:00:00 GMT",
+    },
+    {
+      slug: "transcription-tips",
+      title: "10 Proven Tips for Achieving 99%+ Speech Transcription Accuracy",
+      description: "Learn how microphone placement, sample rate normalization, and background noise isolation drastically elevate transcript quality.",
+      pubDate: "Sat, 02 Aug 2026 00:00:00 GMT",
+    },
+    {
+      slug: "srt-vs-vtt",
+      title: "SRT vs. VTT: Which Subtitle Format Should You Use in 2026?",
+      description: "A definitive comparison between SubRip (SRT) and Web Video Text Tracks (VTT) for YouTube, HTML5 video, and video editing suites.",
+      pubDate: "Sun, 03 Aug 2026 00:00:00 GMT",
+    },
+    {
+      slug: "ai-meeting-summarizer-guide",
+      title: "How to Convert Zoom & Teams Meeting Audio into Actionable AI Digests",
+      description: "A practical guide for executives and remote teams to extract decision logs, action items, and executive summaries from recordings.",
+      pubDate: "Mon, 04 Aug 2026 00:00:00 GMT",
+    },
+  ];
+
+  const rssXml = `<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>TranscriptG Journal & Engineering Insights</title>
+  <link>${baseUrl}/blog</link>
+  <description>High-precision audio transcription, subtitle conversion guides, and AI speech intelligence engineering notes.</description>
+  <language>en-us</language>
+  <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
+  ${posts
+    .map(
+      (p) => `
+  <item>
+    <title>${p.title}</title>
+    <link>${baseUrl}/blog/${p.slug}</link>
+    <guid>${baseUrl}/blog/${p.slug}</guid>
+    <description>${p.description}</description>
+    <pubDate>${p.pubDate}</pubDate>
+  </item>`
+    )
+    .join("")}
+</channel>
+</rss>`;
+
+  res.setHeader("Content-Type", "application/xml");
+  res.send(rssXml);
 });
 
 // Global Express Error Handler (returns JSON instead of default HTML)

@@ -4,11 +4,13 @@ import { Logo } from "./Logo";
 import { FloatingDock } from "./FloatingDock";
 import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
+import { CookieConsent } from "./CookieConsent";
 
 export const Layout: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#faf9f6] text-[#0d0f12] relative font-sans antialiased">
       <ScrollToTop />
+      <CookieConsent />
 
       {/* Top Header */}
       <header className="sticky top-0 z-40 bg-[#faf9f6]/80 backdrop-blur-md border-b border-black/5 px-4 sm:px-8 py-3.5 flex items-center justify-between">

@@ -144,8 +144,9 @@ export const ProcessPage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="Text Intelligence Engine (Summarize, Translate, Polish) — TranscriptG"
-        description="Run AI intelligence operations on transcripts or raw text. Summarize, translate across 90+ languages, extract key points, and generate titles & chapters."
+        title="AI Speech Summarizer, Text Intelligence & Translation Suite"
+        description="Summarize long transcripts, generate key action items, translate speech to 90+ languages, and polish grammar. Privacy-first, instant output."
+        keywords="speech summarizer, text summarizer, transcript summarizer, audio summarizer, speech translator, translate transcript, action items generator"
       />
 
       <PageHeader

@@ -110,8 +110,9 @@ export const TranscribePage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="Audio & Video Transcribe Engine — TranscriptG"
-        description="High-precision speech-to-text engine with auto timestamps, AI summary, and multi-format export in 90+ languages. No login required."
+        title="Speech to Text & Audio Transcription Engine — Free Online App"
+        description="Free speech to text & video transcription tool. Convert MP3, WAV, MP4 to timecoded transcripts with AI summaries in 90+ languages. No login, no watermark."
+        keywords="speech to text, audio transcription, video transcription, transcribe mp3 to text, transcribe video, free audio transcriber, transcript generator"
       />
 
       <PageHeader

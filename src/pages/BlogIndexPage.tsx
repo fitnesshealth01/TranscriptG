@@ -30,6 +30,14 @@ export const BlogIndexPage: React.FC = () => {
       category: "Guides",
       date: "August 2026",
     },
+    {
+      slug: "ai-meeting-summarizer-guide",
+      title: "How to Convert Zoom & Teams Meeting Audio into Actionable AI Digests",
+      desc: "A practical guide for executives and remote teams to extract decision logs, action items, and executive summaries from recordings.",
+      readTime: "7 min read",
+      category: "Workflows",
+      date: "August 2026",
+    },
   ];
 
   return (

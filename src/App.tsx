@@ -1,40 +1,56 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { Home } from "./pages/Home";
-import { TranscribePage } from "./pages/TranscribePage";
-import { ConvertPage } from "./pages/ConvertPage";
-import { ProcessPage } from "./pages/ProcessPage";
-import { AboutPage } from "./pages/AboutPage";
-import { PrivacyPage } from "./pages/PrivacyPage";
-import { TermsPage } from "./pages/TermsPage";
-import { ContactPage } from "./pages/ContactPage";
-import { BlogIndexPage } from "./pages/BlogIndexPage";
-import { BlogPost1 } from "./pages/BlogPost1";
-import { BlogPost2 } from "./pages/BlogPost2";
-import { BlogPost3 } from "./pages/BlogPost3";
-import { NotFoundPage } from "./pages/NotFoundPage";
+import { Loader2 } from "lucide-react";
+
+// Lazy-loaded page components for bundle-size optimization
+const Home = React.lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
+const TranscribePage = React.lazy(() => import("./pages/TranscribePage").then((m) => ({ default: m.TranscribePage })));
+const ConvertPage = React.lazy(() => import("./pages/ConvertPage").then((m) => ({ default: m.ConvertPage })));
+const ProcessPage = React.lazy(() => import("./pages/ProcessPage").then((m) => ({ default: m.ProcessPage })));
+const AboutPage = React.lazy(() => import("./pages/AboutPage").then((m) => ({ default: m.AboutPage })));
+const PrivacyPage = React.lazy(() => import("./pages/PrivacyPage").then((m) => ({ default: m.PrivacyPage })));
+const TermsPage = React.lazy(() => import("./pages/TermsPage").then((m) => ({ default: m.TermsPage })));
+const ContactPage = React.lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
+const BlogIndexPage = React.lazy(() => import("./pages/BlogIndexPage").then((m) => ({ default: m.BlogIndexPage })));
+const BlogPost1 = React.lazy(() => import("./pages/BlogPost1").then((m) => ({ default: m.BlogPost1 })));
+const BlogPost2 = React.lazy(() => import("./pages/BlogPost2").then((m) => ({ default: m.BlogPost2 })));
+const BlogPost3 = React.lazy(() => import("./pages/BlogPost3").then((m) => ({ default: m.BlogPost3 })));
+const BlogPost4 = React.lazy(() => import("./pages/BlogPost4").then((m) => ({ default: m.BlogPost4 })));
+const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
+
+const PageFallbackLoader: React.FC = () => (
+  <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
+    <div className="p-4 rounded-2xl bg-white shadow-xl border border-black/10 flex items-center gap-3">
+      <Loader2 className="w-5 h-5 text-[#ff4d00] animate-spin" />
+      <span className="text-xs font-mono font-bold text-[#0d0f12]">Loading Engine View...</span>
+    </div>
+  </div>
+);
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="transcribe" element={<TranscribePage />} />
-          <Route path="convert" element={<ConvertPage />} />
-          <Route path="process" element={<ProcessPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="privacy" element={<PrivacyPage />} />
-          <Route path="terms" element={<TermsPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="blog" element={<BlogIndexPage />} />
-          <Route path="blog/how-transcriptg-works" element={<BlogPost1 />} />
-          <Route path="blog/transcription-tips" element={<BlogPost2 />} />
-          <Route path="blog/srt-vs-vtt" element={<BlogPost3 />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<PageFallbackLoader />}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="transcribe" element={<TranscribePage />} />
+            <Route path="convert" element={<ConvertPage />} />
+            <Route path="process" element={<ProcessPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="privacy" element={<PrivacyPage />} />
+            <Route path="terms" element={<TermsPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="blog" element={<BlogIndexPage />} />
+            <Route path="blog/how-transcriptg-works" element={<BlogPost1 />} />
+            <Route path="blog/transcription-tips" element={<BlogPost2 />} />
+            <Route path="blog/srt-vs-vtt" element={<BlogPost3 />} />
+            <Route path="blog/ai-meeting-summarizer-guide" element={<BlogPost4 />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
