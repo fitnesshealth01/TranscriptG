@@ -3,6 +3,7 @@ import { Seo } from "../components/Seo";
 import { PageHeader } from "../components/PageHeader";
 import { Manuscript } from "../components/Manuscript";
 import { ExportSuite } from "../components/ExportSuite";
+import { ConvertGuide } from "../components/ConvertGuide";
 import {
   CueSegment,
   detectFormat,
@@ -200,6 +201,9 @@ export const ConvertPage: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Detailed Tool Guide */}
+        <ConvertGuide />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Seo } from "../components/Seo";
 import { PageHeader } from "../components/PageHeader";
 import { ExportSuite } from "../components/ExportSuite";
+import { ProcessGuide } from "../components/ProcessGuide";
 import { SUPPORTED_LANGUAGES, parseTXT } from "../lib/transcript";
 import {
   Cpu,
@@ -311,6 +312,9 @@ export const ProcessPage: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Detailed Tool Guide */}
+        <ProcessGuide />
       </div>
     </div>
   );

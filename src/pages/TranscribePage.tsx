@@ -5,6 +5,7 @@ import { DropZone } from "../components/DropZone";
 import { ProcessingView } from "../components/ProcessingView";
 import { Manuscript } from "../components/Manuscript";
 import { ExportSuite } from "../components/ExportSuite";
+import { TranscribeGuide } from "../components/TranscribeGuide";
 import { CueSegment, SUPPORTED_LANGUAGES } from "../lib/transcript";
 import { Sparkles, RefreshCw, AlertCircle, ShieldCheck, Zap, Globe2, HelpCircle } from "lucide-react";
 
@@ -268,6 +269,9 @@ export const TranscribePage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Detailed Tool Documentation Guide */}
+        <TranscribeGuide />
       </div>
     </div>
   );
