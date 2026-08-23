@@ -40,3 +40,68 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   article17_audioArchivesJsonTranscripts,
   article18_asrEvolutionWhisperGemini,
 ];
+
+/**
+ * Returns 3 related articles for a given article, honoring explicit `relatedSlugs`
+ * or dynamically picking by category/keyword similarity.
+ */
+export function getRelatedArticles(currentArticle: BlogArticle, count = 3): BlogArticle[] {
+  const result: BlogArticle[] = [];
+  const addedSlugs = new Set<string>([currentArticle.slug]);
+
+  // 1. Explicitly mapped related slugs
+  if (currentArticle.relatedSlugs && currentArticle.relatedSlugs.length > 0) {
+    for (const slug of currentArticle.relatedSlugs) {
+      if (result.length >= count) break;
+      const found = BLOG_ARTICLES.find((a) => a.slug === slug);
+      if (found && !addedSlugs.has(found.slug)) {
+        result.push(found);
+        addedSlugs.add(found.slug);
+      }
+    }
+  }
+
+  // 2. Match by exact category
+  if (result.length < count) {
+    const sameCategory = BLOG_ARTICLES.filter(
+      (a) => a.category === currentArticle.category && !addedSlugs.has(a.slug)
+    );
+    for (const a of sameCategory) {
+      if (result.length >= count) break;
+      result.push(a);
+      addedSlugs.add(a.slug);
+    }
+  }
+
+  // 3. Fallback: select other top articles
+  if (result.length < count) {
+    for (const a of BLOG_ARTICLES) {
+      if (result.length >= count) break;
+      if (!addedSlugs.has(a.slug)) {
+        result.push(a);
+        addedSlugs.add(a.slug);
+      }
+    }
+  }
+
+  return result.slice(0, count);
+}
+
+/**
+ * Returns previous and next articles in chronological / index order for smooth linear navigation
+ */
+export function getAdjacentArticles(currentSlug: string): {
+  previous: BlogArticle | null;
+  next: BlogArticle | null;
+} {
+  const currentIndex = BLOG_ARTICLES.findIndex((a) => a.slug === currentSlug);
+  if (currentIndex === -1) {
+    return { previous: null, next: null };
+  }
+
+  const previous = currentIndex > 0 ? BLOG_ARTICLES[currentIndex - 1] : null;
+  const next = currentIndex < BLOG_ARTICLES.length - 1 ? BLOG_ARTICLES[currentIndex + 1] : null;
+
+  return { previous, next };
+}
+

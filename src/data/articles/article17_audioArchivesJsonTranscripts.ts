@@ -1,172 +1,91 @@
 import { BlogArticle } from "./types";
 
 export const article17_audioArchivesJsonTranscripts: BlogArticle = {
-  slug: "building-searchable-audio-archives-json-transcripts",
-  title: "Building Searchable Audio Archives with JSON Transcripts: React, Elasticsearch & Full-Text Indexing",
-  metaTitle: "Building Searchable Audio Archives with JSON Transcripts & React",
-  metaDescription: "Learn how to build interactive web audio players with click-to-seek, real-time word highlighting, Elasticsearch full-text indexing, and JSON transcripts.",
-  keywords: "searchable audio archive, json transcript react, interactive transcript player, elasticsearch audio search, click to seek audio, web audio player captions",
-  category: "Engineering",
-  readTime: "16 min read",
+  slug: "audio-archives-json-transcripts-semantic-search",
+  title: "Modernizing Legacy Audio Archives: JSON Transcripts, Vector Search & Semantic Discovery",
+  metaTitle: "Audio Archives to JSON & Vector Search Guide (2026)",
+  metaDescription: "Learn how to digitize legacy audio collections into structured JSON transcripts and vector embeddings for semantic search, RAG pipelines, and digital preservation.",
+  keywords: "audio archive digitization, JSON transcript format, vector search audio, semantic search speech, RAG audio pipeline, audio digital preservation",
+  category: "Architecture",
+  readTime: "14 min read",
   date: "August 2026",
-  author: "TranscriptG Full-Stack & UI Engineering Lab",
-  authorRole: "Frontend Systems Architects & Search Indexing Engineers",
-  summary: "A complete software engineering tutorial on building interactive, searchable web audio libraries using structured JSON transcripts, React click-to-seek interfaces, and Elasticsearch full-text search.",
+  author: "TranscriptG Data Architecture Group",
+  authorRole: "Information Retrieval & Vector Database Engineers",
+  summary: "A technical blueprint for libraries, broadcast networks, and enterprises digitizing massive audio repositories into structured JSON datasets and vector embeddings for instant semantic search.",
   tableOfContents: [
-    { id: "structured-audio-data", title: "1. Why Plain Text Is Insufficient for Modern Media Apps" },
-    { id: "transcript-json-schema", title: "2. The TranscriptG JSON Schema Standard" },
-    { id: "react-interactive-player", title: "3. Building an Interactive Click-to-Seek Player in React" },
-    { id: "word-highlighting-sync", title: "4. Synchronized Real-Time Word Highlighting" },
-    { id: "elasticsearch-indexing", title: "5. Full-Text Search Indexing with Elasticsearch / Meilisearch" },
-    { id: "faqs", title: "6. Frequently Asked Questions" },
+    { id: "the-dark-data-archive-problem", title: "1. The 'Dark Data' Crisis in Audio Archives" },
+    { id: "structured-json-transcript-schema", title: "2. The Standardized Archive JSON Transcript Schema" },
+    { id: "vector-embeddings-semantic-search", title: "3. Generating Vector Embeddings for Semantic Discovery" },
+    { id: "rag-pipeline-integration", title: "4. Integrating Audio Knowledge into Enterprise RAG Systems" },
+    { id: "preservation-standards-metadata", title: "5. Long-Term Preservation Standards & Dublin Core Metadata" },
+    { id: "transcriptg-migration-architecture", title: "6. Mass Digitization Pipelines with TranscriptG" },
   ],
   content: `
-## Why Plain Text Is Insufficient for Modern Media Apps
+<h2 id="the-dark-data-archive-problem">1. The 'Dark Data' Crisis in Audio Archives</h2>
+<p>Broadcast networks, government agencies, universities, and enterprise legal departments possess hundreds of thousands of hours of historical audio and video tapes. Without accurate textual indexes, these archives become "dark data"—vast repositories of knowledge that cannot be searched, cited, or mined for insights.</p>
+<p>Converting analog tapes and legacy audio files into structured JSON transcripts unlocks full-text search, automated metadata classification, and semantic AI queries across entire historical archives.</p>
 
-While plain text and standard \`.srt\` files are suitable for traditional linear video playback, modern media web applications require **structured JSON data** to power rich, interactive user experiences:
-- **Click-to-Seek Audio Navigation:** Allowing users to click on any sentence in the transcript and instantly jump the audio playback head to that exact millisecond.
-- **Synchronized Real-Time Word Highlighting:** Visually highlighting the active sentence or word in real time as the speaker talks.
-- **Deep In-Audio Keyword Search:** Enabling users to query thousands of hours of audio archives and jump directly to the exact point where a topic is discussed.
+<hr />
 
-In this engineering guide, we examine the TranscriptG JSON transcript schema and implement a production-ready **React click-to-seek audio player**.
+<h2 id="structured-json-transcript-schema">2. The Standardized Archive JSON Transcript Schema</h2>
+<p>Digital archivists require structured schemas that capture speaker identities, word-level confidence scores, and millisecond timestamps (see parsing implementations in our <a href="/blog/developer-guide-parsing-srt-vtt-json-subtitles">Developer's Parsing Guide</a>):</p>
 
----
-
-## 1. The TranscriptG JSON Schema Standard
-
-When you export a structured JSON transcript from TranscriptG, the payload follows this schema:
-
-\`\`\`json
-{
-  "version": "1.0.0",
-  "metadata": {
-    "languageDetected": "en",
-    "durationSeconds": 184.2,
-    "confidenceScore": 0.994,
-    "generatedAt": "2026-08-23T12:00:00Z"
+<pre><code>{
+  "archiveId": "ARCH-2026-08942",
+  "mediaMetadata": {
+    "title": "Oral History: Semiconductor Innovations",
+    "recordedDate": "1984-06-12",
+    "durationMs": 3745200,
+    "sampleRateHz": 44100,
+    "channels": 1
   },
-  "summary": "Executive summary of the technical discussion...",
+  "speakers": [
+    { "id": "SPK_01", "name": "Dr. Eleanor Vance", "role": "Principal Physicist" },
+    { "id": "SPK_02", "name": "Marcus Holloway", "role": "Interviewer" }
+  ],
   "segments": [
     {
-      "id": 1,
-      "start": "00:00:01.200",
-      "end": "00:00:05.800",
-      "startSeconds": 1.2,
-      "endSeconds": 5.8,
-      "text": "Welcome to our developer integration workshop.",
-      "speaker": "Speaker 1",
-      "confidence": 0.998
-    },
-    {
-      "id": 2,
-      "start": "00:00:06.100",
-      "end": "00:00:10.450",
-      "startSeconds": 6.1,
-      "endSeconds": 10.45,
-      "text": "Today we are implementing click-to-seek audio in React.",
-      "speaker": "Speaker 1",
-      "confidence": 0.995
+      "segmentId": 1,
+      "speakerId": "SPK_01",
+      "startMs": 14200,
+      "endMs": 19850,
+      "text": "We realized the silicon gate process would double transistor density.",
+      "tokens": [
+        { "word": "silicon", "startMs": 15100, "endMs": 15600, "confidence": 0.99 },
+        { "word": "gate", "startMs": 15650, "endMs": 16000, "confidence": 0.98 }
+      ]
     }
   ]
-}
-\`\`\`
+}</code></pre>
 
----
+<hr />
 
-## 2. Building an Interactive Click-to-Seek Player in React
+<h2 id="vector-embeddings-semantic-search">3. Generating Vector Embeddings for Semantic Discovery</h2>
+<p>Traditional keyword search fails when searchers do not know the exact terminology used 40 years ago. By generating dense vector embeddings (such as 768-dimensional or 1536-dimensional embeddings) for each transcript segment, users can find relevant audio moments using natural language concepts.</p>
 
-Here is a clean, accessible React component that binds audio playback time with interactive transcript cues:
+<hr />
 
-\`\`\`tsx
-import React, { useRef, useState, useEffect } from "react";
+<h2 id="rag-pipeline-integration">4. Integrating Audio Knowledge into Enterprise RAG Systems</h2>
+<p>Retrieval-Augmented Generation (RAG) systems can ingest structured JSON transcripts, allowing employees or researchers to ask questions like <em>"What were the core safety concerns raised during the 1998 reactor review?"</em> and receive exact answers with audio timecode citations.</p>
 
-interface Segment {
-  id: number;
-  start: string;
-  end: string;
-  startSeconds: number;
-  endSeconds: number;
-  text: string;
-  speaker: string;
-}
+<hr />
 
-interface AudioPlayerProps {
-  audioUrl: string;
-  segments: Segment[];
-}
+<h2 id="preservation-standards-metadata">5. Long-Term Preservation Standards & Dublin Core Metadata</h2>
+<p>To ensure digital archives remain accessible across decades of software evolution, pair JSON transcripts with standardized Dublin Core (ISO 15836) metadata and store archival master copies in open formats (consult our <a href="/blog/audio-formats-codecs-containers-guide">Audio Codecs & Containers Guide</a>).</p>
 
-export const SearchableAudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, segments }) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [activeSegmentId, setActiveSegmentId] = useState<number | null>(null);
+<hr />
 
-  // Track playback time and active subtitle segment
-  const handleTimeUpdate = () => {
-    if (!audioRef.current) return;
-    const time = audioRef.current.currentTime;
-    setCurrentTime(time);
-
-    const active = segments.find(
-      (seg) => time >= seg.startSeconds && time <= seg.endSeconds
-    );
-    setActiveSegmentId(active ? active.id : null);
-  };
-
-  // Jump audio to specific timestamp when cue is clicked
-  const handleSeek = (seconds: number) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = seconds;
-      audioRef.current.play();
-    }
-  };
-
-  return (
-    <div className="p-6 rounded-3xl bg-white border border-black/10 shadow-xl space-y-6">
-      {/* Native HTML5 Audio Controller */}
-      <audio
-        ref={audioRef}
-        src={audioUrl}
-        onTimeUpdate={handleTimeUpdate}
-        controls
-        className="w-full"
-      />
-
-      {/* Interactive Transcript Cue List */}
-      <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
-        {segments.map((seg) => {
-          const isActive = seg.id === activeSegmentId;
-          return (
-            <div
-              key={seg.id}
-              onClick={() => handleSeek(seg.startSeconds)}
-              className={\`p-4 rounded-2xl cursor-pointer transition-all duration-200 \${
-                isActive
-                  ? "bg-[#ff4d00]/10 border border-[#ff4d00]/30 shadow-sm"
-                  : "bg-neutral-50 hover:bg-neutral-100 border border-transparent"
-              }\`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-mono font-bold text-[#ff4d00]">
-                  [{seg.start}]
-                </span>
-                <span className="text-xs font-mono font-semibold text-neutral-500">
-                  {seg.speaker}
-                </span>
-              </div>
-              <p className={\`text-sm leading-relaxed \${isActive ? "font-bold text-[#0d0f12]" : "text-neutral-700"}\`}>
-                {seg.text}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-\`\`\`
-  `,
+<h2 id="transcriptg-migration-architecture">6. Mass Digitization Pipelines with TranscriptG</h2>
+<p>TranscriptG provides fast transcription speeds, millisecond-accurate JSON exports, and zero-retention privacy—making it the ideal engine for digitizing massive historical audio repositories. Explore academic research workflows in our <a href="/blog/academic-qualitative-interview-transcription-guide">Qualitative Interview Guide</a> or start converting audio directly with our <a href="/transcribe">AI Speech Transcriber</a>.</p>
+`,
   faqs: [
-    { q: "How do I export JSON transcripts from TranscriptG?", a: "In TranscriptG Engine 01 or Engine 02, click the 'Export JSON' button to download a structured JSON payload containing start/end seconds, speaker turns, and confidence scores." },
-    { q: "Can I index JSON transcripts into search databases like Elasticsearch?", a: "Yes. The TranscriptG JSON schema maps directly to Elasticsearch document indices, allowing full-text fuzzy search and timestamped document filtering." },
+    { q: "Why is JSON preferred over plain text for audio archives?", a: "JSON preserves structural metadata, speaker identifiers, and millisecond timestamps required for interactive web players and vector database indexing." },
+    { q: "Can I search audio transcripts using semantic concepts instead of exact words?", a: "Yes. By generating vector embeddings from JSON transcripts, semantic search engines find relevant sections even if different words were used." },
+    { q: "What audio formats are best for archival digitization?", a: "Uncompressed 24-bit 96 kHz or 48 kHz Linear PCM WAV files provide the gold standard for long-term acoustic preservation." },
+  ],
+  relatedSlugs: [
+    "developer-guide-parsing-srt-vtt-json-subtitles",
+    "audio-formats-codecs-containers-guide",
+    "academic-qualitative-interview-transcription-guide",
   ],
 };

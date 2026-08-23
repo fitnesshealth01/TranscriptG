@@ -13,4 +13,5 @@ export interface BlogArticle {
   tableOfContents: { id: string; title: string }[];
   content: string;
   faqs?: { q: string; a: string }[];
+  relatedSlugs?: string[];
 }

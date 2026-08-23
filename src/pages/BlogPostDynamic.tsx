@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { Seo } from "../components/Seo";
-import { BLOG_ARTICLES } from "../data/blogArticles";
+import { BLOG_ARTICLES, getRelatedArticles, getAdjacentArticles } from "../data/blogArticles";
 import {
   ArrowLeft,
+  ArrowRight,
   Clock,
   Calendar,
   User,
@@ -16,11 +17,14 @@ import {
   ChevronDown,
   ChevronUp,
   Sparkles,
-  HelpCircle
+  HelpCircle,
+  Compass,
+  FileText
 } from "lucide-react";
 
 export const BlogPostDynamic: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -29,6 +33,9 @@ export const BlogPostDynamic: React.FC = () => {
   if (!article) {
     return <Navigate to="/blog" replace />;
   }
+
+  const relatedArticles = getRelatedArticles(article, 3);
+  const { previous, next } = getAdjacentArticles(article.slug);
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
@@ -41,140 +48,63 @@ export const BlogPostDynamic: React.FC = () => {
   const encodedUrl = typeof window !== "undefined" ? encodeURIComponent(window.location.href) : "";
   const encodedTitle = encodeURIComponent(article.title);
 
-  // Helper to parse content markdown into rich JSX
-  const renderFormattedContent = (content: string) => {
-    const paragraphs = content.trim().split("\n\n");
+  // Handle clicks inside article HTML for client-side navigation of internal links
+  const handleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = (e.target as HTMLElement).closest("a");
+    if (!target) return;
 
-    return paragraphs.map((block, idx) => {
-      const trimmed = block.trim();
+    const href = target.getAttribute("href");
+    if (!href) return;
 
-      // Heading 2
-      if (trimmed.startsWith("## ")) {
-        const text = trimmed.replace("## ", "");
-        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-        return (
-          <h2
-            key={idx}
-            id={id}
-            className="text-2xl sm:text-3xl font-black text-[#0d0f12] tracking-tight mt-10 mb-4 pt-4 border-t border-black/5"
-          >
-            {text}
-          </h2>
-        );
+    // If it's a hash anchor on the same page, let normal smooth scroll handle it
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetElement = document.getElementById(href.substring(1));
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
       }
+      return;
+    }
 
-      // Heading 3
-      if (trimmed.startsWith("### ")) {
-        return (
-          <h3 key={idx} className="text-xl font-bold text-[#0d0f12] mt-6 mb-3">
-            {trimmed.replace("### ", "")}
-          </h3>
-        );
-      }
-
-      // Code blocks
-      if (trimmed.startsWith("```")) {
-        const codeText = trimmed.replace(/```[a-z]*\n?|```$/g, "");
-        return (
-          <div key={idx} className="my-6 rounded-2xl bg-[#0d0f12] text-neutral-100 p-5 font-mono text-xs overflow-x-auto shadow-lg border border-white/10">
-            <pre>{codeText}</pre>
-          </div>
-        );
-      }
-
-      // Horizontal Rules
-      if (trimmed === "---" || trimmed === "***") {
-        return <hr key={idx} className="my-8 border-t border-black/10" />;
-      }
-
-      // Blockquotes / Warnings
-      if (trimmed.startsWith("> ")) {
-        return (
-          <blockquote key={idx} className="my-5 pl-4 py-2 border-l-4 border-[#ff4d00] bg-[#ff4d00]/5 rounded-r-2xl text-neutral-800 italic text-base">
-            {trimmed.replace(/^>\s*/, "")}
-          </blockquote>
-        );
-      }
-
-      // Ordered lists (1. , 2. )
-      if (/^\d+\.\s/.test(trimmed)) {
-        const items = trimmed.split("\n").filter((line) => line.trim().length > 0);
-        return (
-          <ol key={idx} className="list-decimal pl-6 space-y-2 text-neutral-700 text-base sm:text-lg leading-relaxed my-4">
-            {items.map((item, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: formatInlineMarkdown(item.replace(/^\d+\.\s*/, "")) }} />
-            ))}
-          </ol>
-        );
-      }
-
-      // Unordered lists
-      if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-        const items = trimmed.split("\n").filter((line) => line.trim().length > 0);
-        return (
-          <ul key={idx} className="list-disc pl-6 space-y-2 text-neutral-700 text-base sm:text-lg leading-relaxed my-4">
-            {items.map((item, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: formatInlineMarkdown(item.replace(/^[-*]\s*/, "")) }} />
-            ))}
-          </ul>
-        );
-      }
-
-      // Tables
-      if (trimmed.includes("|") && trimmed.includes("\n|")) {
-        const rows = trimmed.split("\n").filter((r) => r.trim().startsWith("|"));
-        if (rows.length >= 2) {
-          const headerCols = rows[0].split("|").filter((c) => c.trim().length > 0);
-          const dataRows = rows.slice(2);
-
-          return (
-            <div key={idx} className="my-6 overflow-x-auto rounded-2xl border border-black/10 shadow-sm">
-              <table className="w-full text-left text-xs sm:text-sm border-collapse bg-white">
-                <thead>
-                  <tr className="bg-neutral-100 border-b border-black/10">
-                    {headerCols.map((h, i) => (
-                      <th key={i} className="p-3.5 font-mono font-bold text-[#0d0f12]">
-                        {h.trim().replace(/\*\*/g, "")}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-black/5">
-                  {dataRows.map((row, rIdx) => {
-                    const cols = row.split("|").filter((c) => c.trim().length > 0);
-                    return (
-                      <tr key={rIdx} className="hover:bg-neutral-50/50">
-                        {cols.map((col, cIdx) => (
-                          <td key={cIdx} className="p-3.5 text-neutral-700 font-normal" dangerouslySetInnerHTML={{ __html: formatInlineMarkdown(col.trim()) }} />
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          );
-        }
-      }
-
-      // Default Paragraph
-      return (
-        <p
-          key={idx}
-          className="text-neutral-700 text-base sm:text-lg leading-relaxed mb-4"
-          dangerouslySetInnerHTML={{ __html: formatInlineMarkdown(trimmed) }}
-        />
-      );
-    });
+    // If it's an internal relative link (e.g. /blog/xyz or /transcribe)
+    if (href.startsWith("/") && !href.startsWith("//")) {
+      e.preventDefault();
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
-  // Helper for bold, italics, links, and inline code
-  const formatInlineMarkdown = (text: string) => {
-    return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#0d0f12]">$1</strong>')
-      .replace(/\*([^*]+)\*/g, '<em class="italic text-neutral-800">$1</em>')
-      .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-neutral-100 font-mono text-xs text-[#ff4d00] font-semibold">$1</code>')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[#ff4d00] font-bold underline hover:text-[#0d0f12] transition-colors">$1</a>');
+  // Process HTML content to ensure headings have valid IDs for TOC anchor jumping
+  const processArticleHtml = (htmlContent: string) => {
+    let processed = htmlContent;
+
+    // Match headings to TOC IDs
+    if (article.tableOfContents && article.tableOfContents.length > 0) {
+      article.tableOfContents.forEach((tocItem) => {
+        const plainTitle = tocItem.title.replace(/<[^>]*>/g, "").trim();
+        const escapedTitle = plainTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        
+        // Match <h2> tags containing the TOC title text
+        const h2Regex = new RegExp(`<h2>([\\s\\S]*?${escapedTitle}[\\s\\S]*?)<\\/h2>`, "gi");
+        processed = processed.replace(h2Regex, `<h2 id="${tocItem.id}">$1</h2>`);
+      });
+    }
+
+    // Auto-generate IDs for any remaining <h2> without an id
+    processed = processed.replace(/<h2(?![^>]*\bid=)([^>]*)>(.*?)<\/h2>/gi, (_match, attrs, content) => {
+      const cleanText = content.replace(/<[^>]*>/g, "");
+      const generatedId = cleanText.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      return `<h2 id="${generatedId}"${attrs}>${content}</h2>`;
+    });
+
+    // Auto-generate IDs for any remaining <h3> without an id
+    processed = processed.replace(/<h3(?![^>]*\bid=)([^>]*)>(.*?)<\/h3>/gi, (_match, attrs, content) => {
+      const cleanText = content.replace(/<[^>]*>/g, "");
+      const generatedId = cleanText.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      return `<h3 id="${generatedId}"${attrs}>${content}</h3>`;
+    });
+
+    return processed;
   };
 
   return (
@@ -282,10 +212,12 @@ export const BlogPostDynamic: React.FC = () => {
           </div>
         )}
 
-        {/* Rendered Body */}
-        <div className="prose prose-neutral max-w-none text-neutral-800 leading-relaxed">
-          {renderFormattedContent(article.content)}
-        </div>
+        {/* Rendered Body with Internal Link Interception */}
+        <div
+          className="article-content"
+          onClick={handleContentClick}
+          dangerouslySetInnerHTML={{ __html: processArticleHtml(article.content) }}
+        />
 
         {/* FAQs Section if present */}
         {article.faqs && article.faqs.length > 0 && (
@@ -347,8 +279,96 @@ export const BlogPostDynamic: React.FC = () => {
         </div>
       </article>
 
-      {/* Explore More Articles Navigation */}
-      <div className="pt-8 flex items-center justify-between border-t border-black/10">
+      {/* SEQUENTIAL PREVIOUS / NEXT NAVIGATION */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {previous ? (
+          <Link
+            to={`/blog/${previous.slug}`}
+            className="group p-5 rounded-2xl bg-white border border-black/10 hover:border-[#ff4d00]/40 transition-all shadow-sm flex flex-col justify-between"
+          >
+            <span className="text-[11px] font-mono text-neutral-400 flex items-center gap-1.5 group-hover:text-[#ff4d00] transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" /> Previous Article
+            </span>
+            <h4 className="font-bold text-sm text-[#0d0f12] group-hover:text-[#ff4d00] transition-colors line-clamp-2 mt-2">
+              {previous.title}
+            </h4>
+          </Link>
+        ) : (
+          <div className="hidden sm:block" />
+        )}
+
+        {next ? (
+          <Link
+            to={`/blog/${next.slug}`}
+            className="group p-5 rounded-2xl bg-white border border-black/10 hover:border-[#ff4d00]/40 transition-all shadow-sm flex flex-col justify-between text-left sm:text-right"
+          >
+            <span className="text-[11px] font-mono text-neutral-400 flex items-center justify-start sm:justify-end gap-1.5 group-hover:text-[#ff4d00] transition-colors">
+              Next Article <ArrowRight className="w-3.5 h-3.5" />
+            </span>
+            <h4 className="font-bold text-sm text-[#0d0f12] group-hover:text-[#ff4d00] transition-colors line-clamp-2 mt-2">
+              {next.title}
+            </h4>
+          </Link>
+        ) : null}
+      </div>
+
+      {/* 3 RELATED ARTICLES SECTION */}
+      {relatedArticles.length > 0 && (
+        <section className="pt-8 space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Compass className="w-5 h-5 text-[#ff4d00]" />
+              <h3 className="text-xl sm:text-2xl font-black text-[#0d0f12]">Related Technical Guides</h3>
+            </div>
+            <Link
+              to="/blog"
+              className="text-xs font-mono font-bold text-neutral-500 hover:text-[#ff4d00] transition-colors"
+            >
+              View all 18 articles →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {relatedArticles.map((rel) => (
+              <Link
+                key={rel.slug}
+                to={`/blog/${rel.slug}`}
+                className="group flex flex-col justify-between p-5 rounded-2xl bg-white border border-black/10 hover:border-[#ff4d00]/50 hover:shadow-xl transition-all"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#ff4d00]/10 text-[#ff4d00] font-bold">
+                      {rel.category}
+                    </span>
+                    <span className="text-neutral-400 flex items-center gap-1">
+                      <Clock className="w-3 h-3" /> {rel.readTime}
+                    </span>
+                  </div>
+
+                  <h4 className="font-bold text-base text-[#0d0f12] group-hover:text-[#ff4d00] transition-colors line-clamp-2 leading-snug">
+                    {rel.title}
+                  </h4>
+
+                  <p className="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                    {rel.summary}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-black/5 flex items-center justify-between text-xs font-mono font-bold text-[#0d0f12] group-hover:text-[#ff4d00] transition-colors">
+                  <span className="flex items-center gap-1">
+                    <FileText className="w-3.5 h-3.5 text-neutral-400 group-hover:text-[#ff4d00]" />
+                    Read Guide
+                  </span>
+                  <span>→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Bottom CTA / Engine Launch Bar */}
+      <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-black/10">
         <Link
           to="/blog"
           className="text-xs font-mono font-bold text-[#0d0f12] hover:text-[#ff4d00] transition-colors"
@@ -357,7 +377,7 @@ export const BlogPostDynamic: React.FC = () => {
         </Link>
         <Link
           to="/transcribe"
-          className="px-4 py-2 rounded-xl bg-[#0d0f12] text-white text-xs font-mono font-bold hover:bg-[#ff4d00] transition-colors shadow-sm"
+          className="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl bg-[#0d0f12] text-white text-xs font-mono font-bold hover:bg-[#ff4d00] transition-colors shadow-md"
         >
           Launch Free Transcribe Engine →
         </Link>
@@ -365,3 +385,4 @@ export const BlogPostDynamic: React.FC = () => {
     </div>
   );
 };
+

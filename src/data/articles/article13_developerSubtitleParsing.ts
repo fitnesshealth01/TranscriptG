@@ -1,186 +1,167 @@
 import { BlogArticle } from "./types";
 
 export const article13_developerSubtitleParsing: BlogArticle = {
-  slug: "developer-guide-parsing-srt-vtt-json-subtitles-javascript-python",
-  title: "Developer Guide: Parsing SRT, WebVTT & JSON Subtitles in TypeScript, JavaScript & Python",
-  metaTitle: "Developer Guide: Parsing SRT, WebVTT & JSON in TS, JS & Python",
-  metaDescription: "A comprehensive developer guide with production-ready TypeScript, JavaScript, and Python code to parse, validate, and convert SRT and WebVTT subtitle files.",
-  keywords: "parse SRT javascript, parse WebVTT typescript, python srt parser regex, convert srt to json, subtitle parsing algorithms, webvtt regex parser",
+  slug: "developer-guide-parsing-srt-vtt-json-subtitles",
+  title: "Developer's Guide: Parsing & Manipulating SRT, WebVTT & JSON Subtitles in TypeScript & Python",
+  metaTitle: "Developer Guide: Parsing SRT, WebVTT & JSON Subtitles (TypeScript/Python)",
+  metaDescription: "Full developer tutorial on parsing, validating, and manipulating SRT, WebVTT, and JSON subtitle formats with clean TypeScript and Python code examples.",
+  keywords: "parse SRT TypeScript, parse WebVTT Python, subtitle parser regex, timecode conversion JavaScript, subtitle format manipulation, JSON transcript parser",
   category: "Engineering",
-  readTime: "17 min read",
+  readTime: "14 min read",
   date: "August 2026",
-  author: "TranscriptG Developer Relations Group",
-  authorRole: "Full-Stack Engineers & Open Source Maintainers",
-  summary: "A production engineering tutorial providing robust regular expressions, timecode conversion algorithms, and edge-case handling for parsing SRT, WebVTT, and JSON subtitle formats.",
+  author: "TranscriptG Developer Relations",
+  authorRole: "Core SDK & Open-Source Tooling Group",
+  summary: "A practical guide for software engineers building subtitle parsers, video editors, and audio synchronization tools. Includes production-ready TypeScript and Python parsers, timecode converters, and regex patterns.",
   tableOfContents: [
-    { id: "the-parsing-challenge", title: "1. The Hidden Complexity of Subtitle Parsing" },
-    { id: "timecode-math", title: "2. Timecode Mathematics: Milliseconds to HH:MM:SS" },
-    { id: "typescript-srt-parser", title: "3. Complete TypeScript / JavaScript SRT Parser" },
-    { id: "typescript-vtt-parser", title: "4. Complete TypeScript WebVTT Parser" },
-    { id: "python-subtitle-parser", title: "5. Production Python 3 Subtitle Parser" },
-    { id: "edge-cases-validation", title: "6. Handling Malformed Cues, BOM & UTF-8 Edge Cases" },
-    { id: "faqs", title: "7. Frequently Asked Questions" },
+    { id: "subtitle-data-models", title: "1. The Universal Subtitle Data Model" },
+    { id: "typescript-srt-parser", title: "2. Building a Robust TypeScript SRT Parser" },
+    { id: "python-webvtt-parser", title: "3. Building a WebVTT Parser & Validator in Python" },
+    { id: "millisecond-timecode-math", title: "4. Millisecond Timecode Math & Drift Correction" },
+    { id: "json-transcript-schema", title: "5. Standardizing Word-Level JSON Transcripts" },
+    { id: "transcriptg-api-integration", title: "6. Integrating with TranscriptG's Ephemeral API" },
   ],
   content: `
-## The Hidden Complexity of Subtitle Parsing
+<h2 id="subtitle-data-models">1. The Universal Subtitle Data Model</h2>
+<p>Whether parsing SubRip (.SRT), WebVTT (.VTT), or modern JSON transcripts, all time-synchronized caption structures share a foundational data model:</p>
 
-To the casual developer, subtitle formats like SubRip (.SRT) and WebVTT (.VTT) appear deceptively simple. After all, they are just plain text files containing numbers, timestamps, and lines of dialogue.
+<pre><code>export interface SubtitleCue {
+  id?: string | number;
+  startTime: number; // Start timestamp in milliseconds
+  endTime: number;   // End timestamp in milliseconds
+  text: string;      // Rendered caption text
+  speaker?: string;  // Optional speaker attribution
+}</code></pre>
 
-In production environments, however, naive string-splitting implementations quickly crash when encountering real-world edge cases:
-- Inconsistent line breaks (\`\\r\\n\` vs. \`\\n\`)
-- Byte Order Marks (UTF-8 BOM) at the beginning of files
-- Missing sequential cue numbers or blank lines
-- Commas (\`,\`) vs. periods (\`.\`) in millisecond delimiters
-- Multiline subtitle text containing embedded HTML/VTT tags
+<hr />
 
-In this developer guide, we provide robust, production-tested parsers in **TypeScript/JavaScript** and **Python 3**.
+<h2 id="typescript-srt-parser">2. Building a Robust TypeScript SRT Parser</h2>
+<p>Here is a complete, zero-dependency TypeScript implementation for parsing SRT subtitle blocks into structured cue objects (compare syntax differences in our <a href="/blog/srt-vs-vtt-subtitles-format-guide">SRT vs. WebVTT Format Guide</a>):</p>
 
----
-
-## 1. Timecode Mathematics: Milliseconds to HH:MM:SS
-
-Converting between human-readable timestamp strings (\`01:23:45,678\`) and floating-point seconds (\`5025.678\`) requires precise arithmetic:
-
-### TypeScript Timecode Conversion Utilities
-
-\`\`\`typescript
-/** Converts "HH:MM:SS,mmm" or "HH:MM:SS.mmm" to total seconds */
-export function parseTimestampToSeconds(timestamp: string): number {
-  const normalized = timestamp.trim().replace(",", ".");
-  const parts = normalized.split(":");
-  
-  if (parts.length === 3) {
-    const hours = parseFloat(parts[0]);
-    const minutes = parseFloat(parts[1]);
-    const seconds = parseFloat(parts[2]);
-    return hours * 3600 + minutes * 60 + seconds;
-  } else if (parts.length === 2) {
-    const minutes = parseFloat(parts[0]);
-    const seconds = parseFloat(parts[1]);
-    return minutes * 60 + seconds;
-  }
-  return 0;
-}
-
-/** Formats seconds into "HH:MM:SS,mmm" (SRT) or "HH:MM:SS.mmm" (VTT) */
-export function formatSecondsToTimestamp(totalSeconds: number, delimiter: "," | "." = ","): string {
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = Math.floor(totalSeconds % 60);
-  const millis = Math.round((totalSeconds % 1) * 1000);
-
-  const pad = (n: number, size = 2) => n.toString().padStart(size, "0");
-  return \`\${pad(hours)}:\${pad(minutes)}:\${pad(seconds)}\${delimiter}\${pad(millis, 3)}\`;
-}
-\`\`\`
-
----
-
-## 2. Complete TypeScript / JavaScript SRT Parser
-
-\`\`\`typescript
-export interface SubtitleCue {
-  id: number;
-  start: string;
-  end: string;
-  startSeconds: number;
-  endSeconds: number;
-  text: string;
-}
-
-export function parseSRT(srtContent: string): SubtitleCue[] {
-  // Normalize line breaks and strip UTF-8 BOM
-  const cleanContent = srtContent.replace(/^\\uFEFF/, "").replace(/\\r\\n|\\r/g, "\\n").trim();
-  const blocks = cleanContent.split(/\\n\\n+/);
+<pre><code>export function parseSrt(srtContent: string): SubtitleCue[] {
   const cues: SubtitleCue[] = [];
+  const normalized = srtContent.replace(/\\r\\n|\\r/g, '\\n').trim();
+  const blocks = normalized.split(/\\n\\n+/);
 
-  const timecodeRegex = /(\\d{1,2}:\\d{2}:\\d{2}[,\\.]\\d{3})\\s*-->\\s*(\\d{1,2}:\\d{2}:\\d{2}[,\\.]\\d{3})/;
+  const timecodeRegex = /^(\\d{2}):(\\d{2}):(\\d{2})[,.](\\d{3})\\s*--&gt;\\s*(\\d{2}):(\\d{2}):(\\d{2})[,.](\\d{3})/;
 
   for (const block of blocks) {
-    const lines = block.split("\\n").map((l) => l.trim()).filter(Boolean);
-    if (lines.length === 0) continue;
+    const lines = block.split('\\n');
+    if (lines.length &lt; 2) continue;
 
-    let timecodeLineIndex = -1;
-    for (let i = 0; i < lines.length; i++) {
-      if (timecodeRegex.test(lines[i])) {
-        timecodeLineIndex = i;
-        break;
-      }
+    let timeLineIdx = 0;
+    let cueId: string | undefined;
+
+    // Check if first line is a numeric ID
+    if (/^\\d+$/.test(lines[0].trim())) {
+      cueId = lines[0].trim();
+      timeLineIdx = 1;
     }
 
-    if (timecodeLineIndex === -1) continue;
-
-    const match = lines[timecodeLineIndex].match(timecodeRegex);
+    const timeLine = lines[timeLineIdx];
+    const match = timeLine.match(timecodeRegex);
     if (!match) continue;
 
-    const id = timecodeLineIndex > 0 ? parseInt(lines[0], 10) || cues.length + 1 : cues.length + 1;
-    const start = match[1].replace(".", ",");
-    const end = match[2].replace(".", ",");
-    const text = lines.slice(timecodeLineIndex + 1).join("\\n");
+    const startMs = parseTimeToMs(match[1], match[2], match[3], match[4]);
+    const endMs = parseTimeToMs(match[5], match[6], match[7], match[8]);
+    const text = lines.slice(timeLineIdx + 1).join('\\n').trim();
 
-    cues.push({
-      id,
-      start,
-      end,
-      startSeconds: parseTimestampToSeconds(start),
-      endSeconds: parseTimestampToSeconds(end),
-      text,
-    });
+    cues.push({ id: cueId, startTime: startMs, endTime: endMs, text });
   }
 
   return cues;
 }
-\`\`\`
 
----
+function parseTimeToMs(hh: string, mm: string, ss: string, ms: string): number {
+  return (
+    parseInt(hh, 10) * 3600000 +
+    parseInt(mm, 10) * 60000 +
+    parseInt(ss, 10) * 1000 +
+    parseInt(ms, 10)
+  );
+}</code></pre>
 
-## 3. Production Python 3 Subtitle Parser
+<hr />
 
-\`\`\`python
-import re
+<h2 id="python-webvtt-parser">3. Building a WebVTT Parser & Validator in Python</h2>
+<p>Below is a clean Python 3.11 implementation for parsing and formatting WebVTT files:</p>
+
+<pre><code>import re
 from typing import List, Dict, Any
 
-TIMECODE_RE = re.compile(r"(\d{1,2}:\d{2}:\d{2}[,\.]\d{3})\s*-->\s*(\d{1,2}:\d{2}:\d{2}[,\.]\d{3})")
+def parse_webvtt(vtt_text: str) -&gt; List[Dict[str, Any]]:
+    lines = [l.strip() for l in vtt_text.strip().splitlines() if l.strip()]
+    if not lines or not lines[0].startswith("WEBVTT"):
+        raise ValueError("Invalid WebVTT: Missing WEBVTT header")
 
-def parse_timestamp_to_seconds(ts: str) -> float:
-    normalized = ts.strip().replace(",", ".")
-    parts = normalized.split(":")
-    if len(parts) == 3:
-        return float(parts[0]) * 3600 + float(parts[1]) * 60 + float(parts[2])
-    return 0.0
-
-def parse_srt(content: str) -> List[Dict[str, Any]]:
-    clean = content.replace("\ufeff", "").replace("\r\n", "\n").strip()
-    blocks = re.split(r"\n\n+", clean)
     cues = []
+    tc_pattern = re.compile(r"(?:(\\d{2}):)?(\\d{2}):(\\d{2})\\.(\\d{3})\\s*--&gt;\\s*(?:(\\d{2}):)?(\\d{2}):(\\d{2})\\.(\\d{3})")
 
-    for block in blocks:
-        lines = [line.strip() for line in block.split("\n") if line.strip()]
-        if not lines:
-            continue
-        
-        tc_idx = next((i for i, l in enumerate(lines) if TIMECODE_RE.search(l)), -1)
-        if tc_idx == -1:
-            continue
-
-        match = TIMECODE_RE.search(lines[tc_idx])
-        start, end = match.group(1), match.group(2)
-        text = "\n".join(lines[tc_idx + 1:])
-
-        cues.append({
-            "id": len(cues) + 1,
-            "start": start,
-            "end": end,
-            "start_seconds": parse_timestamp_to_seconds(start),
-            "end_seconds": parse_timestamp_to_seconds(end),
-            "text": text
-        })
-
+    i = 1
+    while i &lt; len(lines):
+        match = tc_pattern.match(lines[i])
+        if match:
+            start_ms = time_to_ms(*match.groups()[:4])
+            end_ms = time_to_ms(*match.groups()[4:])
+            text_lines = []
+            i += 1
+            while i &lt; len(lines) and not tc_pattern.match(lines[i]):
+                text_lines.append(lines[i])
+                i += 1
+            cues.append({
+                "start": start_ms,
+                "end": end_ms,
+                "text": " ".join(text_lines)
+            })
+        else:
+            i += 1
     return cues
-\`\`\`
-  `,
+
+def time_to_ms(hh, mm, ss, ms) -&gt; int:
+    h = int(hh) if hh else 0
+    return h * 3600000 + int(mm) * 60000 + int(ss) * 1000 + int(ms)</code></pre>
+
+<hr />
+
+<h2 id="millisecond-timecode-math">4. Millisecond Timecode Math & Drift Correction</h2>
+<p>When stitching audio chunks together or correcting drift caused by frame rate conversions (e.g. 23.976 fps to 29.97 fps), working with pure integer milliseconds avoids floating-point precision loss. For audio format container details, consult our <a href="/blog/audio-formats-codecs-containers-guide">Audio Formats, Codecs & Containers Guide</a>.</p>
+
+<hr />
+
+<h2 id="json-transcript-schema">5. Standardizing Word-Level JSON Transcripts</h2>
+<p>Modern web video applications (like custom audio waveforms and interactive karaoke players) require word-level precision. TranscriptG exports structured JSON following this standard (learn how to build vector indexes with this schema in our <a href="/blog/audio-archives-json-transcripts-semantic-search">Audio Archives & Semantic Search Guide</a>):</p>
+
+<pre><code>{
+  "durationSeconds": 142.5,
+  "language": "en",
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.12,
+      "end": 3.48,
+      "speaker": "Speaker 1",
+      "text": "Welcome to TranscriptG's neural transcription platform.",
+      "words": [
+        { "word": "Welcome", "start": 0.12, "end": 0.65, "confidence": 0.99 },
+        { "word": "to", "start": 0.68, "end": 0.82, "confidence": 0.99 },
+        { "word": "TranscriptG", "start": 0.85, "end": 1.45, "confidence": 0.98 }
+      ]
+    }
+  ]
+}</code></pre>
+
+<hr />
+
+<h2 id="transcriptg-api-integration">6. Integrating with TranscriptG's Ephemeral API</h2>
+<p>Developers can integrate with TranscriptG to generate frame-accurate SRT, VTT, and JSON exports instantly with zero data persistence overhead. Try out instantaneous format conversions on our interactive <a href="/convert">Subtitle Converter Tool</a> or test our speech models via the <a href="/transcribe">Free Speech Transcriber</a>.</p>
+`,
   faqs: [
-    { q: "How do I handle both comma and period millisecond delimiters in one parser?", a: "Always normalize timestamps by replacing commas with periods before parsing or splitting, then re-format with the required delimiter during export." },
-    { q: "Can TranscriptG export subtitles directly as JSON arrays?", a: "Yes. In TranscriptG Engine 01 or Engine 02, you can export structured JSON containing millisecond timestamps, speaker tags, and cue text directly." },
+    { q: "Why use integer milliseconds instead of float seconds?", a: "Floating-point numbers suffer from rounding errors during subtitle math. Storing timestamps as integer milliseconds guarantees exact synchronization." },
+    { q: "How do I handle both comma and period millisecond delimiters?", a: "Use a regular expression like '[,.]' that matches both commas (SRT standard) and periods (VTT standard)." },
+    { q: "Can I export word-level timestamps in TranscriptG?", a: "Yes. TranscriptG exports structured JSON containing start and end timestamps for every individual spoken word." },
+  ],
+  relatedSlugs: [
+    "srt-vs-vtt-subtitles-format-guide",
+    "audio-formats-codecs-containers-guide",
+    "audio-archives-json-transcripts-semantic-search",
   ],
 };
