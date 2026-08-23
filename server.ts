@@ -3,6 +3,7 @@ import path from "path";
 import multer from "multer";
 import { GoogleGenAI, Type } from "@google/genai";
 import { createServer as createViteServer } from "vite";
+import { BLOG_ARTICLES } from "./src/data/blogArticles";
 
 // Process level safety to prevent crashes from unhandled promise rejections
 process.on("unhandledRejection", (reason, promise) => {
@@ -293,7 +294,7 @@ app.get("/sitemap.xml", (req, res) => {
   const protocol = req.headers["x-forwarded-proto"] || "https";
   const baseUrl = `${protocol}://${host}`;
 
-  const routes = [
+  const staticRoutes = [
     "",
     "/transcribe",
     "/convert",
@@ -303,22 +304,21 @@ app.get("/sitemap.xml", (req, res) => {
     "/terms",
     "/contact",
     "/blog",
-    "/blog/how-transcriptg-works",
-    "/blog/transcription-tips",
-    "/blog/srt-vs-vtt",
-    "/blog/ai-meeting-summarizer-guide",
   ];
+
+  const blogRoutes = BLOG_ARTICLES.map((a) => `/blog/${a.slug}`);
+  const allRoutes = [...staticRoutes, ...blogRoutes];
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${routes
+  ${allRoutes
     .map(
       (route) => `
   <url>
     <loc>${baseUrl}${route}</loc>
     <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${route === "" ? "1.0" : route.startsWith("/blog") ? "0.8" : "0.9"}</priority>
+    <changefreq>${route === "" ? "daily" : "weekly"}</changefreq>
+    <priority>${route === "" ? "1.0" : route.startsWith("/blog/") ? "0.8" : "0.9"}</priority>
   </url>`
     )
     .join("")}
@@ -354,53 +354,24 @@ app.get(["/rss.xml", "/feed.xml"], (req, res) => {
   const protocol = req.headers["x-forwarded-proto"] || "https";
   const baseUrl = `${protocol}://${host}`;
 
-  const posts = [
-    {
-      slug: "how-transcriptg-works",
-      title: "How TranscriptG Works: Inside Our Privacy-First Acoustic Engine",
-      description: "An architectural overview of sub-second speech processing, acoustic timecode generation, and session-private data handling.",
-      pubDate: "Fri, 01 Aug 2026 00:00:00 GMT",
-    },
-    {
-      slug: "transcription-tips",
-      title: "10 Proven Tips for Achieving 99%+ Speech Transcription Accuracy",
-      description: "Learn how microphone placement, sample rate normalization, and background noise isolation drastically elevate transcript quality.",
-      pubDate: "Sat, 02 Aug 2026 00:00:00 GMT",
-    },
-    {
-      slug: "srt-vs-vtt",
-      title: "SRT vs. VTT: Which Subtitle Format Should You Use in 2026?",
-      description: "A definitive comparison between SubRip (SRT) and Web Video Text Tracks (VTT) for YouTube, HTML5 video, and video editing suites.",
-      pubDate: "Sun, 03 Aug 2026 00:00:00 GMT",
-    },
-    {
-      slug: "ai-meeting-summarizer-guide",
-      title: "How to Convert Zoom & Teams Meeting Audio into Actionable AI Digests",
-      description: "A practical guide for executives and remote teams to extract decision logs, action items, and executive summaries from recordings.",
-      pubDate: "Mon, 04 Aug 2026 00:00:00 GMT",
-    },
-  ];
-
   const rssXml = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>TranscriptG Journal & Engineering Insights</title>
+  <title>TranscriptG Journal &amp; Engineering Insights</title>
   <link>${baseUrl}/blog</link>
   <description>High-precision audio transcription, subtitle conversion guides, and AI speech intelligence engineering notes.</description>
   <language>en-us</language>
   <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
-  ${posts
-    .map(
-      (p) => `
+  ${BLOG_ARTICLES.map(
+    (p) => `
   <item>
-    <title>${p.title}</title>
+    <title><![CDATA[${p.title}]]></title>
     <link>${baseUrl}/blog/${p.slug}</link>
     <guid>${baseUrl}/blog/${p.slug}</guid>
-    <description>${p.description}</description>
-    <pubDate>${p.pubDate}</pubDate>
+    <description><![CDATA[${p.summary}]]></description>
+    <pubDate>${new Date().toUTCString()}</pubDate>
   </item>`
-    )
-    .join("")}
+  ).join("")}
 </channel>
 </rss>`;
 

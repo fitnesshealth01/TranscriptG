@@ -434,13 +434,59 @@ export function exportToDOCX(segments: CueSegment[], title = "TranscriptG Report
 
 // Sample SRT data for format conversion demo
 export const SAMPLE_SRT = `1
-00:00:00,500 --> 00:00:03,800
-Welcome to TranscriptG, the privacy-first transcription laboratory.
+00:00:00,500 --> 00:00:04,200
+Welcome to TranscriptG, the high-precision audio and speech-to-text processing laboratory.
 
 2
-00:00:04,100 --> 00:00:08,200
-Convert high-precision audio into structured manuscripts, subtitles, and actionable text intelligence.
+00:00:04,500 --> 00:00:09,100
+We engineer sub-second transcription with millisecond-aligned timecodes, speaker tags, and AI intelligence.
 
 3
-00:00:08,500 --> 00:00:13,000
-No login, no watermark, no signup required — instant processing in 90+ languages.`;
+00:00:09,500 --> 00:00:14,400
+All media streams are processed in ephemeral RAM with zero permanent storage, ensuring complete user privacy.
+
+4
+00:00:14,800 --> 00:00:19,600
+Export freely to SubRip (.SRT), WebVTT (.VTT), Microsoft Word (.DOCX), PDF, Markdown, and structured JSON.`;
+
+export const SAMPLE_SEGMENTS: CueSegment[] = [
+  {
+    id: "seg-1",
+    start: 0.5,
+    end: 4.2,
+    text: "Welcome to TranscriptG, the high-precision audio and speech-to-text processing laboratory.",
+  },
+  {
+    id: "seg-2",
+    start: 4.5,
+    end: 9.1,
+    text: "We engineer sub-second transcription with millisecond-aligned timecodes, speaker tags, and AI intelligence.",
+  },
+  {
+    id: "seg-3",
+    start: 9.5,
+    end: 14.4,
+    text: "All media streams are processed in ephemeral RAM with zero permanent storage, ensuring complete user privacy.",
+  },
+  {
+    id: "seg-4",
+    start: 14.8,
+    end: 19.6,
+    text: "Export freely to SubRip (.SRT), WebVTT (.VTT), Microsoft Word (.DOCX), PDF, Markdown, and structured JSON.",
+  },
+];
+
+export const SAMPLE_SUMMARY =
+  "An architectural briefing highlighting TranscriptG's high-speed acoustic transcription engine, zero-retention ephemeral privacy guarantees, and universal export suite supporting SRT, VTT, DOCX, and PDF formats across 90+ spoken languages.";
+
+export const SAMPLE_PROCESS_TEXT = `Team Meeting Notes — Project Velocity & Acoustic Pipeline Deployment:
+
+During today's architectural review, the speech engineering group finalized the zero-retention memory processing pipeline. Key breakthroughs include sub-second Mel-spectrogram generation and 99.4% Word Error Rate accuracy across accented speech.
+
+Action Items:
+1. Elena to finalize the WebVTT parser edge-case test suite by Thursday.
+2. Marcus to optimize Web Audio API mono downsampling for 16kHz audio buffers.
+3. Sarah to deploy updated ADA Section 508 accessibility compliance documentation.
+
+The team agreed to maintain 100% public access with no mandatory login requirements.`;
+

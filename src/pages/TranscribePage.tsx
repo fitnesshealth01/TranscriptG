@@ -6,8 +6,26 @@ import { ProcessingView } from "../components/ProcessingView";
 import { Manuscript } from "../components/Manuscript";
 import { ExportSuite } from "../components/ExportSuite";
 import { TranscribeGuide } from "../components/TranscribeGuide";
-import { CueSegment, SUPPORTED_LANGUAGES } from "../lib/transcript";
-import { Sparkles, RefreshCw, AlertCircle, ShieldCheck, Zap, Globe2, HelpCircle } from "lucide-react";
+import {
+  CueSegment,
+  SUPPORTED_LANGUAGES,
+  SAMPLE_SEGMENTS,
+  SAMPLE_SUMMARY,
+  formatTimeDisplay
+} from "../lib/transcript";
+import {
+  Sparkles,
+  RefreshCw,
+  AlertCircle,
+  ShieldCheck,
+  Zap,
+  Globe2,
+  HelpCircle,
+  Play,
+  FileAudio,
+  CheckCircle2,
+  FileText
+} from "lucide-react";
 
 export const TranscribePage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -73,10 +91,10 @@ export const TranscribePage: React.FC = () => {
         const data = json.data;
         if (data && data.segments) {
           const mappedSegments: CueSegment[] = data.segments.map((s: any, idx: number) => ({
-            id: `cue-${idx + 1}`,
-            start: typeof s.start === "number" ? s.start : 0,
-            end: typeof s.end === "number" ? s.end : 0,
-            text: s.text || "",
+            id: `seg-${idx + 1}`,
+            start: s.start ?? idx * 3,
+            end: s.end ?? (idx + 1) * 3,
+            text: s.text ?? "",
           }));
 
           setSegments(mappedSegments);
@@ -96,6 +114,14 @@ export const TranscribePage: React.FC = () => {
     }
 
     setIsLoading(false);
+  };
+
+  const handleLoadSample = () => {
+    setFile(new File(["sample-audio-bytes"], "Sample_Engineering_Podcast.mp3", { type: "audio/mp3" }));
+    setSegments(SAMPLE_SEGMENTS);
+    setSummary(SAMPLE_SUMMARY);
+    setLanguageDetected("English (US)");
+    setError(null);
   };
 
   const handleReset = () => {
@@ -129,7 +155,7 @@ export const TranscribePage: React.FC = () => {
             {!segments && !isLoading && (
               <div className="space-y-6">
                 {/* Configuration Bar */}
-                <div className="glass-card p-5 rounded-2xl border border-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="glass-card p-5 rounded-2xl border border-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white shadow-sm">
                   <div className="flex items-center gap-3">
                     <label className="text-xs font-mono font-bold text-neutral-700 flex items-center gap-1.5">
                       <Globe2 className="w-4 h-4 text-[#ff4d00]" /> Spoken Language:
@@ -147,16 +173,25 @@ export const TranscribePage: React.FC = () => {
                     </select>
                   </div>
 
-                  <label className="flex items-center gap-2 cursor-pointer text-xs font-mono font-bold text-neutral-800">
-                    <input
-                      type="checkbox"
-                      checked={generateSummary}
-                      onChange={(e) => setGenerateSummary(e.target.checked)}
-                      className="w-4 h-4 rounded text-[#ff4d00] focus:ring-[#ff4d00] accent-[#ff4d00]"
-                    />
-                    <Sparkles className="w-3.5 h-3.5 text-[#ff4d00]" />
-                    Generate AI Summary
-                  </label>
+                  <div className="flex items-center gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer text-xs font-mono font-bold text-neutral-800">
+                      <input
+                        type="checkbox"
+                        checked={generateSummary}
+                        onChange={(e) => setGenerateSummary(e.target.checked)}
+                        className="w-4 h-4 rounded text-[#ff4d00] focus:ring-[#ff4d00] accent-[#ff4d00]"
+                      />
+                      <Sparkles className="w-3.5 h-3.5 text-[#ff4d00]" />
+                      Generate AI Summary
+                    </label>
+
+                    <button
+                      onClick={handleLoadSample}
+                      className="px-3 py-1.5 rounded-xl bg-neutral-100 hover:bg-[#ff4d00]/10 text-neutral-700 hover:text-[#ff4d00] text-xs font-mono font-bold transition-colors border border-neutral-200 flex items-center gap-1.5"
+                    >
+                      <Play className="w-3 h-3 text-[#ff4d00]" /> Try Sample Demo
+                    </button>
+                  </div>
                 </div>
 
                 {/* Dropzone */}
@@ -169,6 +204,47 @@ export const TranscribePage: React.FC = () => {
                   fileTypesList={["MP3", "WAV", "M4A", "OGG", "MP4", "MOV"]}
                   isLoading={isLoading}
                 />
+
+                {/* Pre-Rendered Crawler-Accessible Sample Showcase (Solves Empty Shell Issue) */}
+                <div className="glass-card p-6 sm:p-8 rounded-3xl border border-black/10 bg-neutral-50/80 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#0d0f12] uppercase tracking-wider">
+                      <FileAudio className="w-4 h-4 text-[#ff4d00]" /> Pre-Loaded Interactive Output Demonstration
+                    </div>
+                    <button
+                      onClick={handleLoadSample}
+                      className="text-xs font-mono font-bold text-[#ff4d00] hover:underline flex items-center gap-1"
+                    >
+                      Load into Interactive Editor →
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-neutral-600 leading-relaxed">
+                    Review this pre-rendered sample output demonstrating millisecond timecode alignment, speaker turn formatting, and automated executive summarization generated by Engine 01:
+                  </p>
+
+                  <div className="space-y-3">
+                    <div className="p-4 rounded-2xl bg-white border border-black/5 space-y-1.5">
+                      <div className="text-[11px] font-mono font-bold text-[#ff4d00] uppercase">
+                        AI Executive Summary:
+                      </div>
+                      <p className="text-xs text-neutral-700 italic leading-relaxed">
+                        "{SAMPLE_SUMMARY}"
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      {SAMPLE_SEGMENTS.map((seg) => (
+                        <div key={seg.id} className="p-3 rounded-xl bg-white border border-black/5 flex items-start gap-3 text-xs">
+                          <span className="font-mono font-bold text-[#ff4d00] whitespace-nowrap pt-0.5">
+                            [{formatTimeDisplay(seg.start)} - {formatTimeDisplay(seg.end)}]
+                          </span>
+                          <span className="text-neutral-800 leading-relaxed font-sans">{seg.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -240,7 +316,7 @@ export const TranscribePage: React.FC = () => {
 
           {/* Sidebar / Aside (Right col) */}
           <div className="space-y-6">
-            <div className="glass-card p-6 rounded-3xl border border-black/10 space-y-4">
+            <div className="glass-card p-6 rounded-3xl border border-black/10 space-y-4 bg-white shadow-sm">
               <h3 className="text-base font-black text-[#0d0f12] flex items-center gap-2">
                 <HelpCircle className="w-4 h-4 text-[#ff4d00]" /> How Engine 01 Works
               </h3>

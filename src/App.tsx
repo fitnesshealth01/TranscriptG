@@ -13,10 +13,7 @@ const PrivacyPage = React.lazy(() => import("./pages/PrivacyPage").then((m) => (
 const TermsPage = React.lazy(() => import("./pages/TermsPage").then((m) => ({ default: m.TermsPage })));
 const ContactPage = React.lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
 const BlogIndexPage = React.lazy(() => import("./pages/BlogIndexPage").then((m) => ({ default: m.BlogIndexPage })));
-const BlogPost1 = React.lazy(() => import("./pages/BlogPost1").then((m) => ({ default: m.BlogPost1 })));
-const BlogPost2 = React.lazy(() => import("./pages/BlogPost2").then((m) => ({ default: m.BlogPost2 })));
-const BlogPost3 = React.lazy(() => import("./pages/BlogPost3").then((m) => ({ default: m.BlogPost3 })));
-const BlogPost4 = React.lazy(() => import("./pages/BlogPost4").then((m) => ({ default: m.BlogPost4 })));
+const BlogPostDynamic = React.lazy(() => import("./pages/BlogPostDynamic").then((m) => ({ default: m.BlogPostDynamic })));
 const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
 const PageFallbackLoader: React.FC = () => (
@@ -43,10 +40,7 @@ export default function App() {
             <Route path="terms" element={<TermsPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="blog" element={<BlogIndexPage />} />
-            <Route path="blog/how-transcriptg-works" element={<BlogPost1 />} />
-            <Route path="blog/transcription-tips" element={<BlogPost2 />} />
-            <Route path="blog/srt-vs-vtt" element={<BlogPost3 />} />
-            <Route path="blog/ai-meeting-summarizer-guide" element={<BlogPost4 />} />
+            <Route path="blog/:slug" element={<BlogPostDynamic />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

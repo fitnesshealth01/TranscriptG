@@ -3,7 +3,7 @@ import { Seo } from "../components/Seo";
 import { PageHeader } from "../components/PageHeader";
 import { ExportSuite } from "../components/ExportSuite";
 import { ProcessGuide } from "../components/ProcessGuide";
-import { SUPPORTED_LANGUAGES, parseTXT } from "../lib/transcript";
+import { SUPPORTED_LANGUAGES, parseTXT, SAMPLE_PROCESS_TEXT } from "../lib/transcript";
 import {
   Cpu,
   Sparkles,
@@ -17,16 +17,19 @@ import {
   Check,
   RefreshCw,
   FileText,
+  Play
 } from "lucide-react";
 
 export const ProcessPage: React.FC = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(SAMPLE_PROCESS_TEXT);
   const [operation, setOperation] = useState<"summarize" | "translate" | "key_points" | "polish" | "title">(
     "summarize"
   );
   const [targetLanguage, setTargetLanguage] = useState("Spanish (Español)");
   const [isLoading, setIsLoading] = useState(false);
-  const [resultText, setResultText] = useState("");
+  const [resultText, setResultText] = useState(
+    "The engineering team achieved key milestones in the zero-retention acoustic processing pipeline, recording sub-second Mel-spectrogram generation and 99.4% Word Error Rate accuracy. Team leads committed to releasing accessibility compliance updates and Web Audio API optimizations while guaranteeing complete public access with no login requirements."
+  );
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -103,25 +106,25 @@ export const ProcessPage: React.FC = () => {
           try {
             json = await res.json();
           } catch {
-            throw new Error("Unable to parse response from server.");
+            throw new Error("Unable to parse intelligence response.");
           }
         } else {
           const textResp = await res.text();
           throw new Error(
-            `Server error (${res.status}): ${textResp.replace(/<[^>]*>/g, "").slice(0, 120).trim() || "Service temporary busy."}`
+            `Server error (${res.status}): ${textResp.replace(/<[^>]*>/g, "").slice(0, 120).trim() || "Service busy. Retrying..."}`
           );
         }
 
         if (!res.ok || json.error) {
-          throw new Error(json.error || "Failed to process text intelligence operation.");
+          throw new Error(json.error || "Failed to process text intelligence.");
         }
 
-        setResultText(json.result || "");
+        setResultText(json.result || "No response text received.");
         success = true;
       } catch (err: any) {
-        console.error(`Process error (attempt ${attempt}/${maxAttempts}):`, err);
+        console.error(`Process error attempt ${attempt}:`, err);
         if (attempt >= maxAttempts) {
-          setError(err.message || "An error occurred while executing the operation.");
+          setError(err.message || "An error occurred during AI processing.");
         }
       }
     }
@@ -129,61 +132,74 @@ export const ProcessPage: React.FC = () => {
     setIsLoading(false);
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(resultText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopyResult = () => {
+    if (resultText) {
+      navigator.clipboard.writeText(resultText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
-  const handleReset = () => {
-    setText("");
-    setResultText("");
+  const handleLoadSample = () => {
+    setText(SAMPLE_PROCESS_TEXT);
+    setOperation("summarize");
     setError(null);
   };
 
   return (
     <div className="space-y-12">
       <Seo
-        title="AI Speech Summarizer, Text Intelligence & Translation Suite"
-        description="Summarize long transcripts, generate key action items, translate speech to 90+ languages, and polish grammar. Privacy-first, instant output."
-        keywords="speech summarizer, text summarizer, transcript summarizer, audio summarizer, speech translator, translate transcript, action items generator"
+        title="AI Speech & Text Summarizer, Translator & Polish Engine"
+        description="Transform raw transcripts into executive summaries, bullet points, 90+ language translations, or polished articles instantly. No signup required."
+        keywords="speech summarizer, text summarizer, transcript summarizer, speech translator, audio text intelligence, extract action items, meeting minutes AI"
       />
 
       <PageHeader
-        eyebrow="Engine 03 · Text Intelligence"
-        title="AI Text Intelligence & Transformation"
-        description="Extract summaries, translate into 90+ languages, generate key points, and refine transcript manuscripts."
-        badge="Gemini 3.7 Intelligence"
+        eyebrow="Engine 03 · Natural Language Intelligence"
+        title="AI Text Summarizer, Translator & NLP Engine"
+        description="Transform raw transcripts and text into executive digests, structured action items, multi-language translations, and polished documents."
+        badge="Zero Storage • Instant Inference"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* INPUT & OPERATIONS COLUMN (LEFT) */}
+          {/* INPUT COLUMN (LEFT) */}
           <div className="space-y-6">
-            <div className="glass-card p-6 rounded-3xl border border-black/10 space-y-4">
+            <div className="glass-card p-6 sm:p-8 rounded-3xl border border-black/10 space-y-5 bg-white shadow-xl">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-black text-[#0d0f12] flex items-center gap-2">
-                  <Cpu className="w-5 h-5 text-purple-600" /> Input Manuscript
-                </h3>
-                <span className="text-xs font-mono text-neutral-500 font-semibold">
-                  {wordCount} Words • {charCount} Chars
-                </span>
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-5 h-5 text-[#ff4d00]" />
+                  <h3 className="text-lg font-black text-[#0d0f12]">Input Text Buffer</h3>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleLoadSample}
+                    className="px-2.5 py-1 rounded-xl bg-[#ff4d00]/10 hover:bg-[#ff4d00]/20 text-[#ff4d00] text-xs font-mono font-bold transition-colors flex items-center gap-1"
+                  >
+                    <Play className="w-3 h-3" /> Sample Meeting
+                  </button>
+                  <span className="text-xs font-mono text-neutral-400">
+                    {wordCount} words · {charCount} chars
+                  </span>
+                </div>
               </div>
 
+              {/* Text Area */}
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Paste transcript or raw article text here..."
+                placeholder="Paste transcript, meeting notes, interview text, or article draft here..."
                 rows={10}
-                className="w-full p-4 bg-neutral-50 rounded-2xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-purple-600 transition-colors leading-relaxed"
+                className="w-full p-4 bg-neutral-50 rounded-2xl border border-neutral-200 font-sans text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] leading-relaxed resize-y"
               />
 
-              {/* Operation Selector */}
-              <div className="space-y-2 pt-2">
-                <label className="text-xs font-mono font-bold text-neutral-700 uppercase tracking-wider block">
+              {/* Operation Selection Grid */}
+              <div className="space-y-3">
+                <label className="text-xs font-mono font-bold text-neutral-700 block">
                   Select Intelligence Operation:
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                   {operations.map((op) => {
                     const Icon = op.icon;
                     const isSelected = operation === op.id;
@@ -192,35 +208,35 @@ export const ProcessPage: React.FC = () => {
                         key={op.id}
                         type="button"
                         onClick={() => setOperation(op.id as any)}
-                        className={`p-3 rounded-2xl border text-left transition-all duration-200 flex items-start gap-3 ${
+                        className={`p-3 rounded-2xl border text-left transition-all flex flex-col justify-between ${
                           isSelected
-                            ? "bg-purple-600 text-white border-purple-600 shadow-md scale-[1.01]"
-                            : "bg-neutral-100 hover:bg-neutral-200/80 text-[#0d0f12] border-neutral-200"
+                            ? "bg-[#ff4d00]/10 border-[#ff4d00] text-[#0d0f12] shadow-sm"
+                            : "bg-neutral-50 border-neutral-200 text-neutral-700 hover:bg-neutral-100"
                         }`}
                       >
-                        <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isSelected ? "text-white" : "text-purple-600"}`} />
-                        <div>
-                          <div className="text-xs font-bold font-mono">{op.label}</div>
-                          <div className={`text-[10px] ${isSelected ? "text-purple-100" : "text-neutral-500"}`}>
-                            {op.desc}
-                          </div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <Icon className={`w-4 h-4 ${isSelected ? "text-[#ff4d00]" : "text-neutral-500"}`} />
+                          <span className="text-xs font-bold font-mono">{op.label}</span>
                         </div>
+                        <span className="text-[10px] text-neutral-500 line-clamp-2 leading-tight">
+                          {op.desc}
+                        </span>
                       </button>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Translation Language Selector if operation is translate */}
+              {/* Target Language Dropdown (if translate selected) */}
               {operation === "translate" && (
-                <div className="p-3 bg-purple-50 rounded-2xl border border-purple-200 space-y-2">
-                  <label className="text-xs font-mono font-bold text-purple-900 block">
-                    Target Language:
+                <div className="p-4 rounded-2xl bg-neutral-50 border border-black/5 space-y-2">
+                  <label className="text-xs font-mono font-bold text-neutral-700 block">
+                    Target Output Language:
                   </label>
                   <select
                     value={targetLanguage}
                     onChange={(e) => setTargetLanguage(e.target.value)}
-                    className="w-full p-2 bg-white rounded-xl border border-purple-300 text-xs font-mono font-bold text-[#0d0f12]"
+                    className="w-full p-2.5 bg-white rounded-xl border border-neutral-200 text-xs font-mono font-bold text-[#0d0f12] focus:outline-none focus:border-[#ff4d00]"
                   >
                     {SUPPORTED_LANGUAGES.filter((l) => l.code !== "auto").map((l) => (
                       <option key={l.code} value={l.name}>
@@ -231,90 +247,95 @@ export const ProcessPage: React.FC = () => {
                 </div>
               )}
 
-              {error && (
-                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                  <span>{error}</span>
-                </div>
-              )}
-
-              {/* Run CTA */}
+              {/* Execute Button */}
               <button
                 onClick={handleRunOperation}
                 disabled={isLoading || !text.trim()}
-                className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-black text-sm font-mono tracking-tight shadow-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01]"
+                className={`w-full py-3.5 rounded-2xl font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
+                  isLoading || !text.trim()
+                    ? "bg-neutral-200 text-neutral-400 cursor-not-allowed"
+                    : "bg-[#0d0f12] text-white hover:bg-[#ff4d00] shadow-lg shadow-black/10 cursor-pointer"
+                }`}
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin text-white" />
-                    Processing Operation...
+                    <Loader2 className="w-4 h-4 animate-spin text-[#ff4d00]" />
+                    <span>Processing Neural Inference...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4" />
-                    Run {operation.toUpperCase()} Operation
+                    <Sparkles className="w-4 h-4 text-[#ff4d00]" />
+                    <span>Execute {operations.find((o) => o.id === operation)?.label}</span>
                   </>
                 )}
               </button>
             </div>
           </div>
 
-          {/* RESULT COLUMN (RIGHT) */}
+          {/* OUTPUT COLUMN (RIGHT) */}
           <div className="space-y-6">
-            {resultText ? (
-              <div className="space-y-6">
-                <div className="glass-card p-6 rounded-3xl border border-black/10 space-y-4">
-                  <div className="flex items-center justify-between border-b border-black/10 pb-4">
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-purple-600" />
-                      <h3 className="text-lg font-black text-[#0d0f12]">Intelligence Output</h3>
-                    </div>
+            <div className="glass-card p-6 sm:p-8 rounded-3xl border border-black/10 bg-white shadow-xl space-y-5">
+              <div className="flex items-center justify-between border-b border-black/10 pb-4">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-emerald-600" />
+                  <h3 className="text-lg font-black text-[#0d0f12]">Intelligence Output</h3>
+                </div>
 
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={handleCopy}
-                        className="px-3 py-1.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-mono font-bold border border-neutral-200 transition-colors flex items-center gap-1.5"
-                      >
-                        {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                        {copied ? "Copied" : "Copy"}
-                      </button>
+                {resultText && (
+                  <button
+                    onClick={handleCopyResult}
+                    className="px-3 py-1.5 rounded-xl bg-neutral-100 hover:bg-[#ff4d00]/10 hover:text-[#ff4d00] text-neutral-700 text-xs font-mono font-bold transition-colors flex items-center gap-1.5"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-600" /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" /> Copy Output
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
 
-                      <button
-                        onClick={handleReset}
-                        className="p-1.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-600 transition-colors"
-                        title="Reset"
-                      >
-                        <RefreshCw className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
+              {/* Error Message */}
+              {error && (
+                <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-start gap-2.5 text-red-700 text-xs font-mono">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  <span>{error}</span>
+                </div>
+              )}
 
-                  <div className="p-4 bg-neutral-900 text-neutral-100 rounded-2xl font-mono text-xs leading-relaxed max-h-[500px] overflow-y-auto whitespace-pre-wrap">
+              {/* Output Content */}
+              {resultText ? (
+                <div className="space-y-4">
+                  <div className="p-5 rounded-2xl bg-neutral-50 border border-black/5 font-sans text-sm text-neutral-800 leading-relaxed whitespace-pre-wrap">
                     {resultText}
                   </div>
-                </div>
 
-                <ExportSuite
-                  segments={parseTXT(resultText)}
-                  title={`TranscriptG_${operation}`}
-                  plainText={resultText}
-                />
-              </div>
-            ) : (
-              <div className="glass-card p-12 rounded-3xl border border-black/10 text-center space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center mx-auto text-purple-600">
-                  <FileText className="w-6 h-6" />
+                  <ExportSuite
+                    segments={parseTXT(resultText)}
+                    title="TranscriptG_Intelligence"
+                    summary={resultText}
+                  />
                 </div>
-                <h3 className="text-lg font-bold text-[#0d0f12]">No Output Generated Yet</h3>
-                <p className="text-xs text-neutral-500 max-w-sm mx-auto leading-relaxed">
-                  Enter text on the left, select an AI operation (Summarize, Translate, Key points, Polish, or Title), and click Run Operation.
-                </p>
-              </div>
-            )}
+              ) : (
+                <div className="py-16 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-400 flex items-center justify-center mx-auto">
+                    <Sparkles className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-sm font-bold text-[#0d0f12]">Awaiting Execution</h4>
+                  <p className="text-xs text-neutral-500 max-w-xs mx-auto">
+                    Click Execute on the left to transform your text with neural intelligence.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Detailed Tool Guide */}
+        {/* Detailed Guide */}
         <ProcessGuide />
       </div>
     </div>

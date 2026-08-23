@@ -13,13 +13,24 @@ import {
   parseTXT,
   SAMPLE_SRT,
 } from "../lib/transcript";
-import { FileCode2, RefreshCw, Sparkles, Trash2, FileCheck, AlertCircle } from "lucide-react";
+import {
+  FileCode2,
+  RefreshCw,
+  Sparkles,
+  Trash2,
+  FileCheck,
+  AlertCircle,
+  Play,
+  Copy,
+  Check
+} from "lucide-react";
 
 export const ConvertPage: React.FC = () => {
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState(SAMPLE_SRT);
   const [formatDetected, setFormatDetected] = useState<"srt" | "vtt" | "json" | "txt">("srt");
   const [segments, setSegments] = useState<CueSegment[]>([]);
   const [parseError, setParseError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   // Re-parse whenever input changes
   useEffect(() => {
@@ -75,6 +86,12 @@ export const ConvertPage: React.FC = () => {
     setParseError(null);
   };
 
+  const handleCopyInput = () => {
+    navigator.clipboard.writeText(inputText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="space-y-12">
       <Seo
@@ -94,11 +111,11 @@ export const ConvertPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* SOURCE COLUMN (LEFT) */}
           <div className="space-y-6">
-            <div className="glass-card p-6 rounded-3xl border border-black/10 space-y-4">
+            <div className="glass-card p-6 sm:p-8 rounded-3xl border border-black/10 space-y-4 bg-white shadow-xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FileCode2 className="w-5 h-5 text-[#ff4d00]" />
-                  <h3 className="text-lg font-black text-[#0d0f12]">Source Input</h3>
+                  <h3 className="text-lg font-black text-[#0d0f12]">Source Input Payload</h3>
                 </div>
 
                 {inputText.trim() && (
@@ -122,18 +139,28 @@ export const ConvertPage: React.FC = () => {
 
                 <button
                   onClick={handleLoadSample}
-                  className="px-3.5 py-1.5 rounded-xl bg-[#ff4d00]/10 hover:bg-[#ff4d00]/20 text-[#ff4d00] text-xs font-mono font-bold transition-colors"
+                  className="px-3.5 py-1.5 rounded-xl bg-[#ff4d00]/10 hover:bg-[#ff4d00]/20 text-[#ff4d00] text-xs font-mono font-bold transition-colors flex items-center gap-1.5"
                 >
-                  Load Sample SRT
+                  <Play className="w-3 h-3" /> Reset Sample SRT
                 </button>
 
                 {inputText.trim() && (
-                  <button
-                    onClick={handleClear}
-                    className="px-3.5 py-1.5 rounded-xl bg-red-100 hover:bg-red-200 text-red-700 text-xs font-mono font-bold transition-colors ml-auto flex items-center gap-1"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" /> Clear
-                  </button>
+                  <>
+                    <button
+                      onClick={handleCopyInput}
+                      className="px-3 py-1.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-700 text-xs font-mono font-bold transition-colors flex items-center gap-1"
+                      title="Copy Source Text"
+                    >
+                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                    </button>
+
+                    <button
+                      onClick={handleClear}
+                      className="px-3.5 py-1.5 rounded-xl bg-red-100 hover:bg-red-200 text-red-700 text-xs font-mono font-bold transition-colors ml-auto flex items-center gap-1"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" /> Clear
+                    </button>
+                  </>
                 )}
               </div>
 
@@ -141,38 +168,38 @@ export const ConvertPage: React.FC = () => {
               <textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="Paste SRT, VTT, JSON, or plain text content here..."
-                rows={16}
-                className="w-full p-4 bg-neutral-50 rounded-2xl border border-neutral-200 text-xs font-mono text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] transition-colors leading-relaxed"
+                placeholder="Paste your SRT, WebVTT, JSON, or plain text subtitle here..."
+                rows={12}
+                className="w-full p-4 bg-neutral-50 rounded-2xl border border-neutral-200 font-mono text-xs text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] leading-relaxed resize-y"
               />
 
               {parseError && (
-                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-start gap-2.5 text-red-700 text-xs font-mono">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                   <span>{parseError}</span>
                 </div>
               )}
             </div>
           </div>
 
-          {/* OUTPUT COLUMN (RIGHT) */}
+          {/* TARGET COLUMN (RIGHT) */}
           <div className="space-y-6">
             {segments.length > 0 ? (
               <div className="space-y-6">
-                <div className="glass-card p-6 rounded-3xl border border-black/10">
-                  <div className="flex items-center justify-between mb-4">
+                <div className="glass-card p-6 sm:p-8 rounded-3xl border border-black/10 bg-white shadow-xl space-y-6">
+                  <div className="flex items-center justify-between border-b border-black/10 pb-4">
                     <div className="flex items-center gap-2">
                       <FileCheck className="w-5 h-5 text-emerald-600" />
-                      <h3 className="text-lg font-black text-[#0d0f12]">Parsed Output Preview</h3>
+                      <h3 className="text-lg font-black text-[#0d0f12]">Parsed Cues ({segments.length})</h3>
                     </div>
-                    <span className="text-xs font-mono text-neutral-500 font-semibold">
-                      {segments.length} Cues Detected
+                    <span className="text-xs font-mono font-bold text-neutral-500">
+                      Live Subtitle Preview
                     </span>
                   </div>
 
                   <Manuscript
                     segments={segments}
-                    title="Converted Subtitle"
+                    title="Converted_Subtitles"
                     onUpdateSegment={(id, newText) => {
                       setSegments((prev) =>
                         prev.map((s) => (s.id === id ? { ...s, text: newText } : s))
@@ -181,29 +208,32 @@ export const ConvertPage: React.FC = () => {
                   />
                 </div>
 
-                <ExportSuite segments={segments} title="Converted_Subtitle" />
+                <ExportSuite
+                  segments={segments}
+                  title="TranscriptG_Converted"
+                />
               </div>
             ) : (
-              <div className="glass-card p-12 rounded-3xl border border-black/10 text-center space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-neutral-100 flex items-center justify-center mx-auto text-neutral-400">
+              <div className="glass-card p-12 rounded-3xl border border-black/10 text-center space-y-4 bg-white shadow-lg">
+                <div className="w-12 h-12 rounded-2xl bg-neutral-100 text-neutral-400 flex items-center justify-center mx-auto">
                   <FileCode2 className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-[#0d0f12]">No Subtitle Data Loaded</h3>
-                <p className="text-xs text-neutral-500 max-w-sm mx-auto leading-relaxed">
-                  Paste or upload SRT/VTT content on the left to inspect timecoded cues and export to any target format instantly.
+                <h4 className="text-base font-bold text-[#0d0f12]">No Subtitle Data Loaded</h4>
+                <p className="text-xs text-neutral-500 max-w-sm mx-auto">
+                  Paste subtitle text on the left or click "Reset Sample SRT" to preview the live converter.
                 </p>
                 <button
                   onClick={handleLoadSample}
-                  className="px-4 py-2 rounded-xl bg-[#ff4d00] text-white text-xs font-mono font-bold thermal-glow transition-all hover:scale-105"
+                  className="px-4 py-2 rounded-xl bg-[#0d0f12] text-white text-xs font-mono font-bold hover:bg-[#ff4d00] transition-colors"
                 >
-                  Load Sample Subtitle
+                  Load Sample Subtitle Track
                 </button>
               </div>
             )}
           </div>
         </div>
 
-        {/* Detailed Tool Guide */}
+        {/* Detailed Guide */}
         <ConvertGuide />
       </div>
     </div>
