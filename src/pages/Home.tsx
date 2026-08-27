@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { SpectrumTrace } from "../components/SpectrumTrace";
 import { SUPPORTED_LANGUAGES } from "../lib/transcript";
+import { TOOLS_REGISTRY } from "../lib/navigation";
 import {
   Mic,
   FileText,
   Cpu,
+  GraduationCap,
   ArrowRight,
   UploadCloud,
   Layers,
@@ -51,8 +53,24 @@ export const Home: React.FC = () => {
   return (
     <div className="space-y-24">
       <Seo
-        title="TranscriptG — Free Precision Transcription & Text Intelligence Platform"
-        description="Transcribe audio & video into subtitles, convert SRT/VTT/JSON, and run AI summaries in 90+ languages. No login, no watermark, 100% free and private."
+        title="TranscriptG — Free Online Audio Transcription, YouTube Captions & Subtitle Converter"
+        description="Zero-retention, 100% free transcription suite. Transcribe MP3/WAV/MP4 audio to text, extract YouTube video transcripts with timestamps, convert SRT/VTT/JSON, audit academic Parchment PDFs, and summarize speech in 90+ languages. No login, no watermark."
+        keywords={[
+          "transcription",
+          "speech to text",
+          "youtube transcript generator",
+          "parchment transcript parser",
+          "srt converter",
+          "vtt converter",
+          "audio to text",
+          "video transcription",
+          "free transcription tool",
+          "subtitles downloader",
+          "ai text summarizer",
+          "no login speech to text",
+        ]}
+        faqs={faqs}
+        canonicalPath="/"
       />
 
       {/* SECTION 1: HERO */}
@@ -63,31 +81,31 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto space-y-6">
             {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/10 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#ff4d00] animate-pulse" />
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-neutral-800">
+            <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white border border-black/10 shadow-sm max-w-full mx-auto">
+              <span className="w-2 h-2 rounded-full bg-[#ff4d00] animate-pulse shrink-0" />
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-neutral-800">
                 Precision Linguistic Engine
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-[#00d9ff]/20 text-[#0088a8] text-[10px] font-mono font-bold">
+              <span className="px-2 py-0.5 rounded-full bg-[#00d9ff]/20 text-[#0088a8] text-[9px] sm:text-[10px] font-mono font-bold shrink-0">
                 No Login Required
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#0d0f12] tracking-[-0.04em] leading-[1.05]">
+            <h1 className="text-3xl sm:text-6xl lg:text-7xl font-black text-[#0d0f12] tracking-[-0.03em] sm:tracking-[-0.04em] leading-[1.1] sm:leading-[1.05] break-words">
               Transcribe, convert, and think in{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d00] to-amber-500">
                 90+ languages
               </span>
             </h1>
 
-            <p className="text-lg sm:text-2xl text-neutral-600 max-w-2xl mx-auto font-normal leading-relaxed">
+            <p className="text-base sm:text-2xl text-neutral-600 max-w-2xl mx-auto font-normal leading-relaxed px-2 sm:px-0">
               A public-access transcription laboratory that turns sound into knowledge. Zero signups, zero watermarks, session-private.
             </p>
 
             {/* Hero Spectrum Trace */}
-            <div className="max-w-md mx-auto my-6 p-3 bg-white/80 rounded-2xl border border-black/10 shadow-sm">
-              <SpectrumTrace active={true} barsCount={32} heightClass="h-10" accentColor="mixed" />
+            <div className="max-w-md w-full mx-auto my-4 sm:my-6 p-2.5 sm:p-3 bg-white/80 rounded-2xl border border-black/10 shadow-sm overflow-hidden">
+              <SpectrumTrace active={true} barsCount={28} heightClass="h-10" accentColor="mixed" />
             </div>
 
             {/* Primary CTA */}
@@ -109,79 +127,56 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* 3 Engine Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-            {/* Engine 1 */}
-            <Link
-              to="/transcribe"
-              className="glass-card glass-card-hover p-8 rounded-3xl border border-black/10 flex flex-col justify-between group"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#ff4d00]/10 flex items-center justify-center text-[#ff4d00] mb-6 group-hover:bg-[#ff4d00] group-hover:text-white transition-colors">
-                  <Mic className="w-6 h-6" />
-                </div>
-                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold">
-                  Engine 01
-                </span>
-                <h2 className="text-2xl font-black text-[#0d0f12] mt-1 mb-2 tracking-tight">
-                  Speech → Text
-                </h2>
-                <p className="text-neutral-600 text-sm leading-relaxed">
-                  High-precision audio/video transcription with automated cue timestamps and optional AI executive summary.
-                </p>
-              </div>
-              <div className="mt-8 flex items-center text-xs font-mono font-bold text-[#ff4d00] gap-1 group-hover:translate-x-1 transition-transform">
-                Open Engine <ArrowRight className="w-3.5 h-3.5" />
-              </div>
-            </Link>
+          {/* Dynamic Engine Grid from TOOLS_REGISTRY */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            {TOOLS_REGISTRY.map((tool, idx) => {
+              const Icon = tool.icon;
+              const engineNum = `0${idx + 1}`.slice(-2);
+              return (
+                <Link
+                  key={tool.id}
+                  to={tool.path}
+                  className="glass-card glass-card-hover p-6 sm:p-7 rounded-3xl border border-black/10 flex flex-col justify-between group relative overflow-hidden"
+                >
+                  {tool.badge && (
+                    <div className="absolute top-4 right-4">
+                      <span
+                        className={`px-2 py-0.5 rounded-full font-mono font-bold text-[9px] uppercase tracking-wider ${
+                          tool.badgeType === "amber"
+                            ? "bg-amber-100 text-amber-800"
+                            : tool.badgeType === "purple"
+                            ? "bg-purple-100 text-purple-800"
+                            : "bg-[#ff4d00]/15 text-[#ff4d00]"
+                        }`}
+                      >
+                        {tool.badge}
+                      </span>
+                    </div>
+                  )}
 
-            {/* Engine 2 */}
-            <Link
-              to="/convert"
-              className="glass-card glass-card-hover p-8 rounded-3xl border border-black/10 flex flex-col justify-between group"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#00d9ff]/15 flex items-center justify-center text-[#0088a8] mb-6 group-hover:bg-[#00d9ff] group-hover:text-black transition-colors">
-                  <FileText className="w-6 h-6" />
-                </div>
-                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#0088a8] font-bold">
-                  Engine 02
-                </span>
-                <h2 className="text-2xl font-black text-[#0d0f12] mt-1 mb-2 tracking-tight">
-                  Subtitle Convert
-                </h2>
-                <p className="text-neutral-600 text-sm leading-relaxed">
-                  Convert SRT, VTT, TXT, and JSON formats seamlessly while preserving exact cue timestamps and layout.
-                </p>
-              </div>
-              <div className="mt-8 flex items-center text-xs font-mono font-bold text-[#0088a8] gap-1 group-hover:translate-x-1 transition-transform">
-                Open Engine <ArrowRight className="w-3.5 h-3.5" />
-              </div>
-            </Link>
+                  <div>
+                    <div
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-all ${tool.accentBg} ${tool.accentText}`}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className={`text-[11px] font-mono uppercase tracking-[0.2em] font-bold ${tool.accentText}`}>
+                      Engine {engineNum}
+                    </span>
+                    <h2 className="text-xl font-black text-[#0d0f12] mt-1 mb-2 tracking-tight">
+                      {tool.name}
+                    </h2>
+                    <p className="text-neutral-600 text-xs leading-relaxed line-clamp-3">
+                      {tool.description}
+                    </p>
+                  </div>
 
-            {/* Engine 3 */}
-            <Link
-              to="/process"
-              className="glass-card glass-card-hover p-8 rounded-3xl border border-black/10 flex flex-col justify-between group"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600 mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                  <Cpu className="w-6 h-6" />
-                </div>
-                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-purple-600 font-bold">
-                  Engine 03
-                </span>
-                <h2 className="text-2xl font-black text-[#0d0f12] mt-1 mb-2 tracking-tight">
-                  Text Intelligence
-                </h2>
-                <p className="text-neutral-600 text-sm leading-relaxed">
-                  Run AI operations on transcripts: summarize, translate across 90+ languages, extract key points, and polish.
-                </p>
-              </div>
-              <div className="mt-8 flex items-center text-xs font-mono font-bold text-purple-600 gap-1 group-hover:translate-x-1 transition-transform">
-                Open Engine <ArrowRight className="w-3.5 h-3.5" />
-              </div>
-            </Link>
+                  <div className={`mt-6 flex items-center text-xs font-mono font-bold gap-1 group-hover:translate-x-1 transition-transform ${tool.accentText}`}>
+                    Open Engine <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 {
   "name": "TranscriptG",
-  "description": "High-precision, privacy-first transcription and text-intelligence web platform with multi-format conversion and 90+ languages support.",
+  "description": "High-precision, privacy-first audio transcription, instant YouTube video transcript generation with no-captions AI reconstruction, Parchment academic transcript parsing & GPA calculation, and text intelligence platform with multi-format conversion in 90+ languages.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

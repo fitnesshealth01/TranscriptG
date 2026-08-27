@@ -92,12 +92,45 @@ export const ConvertPage: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const convertFaqs = [
+    {
+      q: "What is the difference between SRT and WebVTT (VTT)?",
+      a: "SRT (SubRip) uses comma-delimited milliseconds (00:00:01,000) and is standard for offline media players, Premiere Pro, and VLC. WebVTT (.vtt) uses period-delimited milliseconds (00:00:01.000), starts with a WEBVTT header, and is native to HTML5 web video players.",
+    },
+    {
+      q: "Does format conversion alter or drift my subtitle timecodes?",
+      a: "No. TranscriptG's format conversion engine parses timecodes with millisecond precision, ensuring zero audio-visual sync drift across format migrations.",
+    },
+    {
+      q: "Can I convert JSON subtitle files to SRT or VTT?",
+      a: "Yes. TranscriptG automatically detects structured JSON cue arrays and converts them into standard SRT or WebVTT files instantaneously.",
+    },
+    {
+      q: "Is there any file size limit for subtitle conversion?",
+      a: "You can convert subtitle scripts of any length — from short YouTube clips to full 3-hour feature film subtitle tracks.",
+    },
+  ];
+
   return (
     <div className="space-y-12">
       <Seo
-        title="Free SRT Converter & Subtitle Format Translator (SRT, VTT, JSON)"
-        description="Instant closed-caption & subtitle format converter. Convert SRT to VTT, VTT to SRT, JSON, or plain text. Real-time preview, timecode parsing, 100% free."
-        keywords="SRT converter, VTT converter, srt to vtt, vtt to srt, subtitle converter, closed caption converter, srt to json, subtitle timecode editor"
+        title="Free Subtitle Converter — Convert SRT to VTT, VTT to SRT, JSON & TXT"
+        description="Lossless closed-caption & subtitle format converter. Convert SRT to VTT, VTT to SRT, JSON, TXT, PDF, and DOCX instantaneously with millisecond timecode precision. 100% free, no login."
+        keywords={[
+          "srt to vtt converter",
+          "vtt to srt converter",
+          "subtitle converter",
+          "convert srt to text",
+          "vtt to txt",
+          "subtitle format translator",
+          "closed captions converter",
+          "json to srt",
+          "srt to json converter",
+          "webvtt converter online",
+        ]}
+        faqs={convertFaqs}
+        canonicalPath="/convert"
+        applicationCategory="MultimediaApplication"
       />
 
       <PageHeader

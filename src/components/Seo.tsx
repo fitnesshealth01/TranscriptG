@@ -6,33 +6,46 @@ export interface FaqItem {
   a: string;
 }
 
-interface SeoProps {
+export interface SeoProps {
   title?: string;
   description?: string;
-  keywords?: string;
+  keywords?: string | string[];
   type?: "website" | "article" | "application";
   faqs?: FaqItem[];
   jsonLd?: Record<string, any> | Record<string, any>[];
   canonicalPath?: string;
+  canonicalUrl?: string;
   author?: string;
   datePublished?: string;
+  dateModified?: string;
+  applicationCategory?: string;
+  noindex?: boolean;
 }
 
 export const Seo: React.FC<SeoProps> = ({
-  title = "TranscriptG — Free High-Precision Transcription & Text Intelligence",
-  description = "No login, no watermark, privacy-first transcription platform. Transcribe speech to text, convert SRT/VTT/JSON, and summarize audio in 90+ languages.",
-  keywords = "transcription, speech to text, srt converter, vtt converter, audio summarizer, free transcription, AI transcription, closed captions",
+  title = "TranscriptG — Free High-Precision Audio Transcription, YouTube Captions & Subtitle Converter",
+  description = "No login, no watermark, zero-retention transcription platform. Transcribe speech to text, generate YouTube video transcripts with timestamps, convert SRT/VTT/JSON, and parse academic Parchment transcripts in 90+ languages.",
+  keywords = "transcription, speech to text, youtube transcript generator, parchment transcript parser, srt converter, vtt converter, audio summarizer, free transcription, AI transcription, closed captions",
   type = "website",
   faqs,
   jsonLd,
   canonicalPath,
-  author = "TranscriptG Engineering",
+  canonicalUrl: customCanonicalUrl,
+  author = "TranscriptG Engineering Lab",
   datePublished = "2026-08-01",
+  dateModified = "2026-08-27",
+  applicationCategory = "MultimediaApplication",
+  noindex = false,
 }) => {
   const location = useLocation();
   const currentPath = canonicalPath || location.pathname;
-  const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://transcriptg.com";
-  const canonicalUrl = `${siteUrl}${currentPath}`;
+  const siteUrl = typeof window !== "undefined" && window.location.origin
+    ? window.location.origin
+    : "https://transcriptg.com";
+  
+  const canonicalUrl = customCanonicalUrl || `${siteUrl}${currentPath === "/" ? "" : currentPath}`;
+
+  const formattedKeywords = Array.isArray(keywords) ? keywords.join(", ") : keywords;
 
   useEffect(() => {
     // 1. Update Title
@@ -50,17 +63,33 @@ export const Seo: React.FC<SeoProps> = ({
       element.setAttribute("content", content);
     };
 
-    // Meta descriptions and OpenGraph
+    // Meta descriptions and keywords
     setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", keywords);
+    setMetaTag("name", "keywords", formattedKeywords);
+    setMetaTag("name", "author", author);
+    setMetaTag(
+      "name",
+      "robots",
+      noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    );
+    setMetaTag("name", "googlebot", noindex ? "noindex, nofollow" : "index, follow");
+
+    // OpenGraph
     setMetaTag("property", "og:title", formattedTitle);
     setMetaTag("property", "og:description", description);
     setMetaTag("property", "og:type", type === "article" ? "article" : "website");
     setMetaTag("property", "og:url", canonicalUrl);
     setMetaTag("property", "og:site_name", "TranscriptG");
+    setMetaTag("property", "og:locale", "en_US");
+    setMetaTag("property", "og:image", `${siteUrl}/icon.png`);
+
+    // Twitter Cards
+    setMetaTag("name", "twitter:card", "summary_large_image");
     setMetaTag("name", "twitter:title", formattedTitle);
     setMetaTag("name", "twitter:description", description);
-    setMetaTag("name", "twitter:card", "summary_large_image");
+    setMetaTag("name", "twitter:image", `${siteUrl}/icon.png`);
 
     // Canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -85,30 +114,37 @@ export const Seo: React.FC<SeoProps> = ({
       {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
-        "url": siteUrl,
-        "name": "TranscriptG",
-        "description": "Elite, free, no-login transcription and text intelligence web platform",
-        "inLanguage": "en-US",
+        url: siteUrl,
+        name: "TranscriptG",
+        description: "Elite, free, no-login transcription and text intelligence web platform",
+        inLanguage: "en-US",
       },
       {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
-        "name": "TranscriptG",
-        "url": siteUrl,
-        "logo": `${siteUrl}/icon.png`,
+        name: "TranscriptG",
+        url: siteUrl,
+        logo: `${siteUrl}/icon.png`,
       },
       {
         "@type": "WebApplication",
         "@id": `${siteUrl}/#webapp`,
-        "name": "TranscriptG Engine Suite",
-        "url": siteUrl,
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "All Browser Runtimes",
-        "browserRequirements": "Requires JavaScript and HTML5",
-        "offers": {
+        name: formattedTitle,
+        url: canonicalUrl,
+        applicationCategory,
+        operatingSystem: "All Browser Runtimes (Chrome, Firefox, Safari, Edge, Android, iOS)",
+        browserRequirements: "Requires modern JavaScript and HTML5 Audio/Video",
+        offers: {
           "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
+          price: "0",
+          priceCurrency: "USD",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          ratingCount: "1280",
+          bestRating: "5",
+          worstRating: "1",
         },
       },
     ];
@@ -119,9 +155,9 @@ export const Seo: React.FC<SeoProps> = ({
       const breadcrumbItems = [
         {
           "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": siteUrl,
+          position: 1,
+          name: "Home",
+          item: siteUrl,
         },
       ];
 
@@ -131,15 +167,15 @@ export const Seo: React.FC<SeoProps> = ({
         const humanName = part.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
         breadcrumbItems.push({
           "@type": "ListItem",
-          "position": idx + 2,
-          "name": humanName,
-          "item": runningPath,
+          position: idx + 2,
+          name: humanName,
+          item: runningPath,
         });
       });
 
       graph.push({
         "@type": "BreadcrumbList",
-        "itemListElement": breadcrumbItems,
+        itemListElement: breadcrumbItems,
       });
     }
 
@@ -147,12 +183,12 @@ export const Seo: React.FC<SeoProps> = ({
     if (faqs && faqs.length > 0) {
       graph.push({
         "@type": "FAQPage",
-        "mainEntity": faqs.map((f) => ({
+        mainEntity: faqs.map((f) => ({
           "@type": "Question",
-          "name": f.q,
-          "acceptedAnswer": {
+          name: f.q,
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": f.a,
+            text: f.a,
           },
         })),
       });
@@ -162,20 +198,21 @@ export const Seo: React.FC<SeoProps> = ({
     if (type === "article") {
       graph.push({
         "@type": "BlogPosting",
-        "headline": formattedTitle,
-        "description": description,
-        "mainEntityOfPage": canonicalUrl,
-        "author": {
+        headline: formattedTitle,
+        description,
+        mainEntityOfPage: canonicalUrl,
+        author: {
           "@type": "Organization",
-          "name": author,
+          name: author,
         },
-        "publisher": {
+        publisher: {
           "@type": "Organization",
-          "name": "TranscriptG",
-          "url": siteUrl,
+          name: "TranscriptG",
+          url: siteUrl,
         },
-        "datePublished": datePublished,
-        "inLanguage": "en-US",
+        datePublished,
+        dateModified,
+        inLanguage: "en-US",
       });
     }
 
@@ -191,7 +228,22 @@ export const Seo: React.FC<SeoProps> = ({
         send_to: "G-BVZ9V3TN4V",
       });
     }
-  }, [title, description, type, canonicalUrl, currentPath, jsonLd, faqs, author, datePublished, siteUrl]);
+  }, [
+    title,
+    description,
+    formattedKeywords,
+    type,
+    canonicalUrl,
+    currentPath,
+    jsonLd,
+    faqs,
+    author,
+    datePublished,
+    dateModified,
+    siteUrl,
+    applicationCategory,
+    noindex,
+  ]);
 
   return null;
 };

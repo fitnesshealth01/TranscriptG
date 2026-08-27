@@ -133,12 +133,46 @@ export const TranscribePage: React.FC = () => {
     setIsLoading(false);
   };
 
+  const transcribeFaqs = [
+    {
+      q: "What audio and video file formats are supported for transcription?",
+      a: "TranscriptG supports all major audio and video media containers including MP3, WAV, M4A, AAC, OGG, FLAC, WEBM, MP4, MOV, and AVI up to 25MB per upload.",
+    },
+    {
+      q: "Are the transcripts timecoded for video subtitle editing?",
+      a: "Yes. Every transcript includes millisecond-accurate timestamps and speaker cues that can be directly exported to SRT, VTT, JSON, TXT, PDF, and DOCX.",
+    },
+    {
+      q: "How fast is the speech recognition inference?",
+      a: "Standard recordings process within 2 to 5 seconds depending on file length, providing instant text rendering with automated chaptering and summaries.",
+    },
+    {
+      q: "Is there any limit to the number of transcriptions I can perform?",
+      a: "No. TranscriptG is an open public utility with unlimited free sessions and zero login friction.",
+    },
+  ];
+
   return (
     <div className="space-y-12">
       <Seo
-        title="Speech to Text & Audio Transcription Engine — Free Online App"
-        description="Free speech to text & video transcription tool. Convert MP3, WAV, MP4 to timecoded transcripts with AI summaries in 90+ languages. No login, no watermark."
-        keywords="speech to text, audio transcription, video transcription, transcribe mp3 to text, transcribe video, free audio transcriber, transcript generator"
+        title="Speech to Text & Audio Transcriber — Free MP3, WAV & Video Transcription Engine"
+        description="Free online speech-to-text audio and video transcription tool. Convert MP3, WAV, M4A, and MP4 into timecoded subtitles, transcripts, and AI executive summaries in 90+ languages. Zero login, no watermark."
+        keywords={[
+          "speech to text",
+          "audio transcription",
+          "transcribe mp3 to text",
+          "video transcription free",
+          "free speech to text converter",
+          "transcribe audio online",
+          "mp3 to text converter",
+          "wav to text",
+          "voice to text generator",
+          "ai speech recognition",
+          "subtitles generator",
+        ]}
+        faqs={transcribeFaqs}
+        canonicalPath="/transcribe"
+        applicationCategory="MultimediaApplication"
       />
 
       <PageHeader

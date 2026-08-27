@@ -8,6 +8,8 @@ const Home = React.lazy(() => import("./pages/Home").then((m) => ({ default: m.H
 const TranscribePage = React.lazy(() => import("./pages/TranscribePage").then((m) => ({ default: m.TranscribePage })));
 const ConvertPage = React.lazy(() => import("./pages/ConvertPage").then((m) => ({ default: m.ConvertPage })));
 const ProcessPage = React.lazy(() => import("./pages/ProcessPage").then((m) => ({ default: m.ProcessPage })));
+const ParchmentPage = React.lazy(() => import("./pages/ParchmentPage").then((m) => ({ default: m.ParchmentPage })));
+const YouTubeTranscriptPage = React.lazy(() => import("./pages/YouTubeTranscriptPage").then((m) => ({ default: m.YouTubeTranscriptPage })));
 const AboutPage = React.lazy(() => import("./pages/AboutPage").then((m) => ({ default: m.AboutPage })));
 const PrivacyPage = React.lazy(() => import("./pages/PrivacyPage").then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = React.lazy(() => import("./pages/TermsPage").then((m) => ({ default: m.TermsPage })));
@@ -33,8 +35,12 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="transcribe" element={<TranscribePage />} />
+            <Route path="youtube-transcript" element={<YouTubeTranscriptPage />} />
+            <Route path="youtube" element={<YouTubeTranscriptPage />} />
             <Route path="convert" element={<ConvertPage />} />
             <Route path="process" element={<ProcessPage />} />
+            <Route path="parchment-transcript" element={<ParchmentPage />} />
+            <Route path="parchment" element={<ParchmentPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="privacy" element={<PrivacyPage />} />
             <Route path="terms" element={<TermsPage />} />

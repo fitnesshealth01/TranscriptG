@@ -146,12 +146,44 @@ export const ProcessPage: React.FC = () => {
     setError(null);
   };
 
+  const processFaqs = [
+    {
+      q: "What text intelligence operations does Engine 03 support?",
+      a: "Engine 03 supports 5 core operations: Executive Summarization (3–5 sentences), Translation into 90+ languages, Key Action Item Bullets, Grammar & Verbal Polish, and Automated Title & Chapter Generation.",
+    },
+    {
+      q: "Can I process confidential meeting transcripts safely?",
+      a: "Yes. Processing occurs in ephemeral server memory with zero database retention, ensuring company meeting notes, legal depositions, and medical dictations remain strictly confidential.",
+    },
+    {
+      q: "Is there any text input length restriction?",
+      a: "You can input up to 50,000 words per request, supporting lengthy podcast episodes, conference recordings, and long-form research papers.",
+    },
+    {
+      q: "How accurate is the multi-language translation?",
+      a: "Our neural translation models retain linguistic nuances, domain terminology, and grammatical precision across 90+ supported languages.",
+    },
+  ];
+
   return (
     <div className="space-y-12">
       <Seo
-        title="AI Speech & Text Summarizer, Translator & Polish Engine"
-        description="Transform raw transcripts into executive summaries, bullet points, 90+ language translations, or polished articles instantly. No signup required."
-        keywords="speech summarizer, text summarizer, transcript summarizer, speech translator, audio text intelligence, extract action items, meeting minutes AI"
+        title="AI Transcript Summarizer & Translator — Instant Speech-to-Text NLP Intelligence"
+        description="Free AI text intelligence engine. Transform raw transcripts and notes into executive digests, structured action items, 90+ language translations, and polished documents with zero data retention."
+        keywords={[
+          "transcript summarizer",
+          "ai text summarizer",
+          "speech to text translator",
+          "meeting notes summarizer",
+          "extract action items from audio",
+          "transcript grammar polish",
+          "generate chapters from transcript",
+          "audio text intelligence",
+          "free ai summarizer",
+        ]}
+        faqs={processFaqs}
+        canonicalPath="/process"
+        applicationCategory="BusinessApplication"
       />
 
       <PageHeader

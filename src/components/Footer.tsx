@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 import { ShieldCheck, Zap, Globe2, FileCode2 } from "lucide-react";
+import { TOOLS_REGISTRY } from "../lib/navigation";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#0d0f12] text-white pt-16 pb-28 border-t border-white/10 relative overflow-hidden">
+    <footer className="bg-[#0d0f12] text-white pt-16 pb-28 border-t border-white/10 relative overflow-hidden w-full max-w-full">
       {/* Background glow accents */}
       <div className="absolute -top-32 right-0 w-96 h-96 bg-[#ff4d00]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00d9ff]/10 rounded-full blur-3xl pointer-events-none" />
@@ -33,27 +34,25 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Engines */}
+          {/* Dynamic Engines from Registry */}
           <div>
             <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold mb-4">
-              Linguistic Engines
+              Linguistic & Academic Engines
             </h3>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link to="/transcribe" className="text-neutral-300 hover:text-white transition-colors">
-                  Transcribe (Speech → Text)
-                </Link>
-              </li>
-              <li>
-                <Link to="/convert" className="text-neutral-300 hover:text-white transition-colors">
-                  Convert (Subtitle Engine)
-                </Link>
-              </li>
-              <li>
-                <Link to="/process" className="text-neutral-300 hover:text-white transition-colors">
-                  Process (Text Intelligence)
-                </Link>
-              </li>
+              {TOOLS_REGISTRY.map((tool) => (
+                <li key={tool.id}>
+                  <Link
+                    to={tool.path}
+                    className="text-neutral-300 hover:text-white transition-colors flex items-center gap-1.5"
+                  >
+                    {tool.badge && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#ff4d00]" />
+                    )}
+                    {tool.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

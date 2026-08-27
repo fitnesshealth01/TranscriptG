@@ -53,9 +53,18 @@ export const BlogIndexPage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="Linguistic Journal & Engineering Guides — TranscriptG"
-        description="Comprehensive technical breakdowns, acoustic engineering benchmarks, subtitle standards (SRT vs VTT), ADA compliance, and AI workflows."
-        keywords="speech recognition blog, audio transcription guides, subtitle formats, speech to text benchmarks, acoustic engineering articles"
+        title="Speech Technology & Subtitle Engineering Journal — TranscriptG"
+        description="Comprehensive technical breakdowns, acoustic engineering benchmarks, subtitle standards (SRT vs VTT), ADA compliance, and AI speech workflows."
+        keywords={[
+          "speech recognition blog",
+          "audio transcription guides",
+          "subtitle formats guide",
+          "speech to text benchmarks",
+          "acoustic engineering articles",
+          "srt vs vtt comparison",
+          "youtube captions workflow",
+        ]}
+        canonicalPath="/blog"
       />
 
       <PageHeader

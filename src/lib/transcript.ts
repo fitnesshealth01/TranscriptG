@@ -135,6 +135,17 @@ export function formatTimeDisplay(seconds: number): string {
   return `${mins}:${pad(secs)}`;
 }
 
+export const formatTime = formatTimeDisplay;
+export const exportToSrt = exportToSRT;
+export const exportToVtt = exportToVTT;
+export const exportToTxt = (segments: CueSegment[], withTimestamps: boolean = false): string => {
+  if (!withTimestamps) return exportToTXT(segments);
+  return segments
+    .map((s) => `[${formatTimeDisplay(s.start)}] ${s.text}`)
+    .join("\n");
+};
+export const exportToJson = exportToJSON;
+
 export function parseSrtTimeToSeconds(timeStr: string): number {
   if (!timeStr) return 0;
   const cleaned = timeStr.replace(",", ".").trim();

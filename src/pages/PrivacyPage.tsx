@@ -6,8 +6,16 @@ export const PrivacyPage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="Privacy Policy & Cookie Disclosure — TranscriptG"
-        description="TranscriptG privacy policy: zero permanent storage, zero account tracking, Google AdSense cookie compliance, GDPR and CCPA rights."
+        title="Privacy Policy & Zero-Retention Security — TranscriptG"
+        description="TranscriptG privacy policy: zero permanent storage, zero account tracking, Google AdSense cookie compliance, GDPR and CCPA privacy rights."
+        keywords={[
+          "transcriptg privacy policy",
+          "zero data retention transcription",
+          "ferpa audio compliance",
+          "gdpr speech to text",
+          "adsense privacy compliance",
+        ]}
+        canonicalPath="/privacy"
       />
 
       <PageHeader

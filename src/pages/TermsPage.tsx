@@ -7,9 +7,17 @@ export const TermsPage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="Terms of Service & User Agreement — TranscriptG"
+        title="Terms of Service & Public Usage Agreement — TranscriptG"
         description="TranscriptG Terms of Service: acceptable use policies, disclaimer of AI accuracy, limitation of liability, and 100% user intellectual property ownership."
-        keywords="terms of service, user agreement, legal disclaimer, AI transcription liability, acceptable use policy"
+        keywords={[
+          "terms of service",
+          "user agreement",
+          "legal disclaimer",
+          "AI transcription liability",
+          "acceptable use policy",
+          "transcriptg terms",
+        ]}
+        canonicalPath="/terms"
       />
 
       <PageHeader

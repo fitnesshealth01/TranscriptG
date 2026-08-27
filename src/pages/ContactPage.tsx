@@ -33,8 +33,15 @@ export const ContactPage: React.FC = () => {
     <div className="space-y-12">
       <Seo
         title="Contact & Technical Support — TranscriptG"
-        description="Get in touch with the TranscriptG team for technical support, feedback, partnership inquiries, and API assistance."
-        keywords="contact transcriptg, audio transcription support, technical support, email help, transcriptg team"
+        description="Get in touch with the TranscriptG engineering team for technical support, subtitle conversion feedback, partnership inquiries, and API assistance."
+        keywords={[
+          "contact transcriptg",
+          "audio transcription support",
+          "technical support",
+          "subtitle conversion help",
+          "transcriptg team",
+        ]}
+        canonicalPath="/contact"
       />
 
       <PageHeader

@@ -117,6 +117,7 @@ export const BlogPostDynamic: React.FC = () => {
         author={article.author}
         datePublished="2026-08-23"
         faqs={article.faqs}
+        canonicalPath={`/blog/${article.slug}`}
       />
 
       {/* Top Breadcrumb & Share */}

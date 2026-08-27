@@ -53,7 +53,7 @@ export const SpectrumTrace: React.FC<SpectrumTraceProps> = ({
       {/* TraceLine SVG Wave Overlay */}
       {showLineWave && (
         <svg
-          className="absolute inset-0 w-full h-full pointer-events-none opacity-40 overflow-visible"
+          className="absolute inset-0 w-full h-full pointer-events-none opacity-40 overflow-hidden"
           preserveAspectRatio="none"
           viewBox="0 0 400 100"
         >

@@ -22,9 +22,17 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="space-y-12">
       <Seo
-        title="About TranscriptG — Precision Linguistic Engineering Laboratory"
-        description="Learn about TranscriptG: our public-access mission, zero-retention privacy architecture, engineering team, and commitment to free speech tools."
-        keywords="about transcriptg, speech technology laboratory, acoustic AI mission, free transcription team, audio engineering company"
+        title="About TranscriptG — Free Public-Access Acoustic & Linguistic Engineering Lab"
+        description="Learn about TranscriptG: our public-access speech mission, zero-retention privacy architecture, engineering benchmarks, and commitment to free speech tools."
+        keywords={[
+          "about transcriptg",
+          "speech technology laboratory",
+          "acoustic AI mission",
+          "free transcription team",
+          "zero retention audio engineering",
+          "open linguistic laboratory",
+        ]}
+        canonicalPath="/about"
       />
 
       <PageHeader
