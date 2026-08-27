@@ -1,4 +1,4 @@
-import { LucideIcon, Mic, FileText, Cpu, GraduationCap, Youtube, Home, Sparkles, Wand2, Layers, Music, FileCode2, Search } from "lucide-react";
+import { LucideIcon, Mic, FileText, Cpu, GraduationCap, Youtube, Home, Sparkles, Wand2, Layers, Music, FileCode2, Search, ChefHat } from "lucide-react";
 
 export interface ToolItem {
   id: string;
@@ -48,6 +48,21 @@ export const TOOLS_REGISTRY: ToolItem[] = [
     keywords: ["youtube", "video", "shorts", "captions", "subtitles", "timestamps", "summary", "youtube to text", "no captions"],
   },
   {
+    id: "grams_to_cups",
+    name: "Grams to Cups Converter",
+    shortName: "Grams/Cups",
+    path: "/grams-to-cups",
+    icon: ChefHat,
+    description: "Convert grams to cups, ounces, and tablespoons for 400+ ingredients with live visual measuring cup & butter calculator.",
+    category: "Utilities",
+    badge: "Culinary",
+    badgeType: "amber",
+    dockPriority: 3,
+    accentBg: "bg-amber-500/10",
+    accentText: "text-amber-600",
+    keywords: ["grams to cups", "baking calculator", "flour converter", "sugar", "butter sticks", "cups to grams", "density", "oven temperature"],
+  },
+  {
     id: "parchment",
     name: "Parchment Transcript Engine",
     shortName: "Parchment",
@@ -57,7 +72,7 @@ export const TOOLS_REGISTRY: ToolItem[] = [
     category: "Academic & Documents",
     badge: "Elite",
     badgeType: "amber",
-    dockPriority: 3,
+    dockPriority: 4,
     accentBg: "bg-amber-500/10",
     accentText: "text-amber-600",
     keywords: ["gpa", "parchment", "transcript", "grades", "university", "college", "academic", "amcas", "pdf", "courses"],
@@ -70,7 +85,7 @@ export const TOOLS_REGISTRY: ToolItem[] = [
     icon: FileText,
     description: "Seamlessly convert between SRT, VTT, TXT, JSON, and DOCX formats while preserving cue timing.",
     category: "Subtitles & Formats",
-    dockPriority: 4,
+    dockPriority: 5,
     accentBg: "bg-[#00d9ff]/15",
     accentText: "text-[#0088a8]",
     keywords: ["srt", "vtt", "subtitles", "captions", "json", "txt", "convert", "timing"],
@@ -85,7 +100,7 @@ export const TOOLS_REGISTRY: ToolItem[] = [
     category: "AI & Intelligence",
     badge: "AI 3.7",
     badgeType: "purple",
-    dockPriority: 5,
+    dockPriority: 6,
     accentBg: "bg-purple-500/10",
     accentText: "text-purple-600",
     keywords: ["ai", "summary", "translate", "languages", "intelligence", "action items", "polish"],

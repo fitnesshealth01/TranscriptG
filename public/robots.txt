@@ -3,6 +3,7 @@ Allow: /
 Allow: /transcribe
 Allow: /youtube-transcript
 Allow: /youtube
+Allow: /grams-to-cups
 Allow: /convert
 Allow: /process
 Allow: /parchment-transcript

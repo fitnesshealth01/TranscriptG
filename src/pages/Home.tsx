@@ -128,7 +128,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Dynamic Engine Grid from TOOLS_REGISTRY */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
             {TOOLS_REGISTRY.map((tool, idx) => {
               const Icon = tool.icon;
               const engineNum = `0${idx + 1}`.slice(-2);

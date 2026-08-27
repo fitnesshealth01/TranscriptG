@@ -10,6 +10,7 @@ const ConvertPage = React.lazy(() => import("./pages/ConvertPage").then((m) => (
 const ProcessPage = React.lazy(() => import("./pages/ProcessPage").then((m) => ({ default: m.ProcessPage })));
 const ParchmentPage = React.lazy(() => import("./pages/ParchmentPage").then((m) => ({ default: m.ParchmentPage })));
 const YouTubeTranscriptPage = React.lazy(() => import("./pages/YouTubeTranscriptPage").then((m) => ({ default: m.YouTubeTranscriptPage })));
+const GramsToCupsPage = React.lazy(() => import("./pages/GramsToCupsPage").then((m) => ({ default: m.GramsToCupsPage })));
 const AboutPage = React.lazy(() => import("./pages/AboutPage").then((m) => ({ default: m.AboutPage })));
 const PrivacyPage = React.lazy(() => import("./pages/PrivacyPage").then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = React.lazy(() => import("./pages/TermsPage").then((m) => ({ default: m.TermsPage })));
@@ -41,6 +42,9 @@ export default function App() {
             <Route path="process" element={<ProcessPage />} />
             <Route path="parchment-transcript" element={<ParchmentPage />} />
             <Route path="parchment" element={<ParchmentPage />} />
+            <Route path="grams-to-cups" element={<GramsToCupsPage />} />
+            <Route path="gramstocups" element={<GramsToCupsPage />} />
+            <Route path="baking-converter" element={<GramsToCupsPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="privacy" element={<PrivacyPage />} />
             <Route path="terms" element={<TermsPage />} />

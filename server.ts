@@ -998,6 +998,7 @@ app.get("/sitemap.xml", (req, res) => {
     { path: "/transcribe", changefreq: "weekly", priority: "0.9" },
     { path: "/youtube-transcript", changefreq: "weekly", priority: "0.9" },
     { path: "/youtube", changefreq: "weekly", priority: "0.8" },
+    { path: "/grams-to-cups", changefreq: "weekly", priority: "0.9" },
     { path: "/convert", changefreq: "weekly", priority: "0.9" },
     { path: "/process", changefreq: "weekly", priority: "0.9" },
     { path: "/parchment-transcript", changefreq: "weekly", priority: "0.9" },
@@ -1052,6 +1053,7 @@ Allow: /
 Allow: /transcribe
 Allow: /youtube-transcript
 Allow: /youtube
+Allow: /grams-to-cups
 Allow: /convert
 Allow: /process
 Allow: /parchment-transcript
