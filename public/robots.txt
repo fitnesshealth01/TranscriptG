@@ -1,3 +1,6 @@
+# TranscriptG Robots Directive
+# https://transcriptg.com/robots.txt
+
 User-agent: *
 Allow: /
 Allow: /transcribe
@@ -16,4 +19,63 @@ Allow: /privacy
 Allow: /terms
 Disallow: /api/
 
+# Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /og-image.png
+Allow: /icon.png
+Allow: /favicon.svg
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+
+# AI Search & LLM Retrieval Agents
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+
+# Social Media Link Previews
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# Sitemap Index
 Sitemap: https://transcriptg.com/sitemap.xml
+Host: https://transcriptg.com

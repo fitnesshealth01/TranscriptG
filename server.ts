@@ -1,9 +1,11 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import multer from "multer";
 import { GoogleGenAI, Type } from "@google/genai";
 import { createServer as createViteServer } from "vite";
 import { BLOG_ARTICLES } from "./src/data/blogArticles";
+import { injectSeoIntoHtml, ROUTE_ALIASES } from "./src/server/seoPrerender";
 
 // Process level safety to prevent crashes from unhandled promise rejections
 process.on("unhandledRejection", (reason, promise) => {
@@ -986,23 +988,28 @@ Return a strict JSON object:
   }
 });
 
+// 301 Permanent Redirects for canonical URL consolidation
+app.get(["/youtube", "/parchment", "/gramstocups", "/baking-converter"], (req, res) => {
+  const target = ROUTE_ALIASES[req.path];
+  if (target) {
+    return res.redirect(301, target);
+  }
+  return res.redirect(301, "/");
+});
+
 // Sitemap route
 // Dynamic XML Sitemap for Search Engine Discovery
-app.get("/sitemap.xml", (req, res) => {
-  const host = req.headers.host || "transcriptg.com";
-  const protocol = req.headers["x-forwarded-proto"] || "https";
-  const baseUrl = `${protocol}://${host}`;
+app.get("/sitemap.xml", (_req, res) => {
+  const baseUrl = "https://transcriptg.com";
 
   const staticRoutes = [
     { path: "", changefreq: "daily", priority: "1.0" },
     { path: "/transcribe", changefreq: "weekly", priority: "0.9" },
     { path: "/youtube-transcript", changefreq: "weekly", priority: "0.9" },
-    { path: "/youtube", changefreq: "weekly", priority: "0.8" },
     { path: "/grams-to-cups", changefreq: "weekly", priority: "0.9" },
+    { path: "/parchment-transcript", changefreq: "weekly", priority: "0.9" },
     { path: "/convert", changefreq: "weekly", priority: "0.9" },
     { path: "/process", changefreq: "weekly", priority: "0.9" },
-    { path: "/parchment-transcript", changefreq: "weekly", priority: "0.9" },
-    { path: "/parchment", changefreq: "weekly", priority: "0.8" },
     { path: "/blog", changefreq: "daily", priority: "0.9" },
     { path: "/about", changefreq: "monthly", priority: "0.7" },
     { path: "/contact", changefreq: "monthly", priority: "0.7" },
@@ -1042,31 +1049,19 @@ app.get("/sitemap.xml", (req, res) => {
 });
 
 // Robots.txt route with complete crawler directives
-app.get("/robots.txt", (req, res) => {
-  const host = req.headers.host || "transcriptg.com";
-  const protocol = req.headers["x-forwarded-proto"] || "https";
-  const baseUrl = `${protocol}://${host}`;
-
+app.get("/robots.txt", (_req, res) => {
+  const robotsTxtPath = path.join(process.cwd(), "public", "robots.txt");
+  if (fs.existsSync(robotsTxtPath)) {
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    return res.sendFile(robotsTxtPath);
+  }
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
   res.send(`User-agent: *
 Allow: /
-Allow: /transcribe
-Allow: /youtube-transcript
-Allow: /youtube
-Allow: /grams-to-cups
-Allow: /convert
-Allow: /process
-Allow: /parchment-transcript
-Allow: /parchment
-Allow: /blog
-Allow: /blog/*
-Allow: /about
-Allow: /contact
-Allow: /privacy
-Allow: /terms
 Disallow: /api/
 
-Sitemap: ${baseUrl}/sitemap.xml
+Sitemap: https://transcriptg.com/sitemap.xml
+Host: https://transcriptg.com
 `);
 });
 
@@ -1129,9 +1124,18 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+    // Serve static files (JS, CSS, images) without auto-serving un-prerendered index.html
+    app.use(express.static(distPath, { index: false }));
+
+    app.get("*", (req, res) => {
+      try {
+        const templatePath = path.join(distPath, "index.html");
+        const template = fs.readFileSync(templatePath, "utf-8");
+        const { html, status } = injectSeoIntoHtml(template, req.path);
+        return res.status(status).setHeader("Content-Type", "text/html; charset=utf-8").send(html);
+      } catch (e) {
+        return res.sendFile(path.join(distPath, "index.html"));
+      }
     });
   }
 

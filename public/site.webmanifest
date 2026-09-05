@@ -1,0 +1,17 @@
+{
+  "name": "TranscriptG — Free AI Transcription & Utilities",
+  "short_name": "TranscriptG",
+  "description": "High-precision audio transcription, YouTube transcript generator, Parchment GPA calculator, and Grams to Cups culinary converter.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf9f6",
+  "theme_color": "#0d0f12",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
