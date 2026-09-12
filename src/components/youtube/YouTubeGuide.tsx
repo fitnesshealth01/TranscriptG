@@ -187,6 +187,19 @@ export const YouTubeGuide: React.FC = () => {
           })}
         </div>
       </div>
+
+      {/* Compliance, Copyright & Fair Use Statement for Google AdSense & Platform Policy Conformance */}
+      <div className="rounded-3xl bg-neutral-50 border border-black/10 p-6 sm:p-8 space-y-4">
+        <div className="flex items-center gap-3">
+          <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+          <h4 className="text-base font-bold text-[#0d0f12]">
+            Educational Fair Use &amp; YouTube Platform Compliance Notice
+          </h4>
+        </div>
+        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+          TranscriptG operates strictly as an educational accessibility and study reading companion. Transcripts and closed captions generated through this interface are provided solely for non-commercial study, academic review, research quotations, and hearing accessibility under fair use doctrine. TranscriptG does not host, duplicate, re-stream, or download YouTube audiovisual streams. Video playback occurs directly via YouTube’s official embedded player in full accordance with the YouTube Developer Policies and Terms of Service. All rights to original video content remain the intellectual property of their respective creators.
+        </p>
+      </div>
     </div>
   );
 };

@@ -175,104 +175,6 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
       </section>
     `,
   },
-  "/grams-to-cups": {
-    title: "Grams to Cups Converter — Free Kitchen Baking & Ingredient Scale Tool",
-    description: "Convert grams to cups, ounces, tablespoons, and milliliters for 400+ baking and cooking ingredients with live cup visualizer. Includes butter stick calculator, oven temperature converter, and recipe batch scaler.",
-    keywords: "grams to cups, baking converter, flour grams to cups, sugar grams to cups, grams to tablespoons, cups to grams converter, butter stick converter, oven temperature converter fahrenheit to celsius, recipe batch scaler, culinary unit conversion",
-    canonicalPath: "/grams-to-cups",
-    ogType: "website",
-    category: "WebApplication",
-    h1: "Grams to Cups Converter & Culinary Baking Calculator",
-    lead: "Scientifically accurate ingredient density conversions for 400+ baking ingredients, featuring an interactive measuring cup visualizer, US butter stick calculator, and oven thermal converter.",
-    features: [
-      "Calibrated density ratios for 400+ flours, sugars, dairy, oils, and leaveners.",
-      "Interactive measuring cup visualizer with live fill levels and sub-surface meniscus.",
-      "Support for US Customary (236.6 ml), Metric (250 ml), US Legal (240 ml), and Imperial cups (284.1 ml).",
-      "US Butter Stick Calculator: Convert sticks to tablespoons, cups, grams, and ounces.",
-      "Oven Thermal Converter: Fahrenheit, Celsius, Fan-Forced, and UK Gas Marks.",
-      "Recipe Batch Scaler: Multiply or halve ingredient quantities instantly.",
-    ],
-    faqs: [
-      {
-        q: "How many cups is 100 grams of all-purpose flour?",
-        a: "100 grams of all-purpose flour is equal to 0.80 US customary cups (approximately 3/4 cup plus 1 tablespoon), or 0.76 metric cups. 1 standard US cup of spooned-and-leveled all-purpose flour weighs 125 grams.",
-      },
-      {
-        q: "How many grams is 1 cup of granulated white sugar?",
-        a: "1 US cup of granulated white sugar weighs exactly 200 grams (7.05 oz). 1 metric cup (250 mL) of granulated sugar weighs 211 grams.",
-      },
-      {
-        q: "Why can't I use the same conversion ratio for all ingredients?",
-        a: "Grams measure weight (mass) while cups measure volume (space). Different ingredients have different physical densities. For example, 1 cup of dense honey weighs 340 grams, whereas 1 cup of light cocoa powder weighs only 85 grams.",
-      },
-      {
-        q: "How much butter is in 1 stick?",
-        a: "In the United States, 1 standard stick of butter equals 8 tablespoons, 1/2 cup, 4 ounces, or 113.4 grams. Two sticks equal 1 cup (227 grams or 1/2 pound).",
-      },
-    ],
-    semanticHtml: `
-      <section class="seo-tool-guide">
-        <h1>Grams to Cups Converter for Baking &amp; Cooking</h1>
-        <p>Convert recipe measurements between metric grams (weight) and US customary cups (volume) with scientific density accuracy.</p>
-        <h2>Common Baking Ingredient Conversions (1 US Cup)</h2>
-        <table border="1" cellpadding="6" style="border-collapse:collapse;width:100%;margin:1rem 0;">
-          <thead>
-            <tr><th>Ingredient</th><th>1 US Cup (grams)</th><th>1 Metric Cup (grams)</th><th>1 Tablespoon (grams)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>All-Purpose Flour (spooned &amp; leveled)</td><td>125 g</td><td>132 g</td><td>7.8 g</td></tr>
-            <tr><td>Granulated White Sugar</td><td>200 g</td><td>211 g</td><td>12.5 g</td></tr>
-            <tr><td>Brown Sugar (packed)</td><td>220 g</td><td>232 g</td><td>13.8 g</td></tr>
-            <tr><td>Powdered / Confectioners Sugar</td><td>120 g</td><td>127 g</td><td>7.5 g</td></tr>
-            <tr><td>Butter (Unsalted)</td><td>227 g</td><td>240 g</td><td>14.2 g</td></tr>
-            <tr><td>Honey / Maple Syrup</td><td>340 g</td><td>360 g</td><td>21.3 g</td></tr>
-            <tr><td>Cocoa Powder (unsweetened)</td><td>85 g</td><td>90 g</td><td>5.3 g</td></tr>
-          </tbody>
-        </table>
-        <h2>Why Weight Measurement is Essential in Baking</h2>
-        <p>Baking is a precise science of hydration, gluten formation, and leavening. Scooping flour with a cup packs the powder and can add 25% to 30% more flour than intended, resulting in dry cakes and dense bread. Using a digital kitchen scale and converting grams to cups guarantees bakery-quality results.</p>
-      </section>
-    `,
-  },
-  "/parchment-transcript": {
-    title: "Parchment Transcript Parser & GPA Calculator — Free Academic Audit & AMCAS Scale",
-    description: "Free online academic transcript parser and GPA calculator. Extract courses, credit hours, and grades from registrar PDF transcripts. Calculate 4.0, 5.0, and AMCAS medical school GPAs with target grade simulator.",
-    keywords: "parchment transcript parser, gpa calculator, college transcript analyzer, amcas gpa calculator, cumulative gpa calculator, weighted gpa calculator, graduation target gpa, academic audit, college grades pdf",
-    canonicalPath: "/parchment-transcript",
-    ogType: "website",
-    category: "EducationalApplication",
-    h1: "Parchment Academic Transcript Parser & GPA Calculator",
-    lead: "Audit university registrar PDF transcripts, compute cumulative, major, and AMCAS medical school GPAs, and simulate required grades to reach graduation honors.",
-    features: [
-      "Automated extraction of course codes, credit hours, and letter grades from PDF transcripts.",
-      "Support for 4.0 unweighted, 4.33 weighted, and AMCAS medical school grading scales.",
-      "Interactive 'What-If' GPA simulator for planning future semesters.",
-      "Course categorization by Major Core, General Education, Elective, and STEM Pre-Med.",
-      "100% private in-browser analysis: FERPA-compliant with zero server retention.",
-    ],
-    faqs: [
-      {
-        q: "Is it safe to upload my official college transcript?",
-        a: "Yes. All PDF parsing and grade computations are performed securely in your session. TranscriptG never stores, caches, or shares academic transcripts with any third parties.",
-      },
-      {
-        q: "What GPA scales does this calculator support?",
-        a: "We support the standard 4.0 US collegiate scale, 4.33 +/- scale, 5.0 honors scale, and AMCAS/AACOMAS medical school conversion matrices.",
-      },
-    ],
-    semanticHtml: `
-      <section class="seo-tool-guide">
-        <h1>Parchment Academic Transcript Parser &amp; GPA Calculator</h1>
-        <p>Analyze official and unofficial university transcripts, audit completed degree requirements, and calculate college GPAs.</p>
-        <h2>Key Academic Capabilities</h2>
-        <ul>
-          <li>Parse course codes (e.g. CS 101, CHEM 210, MATH 241) and credit values directly from PDF files.</li>
-          <li>Calculate cumulative GPA, semester GPA, and major GPA.</li>
-          <li>Simulate graduation honors criteria (Cum Laude, Magna Cum Laude, Summa Cum Laude).</li>
-        </ul>
-      </section>
-    `,
-  },
   "/convert": {
     title: "Subtitle & Format Converter — Free SRT, VTT, JSON & TXT Video Caption Converter",
     description: "Convert subtitles between SRT, VTT, JSON, TXT, and DOCX formats while preserving precise cue timestamps. Free, online, fast, and no registration required.",
@@ -435,9 +337,6 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
 // Aliases mapping
 export const ROUTE_ALIASES: Record<string, string> = {
   "/youtube": "/youtube-transcript",
-  "/parchment": "/parchment-transcript",
-  "/gramstocups": "/grams-to-cups",
-  "/baking-converter": "/grams-to-cups",
 };
 
 /**

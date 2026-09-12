@@ -989,12 +989,13 @@ Return a strict JSON object:
 });
 
 // 301 Permanent Redirects for canonical URL consolidation
-app.get(["/youtube", "/parchment", "/gramstocups", "/baking-converter"], (req, res) => {
-  const target = ROUTE_ALIASES[req.path];
-  if (target) {
-    return res.redirect(301, target);
-  }
-  return res.redirect(301, "/");
+app.get("/youtube", (_req, res) => {
+  return res.redirect(301, "/youtube-transcript");
+});
+
+// Explicit 404 for removed legacy tools
+app.get(["/parchment", "/parchment-transcript", "/grams-to-cups", "/gramstocups", "/baking-converter"], (_req, res) => {
+  return res.status(404).send(`<!DOCTYPE html><html><head><title>404 Not Found</title><meta name="robots" content="noindex, nofollow" /></head><body style="font-family:sans-serif;text-align:center;padding:4rem 1rem;"><h1>404 — Tool Deprecated &amp; Removed</h1><p>This legacy utility was deprecated and removed. Return to <a href="/">TranscriptG Speech Platform</a>.</p></body></html>`);
 });
 
 // Sitemap route

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface AdSenseBannerProps {
   slot?: string;
@@ -21,10 +21,16 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
 }) => {
   const adRef = useRef<HTMLDivElement>(null);
   const pushedRef = useRef(false);
+  const [isProductionDomain, setIsProductionDomain] = useState(false);
 
   useEffect(() => {
-    // Only attempt push once per mount
-    if (pushedRef.current) return;
+    // Only fire live ad calls on official production custom domain
+    // Prevents invalid traffic/unauthorized host policy violations on Cloud Run preview, localhost, or dev domains
+    const host = typeof window !== "undefined" ? window.location.hostname.toLowerCase() : "";
+    const isProd = host === "transcriptg.com" || host === "www.transcriptg.com";
+    setIsProductionDomain(isProd);
+
+    if (!isProd || pushedRef.current) return;
 
     try {
       if (typeof window !== "undefined") {
@@ -48,14 +54,20 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
       </div>
 
       <div className="min-h-[90px] flex items-center justify-center overflow-hidden">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-9246342607636743"
-          data-ad-slot={slot}
-          data-ad-format={format}
-          data-full-width-responsive={responsive ? "true" : "false"}
-        />
+        {isProductionDomain ? (
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-9246342607636743"
+            data-ad-slot={slot}
+            data-ad-format={format}
+            data-full-width-responsive={responsive ? "true" : "false"}
+          />
+        ) : (
+          <div className="text-xs font-mono text-neutral-400 border border-dashed border-neutral-200 rounded-xl px-4 py-3">
+            [AdSense Unit: Active on transcriptg.com]
+          </div>
+        )}
       </div>
     </div>
   );

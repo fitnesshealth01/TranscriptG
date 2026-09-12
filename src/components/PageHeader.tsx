@@ -1,18 +1,20 @@
 import React from "react";
 
 interface PageHeaderProps {
-  eyebrow: string;
-  title: string;
+  eyebrow?: string;
+  title: React.ReactNode;
   description: string;
   badge?: string;
+  icon?: React.ComponentType<{ className?: string }>;
   children?: React.ReactNode;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
-  eyebrow,
+  eyebrow = "TRANSCRIPTG",
   title,
   description,
   badge,
+  icon: Icon,
   children,
 }) => {
   return (

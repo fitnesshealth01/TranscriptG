@@ -2,7 +2,7 @@ import { jsPDF } from "jspdf";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 
 export interface CueSegment {
-  id: string;
+  id?: string;
   start: number; // seconds
   end: number;   // seconds
   text: string;
