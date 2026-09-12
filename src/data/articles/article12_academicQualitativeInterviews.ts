@@ -9,8 +9,11 @@ export const article12_academicQualitativeInterviews: BlogArticle = {
   category: "Guides",
   readTime: "13 min read",
   date: "August 2026",
-  author: "TranscriptG Academic Research Group",
-  authorRole: "Qualitative Methodologies & Computational Social Sciences",
+  author: "Dr. Maya Lin, PhD",
+  authorRole: "Principal Computational Linguist",
+  authorBio: "Computational social scientist and linguist specializing in qualitative transcript normalization, IRB ethics, and CAQDAS computational workflows.",
+  reviewer: "Elena Rostova",
+  reviewerRole: "Media Accessibility & Standards Lead",
   summary: "A methodological guide for university researchers, anthropologists, and UX investigators. Learn how to prepare qualitative audio, maintain IRB ethical compliance, and format transcripts for NVivo, Atlas.ti, and MAXQDA.",
   tableOfContents: [
     { id: "the-qualitative-methodology-challenge", title: "1. The Rigor of Qualitative Data Collection" },

@@ -67,13 +67,26 @@ export const ContactPage: React.FC = () => {
               </div>
               <div className="space-y-2 text-xs font-mono">
                 <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
+                  <span className="text-neutral-500 block text-[10px]">Publisher & Lead Architect:</span>
+                  <span className="text-neutral-700 font-bold block">Akash Singh Solanki</span>
+                  <a href="mailto:akashsinghsolanki66@gmail.com" className="font-bold text-[#ff4d00] hover:underline">
+                    akashsinghsolanki66@gmail.com
+                  </a>
+                </div>
+                <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
+                  <span className="text-neutral-500 block text-[10px]">Editorial & Peer Review:</span>
+                  <a href="mailto:editorial@transcriptg.com" className="font-bold text-[#0d0f12] hover:underline">
+                    editorial@transcriptg.com
+                  </a>
+                </div>
+                <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
                   <span className="text-neutral-500 block text-[10px]">General Support:</span>
                   <a href="mailto:support@transcriptg.com" className="font-bold text-[#ff4d00] hover:underline">
                     support@transcriptg.com
                   </a>
                 </div>
                 <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
-                  <span className="text-neutral-500 block text-[10px]">Privacy & Legal:</span>
+                  <span className="text-neutral-500 block text-[10px]">Privacy & Data Protection:</span>
                   <a href="mailto:privacy@transcriptg.com" className="font-bold text-[#0d0f12] hover:underline">
                     privacy@transcriptg.com
                   </a>

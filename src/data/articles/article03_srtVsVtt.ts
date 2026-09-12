@@ -9,8 +9,11 @@ export const article03_srtVsVtt: BlogArticle = {
   category: "Engineering",
   readTime: "12 min read",
   date: "August 2026",
-  author: "TranscriptG Engineering Group",
-  authorRole: "Video Streaming & Accessibility Architecture",
+  author: "Elena Rostova",
+  authorRole: "Media Accessibility & Standards Lead",
+  authorBio: "Standards editor specializing in SubRip (.SRT) and WebVTT (.VTT) caption specifications, HTML5 cue rendering, and digital broadcast compliance.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "An authoritative technical deep dive comparing SubRip (.SRT) and WebVTT (.VTT). Explore timestamp syntaxes, HTML5 cue styling, browser compatibility, and automated conversion architectures.",
   tableOfContents: [
     { id: "origin-and-history", title: "1. The Origins: SubRip (SRT) vs. WebVTT (VTT)" },

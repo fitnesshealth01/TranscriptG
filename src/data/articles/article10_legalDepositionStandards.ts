@@ -9,8 +9,11 @@ export const article10_legalDepositionStandards: BlogArticle = {
   category: "Legal",
   readTime: "16 min read",
   date: "August 2026",
-  author: "TranscriptG Legal Systems Division",
-  authorRole: "Judicial Transcription & Evidence Compliance Counsel",
+  author: "Elena Rostova",
+  authorRole: "Media Accessibility & Standards Lead",
+  authorBio: "Legal transcription and evidentiary compliance consultant specializing in verbatim reporting formats and attorney-client data integrity.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "An in-depth analysis of legal transcription protocols. Learn how to maintain strict verbatim fidelity, protect attorney-client confidentiality, preserve chain of custody, and ensure evidentiary compliance.",
   tableOfContents: [
     { id: "verbatim-vs-clean-legal", title: "1. True Verbatim vs. Clean Read in Judicial Proceedings" },

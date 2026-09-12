@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { PageHeader } from "../components/PageHeader";
+import { AdSenseBanner } from "../components/AdSenseBanner";
 import { BLOG_ARTICLES } from "../data/blogArticles";
 import {
   ArrowRight,
@@ -196,6 +197,9 @@ export const BlogIndexPage: React.FC = () => {
             ))}
           </div>
         )}
+
+        {/* Compliant Ad Placement below articles index */}
+        <AdSenseBanner slot="7849102834" className="mt-12 max-w-4xl mx-auto" />
       </div>
     </div>
   );

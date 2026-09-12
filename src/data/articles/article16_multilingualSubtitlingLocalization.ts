@@ -9,8 +9,11 @@ export const article16_multilingualSubtitlingLocalization: BlogArticle = {
   category: "Strategy",
   readTime: "13 min read",
   date: "August 2026",
-  author: "TranscriptG Global Localization Network",
-  authorRole: "International Media Localization & Translation Specialists",
+  author: "Dr. Maya Lin, PhD",
+  authorRole: "Principal Computational Linguist",
+  authorBio: "Computational linguist and localization researcher specializing in reading speed limits (CPS), line break ergonomics, and semantic nuance preservation.",
+  reviewer: "Elena Rostova",
+  reviewerRole: "Media Accessibility & Standards Lead",
   summary: "A practical guide to international video localization. Discover how to translate master subtitle files into 90+ languages, manage reading speed differences, and scale global audience reach.",
   tableOfContents: [
     { id: "the-global-video-opportunity", title: "1. The Global Video Opportunity & Audience Demographics" },

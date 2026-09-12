@@ -1006,8 +1006,6 @@ app.get("/sitemap.xml", (_req, res) => {
     { path: "", changefreq: "daily", priority: "1.0" },
     { path: "/transcribe", changefreq: "weekly", priority: "0.9" },
     { path: "/youtube-transcript", changefreq: "weekly", priority: "0.9" },
-    { path: "/grams-to-cups", changefreq: "weekly", priority: "0.9" },
-    { path: "/parchment-transcript", changefreq: "weekly", priority: "0.9" },
     { path: "/convert", changefreq: "weekly", priority: "0.9" },
     { path: "/process", changefreq: "weekly", priority: "0.9" },
     { path: "/blog", changefreq: "daily", priority: "0.9" },

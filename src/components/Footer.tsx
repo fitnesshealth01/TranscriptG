@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
               <Logo />
             </div>
             <p className="text-neutral-400 text-sm max-w-sm leading-relaxed">
-              TranscriptG is a high-precision linguistic laboratory that turns sound into knowledge. Zero accounts, zero ads, public-access, and privacy-first.
+              TranscriptG is a high-precision linguistic laboratory that turns sound into knowledge. Zero accounts, free public-access, supported by privacy-safe advertising, and session-private.
             </p>
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-neutral-400 pt-2">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
           {/* Dynamic Engines from Registry */}
           <div>
             <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold mb-4">
-              Linguistic & Academic Engines
+              Speech & Linguistic Engines
             </h3>
             <ul className="space-y-2.5 text-sm">
               {TOOLS_REGISTRY.map((tool) => (

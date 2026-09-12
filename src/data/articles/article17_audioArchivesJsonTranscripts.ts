@@ -9,8 +9,11 @@ export const article17_audioArchivesJsonTranscripts: BlogArticle = {
   category: "Architecture",
   readTime: "14 min read",
   date: "August 2026",
-  author: "TranscriptG Data Architecture Group",
-  authorRole: "Information Retrieval & Vector Database Engineers",
+  author: "Akash Singh Solanki",
+  authorRole: "Founder & Lead Systems Architect",
+  authorBio: "Database systems architect specializing in vector index pipelines, large-scale audio corpus extraction, and semantic retrieval architectures.",
+  reviewer: "Marcus Sterling",
+  reviewerRole: "Senior DSP & Audio Mastering Engineer",
   summary: "A technical blueprint for libraries, broadcast networks, and enterprises digitizing massive audio repositories into structured JSON datasets and vector embeddings for instant semantic search.",
   tableOfContents: [
     { id: "the-dark-data-archive-problem", title: "1. The 'Dark Data' Crisis in Audio Archives" },

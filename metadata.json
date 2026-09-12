@@ -1,6 +1,6 @@
 {
   "name": "TranscriptG",
-  "description": "High-precision transcription, instant YouTube video transcript generation, Parchment academic transcript parsing & GPA calculation, grams-to-cups culinary baking converter, and text intelligence platform with multi-format conversion in 90+ languages.",
+  "description": "High-precision speech-to-text transcription, YouTube caption generation, universal subtitle converter (SRT, VTT, JSON), and AI linguistic intelligence in 90+ languages with zero data retention.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

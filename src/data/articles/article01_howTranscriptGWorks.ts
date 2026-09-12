@@ -9,8 +9,11 @@ export const article01_howTranscriptGWorks: BlogArticle = {
   category: "Architecture",
   readTime: "15 min read",
   date: "August 2026",
-  author: "TranscriptG Systems Engineering",
-  authorRole: "Distributed Systems & Acoustic Infrastructure Group",
+  author: "Akash Singh Solanki",
+  authorRole: "Founder & Lead Systems Architect",
+  authorBio: "Systems architect specializing in ephemeral in-memory computing, low-latency audio signal processing, and zero-retention security protocols.",
+  reviewer: "Dr. Maya Lin, PhD",
+  reviewerRole: "Principal Computational Linguist",
   summary: "Discover how TranscriptG achieves 99%+ linguistic precision, sub-second latency, and strict zero-data-retention security using modern neural acoustic models and ephemeral memory buffers.",
   tableOfContents: [
     { id: "the-challenge", title: "1. The Dilemma of Modern Cloud Transcription" },

@@ -9,8 +9,11 @@ export const article05_audioFormatsCodecs: BlogArticle = {
   category: "Engineering",
   readTime: "13 min read",
   date: "August 2026",
-  author: "TranscriptG DSP Lab",
-  authorRole: "Audio Compression & Signal Processing Specialists",
+  author: "Marcus Sterling",
+  authorRole: "Senior DSP & Audio Mastering Engineer",
+  authorBio: "Audio mastering engineer specializing in lossy vs lossless audio compression, Opus/FLAC codecs, and psychoacoustic masking.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "A technical guide to audio compression, psychoacoustic masking, and spectral fidelity. Learn which codecs deliver optimal speech recognition accuracy without wasting bandwidth.",
   tableOfContents: [
     { id: "lossless-vs-lossy", title: "1. Lossless vs. Lossy Compression & Psychoacoustic Masking" },

@@ -9,8 +9,11 @@ export const article11_medicalClinicalHipaa: BlogArticle = {
   category: "Compliance",
   readTime: "15 min read",
   date: "August 2026",
-  author: "TranscriptG Healthcare Systems Lab",
-  authorRole: "Clinical Informatics & Health Data Security Specialists",
+  author: "Akash Singh Solanki",
+  authorRole: "Founder & Lead Systems Architect",
+  authorBio: "Specialist in health privacy architectures, HIPAA/HITECH data minimization standards, and ephemeral clinical data processing.",
+  reviewer: "Dr. Maya Lin, PhD",
+  reviewerRole: "Principal Computational Linguist",
   summary: "A comprehensive guide to clinical audio transcription under HIPAA and HITECH. Discover how zero-retention architectures protect Protected Health Information (PHI) while accelerating physician documentation.",
   tableOfContents: [
     { id: "the-physician-burnout-crisis", title: "1. Clinical Documentation Burden & Physician Burnout" },

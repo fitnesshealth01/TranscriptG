@@ -9,8 +9,11 @@ export const article13_developerSubtitleParsing: BlogArticle = {
   category: "Engineering",
   readTime: "14 min read",
   date: "August 2026",
-  author: "TranscriptG Developer Relations",
-  authorRole: "Core SDK & Open-Source Tooling Group",
+  author: "Akash Singh Solanki",
+  authorRole: "Founder & Lead Systems Architect",
+  authorBio: "Full-stack engineer and distributed systems architect with extensive expertise in TypeScript, WebAssembly, and regex timecode parsers.",
+  reviewer: "Marcus Sterling",
+  reviewerRole: "Senior DSP & Audio Mastering Engineer",
   summary: "A practical guide for software engineers building subtitle parsers, video editors, and audio synchronization tools. Includes production-ready TypeScript and Python parsers, timecode converters, and regex patterns.",
   tableOfContents: [
     { id: "subtitle-data-models", title: "1. The Universal Subtitle Data Model" },

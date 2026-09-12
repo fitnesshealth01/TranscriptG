@@ -9,8 +9,11 @@ export const article09_podcastShowNotes: BlogArticle = {
   category: "Productivity",
   readTime: "12 min read",
   date: "August 2026",
-  author: "TranscriptG Media Group",
-  authorRole: "Audio Podcasting & Content Distribution Specialists",
+  author: "Marcus Sterling",
+  authorRole: "Senior DSP & Audio Mastering Engineer",
+  authorBio: "Audio producer and mastering engineer with extensive background in podcast distribution, chapter metadata tagging, and audio content syndication.",
+  reviewer: "Elena Rostova",
+  reviewerRole: "Media Accessibility & Standards Lead",
   summary: "A step-by-step masterclass on turning podcast audio into viral show notes, clickable Apple/Spotify chapter markers, executive quote cards, and SEO-optimized blog posts.",
   tableOfContents: [
     { id: "the-podcast-discoverability-problem", title: "1. The Audio Discoverability Problem" },

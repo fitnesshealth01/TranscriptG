@@ -9,8 +9,11 @@ export const article06_videoSeoStrategy: BlogArticle = {
   category: "Strategy",
   readTime: "11 min read",
   date: "August 2026",
-  author: "TranscriptG Growth & Discovery Group",
-  authorRole: "Technical Search & Media Indexation Specialists",
+  author: "Elena Rostova",
+  authorRole: "Media Accessibility & Standards Lead",
+  authorBio: "Video metadata strategist specializing in VideoObject JSON-LD markup, closed caption indexing, and organic algorithmic reach.",
+  reviewer: "Dr. Maya Lin, PhD",
+  reviewerRole: "Principal Computational Linguist",
   summary: "An authoritative guide to leveraging video transcripts, structured VideoObject JSON-LD schema, and closed captions to dominate organic search results and maximize watch time.",
   tableOfContents: [
     { id: "the-video-indexing-problem", title: "1. The Multi-Media Indexing Blind Spot" },

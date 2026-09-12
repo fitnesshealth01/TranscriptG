@@ -9,8 +9,11 @@ export const article02_transcriptionTips: BlogArticle = {
   category: "Guides",
   readTime: "18 min read",
   date: "August 2026",
-  author: "TranscriptG Acoustic Lab",
-  authorRole: "Senior Speech & Digital Signal Processing Engineers",
+  author: "Marcus Sterling",
+  authorRole: "Senior DSP & Audio Mastering Engineer",
+  authorBio: "Specialist in spectral noise suppression, microphone acoustic calibration, and audio mastering pipelines for neural speech models.",
+  reviewer: "Elena Rostova",
+  reviewerRole: "Media Accessibility & Standards Lead",
   summary: "A masterclass in audio engineering and linguistic capture. Discover the 10 rigorous acoustic calibration, hardware selection, and digital signal processing protocols required to eliminate transcription errors.",
   tableOfContents: [
     { id: "acoustic-physics", title: "1. The Physics of Audio Signal-to-Noise Ratio (SNR)" },

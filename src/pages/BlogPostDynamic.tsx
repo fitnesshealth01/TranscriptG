@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { BLOG_ARTICLES, getRelatedArticles, getAdjacentArticles } from "../data/blogArticles";
+import { AdSenseBanner } from "../components/AdSenseBanner";
 import {
   ArrowLeft,
   ArrowRight,
@@ -19,7 +20,8 @@ import {
   Sparkles,
   HelpCircle,
   Compass,
-  FileText
+  FileText,
+  Award
 } from "lucide-react";
 
 export const BlogPostDynamic: React.FC = () => {
@@ -220,6 +222,9 @@ export const BlogPostDynamic: React.FC = () => {
           dangerouslySetInnerHTML={{ __html: processArticleHtml(article.content) }}
         />
 
+        {/* Compliant In-Article Advertisement */}
+        <AdSenseBanner slot="5491028374" />
+
         {/* FAQs Section if present */}
         {article.faqs && article.faqs.length > 0 && (
           <section id="faqs" className="mt-12 pt-8 border-t border-black/10 space-y-4">
@@ -260,23 +265,44 @@ export const BlogPostDynamic: React.FC = () => {
 
         {/* AUTHOR BIO & E-E-A-T TRUST CARD */}
         <div className="mt-12 pt-8 border-t border-black/10 bg-neutral-50 p-6 sm:p-8 rounded-3xl space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#0d0f12] text-white flex items-center justify-center font-bold text-lg">
-              TG
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h4 className="font-bold text-sm text-[#0d0f12]">{article.author}</h4>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">
-                  <ShieldCheck className="w-3 h-3 text-emerald-600" /> Verified Editorial Board
-                </span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#ff4d00] text-white flex items-center justify-center font-mono font-bold text-lg shrink-0">
+                {article.author.split(" ").map(n => n[0]).slice(0, 2).join("")}
               </div>
-              <p className="text-xs text-neutral-500">{article.authorRole}</p>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h4 className="font-bold text-sm sm:text-base text-[#0d0f12]">{article.author}</h4>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">
+                    <ShieldCheck className="w-3 h-3 text-emerald-600" /> Verified Author
+                  </span>
+                </div>
+                <p className="text-xs text-neutral-500 font-medium">{article.authorRole}</p>
+              </div>
             </div>
+
+            {article.reviewer && (
+              <div className="px-3 py-1.5 rounded-xl bg-white border border-black/10 text-[11px] font-mono text-neutral-600">
+                <span className="text-neutral-400 block text-[9px] uppercase font-bold">Peer Reviewed By:</span>
+                <span className="font-bold text-[#0d0f12]">{article.reviewer}</span>
+                {article.reviewerRole && <span className="text-neutral-500 block text-[10px]">{article.reviewerRole}</span>}
+              </div>
+            )}
           </div>
+
           <p className="text-xs text-neutral-600 leading-relaxed">
-            Written and technically peer-reviewed by the TranscriptG Engineering Team. Our editorial standards mandate reproducible audio benchmarks, empirical accuracy metrics, and zero retention of user-uploaded data.
+            {article.authorBio || "Author and audio researcher at TranscriptG. Our editorial standards mandate reproducible acoustic benchmarks, empirical accuracy metrics, and zero retention of user data."}
           </p>
+
+          <div className="pt-2 flex items-center gap-4 text-[11px] font-mono text-neutral-500 border-t border-black/5">
+            <Link to="/about" className="text-[#ff4d00] hover:underline flex items-center gap-1">
+              <Award className="w-3 h-3" /> Editorial &amp; Fact-Checking Policy
+            </Link>
+            <span>•</span>
+            <Link to="/contact" className="hover:underline">
+              Submit Editorial Feedback
+            </Link>
+          </div>
         </div>
       </article>
 

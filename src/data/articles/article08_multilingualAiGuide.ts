@@ -9,8 +9,11 @@ export const article08_multilingualAiGuide: BlogArticle = {
   category: "Architecture",
   readTime: "14 min read",
   date: "August 2026",
-  author: "TranscriptG Internationalization Lab",
-  authorRole: "Multilingual NLP & Phonetics Research Group",
+  author: "Dr. Maya Lin, PhD",
+  authorRole: "Principal Computational Linguist",
+  authorBio: "Computational linguist researching multilingual speech representations, cross-lingual transfer, and phonetic tokenization across 90+ languages.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "A technical exploration of cross-lingual speech recognition architectures. Learn how shared neural representations, phonetic transfer learning, and language identification models transcribe diverse global dialects.",
   tableOfContents: [
     { id: "multilingual-phonetics-challenge", title: "1. The Linguistic Challenge of Global Phonetics" },

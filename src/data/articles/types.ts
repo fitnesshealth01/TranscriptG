@@ -9,6 +9,9 @@ export interface BlogArticle {
   date: string;
   author: string;
   authorRole: string;
+  authorBio?: string;
+  reviewer?: string;
+  reviewerRole?: string;
   summary: string;
   tableOfContents: { id: string; title: string }[];
   content: string;

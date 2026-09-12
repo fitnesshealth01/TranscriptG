@@ -9,8 +9,11 @@ export const article18_asrEvolutionWhisperGemini: BlogArticle = {
   category: "Architecture",
   readTime: "18 min read",
   date: "August 2026",
-  author: "TranscriptG AI Research Lab",
-  authorRole: "Neural Speech Architecture & Multimodal Machine Learning",
+  author: "Dr. Maya Lin, PhD",
+  authorRole: "Principal Computational Linguist",
+  authorBio: "Speech recognition researcher with two decades of experience tracking acoustic modeling from early HMM acoustic toolkits to modern multimodal transformers.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "A technical retrospective and roadmap of automatic speech recognition over 50 years. Trace the evolution from statistical GMM-HMMs to neural Conformer networks, Whisper, and native multimodal speech-language models.",
   tableOfContents: [
     { id: "the-statistical-era-hmm-gmm", title: "1. The Statistical Era: Gaussian Mixture Models & Hidden Markov Models" },

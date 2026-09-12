@@ -9,8 +9,11 @@ export const article15_youtubeCaptioningWorkflow: BlogArticle = {
   category: "Guides",
   readTime: "11 min read",
   date: "August 2026",
-  author: "TranscriptG Video Creator Network",
-  authorRole: "YouTube Audience Development & Media Production",
+  author: "Elena Rostova",
+  authorRole: "Media Accessibility & Standards Lead",
+  authorBio: "Media production specialist with over a decade of experience designing broadcast-grade caption pipelines and YouTube creator workflows.",
+  reviewer: "Marcus Sterling",
+  reviewerRole: "Senior DSP & Audio Mastering Engineer",
   summary: "A practical guide for video creators looking to scale viewer retention, improve accessibility, and dominate YouTube search by replacing automated captions with accurate, custom subtitles.",
   tableOfContents: [
     { id: "why-auto-captions-hurt-channels", title: "1. Why YouTube's Auto-Captions Hurt Video Growth" },

@@ -6,17 +6,19 @@ Allow: /
 Allow: /transcribe
 Allow: /youtube-transcript
 Allow: /youtube
-Allow: /grams-to-cups
 Allow: /convert
 Allow: /process
-Allow: /parchment-transcript
-Allow: /parchment
 Allow: /blog
 Allow: /blog/*
 Allow: /about
 Allow: /contact
 Allow: /privacy
 Allow: /terms
+Disallow: /api/
+
+# Google AdSense Policy & Inventory Crawler
+User-agent: Mediapartners-Google
+Allow: /
 Disallow: /api/
 
 # Search Engine Crawlers

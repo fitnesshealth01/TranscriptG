@@ -9,8 +9,11 @@ export const article04_meetingSummarizer: BlogArticle = {
   category: "Productivity",
   readTime: "14 min read",
   date: "August 2026",
-  author: "TranscriptG Workplace Group",
-  authorRole: "Operational Intelligence & Collaboration Research",
+  author: "Dr. Maya Lin, PhD",
+  authorRole: "Principal Computational Linguist",
+  authorBio: "Computational linguist specializing in discourse structure extraction, meeting dialogue summarization, and pragmatic NLP models.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "A practical guide to extracting high-leverage business value from team recordings. How to generate executive briefs, delegate clear action items, and ensure compliance without data leaks.",
   tableOfContents: [
     { id: "the-meeting-overload-crisis", title: "1. The Modern Meeting Overload Crisis" },

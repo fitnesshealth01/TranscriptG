@@ -19,26 +19,25 @@ const BASE_URL = "https://transcriptg.com";
 
 export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
   "/": {
-    title: "TranscriptG — Free High-Precision Audio Transcription, YouTube Captions & Free Online Tools",
-    description: "No login, zero data retention, 100% free online transcription platform. Transcribe audio to text, extract YouTube transcripts with timestamps, convert SRT/VTT subtitles, and calculate Parchment GPAs.",
-    keywords: "transcription, speech to text, audio to text, free transcription, youtube transcript generator, parchment transcript gpa calculator, grams to cups converter, srt converter, vtt converter, ai summarizer, closed captions",
+    title: "TranscriptG — Free High-Precision Audio Transcription, YouTube Captions & Subtitle Intelligence",
+    description: "No login, zero data retention, 100% free speech-to-text platform. Transcribe audio to text, extract YouTube transcripts with timestamps, convert SRT/VTT subtitles, and summarize speech in 90+ languages.",
+    keywords: "transcription, speech to text, audio to text, free transcription, youtube transcript generator, srt converter, vtt converter, ai summarizer, closed captions, subtitles generator, voice to text",
     canonicalPath: "/",
     ogType: "website",
     category: "MultimediaApplication",
-    h1: "High-Precision Audio Transcription & Free Online Creator Tools",
-    lead: "TranscriptG is an elite, privacy-first web platform for creators, students, developers, and bakers. Fast, accurate, zero login required, and zero data retained.",
+    h1: "High-Precision Audio Transcription & Speech Intelligence",
+    lead: "TranscriptG is an elite, privacy-first linguistic laboratory for creators, podcasters, filmmakers, journalists, and researchers. Fast, accurate, zero login required, and zero data retained.",
     features: [
       "Speech-to-Text: Transcribe MP3, WAV, M4A, and MP4 files into timecoded transcripts and AI summaries.",
       "YouTube Transcript Generator: Extract timestamped dialogue, chapter summaries, and AI speech reconstruction when no captions exist.",
-      "Grams to Cups Converter: Convert 400+ baking ingredients with live visual measuring cup and butter stick calculator.",
-      "Parchment Transcript Engine: Parse academic registrar PDFs, compute 4.0/5.0/AMCAS GPAs, and simulate target graduation grades.",
       "Subtitle & Format Converter: Seamlessly switch between SRT, VTT, JSON, TXT, and DOCX without losing timecode accuracy.",
       "Text Intelligence: Executive summaries, key insights, bullet action items, and translation in 90+ languages.",
+      "Zero Data Retention: Ephemeral in-memory audio processing with zero disk persistence.",
     ],
     faqs: [
       {
         q: "Is TranscriptG completely free to use?",
-        a: "Yes. All tools on TranscriptG—including audio transcription, YouTube captions, Grams to Cups, and Parchment transcript analysis—are 100% free with no credit card, login, or watermark required.",
+        a: "Yes. All speech-to-text tools on TranscriptG—including audio transcription, YouTube captions, subtitle conversion, and AI summarization—are 100% free with no credit card, login, or watermark required.",
       },
       {
         q: "Does TranscriptG store or train AI models on my uploaded audio or transcripts?",
@@ -51,24 +50,16 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
     ],
     semanticHtml: `
       <section class="seo-hero">
-        <h1>Free High-Precision Audio Transcription &amp; Online Creator Utilities</h1>
-        <p class="lead">TranscriptG offers zero-login speech-to-text, YouTube caption extraction, culinary conversions, and academic transcript analysis.</p>
+        <h1>Free High-Precision Audio Transcription &amp; Subtitle Intelligence Platform</h1>
+        <p class="lead">TranscriptG provides public-access speech-to-text, YouTube caption extraction, universal subtitle conversion, and AI text summarization with zero login and zero data retention.</p>
         <div class="tools-grid">
           <article>
             <h2><a href="/transcribe">Audio &amp; Video Speech-to-Text Transcriber</a></h2>
-            <p>Convert MP3, WAV, and video files to timestamped text with AI executive summaries.</p>
+            <p>Convert MP3, WAV, M4A, and video files to timestamped text with AI executive summaries across 90+ languages.</p>
           </article>
           <article>
             <h2><a href="/youtube-transcript">YouTube Transcript Generator</a></h2>
             <p>Extract instant YouTube captions with timestamps, chapter summaries, and AI voice reconstruction.</p>
-          </article>
-          <article>
-            <h2><a href="/grams-to-cups">Grams to Cups Culinary Calculator</a></h2>
-            <p>Convert grams to cups, tablespoons, and ounces for 400+ baking ingredients with interactive visual measuring cup.</p>
-          </article>
-          <article>
-            <h2><a href="/parchment-transcript">Parchment Academic Transcript Parser &amp; GPA Calculator</a></h2>
-            <p>Calculate cumulative, major, and AMCAS GPAs from university registrar PDF transcripts.</p>
           </article>
           <article>
             <h2><a href="/convert">Subtitle &amp; Format Converter</a></h2>
@@ -750,6 +741,37 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
   `;
 
   modified = modified.replace(/<\/head>/i, `${headInject}\n</head>`);
+
+  // 5. Inject route-specific semantic noscript content for non-JS crawlers & AdSense review bots
+  // When JavaScript is active, standard browsers completely skip <noscript> and hydrate React inside #root cleanly.
+  const routeNoscriptContent = `
+    <noscript>
+      <main id="ssr-crawler-fallback" style="padding: 32px 20px; max-width: 920px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; color: #111827; line-height: 1.6;">
+        ${config.semanticHtml}
+        <section style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">TranscriptG Engineering Lab Navigation</h3>
+          <ul style="list-style-type: disc; padding-left: 20px;">
+            <li><a href="/" style="color: #ff4d00;">Home — Audio Transcription &amp; Intelligence</a></li>
+            <li><a href="/transcribe" style="color: #ff4d00;">Engine 01: Speech-to-Text Transcriber</a></li>
+            <li><a href="/youtube-transcript" style="color: #ff4d00;">Engine 02: YouTube Transcript Generator</a></li>
+            <li><a href="/convert" style="color: #ff4d00;">Engine 03: Subtitle &amp; Format Converter (SRT, VTT, JSON)</a></li>
+            <li><a href="/process" style="color: #ff4d00;">Engine 04: AI Text Intelligence &amp; Summarizer</a></li>
+            <li><a href="/blog" style="color: #ff4d00;">Linguistic Journal &amp; Technical Blog</a></li>
+            <li><a href="/about" style="color: #ff4d00;">About TranscriptG &amp; Editorial Leadership</a></li>
+            <li><a href="/contact" style="color: #ff4d00;">Contact Support &amp; Technical Assistance</a></li>
+            <li><a href="/privacy" style="color: #ff4d00;">Privacy Policy &amp; Cookie Disclosure</a></li>
+            <li><a href="/terms" style="color: #ff4d00;">Terms of Service</a></li>
+          </ul>
+        </section>
+      </main>
+    </noscript>
+  `;
+
+  if (modified.includes("<noscript>")) {
+    modified = modified.replace(/<noscript>[\s\S]*?<\/noscript>/i, routeNoscriptContent);
+  } else {
+    modified = modified.replace(/<body([^>]*)>/i, `<body$1>\n${routeNoscriptContent}`);
+  }
 
   return { html: modified, status: 200 };
 }

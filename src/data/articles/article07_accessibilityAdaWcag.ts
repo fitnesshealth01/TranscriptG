@@ -9,8 +9,11 @@ export const article07_accessibilityAdaWcag: BlogArticle = {
   category: "Compliance",
   readTime: "15 min read",
   date: "August 2026",
-  author: "TranscriptG Legal & Accessibility Policy Group",
-  authorRole: "Digital Rights & Regulatory Compliance Counsel",
+  author: "Elena Rostova",
+  authorRole: "Media Accessibility & Standards Lead",
+  authorBio: "Accessibility consultant specializing in ADA Title III, Section 508, and WCAG 2.2 Level AA/AAA closed-caption compliance guidelines.",
+  reviewer: "Akash Singh Solanki",
+  reviewerRole: "Founder & Lead Systems Architect",
   summary: "An essential regulatory framework for organizations navigating ADA Title III, Section 508, and WCAG 2.2 Level AA guidelines. Discover required accuracy thresholds, synchronized timecoding rules, and how to avoid costly accessibility lawsuits.",
   tableOfContents: [
     { id: "legal-framework-overview", title: "1. The Regulatory Landscape: ADA Title III, Section 508 & CVAA" },

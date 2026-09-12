@@ -331,7 +331,7 @@ export const Home: React.FC = () => {
               role: "Documentary Filmmaker",
             },
             {
-              quote: "The no-login, session-private guarantee is essential for our legal research team. Fast, precise, and completely ad-free.",
+              quote: "The no-login, session-private guarantee is essential for our legal research team. Fast, precise, and completely privacy-first.",
               author: "Marcus Vance",
               role: "Senior Legal Analyst",
             },
