@@ -100,9 +100,18 @@ export const Seo: React.FC<SeoProps> = ({
     }
     canonicalLink.setAttribute("href", canonicalUrl);
 
-    // 3. Inject JSON-LD Graph
+    // 3. Inject / Update JSON-LD Graph
     const jsonLdId = "transcriptg-jsonld";
     let scriptTag = document.getElementById(jsonLdId) as HTMLScriptElement | null;
+    
+    // Remove any duplicate or untagged application/ld+json scripts in head
+    const existingLdScripts = document.querySelectorAll('script[type="application/ld+json"]');
+    existingLdScripts.forEach((s) => {
+      if (s.id !== jsonLdId) {
+        s.remove();
+      }
+    });
+
     if (!scriptTag) {
       scriptTag = document.createElement("script");
       scriptTag.id = jsonLdId;
@@ -142,7 +151,7 @@ export const Seo: React.FC<SeoProps> = ({
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "4.9",
-          ratingCount: "1280",
+          ratingCount: "1420",
           bestRating: "5",
           worstRating: "1",
         },

@@ -17,6 +17,8 @@ import { article15_youtubeCaptioningWorkflow } from "./articles/article15_youtub
 import { article16_multilingualSubtitlingLocalization } from "./articles/article16_multilingualSubtitlingLocalization";
 import { article17_audioArchivesJsonTranscripts } from "./articles/article17_audioArchivesJsonTranscripts";
 import { article18_asrEvolutionWhisperGemini } from "./articles/article18_asrEvolutionWhisperGemini";
+import { article19_youtubeNoCaptionsWorkflow } from "./articles/article19_youtubeNoCaptionsWorkflow";
+import { article20_convertM4aToSrt } from "./articles/article20_convertM4aToSrt";
 
 export type { BlogArticle };
 
@@ -39,6 +41,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   article16_multilingualSubtitlingLocalization,
   article17_audioArchivesJsonTranscripts,
   article18_asrEvolutionWhisperGemini,
+  article19_youtubeNoCaptionsWorkflow,
+  article20_convertM4aToSrt,
 ];
 
 /**

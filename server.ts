@@ -50,11 +50,9 @@ async function generateContentWithFallback(ai: GoogleGenAI, params: {
   config?: any;
 }) {
   const modelsToTry = [
-    "gemini-2.5-flash",
-    "gemini-3.7-flash",
-    "gemini-2.0-flash",
-    "gemini-1.5-flash",
     "gemini-3.1-flash-lite",
+    "gemini-2.5-flash",
+    "gemini-3.8-flash",
   ];
 
   let lastError: any = null;
@@ -565,7 +563,7 @@ async function fetchYouTubeNativeData(videoId: string) {
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         "Accept-Language": "en-US,en;q=0.9",
       },
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(5000),
     });
 
     if (pageRes.ok) {
@@ -592,12 +590,13 @@ async function fetchYouTubeNativeData(videoId: string) {
             }));
           }
         } catch (err) {
-          console.warn("Failed to parse player JSON:", err);
+          // Non-blocking parse warning
         }
       }
     }
-  } catch (err) {
-    console.warn(`HTML scrape error for ${videoId}:`, err);
+  } catch (err: any) {
+    // Normal fallback path when YouTube limits watch page scraping or network slows
+    console.log(`[YouTube Watch Page] Subtitle scrape note for ${videoId}: ${err?.message || "timeout / unavailable"} — proceeding seamlessly with AI transcription engine.`);
   }
 
   return {
@@ -767,7 +766,7 @@ Output a strict JSON object matching this schema:
   ]
 }
 
-Provide at least 15 to 40 rich chronological segments covering the complete narrative arc from start to finish.`;
+Provide 15 to 20 rich chronological dialogue segments covering the complete talk from start to finish.`;
 
       const aiResponse = await generateContentWithFallback(ai, {
         contents: [{ text: aiPrompt }],
@@ -1118,9 +1117,25 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "custom",
     });
     app.use(vite.middlewares);
+
+    app.get("*", async (req, res, next) => {
+      // Don't intercept API routes or assets with dots
+      if (req.path.startsWith("/api") || req.path.includes(".")) {
+        return next();
+      }
+      try {
+        const templatePath = path.join(process.cwd(), "index.html");
+        let template = fs.readFileSync(templatePath, "utf-8");
+        template = await vite.transformIndexHtml(req.originalUrl, template);
+        const { html, status } = injectSeoIntoHtml(template, req.path);
+        return res.status(status).setHeader("Content-Type", "text/html; charset=utf-8").send(html);
+      } catch (e) {
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     // Serve static files (JS, CSS, images) without auto-serving un-prerendered index.html

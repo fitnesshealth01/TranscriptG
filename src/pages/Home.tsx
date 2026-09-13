@@ -54,12 +54,11 @@ export const Home: React.FC = () => {
     <div className="space-y-24">
       <Seo
         title="TranscriptG — Free Online Audio Transcription, YouTube Captions & Subtitle Converter"
-        description="Zero-retention, 100% free transcription suite. Transcribe MP3/WAV/MP4 audio to text, extract YouTube video transcripts with timestamps, convert SRT/VTT/JSON, audit academic Parchment PDFs, and summarize speech in 90+ languages. No login, no watermark."
+        description="Zero-retention, 100% free transcription suite. Transcribe MP3, WAV, and MP4 audio to text, extract YouTube video transcripts with timestamps, convert SRT/VTT/JSON, and summarize speech in 90+ languages. No login, no watermark."
         keywords={[
           "transcription",
           "speech to text",
           "youtube transcript generator",
-          "parchment transcript parser",
           "srt converter",
           "vtt converter",
           "audio to text",
@@ -68,6 +67,7 @@ export const Home: React.FC = () => {
           "subtitles downloader",
           "ai text summarizer",
           "no login speech to text",
+          "transcribe audio to text free",
         ]}
         faqs={faqs}
         canonicalPath="/"

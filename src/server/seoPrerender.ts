@@ -119,7 +119,7 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
         <ul>
           <li><a href="/youtube-transcript">YouTube Transcript Generator</a></li>
           <li><a href="/convert">Subtitle Format Converter (SRT / VTT)</a></li>
-          <li><a href="/grams-to-cups">Grams to Cups Kitchen Baking Converter</a></li>
+          <li><a href="/process">AI Text Intelligence &amp; Meeting Summarizer</a></li>
         </ul>
       </section>
     `,
@@ -241,7 +241,7 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
     h1: "TranscriptG Engineering Journal & Transcription Guides",
     lead: "Authoritative engineering insights, technical guides, and best practices on speech recognition, video accessibility, and multimedia tooling.",
     features: [
-      "18 comprehensive, peer-reviewed engineering guides.",
+      `${BLOG_ARTICLES.length} comprehensive, peer-reviewed engineering guides and workflows.`,
       "Technical deep dives on ASR architectures, audio codecs, and subtitle specifications.",
       "Actionable workflows for creators, podcasters, researchers, and developers.",
     ],
@@ -584,7 +584,7 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
 
   const canonicalUrl = `${BASE_URL}${config.canonicalPath === "/" ? "" : config.canonicalPath}`;
   const jsonLd = buildSchemaOrgJsonLd(config, canonicalUrl);
-  const jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n</script>`;
+  const jsonLdScript = `<script type="application/ld+json" id="transcriptg-jsonld">\n${JSON.stringify(jsonLd, null, 2)}\n</script>`;
 
   let modified = htmlTemplate;
 
