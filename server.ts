@@ -1047,27 +1047,60 @@ app.get("/sitemap.xml", (_req, res) => {
 });
 
 // Robots.txt route with complete crawler directives
-app.get("/robots.txt", (_req, res) => {
+app.get(["/robots.txt", "/robots.txt/"], (_req, res) => {
   const robotsTxtPath = path.join(process.cwd(), "public", "robots.txt");
+  const distRobotsTxtPath = path.join(process.cwd(), "dist", "robots.txt");
+  let content = "";
   if (fs.existsSync(robotsTxtPath)) {
-    res.setHeader("Content-Type", "text/plain; charset=utf-8");
-    return res.sendFile(robotsTxtPath);
-  }
-  res.setHeader("Content-Type", "text/plain; charset=utf-8");
-  res.send(`User-agent: *
+    content = fs.readFileSync(robotsTxtPath, "utf-8");
+  } else if (fs.existsSync(distRobotsTxtPath)) {
+    content = fs.readFileSync(distRobotsTxtPath, "utf-8");
+  } else {
+    content = `# TranscriptG Robots Directive
+User-agent: *
 Allow: /
+Allow: /ads.txt
+Disallow: /api/
+
+# Google Ads.txt Verification Crawler
+User-agent: Google-adstxt
+Allow: /ads.txt
+
+# Google AdSense Policy & Inventory Crawler
+User-agent: Mediapartners-Google
+Allow: /
+Allow: /ads.txt
 Disallow: /api/
 
 Sitemap: https://transcriptg.com/sitemap.xml
 Host: https://transcriptg.com
-`);
+`;
+  }
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  res.setHeader("Cache-Control", "public, max-age=86400");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  return res.send(content);
 });
 
-// Ads.txt route for Google AdSense compliance
-app.get("/ads.txt", (_req, res) => {
-  res.setHeader("Content-Type", "text/plain");
-  res.send(`google.com, pub-9246342607636743, DIRECT, f08c47fec0942fa0
-`);
+// Ads.txt route for Google AdSense compliance & verification
+app.get(["/ads.txt", "/ads.txt/", "/Ads.txt", "/ADS.TXT"], (_req, res) => {
+  const adsTxtPath = path.join(process.cwd(), "public", "ads.txt");
+  const distAdsTxtPath = path.join(process.cwd(), "dist", "ads.txt");
+  let content = "google.com, pub-9246342607636743, DIRECT, f08c47fec0942fa0\n";
+  if (fs.existsSync(adsTxtPath)) {
+    content = fs.readFileSync(adsTxtPath, "utf-8");
+  } else if (fs.existsSync(distAdsTxtPath)) {
+    content = fs.readFileSync(distAdsTxtPath, "utf-8");
+  }
+
+  // Ensure clean trailing newline and trim whitespace
+  const sanitizedContent = content.trim() + "\n";
+
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  res.setHeader("Cache-Control", "public, max-age=3600, must-revalidate");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  return res.status(200).send(sanitizedContent);
 });
 
 // RSS 2.0 Feed Route for Off-Page Syndication & News Search Indexing
