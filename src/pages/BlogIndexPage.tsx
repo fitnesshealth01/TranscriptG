@@ -198,8 +198,8 @@ export const BlogIndexPage: React.FC = () => {
           </div>
         )}
 
-        {/* Compliant Ad Placement below articles index */}
-        <AdSenseBanner slot="7849102834" className="mt-12 max-w-4xl mx-auto" />
+        {/* In-Page Advertisement Container (Managed via AdSense Auto Ads) */}
+        <AdSenseBanner className="mt-12 max-w-4xl mx-auto" />
       </div>
     </div>
   );

@@ -24,8 +24,8 @@ export const YouTubeGuide: React.FC = () => {
 
   const FAQS = [
     {
-      q: "How does TranscriptG transcribe YouTube videos when no captions are available?",
-      a: "When a creator has disabled subtitles or when YouTube fails to generate automatic closed captions (ASR), TranscriptG's backend activates Gemini AI Multimodal Speech Intelligence. The model analyzes the video's title, narration structure, dialogue clues, and audio cues to perform an authentic, chronological spoken reconstruction complete with timestamps, summaries, and chapter markers.",
+      q: "How does TranscriptG transcribe educational YouTube videos?",
+      a: "TranscriptG parses public creator captions and official timed subtitles. For videos where captions are missing or require formatting, our AI language pipeline analyzes public dialogue to generate structured study notes, chapter markers, and readable transcripts.",
     },
     {
       q: "Does this work with YouTube Shorts, unlisted videos, and podcasts?",
@@ -67,7 +67,7 @@ export const YouTubeGuide: React.FC = () => {
             Native Track Extraction
           </h3>
           <p className="text-xs text-neutral-600 leading-relaxed">
-            Instantly scrapes official human-translated caption tracks and YouTube auto-generated speech recognition (ASR) streams without latency.
+            Quickly parses official creator captions and YouTube accessibility subtitle streams without latency.
           </p>
         </div>
 

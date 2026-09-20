@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import { Seo } from "../components/Seo";
 import { PageHeader } from "../components/PageHeader";
-import {
-  Mail,
-  Send,
-  CheckCircle2,
-  Building2,
-  Clock,
-  ShieldCheck,
-  MessageSquare,
-  Sparkles,
-  HelpCircle
-} from "lucide-react";
+import { Mail, Clock, Send, CheckCircle2, ShieldCheck, AlertCircle, Loader2 } from "lucide-react";
 
 export const ContactPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,10 +14,34 @@ export const ContactPage: React.FC = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (form.message.trim() && form.email.trim()) {
+    setError(null);
+
+    if (!form.message.trim() || !form.email.trim() || !form.name.trim()) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to deliver message. Please try again.");
+      }
+
       setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || "Failed to dispatch your inquiry. Please reach us directly at support@transcriptg.com.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -143,6 +159,13 @@ export const ContactPage: React.FC = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {error && (
+                    <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-mono font-bold text-neutral-700 block mb-1.5">
@@ -154,7 +177,8 @@ export const ContactPage: React.FC = () => {
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         placeholder="Alex Morgan"
-                        className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00]"
+                        disabled={loading}
+                        className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] disabled:opacity-50"
                       />
                     </div>
                     <div>
@@ -167,7 +191,8 @@ export const ContactPage: React.FC = () => {
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder="alex@company.com"
-                        className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00]"
+                        disabled={loading}
+                        className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -179,13 +204,16 @@ export const ContactPage: React.FC = () => {
                     <select
                       value={form.subject}
                       onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                      className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] font-mono text-xs font-bold"
+                      disabled={loading}
+                      className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] disabled:opacity-50"
                     >
-                      <option value="General Support">General Support & Feedback</option>
-                      <option value="Audio Formatting & Error">Audio Formatting & Processing Question</option>
-                      <option value="Subtitle & Conversion Help">Subtitle (.SRT / .VTT) Conversion Assistance</option>
-                      <option value="Enterprise & High Volume">Enterprise & High Volume Inquiries</option>
-                      <option value="Bug Report & Engineering">Bug Report or Feature Request</option>
+                      <option value="General Support">General Support &amp; Technical Help</option>
+                      <option value="Audio Transcriber">Engine 01: Audio &amp; Video Transcriber</option>
+                      <option value="YouTube Transcripts">Engine 02: YouTube Transcript Assistance</option>
+                      <option value="Format Converter">Engine 03: Subtitle Converter (SRT, VTT, JSON)</option>
+                      <option value="Text Intelligence">Engine 04: AI Summarization &amp; Translation</option>
+                      <option value="Editorial & Content">Editorial, Blog &amp; Linguistic Research</option>
+                      <option value="Privacy & Legal">Privacy, GDPR &amp; Ad Compliance</option>
                     </select>
                   </div>
 
@@ -199,15 +227,25 @@ export const ContactPage: React.FC = () => {
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Please describe your question or feedback in detail..."
-                      className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] leading-relaxed resize-y"
+                      disabled={loading}
+                      className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] leading-relaxed resize-y disabled:opacity-50"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#0d0f12] text-white text-xs font-mono font-bold hover:bg-[#ff4d00] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-black/10 cursor-pointer"
+                    disabled={loading}
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#0d0f12] text-white text-xs font-mono font-bold hover:bg-[#ff4d00] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-black/10 cursor-pointer disabled:opacity-50"
                   >
-                    <Send className="w-4 h-4" /> Send Message Directly
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" /> Dispatching Message...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" /> Send Message Directly
+                      </>
+                    )}
                   </button>
                 </form>
               )}

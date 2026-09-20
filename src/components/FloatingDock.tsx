@@ -11,9 +11,7 @@ export const FloatingDock: React.FC = () => {
   const allTools = getAllTools();
 
   // Check if current page is one of the secondary tools (not in primary tools list and not Home)
-  const isPrimaryActive = primaryTools.some(
-    (t) => location.pathname === t.path || (t.path === "/parchment-transcript" && location.pathname === "/parchment")
-  );
+  const isPrimaryActive = primaryTools.some((t) => location.pathname === t.path);
   const isHomeActive = location.pathname === "/";
   const isSecondaryToolActive = !isPrimaryActive && !isHomeActive && allTools.some((t) => location.pathname.startsWith(t.path));
 
@@ -49,7 +47,7 @@ export const FloatingDock: React.FC = () => {
           {/* Primary Tool Links */}
           {primaryTools.map((tool) => {
             const Icon = tool.icon;
-            const isMatch = location.pathname === tool.path || (tool.path === "/parchment-transcript" && location.pathname === "/parchment");
+            const isMatch = location.pathname === tool.path;
 
             return (
               <NavLink

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { Logo } from "./Logo";
 import { FloatingDock } from "./FloatingDock";
 import { Footer } from "./Footer";
@@ -10,6 +10,18 @@ import { LayoutGrid } from "lucide-react";
 
 export const Layout: React.FC = () => {
   const [isToolsModalOpen, setIsToolsModalOpen] = useState(false);
+  const location = useLocation();
+
+  // Send pageview events to Google Analytics 4 on route transitions
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "page_view", {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location.pathname, location.search]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#faf9f6] text-[#0d0f12] relative font-sans antialiased w-full max-w-full overflow-x-hidden">

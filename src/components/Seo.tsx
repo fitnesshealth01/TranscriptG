@@ -24,8 +24,8 @@ export interface SeoProps {
 
 export const Seo: React.FC<SeoProps> = ({
   title = "TranscriptG — Free High-Precision Audio Transcription, YouTube Captions & Subtitle Converter",
-  description = "No login, no watermark, zero-retention transcription platform. Transcribe speech to text, generate YouTube video transcripts with timestamps, convert SRT/VTT/JSON, and parse academic Parchment transcripts in 90+ languages.",
-  keywords = "transcription, speech to text, youtube transcript generator, parchment transcript parser, srt converter, vtt converter, audio summarizer, free transcription, AI transcription, closed captions",
+  description = "No login, no watermark, zero-retention transcription platform. Transcribe speech to text, generate YouTube video transcripts with timestamps, convert SRT/VTT/JSON, and summarize speech in 90+ languages.",
+  keywords = "transcription, speech to text, youtube transcript generator, audio to text, srt converter, vtt converter, audio summarizer, free transcription, AI speech recognition, closed captions",
   type = "website",
   faqs,
   jsonLd,

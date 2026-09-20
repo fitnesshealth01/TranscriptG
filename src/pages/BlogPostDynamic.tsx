@@ -222,8 +222,8 @@ export const BlogPostDynamic: React.FC = () => {
           dangerouslySetInnerHTML={{ __html: processArticleHtml(article.content) }}
         />
 
-        {/* Compliant In-Article Advertisement */}
-        <AdSenseBanner slot="5491028374" />
+        {/* In-Article Advertisement Container (Managed via AdSense Auto Ads) */}
+        <AdSenseBanner />
 
         {/* FAQs Section if present */}
         {article.faqs && article.faqs.length > 0 && (

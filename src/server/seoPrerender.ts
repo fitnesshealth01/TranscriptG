@@ -126,24 +126,24 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
   },
   "/youtube-transcript": {
     title: "YouTube Transcript Generator — Free Video to Text with Timestamps & AI Summaries",
-    description: "Free, instant YouTube video & Shorts transcript generator. Get verbatim spoken dialogue with timestamps, AI executive summaries, chapter breakdowns, interactive video seeking, and export to SRT/VTT/TXT — even when no captions exist on YouTube.",
-    keywords: "youtube transcript generator, youtube video to text, youtube transcript with timestamps, transcribe youtube video no captions, youtube subtitles downloader, youtube to srt converter, youtube video summarizer, youtube shorts transcript, free youtube transcription tool",
+    description: "Free, instant YouTube video & Shorts study transcript generator. Get verbatim spoken dialogue with timestamps, AI executive summaries, chapter breakdowns, interactive video seeking, and export to SRT/VTT/TXT for accessibility and research.",
+    keywords: "youtube transcript generator, youtube video to text, youtube transcript with timestamps, youtube video notes, youtube study transcript, youtube to srt converter, youtube video summarizer, youtube shorts transcript, free youtube transcription tool",
     canonicalPath: "/youtube-transcript",
     ogType: "website",
     category: "MultimediaApplication",
     h1: "YouTube Transcript Generator with Timestamps & AI Summaries",
-    lead: "Instantly extract verbatim spoken dialogue from any YouTube video or Short. Read, search, summarize, translate, and export captions in seconds.",
+    lead: "Instantly review verbatim spoken dialogue from any YouTube video or Short. Read, search, summarize, translate, and format accessible captions in seconds.",
     features: [
       "Instant transcript generation with clickable timestamps.",
-      "Acoustic AI Speech Reconstruction when creator subtitles are turned off.",
+      "Acoustic AI Speech Intelligence for structured study notes.",
       "Executive chapter summaries, key quotes, and interactive Q&A assistant.",
       "Translate video transcripts into 90+ languages with synchronized timecodes.",
       "Export to SRT, VTT, TXT, and JSON for video editors and researchers.",
     ],
     faqs: [
       {
-        q: "Can I generate a transcript if the creator turned subtitles off?",
-        a: "Yes! TranscriptG includes an acoustic AI reconstruction pipeline that processes video audio directly to generate transcripts even when native creator captions or closed captions are completely absent.",
+        q: "How does TranscriptG generate transcripts for educational videos?",
+        a: "TranscriptG parses public creator subtitles and utilizes AI speech language intelligence to structure spoken dialogue into chronological, timecoded manuscripts with chapter summaries.",
       },
       {
         q: "Does TranscriptG work on YouTube Shorts?",

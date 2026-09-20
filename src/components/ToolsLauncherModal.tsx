@@ -191,7 +191,7 @@ const ToolCard: React.FC<{
   onClose: () => void;
 }> = ({ tool, currentPath, onClose }) => {
   const Icon = tool.icon;
-  const isActive = currentPath === tool.path || (tool.path === "/parchment-transcript" && currentPath === "/parchment");
+  const isActive = currentPath === tool.path;
 
   return (
     <Link

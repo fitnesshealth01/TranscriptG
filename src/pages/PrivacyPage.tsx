@@ -89,9 +89,19 @@ export const PrivacyPage: React.FC = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xl font-bold text-[#0d0f12]">7. Contact & Privacy Inquiries</h2>
+            <h2 className="text-xl font-bold text-[#0d0f12]">7. Publisher Entity &amp; Privacy Contact</h2>
             <p>
-              If you have any questions or concerns regarding this Privacy Policy, please visit our <a href="/contact" className="text-[#ff4d00] underline font-bold">Contact Page</a> or reach out to our privacy officer directly via email at <span className="font-mono font-bold text-[#0d0f12]">privacy@transcriptg.com</span>.
+              TranscriptG is owned and operated by Lead Publisher and Principal Engineer <strong>Akash Singh Solanki</strong>.
+            </p>
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-black/5 font-mono text-xs space-y-1 text-neutral-700">
+              <p><strong>Entity:</strong> TranscriptG Engineering Lab</p>
+              <p><strong>Publisher:</strong> Akash Singh Solanki</p>
+              <p><strong>Direct Inquiries:</strong> <a href="mailto:akashsinghsolanki66@gmail.com" className="text-[#ff4d00] font-bold hover:underline">akashsinghsolanki66@gmail.com</a></p>
+              <p><strong>Data Protection Officer:</strong> <a href="mailto:privacy@transcriptg.com" className="text-[#0d0f12] font-bold hover:underline">privacy@transcriptg.com</a></p>
+              <p><strong>Support Desk:</strong> <a href="mailto:support@transcriptg.com" className="text-[#ff4d00] font-bold hover:underline">support@transcriptg.com</a></p>
+            </div>
+            <p>
+              If you have any questions or concerns regarding this Privacy Policy, please visit our <a href="/contact" className="text-[#ff4d00] underline font-bold">Contact Page</a>.
             </p>
           </section>
         </div>

@@ -22,6 +22,24 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
+// Canonical domain and HTTPS 301 redirect middleware for production
+app.use((req, res, next) => {
+  const host = (req.headers.host || "").toLowerCase();
+  const forwardedProto = req.headers["x-forwarded-proto"];
+
+  // 301 redirect www to apex transcriptg.com
+  if (host === "www.transcriptg.com") {
+    return res.redirect(301, `https://transcriptg.com${req.originalUrl}`);
+  }
+
+  // 301 redirect http to https on apex domain
+  if (host === "transcriptg.com" && forwardedProto === "http") {
+    return res.redirect(301, `https://transcriptg.com${req.originalUrl}`);
+  }
+
+  next();
+});
+
 // Multer memory storage for uploads up to 25MB
 const upload = multer({
   limits: { fileSize: 25 * 1024 * 1024 },
@@ -132,6 +150,31 @@ function parseJSONResponse(rawText: string) {
 // API Health
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "TranscriptG" });
+});
+
+// API Contact Support & Inquiries
+app.post("/api/contact", (req: any, res: any) => {
+  try {
+    const { name, email, subject, message } = req.body || {};
+    if (!name || typeof name !== "string" || !name.trim()) {
+      return res.status(400).json({ error: "Please provide your name." });
+    }
+    if (!email || typeof email !== "string" || !email.includes("@")) {
+      return res.status(400).json({ error: "Please provide a valid email address." });
+    }
+    if (!message || typeof message !== "string" || message.trim().length < 5) {
+      return res.status(400).json({ error: "Message must contain at least 5 characters." });
+    }
+
+    console.log(`[Contact Ticket Dispatched] From: ${name.trim()} <${email.trim()}> | Category: ${subject || "General"} | Preview: ${message.trim().slice(0, 100)}...`);
+
+    return res.json({
+      success: true,
+      message: "Thank you! Your message has been received by TranscriptG Engineering. We will review your inquiry and follow up within 24 business hours.",
+    });
+  } catch (err: any) {
+    return res.status(500).json({ error: "An unexpected error occurred while dispatching your message." });
+  }
 });
 
 // API Transcribe
@@ -284,199 +327,6 @@ app.post("/api/process", async (req, res) => {
     console.error("Text process error:", err);
     return res.status(500).json({
       error: err.message || "Failed to process text intelligence request.",
-    });
-  }
-});
-
-// API Parchment Academic Transcript Parser
-app.post("/api/parchment/parse", (req: any, res: any, next: any) => {
-  upload.single("file")(req, res, (err: any) => {
-    if (err) {
-      if (err.code === "LIMIT_FILE_SIZE") {
-        return res.status(400).json({
-          error: "File size exceeds 25MB limit. Please upload a smaller document.",
-        });
-      }
-      return res.status(400).json({
-        error: err.message || "File upload failed.",
-      });
-    }
-    next();
-  });
-}, async (req: any, res: any) => {
-  try {
-    const rawText = req.body.text;
-    const ai = getGeminiClient();
-
-    let contents: any[] = [];
-    const prompt = `You are TranscriptG Academic Document Intelligence Engine, specialized in parsing official and unofficial Parchment, National Student Clearinghouse, and Registrar academic transcripts.
-Analyze the provided transcript document or text and extract complete academic history, courses, grades, credits, terms, and student/institution data.
-
-Ensure high precision:
-1. Extract student information (Name, Student ID, Birth Date if present, SSN last 4 if present, Parchment Document ID / DID tracking number).
-2. Extract institution details (Name, Address, Registrar, Accreditation, School Type: University/College/High School).
-3. Extract degree / diploma awards (Degree, Major, Minor, Graduation Date, Honors, Class Rank).
-4. Extract terms and courses chronologically. For each course:
-   - code (e.g. "CS 101", "MATH 215", "AP-CALC-BC")
-   - title (e.g. "Intro to Computer Science")
-   - creditsAttempted (e.g. 4.0)
-   - creditsEarned (e.g. 4.0)
-   - grade (e.g. "A", "A-", "B+", "P", "CR")
-   - gradePoints (e.g. 16.0 for 4 credits * 4.0)
-   - isIncludedInGpa (true unless pass/fail or transfer)
-   - category (e.g. "Major Core", "Quantitative", "AP / Honors", "General Elective")
-5. Extract GPA summary (cumulative GPA, total credits attempted, total credits earned, quality points, unweighted GPA, weighted GPA).
-6. Extract authenticity indicators (Parchment DID, digital signature notes, security seals).
-7. Extract key academic strengths, grade distribution counts (A, B, C, D, F, Other), Dean's list terms, and transfer readiness audit.
-
-Return a strict JSON object with this exact structure:
-{
-  "studentInfo": {
-    "name": "string",
-    "studentId": "string",
-    "birthDate": "string",
-    "ssnLast4": "string",
-    "issueDate": "string",
-    "documentId": "string",
-    "printStatus": "string"
-  },
-  "institutionInfo": {
-    "name": "string",
-    "address": "string",
-    "registrarName": "string",
-    "accreditation": "string",
-    "schoolType": "University"
-  },
-  "degreeInfo": {
-    "degreeAwarded": "string",
-    "major": "string",
-    "minor": "string",
-    "graduationDate": "string",
-    "honors": "string",
-    "classRank": "string"
-  },
-  "terms": [
-    {
-      "termName": "string",
-      "academicLevel": "string",
-      "termGpa": 0.0,
-      "termCreditsAttempted": 0.0,
-      "termCreditsEarned": 0.0,
-      "courses": [
-        {
-          "id": "string",
-          "code": "string",
-          "title": "string",
-          "creditsAttempted": 0.0,
-          "creditsEarned": 0.0,
-          "grade": "string",
-          "gradePoints": 0.0,
-          "isIncludedInGpa": true,
-          "category": "string",
-          "termName": "string"
-        }
-      ]
-    }
-  ],
-  "summary": {
-    "cumulativeGpa": 0.0,
-    "totalCreditsAttempted": 0.0,
-    "totalCreditsEarned": 0.0,
-    "totalQualityPoints": 0.0,
-    "unweightedGpa": 0.0,
-    "weightedGpa": 0.0,
-    "gradingScale": "string"
-  },
-  "transferCredits": [
-    {
-      "institution": "string",
-      "coursesSummary": "string",
-      "totalCredits": 0.0
-    }
-  ],
-  "authenticity": {
-    "hasParchmentDocId": true,
-    "documentId": "string",
-    "hasDigitalSignatureNote": true,
-    "blueRibbonNotice": "string",
-    "securityWatermarkDetected": true
-  },
-  "academicInsights": {
-    "strengths": ["string"],
-    "creditCompletionRate": 100.0,
-    "gradeDistribution": {
-      "A": 0,
-      "B": 0,
-      "C": 0,
-      "D": 0,
-      "F": 0,
-      "Other": 0
-    },
-    "deanListTerms": ["string"],
-    "academicStanding": "string",
-    "transferReadyAudit": "string"
-  }
-}`;
-
-    if (req.file) {
-      let mimeType = req.file.mimetype || "application/pdf";
-      if (mimeType === "application/octet-stream" || !mimeType) {
-        const ext = path.extname(req.file.originalname || "").toLowerCase();
-        if (ext === ".pdf") mimeType = "application/pdf";
-        else if (ext === ".png") mimeType = "image/png";
-        else if (ext === ".jpg" || ext === ".jpeg") mimeType = "image/jpeg";
-        else if (ext === ".webp") mimeType = "image/webp";
-        else mimeType = "application/pdf";
-      }
-
-      const base64Data = req.file.buffer.toString("base64");
-      contents = [
-        {
-          inlineData: {
-            mimeType,
-            data: base64Data,
-          },
-        },
-        { text: prompt },
-      ];
-    } else if (rawText && typeof rawText === "string" && rawText.trim().length > 0) {
-      contents = [
-        { text: `Raw Transcript Text:\n\n${rawText}\n\n${prompt}` },
-      ];
-    } else {
-      return res.status(400).json({ error: "No transcript file (PDF/Image) or text content provided." });
-    }
-
-    const response = await generateContentWithFallback(ai, {
-      contents,
-      config: {
-        responseMimeType: "application/json",
-      },
-    });
-
-    const responseText = response.text || "{}";
-    const result = parseJSONResponse(responseText);
-
-    // Ensure IDs exist for courses
-    if (result.terms && Array.isArray(result.terms)) {
-      result.terms.forEach((term: any, tIdx: number) => {
-        if (term.courses && Array.isArray(term.courses)) {
-          term.courses.forEach((c: any, cIdx: number) => {
-            if (!c.id) c.id = `course-${tIdx + 1}-${cIdx + 1}-${Math.random().toString(36).substring(2, 6)}`;
-            if (!c.termName) c.termName = term.termName || `Term ${tIdx + 1}`;
-          });
-        }
-      });
-    }
-
-    return res.json({
-      success: true,
-      data: result,
-    });
-  } catch (err: any) {
-    console.error("Parchment parse error:", err);
-    return res.status(500).json({
-      error: err.message || "Failed to parse transcript document. Please check the file and try again.",
     });
   }
 });
