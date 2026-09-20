@@ -120,9 +120,19 @@ export const TermsPage: React.FC = () => {
           </section>
 
           <section className="space-y-3 pt-4 border-t border-black/10">
-            <h2 className="text-xl font-bold text-[#0d0f12]">8. Contact & Inquiries</h2>
+            <h2 className="text-xl font-bold text-[#0d0f12]">8. Publisher Entity, Governing Jurisdiction &amp; Legal Notices</h2>
             <p>
-              For legal inquiries, copyright notices, or questions regarding these terms, please contact our team at <span className="font-mono font-bold text-[#0d0f12]">legal@transcriptg.com</span> or via our <a href="/contact" className="text-[#ff4d00] font-bold underline">Contact Page</a>.
+              TranscriptG is owned and operated by Lead Publisher and Principal Engineer <strong>Akash Singh Solanki</strong>.
+            </p>
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-black/5 font-mono text-xs space-y-1 text-neutral-700">
+              <p><strong>Entity:</strong> TranscriptG Engineering Lab</p>
+              <p><strong>Publisher:</strong> Akash Singh Solanki</p>
+              <p><strong>Direct Inquiries:</strong> <a href="mailto:akashsinghsolanki66@gmail.com" className="text-[#ff4d00] font-bold hover:underline">akashsinghsolanki66@gmail.com</a></p>
+              <p><strong>Legal &amp; Compliance Desk:</strong> <a href="mailto:legal@transcriptg.com" className="text-[#0d0f12] font-bold hover:underline">legal@transcriptg.com</a></p>
+              <p><strong>Support Desk:</strong> <a href="mailto:support@transcriptg.com" className="text-[#ff4d00] font-bold hover:underline">support@transcriptg.com</a></p>
+            </div>
+            <p>
+              For legal inquiries, copyright notices, or formal communications regarding these terms, please contact our team via the email addresses above or submit a message through our <a href="/contact" className="text-[#ff4d00] font-bold underline">Contact Page</a>.
             </p>
           </section>
 

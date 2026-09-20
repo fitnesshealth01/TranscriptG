@@ -29,7 +29,7 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
     lead: "TranscriptG is an elite, privacy-first linguistic laboratory for creators, podcasters, filmmakers, journalists, and researchers. Fast, accurate, zero login required, and zero data retained.",
     features: [
       "Speech-to-Text: Transcribe MP3, WAV, M4A, and MP4 files into timecoded transcripts and AI summaries.",
-      "YouTube Transcript Generator: Extract timestamped dialogue, chapter summaries, and AI speech reconstruction when no captions exist.",
+      "YouTube Transcript Generator: Review timestamped dialogue, structured study notes, and chapter summaries for accessibility.",
       "Subtitle & Format Converter: Seamlessly switch between SRT, VTT, JSON, TXT, and DOCX without losing timecode accuracy.",
       "Text Intelligence: Executive summaries, key insights, bullet action items, and translation in 90+ languages.",
       "Zero Data Retention: Ephemeral in-memory audio processing with zero disk persistence.",
@@ -51,7 +51,7 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
     semanticHtml: `
       <section class="seo-hero">
         <h1>Free High-Precision Audio Transcription &amp; Subtitle Intelligence Platform</h1>
-        <p class="lead">TranscriptG provides public-access speech-to-text, YouTube caption extraction, universal subtitle conversion, and AI text summarization with zero login and zero data retention.</p>
+        <p class="lead">TranscriptG provides public-access speech-to-text, educational YouTube caption review, universal subtitle conversion, and AI text summarization with zero login and zero data retention.</p>
         <div class="tools-grid">
           <article>
             <h2><a href="/transcribe">Audio &amp; Video Speech-to-Text Transcriber</a></h2>
@@ -59,7 +59,7 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
           </article>
           <article>
             <h2><a href="/youtube-transcript">YouTube Transcript Generator</a></h2>
-            <p>Extract instant YouTube captions with timestamps, chapter summaries, and AI voice reconstruction.</p>
+            <p>Generate timestamped study transcripts, chapter summaries, and accessibility notes from educational videos.</p>
           </article>
           <article>
             <h2><a href="/convert">Subtitle &amp; Format Converter</a></h2>
@@ -641,10 +641,9 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
 
   modified = modified.replace(/<\/head>/i, `${headInject}\n</head>`);
 
-  // 5. Inject route-specific semantic noscript content for non-JS crawlers & AdSense review bots
-  // When JavaScript is active, standard browsers completely skip <noscript> and hydrate React inside #root cleanly.
-  const routeNoscriptContent = `
-    <noscript>
+  // 5. Inject route-specific semantic content for non-JS crawlers & AdSense review bots
+  // When JavaScript is active, standard browsers hydrate React inside #root, seamlessly replacing static DOM.
+  const semanticBodyContent = `
       <main id="ssr-crawler-fallback" style="padding: 32px 20px; max-width: 920px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; color: #111827; line-height: 1.6;">
         ${config.semanticHtml}
         <section style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
@@ -663,13 +662,20 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
           </ul>
         </section>
       </main>
-    </noscript>
   `;
+
+  const routeNoscriptContent = `<noscript>${semanticBodyContent}</noscript>`;
 
   if (modified.includes("<noscript>")) {
     modified = modified.replace(/<noscript>[\s\S]*?<\/noscript>/i, routeNoscriptContent);
   } else {
     modified = modified.replace(/<body([^>]*)>/i, `<body$1>\n${routeNoscriptContent}`);
+  }
+
+  // Also pre-populate #root with semantic content so raw curl / AdSense DOM crawlers see full text immediately
+  const semanticRoot = `<div id="root" class="w-full max-w-full overflow-x-hidden min-h-screen">${semanticBodyContent}</div>`;
+  if (modified.includes('id="root"')) {
+    modified = modified.replace(/<div id="root"[^>]*>[\s\S]*?<\/div>/i, semanticRoot);
   }
 
   return { html: modified, status: 200 };

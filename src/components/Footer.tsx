@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
-import { ShieldCheck, Zap, Globe2, FileCode2 } from "lucide-react";
+import { ShieldCheck, Zap, Globe2, FileCode2, SlidersHorizontal } from "lucide-react";
 import { TOOLS_REGISTRY } from "../lib/navigation";
+import { openCookieConsent } from "./CookieConsent";
 
 export const Footer: React.FC = () => {
   return (
@@ -102,6 +103,16 @@ export const Footer: React.FC = () => {
                   Contact & Feedback
                 </Link>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={openCookieConsent}
+                  className="text-neutral-300 hover:text-[#ff4d00] transition-colors flex items-center gap-1 text-left cursor-pointer"
+                >
+                  <SlidersHorizontal className="w-3 h-3 text-[#ff4d00]" />
+                  <span>Cookie &amp; Ad Preferences</span>
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -109,9 +120,16 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-500">
           <p>© {new Date().getFullYear()} TranscriptG. All rights reserved. Built for global open access.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link to="/privacy" className="hover:text-neutral-300 transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-neutral-300 transition-colors">Terms</Link>
+            <button
+              type="button"
+              onClick={openCookieConsent}
+              className="hover:text-neutral-300 transition-colors cursor-pointer underline decoration-dotted"
+            >
+              Consent Choices
+            </button>
             <Link to="/sitemap.xml" target="_blank" className="hover:text-neutral-300 transition-colors">Sitemap</Link>
           </div>
         </div>

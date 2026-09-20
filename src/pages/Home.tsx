@@ -4,6 +4,7 @@ import { Seo } from "../components/Seo";
 import { SpectrumTrace } from "../components/SpectrumTrace";
 import { SUPPORTED_LANGUAGES } from "../lib/transcript";
 import { TOOLS_REGISTRY } from "../lib/navigation";
+import { BLOG_ARTICLES } from "../data/blogArticles";
 import {
   Mic,
   FileText,
@@ -22,6 +23,8 @@ import {
   FileCode2,
   Lock,
   Star,
+  BookOpen,
+  Clock,
 } from "lucide-react";
 
 export const Home: React.FC = () => {
@@ -361,7 +364,67 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 6: FAQ */}
+      {/* SECTION 6: EDITORIAL & LINGUISTIC JOURNAL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-[#ff4d00]" />
+              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold">
+                Linguistic Research Lab
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-[#0d0f12] tracking-tight mt-2">
+              Featured Research &amp; Engineering Guides
+            </h2>
+            <p className="text-neutral-600 text-sm sm:text-base mt-2 max-w-xl">
+              In-depth technical guides on acoustic signal processing, subtitle synchronization, accessibility compliance, and multimodal speech recognition.
+            </p>
+          </div>
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#ff4d00] hover:text-[#e04400] transition-colors shrink-0"
+          >
+            <span>Explore All 20 Technical Guides</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {BLOG_ARTICLES.slice(0, 3).map((article) => (
+            <Link
+              key={article.slug}
+              to={`/blog/${article.slug}`}
+              className="glass-card glass-card-hover p-6 rounded-3xl border border-black/10 flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-[11px] font-mono text-neutral-500">
+                  <span className="px-2.5 py-1 rounded-full bg-neutral-100 font-bold text-neutral-800">
+                    {article.category}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3 text-[#ff4d00]" />
+                    {article.readTime}
+                  </span>
+                </div>
+                <h3 className="text-lg font-black text-[#0d0f12] group-hover:text-[#ff4d00] transition-colors leading-snug">
+                  {article.title}
+                </h3>
+                <p className="text-xs text-neutral-600 line-clamp-3 leading-relaxed">
+                  {article.summary}
+                </p>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-black/5 flex items-center justify-between text-xs font-mono font-bold text-[#ff4d00]">
+                <span>Read Full Guide</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 7: FAQ */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-12">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold">

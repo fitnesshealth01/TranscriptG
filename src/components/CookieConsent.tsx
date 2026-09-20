@@ -2,6 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShieldCheck, X } from "lucide-react";
 
+/**
+ * Triggers the Google Certified CMP revocation dialog if active,
+ * or re-opens TranscriptG's consent modal.
+ */
+export function openCookieConsent() {
+  if (typeof window !== "undefined") {
+    const gfc = (window as any).googlefc;
+    if (gfc && typeof gfc.showRevocationMessage === "function") {
+      gfc.showRevocationMessage();
+      return;
+    }
+    window.dispatchEvent(new CustomEvent("open_cookie_consent"));
+  }
+}
+
 export const CookieConsent: React.FC = () => {
   const [show, setShow] = useState(false);
 
@@ -15,6 +30,12 @@ export const CookieConsent: React.FC = () => {
     } catch {
       // LocalStorage access fail-safe
     }
+  }, []);
+
+  useEffect(() => {
+    const handleOpen = () => setShow(true);
+    window.addEventListener("open_cookie_consent", handleOpen);
+    return () => window.removeEventListener("open_cookie_consent", handleOpen);
   }, []);
 
   const handleChoice = (preference: "accepted" | "essential") => {
