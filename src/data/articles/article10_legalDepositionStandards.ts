@@ -61,7 +61,7 @@ export const article10_legalDepositionStandards: BlogArticle = {
 <hr />
 
 <h2 id="handling-inaudibles-cross-talk">5. Protocols for Inaudible Words, Overlapping Speech & Crosstalk</h2>
-<p>When multiple attorneys argue or witnesses speak over one another, standard legal annotation rules apply (compare with <a href="/blog/academic-qualitative-interview-transcription-guide">Academic Qualitative Standards</a> and <a href="/blog/10-tips-for-accurate-audio-transcription">10 Acoustic Calibration Tips</a>):</p>
+<p>When multiple attorneys argue or witnesses speak over one another, standard legal annotation rules apply (compare with <a href="/blog/academic-qualitative-interview-transcription-guide">Academic Qualitative Standards</a> and <a href="/blog/transcription-accuracy-tips">10 Acoustic Calibration Tips</a>):</p>
 <ol>
   <li><strong>[Crosstalk / Overlapping Speech]:</strong> Inserted when two voices cannot be separated acoustically.</li>
   <li><strong>[Inaudible 00:14:22]:</strong> Tagged with an exact millisecond timestamp to enable rapid attorney playback verification.</li>

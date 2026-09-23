@@ -112,7 +112,7 @@ export const article01_howTranscriptGWorks: BlogArticle = {
 <hr />
 
 <h2 id="mel-spectrogram">3. Mel-Spectrogram Extraction & Normalization</h2>
-<p>Human speech frequency ranges between 85 Hz (fundamental frequency for deep male voices) and 8,000 Hz (fricatives and sibilants like 's' and 'th'). The human ear does not perceive pitch linearly; instead, our cochlea perceives pitch logarithmically. Preparing clean audio before recording also makes a dramatic difference, as covered in our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Acoustic Calibration Tips</a>.</p>
+<p>Human speech frequency ranges between 85 Hz (fundamental frequency for deep male voices) and 8,000 Hz (fricatives and sibilants like 's' and 'th'). The human ear does not perceive pitch linearly; instead, our cochlea perceives pitch logarithmically. Preparing clean audio before recording also makes a dramatic difference, as covered in our <a href="/blog/transcription-accuracy-tips">10 Acoustic Calibration Tips</a>.</p>
 
 <h3>Mathematical Transformation Pipeline</h3>
 <ol>
@@ -161,7 +161,7 @@ export const article01_howTranscriptGWorks: BlogArticle = {
 <hr />
 
 <h2 id="timecode-alignment">5. Dynamic Time Warping & Millisecond Alignment</h2>
-<p>Subtitles (<a href="/blog/srt-vs-vtt-subtitles-format-guide">SRT vs. WebVTT</a>) and interactive audio players require exact millisecond timestamps. TranscriptG utilizes <strong>Dynamic Time Warping (DTW)</strong> on the cross-attention matrix generated between the encoder's acoustic frames and the decoder's text tokens. By tracing the optimal cost path through the attention weight matrix, the system aligns every word boundary to within ±15 milliseconds of audio ground truth (developers can learn how to parse these in our <a href="/blog/developer-guide-parsing-srt-vtt-json-subtitles">Subtitle Parsing Guide</a>):</p>
+<p>Subtitles (<a href="/blog/srt-vs-vtt-subtitle-formats">SRT vs. WebVTT</a>) and interactive audio players require exact millisecond timestamps. TranscriptG utilizes <strong>Dynamic Time Warping (DTW)</strong> on the cross-attention matrix generated between the encoder's acoustic frames and the decoder's text tokens. By tracing the optimal cost path through the attention weight matrix, the system aligns every word boundary to within ±15 milliseconds of audio ground truth (developers can learn how to parse these in our <a href="/blog/developer-guide-parsing-srt-vtt-json-subtitles">Subtitle Parsing Guide</a>):</p>
 
 <table>
   <thead>
@@ -207,7 +207,7 @@ export const article01_howTranscriptGWorks: BlogArticle = {
 <ol>
   <li><strong>Voice Activity Detection (VAD):</strong> Neural energy gates isolate active speech intervals, filtering out dead silence, laughter, and ambient room noise.</li>
   <li><strong>d-Vector Speaker Embeddings:</strong> A lightweight convolutional network extracts 256-dimensional speaker embeddings for every 1.5-second speech window.</li>
-  <li><strong>Spectral Clustering & Cosine Similarity:</strong> Embeddings are projected into a latent vector space. Unsupervised spectral clustering groups vectors into discrete speaker IDs (<code>Speaker 1</code>, <code>Speaker 2</code>), even when voices share similar pitch. For legal depositions, see our <a href="/blog/legal-deposition-transcription-standards-guide">Legal Deposition Standards Guide</a>.</li>
+  <li><strong>Spectral Clustering & Cosine Similarity:</strong> Embeddings are projected into a latent vector space. Unsupervised spectral clustering groups vectors into discrete speaker IDs (<code>Speaker 1</code>, <code>Speaker 2</code>), even when voices share similar pitch. For legal depositions, see our <a href="/blog/legal-deposition-court-transcription-standards">Legal Deposition Standards Guide</a>.</li>
 </ol>
 
 <hr />
@@ -215,10 +215,10 @@ export const article01_howTranscriptGWorks: BlogArticle = {
 <h2 id="nlp-refinement">7. Post-Processing & NLP Intelligence</h2>
 <p>Once the raw transcript is generated, TranscriptG unlocks high-leverage linguistic processing:</p>
 <ul>
-  <li><strong>Executive Summaries:</strong> Synthesizing hour-long discussions into 3-paragraph executive briefs (see our <a href="/blog/ai-meeting-summarizer-action-items-guide">AI Meeting Summarizer Guide</a>).</li>
+  <li><strong>Executive Summaries:</strong> Synthesizing hour-long discussions into 3-paragraph executive briefs (see our <a href="/blog/ai-meeting-summarizer-best-practices">AI Meeting Summarizer Guide</a>).</li>
   <li><strong>Action Item Matrices:</strong> Extracting deliverables, assigned owners, and target deadlines into structured tables.</li>
   <li><strong>Grammar Polish & Filler Removal:</strong> Stripping vocal disfluencies (<em>um</em>, <em>uh</em>, <em>like</em>, <em>you know</em>) while preserving original speaker intent.</li>
-  <li><strong>Multilingual Translation:</strong> Translating timecoded transcripts into 90+ languages while preserving exact timecode markers (see our <a href="/blog/multilingual-speech-recognition-ai-translation-guide">Multilingual AI Guide</a>).</li>
+  <li><strong>Multilingual Translation:</strong> Translating timecoded transcripts into 90+ languages while preserving exact timecode markers (see our <a href="/blog/multilingual-ai-transcription-guide">Multilingual AI Guide</a>).</li>
 </ul>
 
 <hr />

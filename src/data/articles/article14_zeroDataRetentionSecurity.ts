@@ -80,7 +80,7 @@ export const article14_zeroDataRetentionSecurity: BlogArticle = {
 <hr />
 
 <h2 id="compliance-advantages-gdpr-soc2">4. Regulatory Compliance: GDPR, CCPA & SOC-2 Advantages</h2>
-<p>Under GDPR Article 17 ("Right to Erasure") and CCPA guidelines, organizations must be able to delete customer personal data upon request. With TranscriptG, deletion is instantaneous and automatic by design—eliminating complex data deletion pipelines. See how this aligns with legal confidentiality in our <a href="/blog/legal-deposition-transcription-standards-guide">Legal Deposition Standards Guide</a> and healthcare rules in <a href="/blog/medical-transcription-hipaa-compliance-guide">Medical Clinical HIPAA Compliance</a>.</p>
+<p>Under GDPR Article 17 ("Right to Erasure") and CCPA guidelines, organizations must be able to delete customer personal data upon request. With TranscriptG, deletion is instantaneous and automatic by design—eliminating complex data deletion pipelines. See how this aligns with legal confidentiality in our <a href="/blog/legal-deposition-court-transcription-standards">Legal Deposition Standards Guide</a> and healthcare rules in <a href="/blog/medical-transcription-hipaa-compliance-guide">Medical Clinical HIPAA Compliance</a>.</p>
 
 <hr />
 
@@ -99,7 +99,7 @@ export const article14_zeroDataRetentionSecurity: BlogArticle = {
   ],
   relatedSlugs: [
     "how-transcriptg-works",
-    "legal-deposition-transcription-standards-guide",
+    "legal-deposition-court-transcription-standards",
     "medical-transcription-hipaa-compliance-guide",
   ],
 };

@@ -20,24 +20,21 @@ export const BlogIndexPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  const categories = [
-    "All",
-    "Architecture",
-    "Best Practices",
-    "Guides",
-    "Workflows",
-    "Acoustic Science",
-    "SEO & Growth",
-    "Legal & Standards",
-    "Media Production",
-    "Linguistics",
-    "Healthcare & AI",
-    "Academic & Research",
-    "Tutorials",
-    "Video Engineering",
-    "Developer",
-    "AI & Research",
-  ];
+  const categories = React.useMemo(() => {
+    const set = new Set<string>();
+    BLOG_ARTICLES.forEach((a) => {
+      if (a.category) set.add(a.category);
+    });
+    return ["All", ...Array.from(set).sort()];
+  }, []);
+
+  const categoryCounts = React.useMemo(() => {
+    const counts: Record<string, number> = { All: BLOG_ARTICLES.length };
+    BLOG_ARTICLES.forEach((a) => {
+      counts[a.category] = (counts[a.category] || 0) + 1;
+    });
+    return counts;
+  }, []);
 
   const filteredArticles = BLOG_ARTICLES.filter((article) => {
     const matchesSearch =
@@ -69,7 +66,7 @@ export const BlogIndexPage: React.FC = () => {
       />
 
       <PageHeader
-        eyebrow="Knowledge Base · 18 Comprehensive Guides"
+        eyebrow={`Knowledge Base · ${BLOG_ARTICLES.length} Comprehensive Technical Guides`}
         title="Linguistic Journal & Audio Engineering Guides"
         description="Authoritative, peer-reviewed engineering breakdowns, acoustic standards, compliance blueprints, and modern AI transcription workflows."
       />
@@ -84,7 +81,7 @@ export const BlogIndexPage: React.FC = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search across 18 guides (e.g. ADA, SRT vs VTT, Whisper, Podcasts, SOAP notes)..."
+                placeholder={`Search across ${BLOG_ARTICLES.length} guides (e.g. ADA, SRT vs VTT, Whisper, Podcasts, SOAP notes)...`}
                 className="w-full pl-11 pr-4 py-3 bg-neutral-50 rounded-2xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] font-sans"
               />
             </div>
@@ -101,13 +98,20 @@ export const BlogIndexPage: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold whitespace-nowrap transition-all ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
                   selectedCategory === cat
                     ? "bg-[#ff4d00] text-white shadow-md shadow-[#ff4d00]/20"
                     : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200/70"
                 }`}
               >
-                {cat}
+                <span>{cat}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                    selectedCategory === cat ? "bg-white/20 text-white" : "bg-neutral-200/80 text-neutral-600"
+                  }`}
+                >
+                  {categoryCounts[cat] || 0}
+                </span>
               </button>
             ))}
           </div>

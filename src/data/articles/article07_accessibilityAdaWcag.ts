@@ -104,7 +104,7 @@ export const article07_accessibilityAdaWcag: BlogArticle = {
 <hr />
 
 <h2 id="transcriptg-compliance">6. How TranscriptG Guarantees Full Compliance</h2>
-<p>TranscriptG provides enterprise-grade accuracy, millisecond-accurate timecodes, automated speaker diarization, and WCAG-compliant WebVTT formatting—allowing your organization to achieve compliance quickly while safeguarding user privacy. Review our <a href="/blog/srt-vs-vtt-subtitles-format-guide">SRT vs. WebVTT Format Guide</a>, see practical deployment steps in our <a href="/blog/youtube-video-captioning-workflow-guide">YouTube Video Captioning Workflow</a>, or examine clinical guidelines in our <a href="/blog/medical-transcription-hipaa-compliance-guide">Medical Transcription & HIPAA Guide</a>. Transcribe compliance media directly with our <a href="/transcribe">AI Speech Transcriber</a> or convert caption formats with our <a href="/convert">Subtitle Converter</a>.</p>
+<p>TranscriptG provides enterprise-grade accuracy, millisecond-accurate timecodes, automated speaker diarization, and WCAG-compliant WebVTT formatting—allowing your organization to achieve compliance quickly while safeguarding user privacy. Review our <a href="/blog/srt-vs-vtt-subtitle-formats">SRT vs. WebVTT Format Guide</a>, see practical deployment steps in our <a href="/blog/youtube-video-captioning-workflow-guide">YouTube Video Captioning Workflow</a>, or examine clinical guidelines in our <a href="/blog/medical-transcription-hipaa-compliance-guide">Medical Transcription & HIPAA Guide</a>. Transcribe compliance media directly with our <a href="/transcribe">AI Speech Transcriber</a> or convert caption formats with our <a href="/convert">Subtitle Converter</a>.</p>
 `,
   faqs: [
     { q: "Are YouTube's automatic captions ADA compliant?", a: "No. Federal courts have ruled that unedited automatic captions with frequent phonetic errors do not satisfy ADA Title III or Section 508 standards." },
@@ -112,7 +112,7 @@ export const article07_accessibilityAdaWcag: BlogArticle = {
     { q: "Do podcasts require a transcript under ADA guidelines?", a: "Yes. WCAG 1.2.1 Level A requires a complete textual transcript for all prerecorded audio-only podcasts." },
   ],
   relatedSlugs: [
-    "srt-vs-vtt-subtitles-format-guide",
+    "srt-vs-vtt-subtitle-formats",
     "youtube-video-captioning-workflow-guide",
     "medical-transcription-hipaa-compliance-guide",
   ],

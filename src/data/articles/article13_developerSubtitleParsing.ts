@@ -38,7 +38,7 @@ export const article13_developerSubtitleParsing: BlogArticle = {
 <hr />
 
 <h2 id="typescript-srt-parser">2. Building a Robust TypeScript SRT Parser</h2>
-<p>Here is a complete, zero-dependency TypeScript implementation for parsing SRT subtitle blocks into structured cue objects (compare syntax differences in our <a href="/blog/srt-vs-vtt-subtitles-format-guide">SRT vs. WebVTT Format Guide</a>):</p>
+<p>Here is a complete, zero-dependency TypeScript implementation for parsing SRT subtitle blocks into structured cue objects (compare syntax differences in our <a href="/blog/srt-vs-vtt-subtitle-formats">SRT vs. WebVTT Format Guide</a>):</p>
 
 <pre><code>export function parseSrt(srtContent: string): SubtitleCue[] {
   const cues: SubtitleCue[] = [];
@@ -126,7 +126,7 @@ def time_to_ms(hh, mm, ss, ms) -&gt; int:
 <hr />
 
 <h2 id="millisecond-timecode-math">4. Millisecond Timecode Math & Drift Correction</h2>
-<p>When stitching audio chunks together or correcting drift caused by frame rate conversions (e.g. 23.976 fps to 29.97 fps), working with pure integer milliseconds avoids floating-point precision loss. For audio format container details, consult our <a href="/blog/audio-formats-codecs-containers-guide">Audio Formats, Codecs & Containers Guide</a>.</p>
+<p>When stitching audio chunks together or correcting drift caused by frame rate conversions (e.g. 23.976 fps to 29.97 fps), working with pure integer milliseconds avoids floating-point precision loss. For audio format container details, consult our <a href="/blog/audio-formats-codecs-transcription-guide">Audio Formats, Codecs & Containers Guide</a>.</p>
 
 <hr />
 
@@ -163,8 +163,8 @@ def time_to_ms(hh, mm, ss, ms) -&gt; int:
     { q: "Can I export word-level timestamps in TranscriptG?", a: "Yes. TranscriptG exports structured JSON containing start and end timestamps for every individual spoken word." },
   ],
   relatedSlugs: [
-    "srt-vs-vtt-subtitles-format-guide",
-    "audio-formats-codecs-containers-guide",
+    "srt-vs-vtt-subtitle-formats",
+    "audio-formats-codecs-transcription-guide",
     "audio-archives-json-transcripts-semantic-search",
   ],
 };

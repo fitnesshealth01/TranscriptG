@@ -37,7 +37,7 @@ export const article12_academicQualitativeInterviews: BlogArticle = {
 <hr />
 
 <h2 id="verbatim-levels-qualitative">3. Selecting Verbatim Levels: Naturalized vs. Denaturalized</h2>
-<p>Researchers must select the transcription level appropriate for their methodological framework (compare with standards in our <a href="/blog/legal-deposition-transcription-standards-guide">Legal Deposition Standards Guide</a>):</p>
+<p>Researchers must select the transcription level appropriate for their methodological framework (compare with standards in our <a href="/blog/legal-deposition-court-transcription-standards">Legal Deposition Standards Guide</a>):</p>
 <ul>
   <li><strong>Denaturalized (Intelligent Verbatim):</strong> Focuses on informational content and thematic substance, smoothing out stuttered syllables and false starts for clarity. Ideal for grounded theory, policy studies, and UX research.</li>
   <li><strong>Naturalized (Strict Verbatim):</strong> Transcribes every hesitation, laughter cue (<em>[laughter]</em>), and pause (<em>[pause 2.5s]</em>) verbatim. Essential for conversation analysis, sociolinguistics, and discourse psychology.</li>
@@ -59,13 +59,13 @@ PARTICIPANT 01: Primarily the container ingress configuration and OAuth callback
 <hr />
 
 <h2 id="thematic-coding-acceleration">5. Accelerating Thematic Coding with AI Summaries</h2>
-<p>While primary coding requires human interpretive synthesis, researchers can utilize TranscriptG's NLP summaries to rapidly identify high-level themes, extract cross-participant sentiment, and index specific research questions across dozens of interview hours (learn more in our <a href="/blog/ai-meeting-summarizer-action-items-guide">AI Summarizer Guide</a>).</p>
+<p>While primary coding requires human interpretive synthesis, researchers can utilize TranscriptG's NLP summaries to rapidly identify high-level themes, extract cross-participant sentiment, and index specific research questions across dozens of interview hours (learn more in our <a href="/blog/ai-meeting-summarizer-best-practices">AI Summarizer Guide</a>).</p>
 
 <hr />
 
 <h2 id="academic-workflow-checklist">6. The Complete Academic Transcription Checklist</h2>
 <ol>
-  <li>Record interviews with a directional cardioid microphone at 44.1 kHz or 48 kHz (see our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Acoustic Calibration Tips</a>).</li>
+  <li>Record interviews with a directional cardioid microphone at 44.1 kHz or 48 kHz (see our <a href="/blog/transcription-accuracy-tips">10 Acoustic Calibration Tips</a>).</li>
   <li>Transcribe using <a href="/transcribe">TranscriptG Transcriber</a> with speaker diarization enabled.</li>
   <li>Export formatted Word (.DOCX) or text files directly into NVivo or Atlas.ti for thematic coding, or build searchable research repositories (detailed in <a href="/blog/audio-archives-json-transcripts-semantic-search">Audio Archives & Semantic Search</a>).</li>
   <li>Maintain full IRB compliance with TranscriptG's zero-retention guarantee.</li>
@@ -77,8 +77,8 @@ PARTICIPANT 01: Primarily the container ingress configuration and OAuth callback
     { q: "How does TranscriptG handle multiple speakers in focus groups?", a: "Our neural speaker diarization automatically clusters distinct voices into unique speaker tracks (e.g. Speaker 1, Speaker 2)." },
   ],
   relatedSlugs: [
-    "legal-deposition-transcription-standards-guide",
+    "legal-deposition-court-transcription-standards",
     "audio-archives-json-transcripts-semantic-search",
-    "10-tips-for-accurate-audio-transcription",
+    "transcription-accuracy-tips",
   ],
 };

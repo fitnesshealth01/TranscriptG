@@ -125,7 +125,7 @@ export const article05_audioFormatsCodecs: BlogArticle = {
 <h2 id="optimal-pipeline">6. The Optimal Transcription Ingestion Pipeline</h2>
 <p>For the fastest uploads and highest transcription accuracy with TranscriptG:</p>
 <ul>
-  <li>Export master recordings as <strong>FLAC</strong> or <strong>WAV</strong> (16-bit, 16 kHz or 44.1 kHz, Mono). Follow our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Calibration Tips</a> for optimal microphone positioning.</li>
+  <li>Export master recordings as <strong>FLAC</strong> or <strong>WAV</strong> (16-bit, 16 kHz or 44.1 kHz, Mono). Follow our <a href="/blog/transcription-accuracy-tips">10 Calibration Tips</a> for optimal microphone positioning.</li>
   <li>If bandwidth or storage is constrained, compress using <strong>Opus at 64 kbps (Mono)</strong> or <strong>AAC at 128 kbps</strong>.</li>
   <li>Avoid compressing speech below 64 kbps on legacy MP3 encoders.</li>
   <li>Learn how TranscriptG demuxes codecs in memory in <a href="/blog/how-transcriptg-works">How TranscriptG Works</a> or explore enterprise archiving in <a href="/blog/audio-archives-json-transcripts-semantic-search">Audio Archives & Semantic Search</a>. Transcribe any format directly with our <a href="/transcribe">Free Speech Transcriber</a>.</li>
@@ -137,7 +137,7 @@ export const article05_audioFormatsCodecs: BlogArticle = {
     { q: "Why does TranscriptG resample audio to 16,000 Hz?", a: "Modern speech recognition models are trained on 16 kHz audio because human speech formants rarely exceed 8 kHz. Resampling to 16 kHz speeds up processing without sacrificing accuracy." },
   ],
   relatedSlugs: [
-    "10-tips-for-accurate-audio-transcription",
+    "transcription-accuracy-tips",
     "how-transcriptg-works",
     "audio-archives-json-transcripts-semantic-search",
   ],

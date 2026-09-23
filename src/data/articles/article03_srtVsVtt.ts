@@ -107,7 +107,7 @@ Experience sub-second latency with zero data retention.</code></pre>
 <hr />
 
 <h2 id="accessibility-benefits">5. Accessibility, Metadata & Multi-Language Tracks</h2>
-<p>WebVTT enables comprehensive WCAG 2.1 AA and ADA compliance by supporting chapters, audio descriptions, and synchronized metadata tracks (learn more in our <a href="/blog/web-accessibility-closed-captions-wcag-ada-guide">Web Accessibility & ADA Compliance Guide</a> and <a href="/blog/multilingual-subtitling-video-localization-guide">Multilingual Video Localization Guide</a>):</p>
+<p>WebVTT enables comprehensive WCAG 2.1 AA and ADA compliance by supporting chapters, audio descriptions, and synchronized metadata tracks (learn more in our <a href="/blog/accessibility-ada-wcag-closed-captions">Web Accessibility & ADA Compliance Guide</a> and <a href="/blog/multilingual-subtitling-video-localization-guide">Multilingual Video Localization Guide</a>):</p>
 
 <pre><code>WEBVTT - Chapter Navigation Track
 
@@ -130,6 +130,6 @@ Mel-Spectrogram Feature Extraction</code></pre>
   relatedSlugs: [
     "developer-guide-parsing-srt-vtt-json-subtitles",
     "youtube-video-captioning-workflow-guide",
-    "web-accessibility-closed-captions-wcag-ada-guide",
+    "accessibility-ada-wcag-closed-captions",
   ],
 };

@@ -842,6 +842,24 @@ app.get("/youtube", (_req, res) => {
   return res.redirect(301, "/youtube-transcript");
 });
 
+const LEGACY_BLOG_REDIRECTS: Record<string, string> = {
+  "/blog/10-tips-for-accurate-audio-transcription": "/blog/transcription-accuracy-tips",
+  "/blog/srt-vs-vtt-subtitles-format-guide": "/blog/srt-vs-vtt-subtitle-formats",
+  "/blog/legal-deposition-transcription-standards-guide": "/blog/legal-deposition-court-transcription-standards",
+  "/blog/ai-meeting-summarizer-action-items-guide": "/blog/ai-meeting-summarizer-best-practices",
+  "/blog/multilingual-speech-recognition-ai-translation-guide": "/blog/multilingual-ai-transcription-guide",
+  "/blog/web-accessibility-closed-captions-wcag-ada-guide": "/blog/accessibility-ada-wcag-closed-captions",
+  "/blog/podcast-show-notes-transcription-growth-guide": "/blog/podcast-transcription-show-notes-automation",
+  "/blog/video-seo-transcripts-ranking-strategy": "/blog/video-seo-transcription-strategy",
+  "/blog/audio-formats-codecs-containers-guide": "/blog/audio-formats-codecs-transcription-guide",
+};
+
+Object.entries(LEGACY_BLOG_REDIRECTS).forEach(([oldPath, newPath]) => {
+  app.get([oldPath, `${oldPath}/`], (_req, res) => {
+    return res.redirect(301, newPath);
+  });
+});
+
 // Explicit 404 for removed legacy tools
 app.get(["/parchment", "/parchment-transcript", "/grams-to-cups", "/gramstocups", "/baking-converter"], (_req, res) => {
   return res.status(404).send(`<!DOCTYPE html><html><head><title>404 Not Found</title><meta name="robots" content="noindex, nofollow" /></head><body style="font-family:sans-serif;text-align:center;padding:4rem 1rem;"><h1>404 — Tool Deprecated &amp; Removed</h1><p>This legacy utility was deprecated and removed. Return to <a href="/">TranscriptG Speech Platform</a>.</p></body></html>`);

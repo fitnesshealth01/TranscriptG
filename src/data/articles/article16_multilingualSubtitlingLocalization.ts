@@ -34,7 +34,7 @@ export const article16_multilingualSubtitlingLocalization: BlogArticle = {
 <p>Professional localization studios utilize the <strong>Master Template Workflow</strong>:</p>
 <ol>
   <li><strong>Create Master Transcript:</strong> Transcribe the source audio into a 99.5%+ accurate timecoded master file with clean sentence boundaries using <a href="/transcribe">TranscriptG Transcriber</a>.</li>
-  <li><strong>Lock Timecodes:</strong> Establish fixed start and end timestamps so subtitle cues remain synchronized across all translated languages (learn more in our <a href="/blog/srt-vs-vtt-subtitles-format-guide">SRT vs. WebVTT Guide</a>).</li>
+  <li><strong>Lock Timecodes:</strong> Establish fixed start and end timestamps so subtitle cues remain synchronized across all translated languages (learn more in our <a href="/blog/srt-vs-vtt-subtitle-formats">SRT vs. WebVTT Guide</a>).</li>
   <li><strong>Multilingual Translation:</strong> Translate the text tokens into target languages (Spanish, German, Japanese, Arabic, etc.) while preserving the exact timecode structure (see our technical analysis in <a href="/blog/multilingual-ai-transcription-guide">Multilingual Speech Recognition</a>).</li>
 </ol>
 
@@ -108,6 +108,6 @@ export const article16_multilingualSubtitlingLocalization: BlogArticle = {
   relatedSlugs: [
     "multilingual-ai-transcription-guide",
     "youtube-video-captioning-workflow-guide",
-    "srt-vs-vtt-subtitles-format-guide",
+    "srt-vs-vtt-subtitle-formats",
   ],
 };

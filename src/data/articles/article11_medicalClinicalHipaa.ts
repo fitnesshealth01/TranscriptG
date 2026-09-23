@@ -63,7 +63,7 @@ export const article11_medicalClinicalHipaa: BlogArticle = {
 <hr />
 
 <h2 id="pharmacological-nomenclature">3. Decoding Complex Pharmacology & Anatomical Vocabularies</h2>
-<p>Medical transcription demands extraordinary phonetic precision. A single misinterpreted syllable in a drug name or dosage (e.g., confusing <em>Zantac</em> with <em>Xanax</em> or <em>15 mg</em> with <em>50 mg</em>) can have severe clinical consequences (see our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Acoustic Tips</a> for preventing audio distortion).</p>
+<p>Medical transcription demands extraordinary phonetic precision. A single misinterpreted syllable in a drug name or dosage (e.g., confusing <em>Zantac</em> with <em>Xanax</em> or <em>15 mg</em> with <em>50 mg</em>) can have severe clinical consequences (see our <a href="/blog/transcription-accuracy-tips">10 Acoustic Tips</a> for preventing audio distortion).</p>
 <p>TranscriptG incorporates specialized medical vocabularies spanning RxNorm pharmaceutical identifiers, ICD-10 diagnostic codes, and anatomical terminologies to ensure accurate medical transcriptions.</p>
 
 <hr />
@@ -94,7 +94,7 @@ PLAN:
 <hr />
 
 <h2 id="clinical-workflow-deployment">6. Deploying TranscriptG in Clinical Practices</h2>
-<p>Healthcare providers, telehealth platforms, and clinical researchers use TranscriptG to transcribe patient dictations, format SOAP notes, and streamline medical documentation with complete HIPAA peace of mind. Compare with legal compliance standards in our <a href="/blog/legal-deposition-transcription-standards-guide">Legal Deposition Standards Guide</a> or review digital compliance in <a href="/blog/web-accessibility-closed-captions-wcag-ada-guide">Web Accessibility & ADA Guidelines</a>. Transcribe clinical audio directly with our <a href="/transcribe">Secure Transcriber</a>.</p>
+<p>Healthcare providers, telehealth platforms, and clinical researchers use TranscriptG to transcribe patient dictations, format SOAP notes, and streamline medical documentation with complete HIPAA peace of mind. Compare with legal compliance standards in our <a href="/blog/legal-deposition-court-transcription-standards">Legal Deposition Standards Guide</a> or review digital compliance in <a href="/blog/accessibility-ada-wcag-closed-captions">Web Accessibility & ADA Guidelines</a>. Transcribe clinical audio directly with our <a href="/transcribe">Secure Transcriber</a>.</p>
 `,
   faqs: [
     { q: "Is TranscriptG safe for transcribing patient medical dictations?", a: "Yes. TranscriptG operates on an ephemeral zero-retention architecture, meaning patient audio and transcripts are never stored on disk or used for AI training." },
@@ -103,7 +103,7 @@ PLAN:
   ],
   relatedSlugs: [
     "zero-data-retention-privacy-security-architecture",
-    "legal-deposition-transcription-standards-guide",
-    "web-accessibility-closed-captions-wcag-ada-guide",
+    "legal-deposition-court-transcription-standards",
+    "accessibility-ada-wcag-closed-captions",
   ],
 };

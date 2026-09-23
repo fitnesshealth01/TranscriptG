@@ -70,9 +70,9 @@ export const article06_videoSeoStrategy: BlogArticle = {
 <h2 id="step-by-step-video-seo-checklist">6. The End-to-End Video SEO Publishing Checklist</h2>
 <ol>
   <li>Transcribe your video using <a href="/transcribe">TranscriptG Transcriber</a> with 99%+ accuracy.</li>
-  <li>Export <code>.SRT</code> files for YouTube (detailed in our <a href="/blog/youtube-video-captioning-workflow-guide">YouTube Captioning Guide</a>) and <code>.VTT</code> files for web video players (see our <a href="/blog/srt-vs-vtt-subtitles-format-guide">SRT vs. VTT Comparison</a>).</li>
+  <li>Export <code>.SRT</code> files for YouTube (detailed in our <a href="/blog/youtube-video-captioning-workflow-guide">YouTube Captioning Guide</a>) and <code>.VTT</code> files for web video players (see our <a href="/blog/srt-vs-vtt-subtitle-formats">SRT vs. VTT Comparison</a>).</li>
   <li>Add structured <code>VideoObject</code> JSON-LD schema with the complete transcript embedded.</li>
-  <li>Format the transcript on your webpage with clear <code>&lt;h2&gt;</code> timestamps and key takeaways (see our <a href="/blog/podcast-show-notes-transcription-growth-guide">Podcast Show Notes Guide</a>).</li>
+  <li>Format the transcript on your webpage with clear <code>&lt;h2&gt;</code> timestamps and key takeaways (see our <a href="/blog/podcast-transcription-show-notes-automation">Podcast Show Notes Guide</a>).</li>
   <li>Publish translated subtitles to unlock international search traffic (see our <a href="/blog/multilingual-subtitling-video-localization-guide">Multilingual Video Localization Guide</a>) and convert formats via our <a href="/convert">Subtitle Converter Tool</a>.</li>
 </ol>
 `,
@@ -84,6 +84,6 @@ export const article06_videoSeoStrategy: BlogArticle = {
   relatedSlugs: [
     "youtube-video-captioning-workflow-guide",
     "multilingual-subtitling-video-localization-guide",
-    "srt-vs-vtt-subtitles-format-guide",
+    "srt-vs-vtt-subtitle-formats",
   ],
 };

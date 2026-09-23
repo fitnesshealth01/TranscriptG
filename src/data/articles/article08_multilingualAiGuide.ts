@@ -115,7 +115,7 @@ export const article08_multilingualAiGuide: BlogArticle = {
 <p>When transcribing international or accented recordings:</p>
 <ol>
   <li>Select the specific primary language in TranscriptG if known in advance.</li>
-  <li>Ensure audio is recorded with a cardioid microphone to avoid ambient noise from obscuring delicate phonetic inflections (see our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Acoustic Calibration Tips</a>).</li>
+  <li>Ensure audio is recorded with a cardioid microphone to avoid ambient noise from obscuring delicate phonetic inflections (see our <a href="/blog/transcription-accuracy-tips">10 Acoustic Calibration Tips</a>).</li>
   <li>Explore global localization strategies in our <a href="/blog/multilingual-subtitling-video-localization-guide">Multilingual Video Localization Guide</a> and delve into neural architectures in <a href="/blog/evolution-of-asr-gmm-whisper-gemini-multimodal">Evolution of ASR</a> and <a href="/blog/how-transcriptg-works">How TranscriptG Works</a>.</li>
   <li>Utilize <a href="/transcribe">TranscriptG Free Transcriber</a> to output bilingual subtitle tracks in a single click, and convert them seamlessly with our <a href="/convert">Subtitle Converter</a>.</li>
 </ol>

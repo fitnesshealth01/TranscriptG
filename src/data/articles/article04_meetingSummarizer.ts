@@ -77,7 +77,7 @@ export const article04_meetingSummarizer: BlogArticle = {
 <hr />
 
 <h2 id="speaker-attribution">4. Multi-Speaker Diarization & Accountability</h2>
-<p>Without speaker attribution, a transcript is just a wall of disconnected phrases. TranscriptG's neural diarization isolates unique acoustic embeddings (explained in depth in <a href="/blog/how-transcriptg-works">How TranscriptG Works</a>), allowing the summary engine to differentiate between a client's requirements and an engineer's estimate. For guidelines on clean multi-speaker recording, review our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Acoustic Calibration Tips</a>.</p>
+<p>Without speaker attribution, a transcript is just a wall of disconnected phrases. TranscriptG's neural diarization isolates unique acoustic embeddings (explained in depth in <a href="/blog/how-transcriptg-works">How TranscriptG Works</a>), allowing the summary engine to differentiate between a client's requirements and an engineer's estimate. For guidelines on clean multi-speaker recording, review our <a href="/blog/transcription-accuracy-tips">10 Acoustic Calibration Tips</a>.</p>
 
 <hr />
 
@@ -90,7 +90,7 @@ export const article04_meetingSummarizer: BlogArticle = {
 <h2 id="implementation-workflow">6. End-to-End Meeting Intelligence Workflow</h2>
 <p>Transforming team recordings into actionable momentum takes seconds with TranscriptG:</p>
 <ol>
-  <li>Export the recording from Zoom, Google Meet, Microsoft Teams, or in-person audio recorders (see our <a href="/blog/podcast-show-notes-transcription-growth-guide">Podcast & Show Notes Guide</a> for distribution best practices).</li>
+  <li>Export the recording from Zoom, Google Meet, Microsoft Teams, or in-person audio recorders (see our <a href="/blog/podcast-transcription-show-notes-automation">Podcast & Show Notes Guide</a> for distribution best practices).</li>
   <li>Upload the audio/video file to <a href="/transcribe">TranscriptG Transcriber</a>.</li>
   <li>Select <strong>Executive Summary & Action Items</strong> in Engine 03.</li>
   <li>Copy the formatted markdown or download the structured DOCX report for instant Slack, Notion, or Jira distribution.</li>
@@ -103,7 +103,7 @@ export const article04_meetingSummarizer: BlogArticle = {
   ],
   relatedSlugs: [
     "zero-data-retention-privacy-security-architecture",
-    "podcast-show-notes-transcription-growth-guide",
+    "podcast-transcription-show-notes-automation",
     "how-transcriptg-works",
   ],
 };

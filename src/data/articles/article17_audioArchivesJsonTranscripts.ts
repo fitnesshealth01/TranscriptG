@@ -74,7 +74,7 @@ export const article17_audioArchivesJsonTranscripts: BlogArticle = {
 <hr />
 
 <h2 id="preservation-standards-metadata">5. Long-Term Preservation Standards & Dublin Core Metadata</h2>
-<p>To ensure digital archives remain accessible across decades of software evolution, pair JSON transcripts with standardized Dublin Core (ISO 15836) metadata and store archival master copies in open formats (consult our <a href="/blog/audio-formats-codecs-containers-guide">Audio Codecs & Containers Guide</a>).</p>
+<p>To ensure digital archives remain accessible across decades of software evolution, pair JSON transcripts with standardized Dublin Core (ISO 15836) metadata and store archival master copies in open formats (consult our <a href="/blog/audio-formats-codecs-transcription-guide">Audio Codecs & Containers Guide</a>).</p>
 
 <hr />
 
@@ -88,7 +88,7 @@ export const article17_audioArchivesJsonTranscripts: BlogArticle = {
   ],
   relatedSlugs: [
     "developer-guide-parsing-srt-vtt-json-subtitles",
-    "audio-formats-codecs-containers-guide",
+    "audio-formats-codecs-transcription-guide",
     "academic-qualitative-interview-transcription-guide",
   ],
 };

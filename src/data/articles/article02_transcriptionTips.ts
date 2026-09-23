@@ -131,7 +131,7 @@ export const article02_transcriptionTips: BlogArticle = {
 <h2 id="lexical-disambiguation">8. Domain Vocabularies & Jargon Normalization</h2>
 <p>Medical terminology, legal statutes, software acronyms, and pharmaceutical names often feature rare phoneme combinations not prevalent in generalized training datasets. You can elevate transcription accuracy by:</p>
 <ul>
-  <li>Providing specialized acronym glossaries or contextual prompts before transcribing (see our <a href="/blog/medical-transcription-hipaa-compliance-guide">Medical Clinical Transcription Guide</a> and <a href="/blog/legal-deposition-transcription-standards-guide">Legal Deposition Standards Guide</a>).</li>
+  <li>Providing specialized acronym glossaries or contextual prompts before transcribing (see our <a href="/blog/medical-transcription-hipaa-compliance-guide">Medical Clinical Transcription Guide</a> and <a href="/blog/legal-deposition-court-transcription-standards">Legal Deposition Standards Guide</a>).</li>
   <li>Pronouncing specialized acronyms with consistent syllable cadence (e.g., saying "API" or "HIPAA" clearly rather than slurring syllables).</li>
 </ul>
 
@@ -160,6 +160,6 @@ export const article02_transcriptionTips: BlogArticle = {
   relatedSlugs: [
     "audio-formats-codecs-transcription-guide",
     "academic-qualitative-interview-transcription-guide",
-    "podcast-show-notes-transcription-growth-guide",
+    "podcast-transcription-show-notes-automation",
   ],
 };

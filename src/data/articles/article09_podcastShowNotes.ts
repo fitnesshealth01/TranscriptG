@@ -70,10 +70,10 @@ export const article09_podcastShowNotes: BlogArticle = {
 
 <h2 id="automated-production-pipeline">6. The Automated 5-Minute Post-Production Workflow</h2>
 <ol>
-  <li>Drop your exported podcast MP3 or WAV file into <a href="/transcribe">TranscriptG Transcriber</a> (ensure optimal recording with our <a href="/blog/10-tips-for-accurate-audio-transcription">10 Calibration Tips</a>).</li>
+  <li>Drop your exported podcast MP3 or WAV file into <a href="/transcribe">TranscriptG Transcriber</a> (ensure optimal recording with our <a href="/blog/transcription-accuracy-tips">10 Calibration Tips</a>).</li>
   <li>Click <strong>Transcribe & Diarize</strong> to separate host and guest voices.</li>
-  <li>Use NLP Summarization to generate structured show notes, timestamps, and quotes (see our <a href="/blog/ai-meeting-summarizer-action-items-guide">AI Summarizer Best Practices</a>).</li>
-  <li>Paste the chapter markers into your podcast hosting feed (Libsyn, Spotify for Podcasters, Buzzsprout) and publish the full transcript to your website using our <a href="/blog/video-seo-transcripts-ranking-strategy">Video & Audio SEO Strategy</a>.</li>
+  <li>Use NLP Summarization to generate structured show notes, timestamps, and quotes (see our <a href="/blog/ai-meeting-summarizer-best-practices">AI Summarizer Best Practices</a>).</li>
+  <li>Paste the chapter markers into your podcast hosting feed (Libsyn, Spotify for Podcasters, Buzzsprout) and publish the full transcript to your website using our <a href="/blog/video-seo-transcription-strategy">Video & Audio SEO Strategy</a>.</li>
 </ol>
 `,
   faqs: [
@@ -82,8 +82,8 @@ export const article09_podcastShowNotes: BlogArticle = {
     { q: "Can TranscriptG separate the host's voice from the guest?", a: "Yes. TranscriptG's neural speaker diarization clusters speakers and tags each dialogue section automatically." },
   ],
   relatedSlugs: [
-    "video-seo-transcripts-ranking-strategy",
-    "10-tips-for-accurate-audio-transcription",
-    "ai-meeting-summarizer-action-items-guide",
+    "video-seo-transcription-strategy",
+    "transcription-accuracy-tips",
+    "ai-meeting-summarizer-best-practices",
   ],
 };
