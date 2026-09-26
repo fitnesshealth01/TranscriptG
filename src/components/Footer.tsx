@@ -79,8 +79,23 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
+                <Link to="/tools" className="text-[#ff4d00] hover:text-white transition-colors flex items-center gap-1 font-bold">
+                  Interactive Utilities
+                </Link>
+              </li>
+              <li>
                 <Link to="/blog" className="text-neutral-300 hover:text-white transition-colors">
                   Linguistic Journal (Blog)
+                </Link>
+              </li>
+              <li>
+                <Link to="/editorial-team" className="text-neutral-300 hover:text-white transition-colors">
+                  Editorial Board &amp; E-E-A-T
+                </Link>
+              </li>
+              <li>
+                <Link to="/editorial-policy" className="text-neutral-300 hover:text-white transition-colors">
+                  Editorial Policy &amp; Ethics
                 </Link>
               </li>
               <li>
@@ -100,7 +115,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/contact" className="text-neutral-300 hover:text-white transition-colors">
-                  Contact & Feedback
+                  Contact &amp; Support
                 </Link>
               </li>
               <li>

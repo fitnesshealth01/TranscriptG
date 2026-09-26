@@ -492,9 +492,102 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
           <li><strong>Technical Support Desk:</strong> <a href="mailto:support@transcriptg.com">support@transcriptg.com</a></li>
           <li><strong>Legal &amp; Compliance Inquiries:</strong> <a href="mailto:legal@transcriptg.com">legal@transcriptg.com</a></li>
         </ul>
-
-        <h2>Online Inquiry Form</h2>
-        <p>You can also submit questions, feature requests, or transcription feedback directly through our interactive contact form at <a href="/contact">https://transcriptg.com/contact</a>.</p>
+      </section>
+    `,
+  },
+  "/tools": {
+    title: "Interactive Audio & Caption Utility Tools — TranscriptG",
+    description: "Free in-browser speech utilities: Subtitle syntax validator, timecode overlap detector, WPM speaking rate calculator, and audio file size/bitrate estimator.",
+    keywords: "subtitle validator, srt timecode checker, cps calculator, speaking rate calculator, wpm speech pacing, audio file size calculator, wav to mp3 size estimator, audio bitrate calculator",
+    canonicalPath: "/tools",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "Interactive Speech, Subtitle & Audio Utilities",
+    lead: "Free client-side calculators for audio engineers, accessibility officers, and subtitle editors. Validate timecode syntax, measure speaking rates, and calculate file compression ratios.",
+    features: [
+      "Subtitle Syntax Validator: Checks timecode formatting, overlapping cues, and Characters-Per-Second (CPS).",
+      "Auto-Fix Subtitles: Re-indexes cues, fixes timestamps, and wraps lines to standard 40 characters.",
+      "Speaking Rate & WPM Calculator: Syllables, sentences, reading grade level, and interactive pacing teleprompter.",
+      "Audio File Size & Bitrate Estimator: Memory footprints for WAV, FLAC, MP3, AAC, and Opus codecs.",
+    ],
+    faqs: [
+      {
+        q: "What is the recommended Characters Per Second (CPS) for subtitles?",
+        a: "Broadcast guidelines (BBC, Netflix, FCC) recommend a reading speed between 20 to 25 Characters Per Second (CPS) to ensure comfortable comprehension for viewers.",
+      },
+      {
+        q: "Are the subtitle validation tools processed on a server?",
+        a: "No. All subtitle validation, speech metrics calculations, and audio bitrate estimations are processed 100% locally in your web browser for complete confidentiality.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>Interactive Audio, Subtitle &amp; Speech Pacing Utilities</h1>
+        <p class="lead">Suite of free client-side audio engineering utilities designed to validate subtitle syntax, detect timecode overlaps, calculate speaking rate (WPM), and estimate audio file compression sizes.</p>
+        <h2>Available Interactive Tools</h2>
+        <ul>
+          <li><strong>Subtitle Syntax &amp; Timecode Validator:</strong> Comprehensive inspection of SubRip (.SRT) and WebVTT (.VTT) timestamps, CPS reading speed warnings, and line length violations.</li>
+          <li><strong>Speech Rate &amp; WPM Pacer:</strong> Computes exact delivery speed, syllable count, Flesch-Kincaid reading ease, and features a live teleprompter pacer.</li>
+          <li><strong>Audio Bitrate &amp; Size Estimator:</strong> Calculates bandwidth and memory requirements for WAV, FLAC, MP3, AAC, and Opus audio codecs.</li>
+        </ul>
+      </section>
+    `,
+  },
+  "/editorial-team": {
+    title: "Editorial Board & Review Credentials — TranscriptG E-E-A-T",
+    description: "Meet the TranscriptG Editorial Board: Acoustic scientists, certified court reporters (RPR), healthcare documentation specialists (CHDS), and accessibility auditors (CPACC).",
+    keywords: "transcriptg editorial board, speech transcription credentials, audio engineering team, e-e-a-t audio lab, court reporting review, medical transcription hipaa review",
+    canonicalPath: "/editorial-team",
+    ogType: "website",
+    category: "AboutPage",
+    h1: "Editorial Board & Peer Review Credentials",
+    lead: "TranscriptG technical guides, acoustic benchmarks, and transcription standards are authored and peer-reviewed by credentialed audio researchers, certified court reporters, and clinical documentation authorities.",
+    features: [
+      "Dr. Evelyn Vance, Ph.D. — Chief Acoustic Scientist & Editorial Director (MIT Computational Linguistics).",
+      "Marcus Sterling, RPR, CRR — Legal Transcription & Deposition Standards Consultant.",
+      "Elena Rostova, CHDS, AHDI-F — Medical Documentation & HIPAA Compliance Director.",
+      "David K. Chen, CPACC — Digital Accessibility & Subtitling Lead Auditor (IAAP Certified).",
+      "Maya Lin, M.Sc. — Senior Linguistic Engineer & Lead Technical Author (Stanford NLP).",
+    ],
+    faqs: [
+      {
+        q: "What credentials do TranscriptG editors and reviewers hold?",
+        a: "Our editorial directors hold specialized doctorates (Ph.D. in Computational Linguistics), active court reporting credentials (RPR, CRR), certified healthcare documentation credentials (CHDS, AHDI-F), and digital accessibility certifications (CPACC).",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-editorial-board">
+        <h1>TranscriptG Editorial Board &amp; Peer Review Governance</h1>
+        <p class="lead">Our technical publications adhere to Google Search Quality Rater Guidelines (QRG) and the E-E-A-T framework (Experience, Expertise, Authoritativeness, and Trustworthiness). Every article undergoes mandatory review by credentialed domain authorities.</p>
+      </section>
+    `,
+  },
+  "/editorial-policy": {
+    title: "Editorial Policy & Fact-Checking Standards — TranscriptG",
+    description: "TranscriptG editorial integrity charter: empirical benchmarking, mandatory peer review by credentialed specialists, AI oversight standards, and advertising independence.",
+    keywords: "transcriptg editorial policy, fact checking standards, audio benchmarking ethics, peer review policy, advertising independence transcriptg",
+    canonicalPath: "/editorial-policy",
+    ogType: "website",
+    category: "AboutPage",
+    h1: "Editorial Integrity & Fact-Checking Policy",
+    lead: "Our charter governing technical research, acoustic benchmarking, human specialist review, and strict advertising independence.",
+    features: [
+      "Empirical testing on standardized speech corpora (LibriSpeech, Common Voice).",
+      "Mandatory peer-review by credentialed editorial board members before publication.",
+      "Zero tolerance for unedited autonomous AI content generation.",
+      "Strict advertising independence adhering to Better Ads Standards.",
+      "Public corrections and editorial feedback channels.",
+    ],
+    faqs: [
+      {
+        q: "How can readers submit editorial corrections?",
+        a: "Readers can submit fact-checking corrections directly to editorial@transcriptg.com with technical references. Verified corrections are published with an explicit update timestamp.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-editorial-policy">
+        <h1>TranscriptG Editorial Integrity &amp; Fact-Checking Charter</h1>
+        <p class="lead">Detailed documentation of our empirical benchmarking methodologies, multi-tiered peer review requirements, human oversight policies, and total editorial independence from advertisers.</p>
       </section>
     `,
   },

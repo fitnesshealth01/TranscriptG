@@ -45,6 +45,9 @@ const TermsPage = lazyWithRetry(() => import("./pages/TermsPage"), "TermsPage");
 const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"), "ContactPage");
 const BlogIndexPage = lazyWithRetry(() => import("./pages/BlogIndexPage"), "BlogIndexPage");
 const BlogPostDynamic = lazyWithRetry(() => import("./pages/BlogPostDynamic"), "BlogPostDynamic");
+const ToolsHubPage = lazyWithRetry(() => import("./pages/ToolsHubPage"), "ToolsHubPage");
+const EditorialTeamPage = lazyWithRetry(() => import("./pages/EditorialTeamPage"), "EditorialTeamPage");
+const EditorialPolicyPage = lazyWithRetry(() => import("./pages/EditorialPolicyPage"), "EditorialPolicyPage");
 const NotFoundPage = lazyWithRetry(() => import("./pages/NotFoundPage"), "NotFoundPage");
 
 interface ErrorBoundaryProps {
@@ -125,6 +128,9 @@ export default function App() {
               <Route path="youtube" element={<YouTubeTranscriptPage />} />
               <Route path="convert" element={<ConvertPage />} />
               <Route path="process" element={<ProcessPage />} />
+              <Route path="tools" element={<ToolsHubPage />} />
+              <Route path="editorial-team" element={<EditorialTeamPage />} />
+              <Route path="editorial-policy" element={<EditorialPolicyPage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="privacy" element={<PrivacyPage />} />
               <Route path="terms" element={<TermsPage />} />

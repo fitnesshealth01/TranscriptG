@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, Link } from "react-router-dom";
 import { Logo } from "./Logo";
 import { FloatingDock } from "./FloatingDock";
 import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
 import { CookieConsent } from "./CookieConsent";
 import { ToolsLauncherModal } from "./ToolsLauncherModal";
-import { LayoutGrid } from "lucide-react";
+import { LayoutGrid, Wand2, BookOpen, ShieldCheck } from "lucide-react";
 
 export const Layout: React.FC = () => {
   const [isToolsModalOpen, setIsToolsModalOpen] = useState(false);
@@ -31,12 +31,43 @@ export const Layout: React.FC = () => {
       {/* Top Header */}
       <header className="sticky top-0 z-30 bg-[#faf9f6]/85 backdrop-blur-md border-b border-black/5 px-4 sm:px-8 py-3 flex items-center justify-between">
         <Logo />
-        <div className="flex items-center gap-2 text-xs font-mono">
+
+        <div className="flex items-center gap-3 text-xs font-mono">
+          <nav className="hidden md:flex items-center gap-4 text-neutral-600 font-semibold mr-2">
+            <Link
+              to="/tools"
+              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
+                location.pathname === "/tools" ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              <Wand2 className="w-3.5 h-3.5" />
+              <span>Utilities</span>
+            </Link>
+            <Link
+              to="/blog"
+              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
+                location.pathname.startsWith("/blog") ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Guides</span>
+            </Link>
+            <Link
+              to="/editorial-team"
+              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
+                location.pathname === "/editorial-team" ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Editorial Board</span>
+            </Link>
+          </nav>
+
           <div className="hidden sm:flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-neutral-500 font-semibold">Engine v3.7 Active</span>
+            <span className="text-neutral-500 font-semibold">v3.7 Active</span>
             <span className="px-2 py-0.5 rounded-full bg-[#ff4d00]/10 text-[#ff4d00] font-bold text-[10px]">
-              Public Access
+              Public
             </span>
           </div>
 

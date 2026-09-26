@@ -77,6 +77,21 @@ export const TOOLS_REGISTRY: ToolItem[] = [
     accentText: "text-purple-600",
     keywords: ["ai", "summary", "translate", "languages", "intelligence", "action items", "polish"],
   },
+  {
+    id: "tools",
+    name: "Interactive Utilities & Pacer",
+    shortName: "Utilities",
+    path: "/tools",
+    icon: Wand2,
+    description: "Real-time client-side tools: Subtitle syntax validator, WPM speech pacer, and audio file size/bitrate estimator.",
+    category: "Utilities",
+    badge: "Utility Lab",
+    badgeType: "emerald",
+    dockPriority: 5,
+    accentBg: "bg-emerald-500/10",
+    accentText: "text-emerald-600",
+    keywords: ["validator", "srt", "vtt", "wpm", "speech rate", "bitrate", "audio size", "calculator", "telemetry"],
+  },
 ];
 
 /**

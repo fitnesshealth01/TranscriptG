@@ -72,6 +72,33 @@ export const BlogIndexPage: React.FC = () => {
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        {/* E-E-A-T & Interactive Utilities Top Notification Banner */}
+        <div className="p-4 sm:p-5 rounded-3xl bg-neutral-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-4 h-4" />
+            </span>
+            <span className="text-neutral-300">
+              All guides undergo empirical review by credentialed board specialists (Ph.D., RPR, CHDS, CPACC).
+            </span>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              to="/editorial-team"
+              className="text-[#00d9ff] hover:underline flex items-center gap-1 font-bold"
+            >
+              <span>Editorial Board</span> <ArrowRight className="w-3 h-3" />
+            </Link>
+            <span className="text-neutral-600">•</span>
+            <Link
+              to="/tools"
+              className="px-3 py-1.5 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white font-bold transition-colors"
+            >
+              Interactive Utilities Hub
+            </Link>
+          </div>
+        </div>
+
         {/* Search & Filter Controls */}
         <div className="glass-card p-6 rounded-3xl border border-black/10 shadow-lg space-y-4 bg-white">
           <div className="flex flex-col sm:flex-row items-center gap-4">

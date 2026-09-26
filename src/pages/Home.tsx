@@ -149,6 +149,10 @@ export const Home: React.FC = () => {
                             ? "bg-amber-100 text-amber-800"
                             : tool.badgeType === "purple"
                             ? "bg-purple-100 text-purple-800"
+                            : tool.badgeType === "emerald"
+                            ? "bg-emerald-100 text-emerald-800"
+                            : tool.badgeType === "cyan"
+                            ? "bg-cyan-100 text-cyan-800"
                             : "bg-[#ff4d00]/15 text-[#ff4d00]"
                         }`}
                       >
@@ -421,6 +425,35 @@ export const Home: React.FC = () => {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* E-E-A-T Editorial Governance Showcase Card */}
+        <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-neutral-900 text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-2xl">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold">
+              <ShieldCheck className="w-3.5 h-3.5" /> E-E-A-T Editorial Governance
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-white">
+              Peer-Reviewed by Acoustic Scientists, Court Reporters &amp; Accessibility Leads
+            </h3>
+            <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed">
+              Every guide, legal deposition framework, and subtitle benchmark published on TranscriptG is reviewed by credentialed authorities holding Ph.D., RPR, CHDS, or CPACC certifications.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <Link
+              to="/editorial-team"
+              className="px-5 py-3 rounded-xl bg-white hover:bg-neutral-100 text-[#0d0f12] font-mono text-xs font-bold transition-all shadow-md"
+            >
+              Meet the Editorial Board →
+            </Link>
+            <Link
+              to="/tools"
+              className="px-5 py-3 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white font-mono text-xs font-bold transition-all shadow-md"
+            >
+              Launch Interactive Utilities
+            </Link>
+          </div>
         </div>
       </section>
 

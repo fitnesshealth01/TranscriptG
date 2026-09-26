@@ -174,21 +174,43 @@ export const BlogPostDynamic: React.FC = () => {
           </h1>
 
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-mono text-neutral-500 pt-2">
-            <span className="flex items-center gap-1.5 font-bold text-[#0d0f12]">
+            <Link
+              to="/editorial-team"
+              className="flex items-center gap-1.5 font-bold text-[#0d0f12] hover:text-[#ff4d00] transition-colors"
+              title="View Author Profile & Editorial Board"
+            >
               <User className="w-4 h-4 text-[#ff4d00]" /> {article.author}
-            </span>
+            </Link>
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" /> {article.date}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-4 h-4" /> {article.readTime}
             </span>
+            {article.reviewer && (
+              <Link
+                to="/editorial-team"
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-bold border border-emerald-200 hover:bg-emerald-100 transition-colors"
+                title="View Reviewer Credentials"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Reviewed by {article.reviewer}</span>
+              </Link>
+            )}
           </div>
 
           {/* Executive Summary Box */}
           <div className="mt-6 p-5 rounded-2xl bg-neutral-50 border border-black/5 text-sm text-neutral-700 leading-relaxed space-y-2">
-            <div className="flex items-center gap-2 font-mono font-bold text-xs text-[#0d0f12] uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#ff4d00]" /> Executive Summary
+            <div className="flex items-center justify-between font-mono font-bold text-xs uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[#0d0f12]">
+                <Sparkles className="w-3.5 h-3.5 text-[#ff4d00]" /> Executive Summary
+              </div>
+              <Link
+                to="/tools"
+                className="text-[#ff4d00] hover:underline normal-case font-sans font-semibold text-xs flex items-center gap-1"
+              >
+                Open Interactive Utilities <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
             <p>{article.summary}</p>
           </div>
@@ -272,7 +294,9 @@ export const BlogPostDynamic: React.FC = () => {
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h4 className="font-bold text-sm sm:text-base text-[#0d0f12]">{article.author}</h4>
+                  <Link to="/editorial-team" className="font-bold text-sm sm:text-base text-[#0d0f12] hover:text-[#ff4d00]">
+                    {article.author}
+                  </Link>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">
                     <ShieldCheck className="w-3 h-3 text-emerald-600" /> Verified Author
                   </span>
@@ -282,11 +306,16 @@ export const BlogPostDynamic: React.FC = () => {
             </div>
 
             {article.reviewer && (
-              <div className="px-3 py-1.5 rounded-xl bg-white border border-black/10 text-[11px] font-mono text-neutral-600">
+              <Link
+                to="/editorial-team"
+                className="px-3 py-1.5 rounded-xl bg-white border border-black/10 text-[11px] font-mono text-neutral-600 hover:border-[#ff4d00] transition-colors"
+              >
                 <span className="text-neutral-400 block text-[9px] uppercase font-bold">Peer Reviewed By:</span>
-                <span className="font-bold text-[#0d0f12]">{article.reviewer}</span>
+                <span className="font-bold text-[#0d0f12] flex items-center gap-1">
+                  <ShieldCheck className="w-3 h-3 text-emerald-600 inline" /> {article.reviewer}
+                </span>
                 {article.reviewerRole && <span className="text-neutral-500 block text-[10px]">{article.reviewerRole}</span>}
-              </div>
+              </Link>
             )}
           </div>
 
@@ -294,13 +323,17 @@ export const BlogPostDynamic: React.FC = () => {
             {article.authorBio || "Author and audio researcher at TranscriptG. Our editorial standards mandate reproducible acoustic benchmarks, empirical accuracy metrics, and zero retention of user data."}
           </p>
 
-          <div className="pt-2 flex items-center gap-4 text-[11px] font-mono text-neutral-500 border-t border-black/5">
-            <Link to="/about" className="text-[#ff4d00] hover:underline flex items-center gap-1">
-              <Award className="w-3 h-3" /> Editorial &amp; Fact-Checking Policy
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-[11px] font-mono text-neutral-500 border-t border-black/5">
+            <Link to="/editorial-team" className="text-[#ff4d00] hover:underline flex items-center gap-1">
+              <Award className="w-3 h-3" /> View Editorial Board &amp; Review Credentials
             </Link>
             <span>•</span>
-            <Link to="/contact" className="hover:underline">
-              Submit Editorial Feedback
+            <Link to="/editorial-policy" className="hover:underline">
+              Editorial Policy
+            </Link>
+            <span>•</span>
+            <Link to="/tools" className="text-[#0088a8] hover:underline font-bold">
+              Launch Interactive Utilities
             </Link>
           </div>
         </div>

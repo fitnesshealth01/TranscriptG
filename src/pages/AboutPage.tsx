@@ -216,6 +216,22 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
           </div>
+
+          <div className="pt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+            <Link
+              to="/editorial-team"
+              className="inline-flex items-center gap-1.5 text-[#ff4d00] font-bold hover:underline"
+            >
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>Meet the Verified Editorial Board &amp; Reviewers →</span>
+            </Link>
+            <Link
+              to="/editorial-policy"
+              className="text-neutral-600 hover:text-black hover:underline"
+            >
+              Read Complete Editorial Integrity Charter
+            </Link>
+          </div>
         </div>
 
         {/* Contact & Support Callout */}
