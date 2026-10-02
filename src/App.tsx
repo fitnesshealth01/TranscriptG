@@ -48,6 +48,9 @@ const BlogPostDynamic = lazyWithRetry(() => import("./pages/BlogPostDynamic"), "
 const ToolsHubPage = lazyWithRetry(() => import("./pages/ToolsHubPage"), "ToolsHubPage");
 const EditorialTeamPage = lazyWithRetry(() => import("./pages/EditorialTeamPage"), "EditorialTeamPage");
 const EditorialPolicyPage = lazyWithRetry(() => import("./pages/EditorialPolicyPage"), "EditorialPolicyPage");
+const GlossaryPage = lazyWithRetry(() => import("./pages/GlossaryPage"), "GlossaryPage");
+const GuidesPage = lazyWithRetry(() => import("./pages/GuidesPage"), "GuidesPage");
+const GscChecklistPage = lazyWithRetry(() => import("./pages/GscChecklistPage"), "GscChecklistPage");
 const NotFoundPage = lazyWithRetry(() => import("./pages/NotFoundPage"), "NotFoundPage");
 
 interface ErrorBoundaryProps {
@@ -131,6 +134,9 @@ export default function App() {
               <Route path="tools" element={<ToolsHubPage />} />
               <Route path="editorial-team" element={<EditorialTeamPage />} />
               <Route path="editorial-policy" element={<EditorialPolicyPage />} />
+              <Route path="glossary" element={<GlossaryPage />} />
+              <Route path="guides" element={<GuidesPage />} />
+              <Route path="seo-checklist" element={<GscChecklistPage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="privacy" element={<PrivacyPage />} />
               <Route path="terms" element={<TermsPage />} />

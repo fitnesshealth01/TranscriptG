@@ -591,6 +591,135 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
       </section>
     `,
   },
+  "/glossary": {
+    title: "Audio Engineering & Caption Terminology Glossary — TranscriptG",
+    description: "Authoritative reference of 40+ speech recognition (ASR), acoustic signal processing, subtitle standards, and closed caption compliance terms (WER, DER, Nyquist, CEA-608, WebVTT).",
+    keywords: "audio engineering glossary, speech recognition terminology, wer word error rate definition, der diarization error rate, webvtt vs srt specifications, cea-608 closed caption standard, audio sample rate nyquist, subtitle characters per second, acoustic signal processing, fcc closed caption compliance",
+    canonicalPath: "/glossary",
+    ogType: "website",
+    category: "TechnicalReference",
+    h1: "Audio Engineering & Subtitle Terminology Glossary",
+    lead: "Comprehensive, peer-reviewed reference defining acoustic signal physics, mathematical equations, neural ASR architectures, and international broadcast compliance standards.",
+    features: [
+      "Word Error Rate (WER) and Diarization Error Rate (DER) mathematical formulations.",
+      "Acoustic signal physics: Nyquist-Shannon Theorem, Sample Rates, Bit Depths, and RT60 reverberation.",
+      "Broadcast subtitle standards: CEA-608, CEA-708, WebVTT, TTML, and Safe Title Areas.",
+      "Accessibility legislation: FCC 47 CFR § 79.1, ADA Title III, Section 508, and WCAG 2.2 SC 1.2.2.",
+    ],
+    faqs: [
+      {
+        q: "What is Word Error Rate (WER) in speech recognition?",
+        a: "Word Error Rate (WER) is the standard metric used to measure speech recognition inaccuracy. It is calculated as the sum of word substitutions, deletions, and insertions divided by the total number of words in the ground-truth reference transcript.",
+      },
+      {
+        q: "What is the difference between SRT and WebVTT subtitle formats?",
+        a: "SRT (SubRip) is a legacy plain text subtitle format using comma millisecond delimiters (00:01:20,500). WebVTT (.VTT) is the modern W3C open web standard that uses period millisecond delimiters (00:01:20.500), includes a mandatory 'WEBVTT' header, and natively supports CSS styling and screen positioning in HTML5 video players.",
+      },
+      {
+        q: "What is the maximum recommended subtitle reading speed (CPS)?",
+        a: "International broadcast standards (BBC, Netflix, FCC) recommend capping subtitle reading speed between 17 to 20 Characters Per Second (CPS) for adult audiences and 12 to 14 CPS for children's programming.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-glossary">
+        <h1>Audio Engineering &amp; Subtitle Terminology Directory</h1>
+        <p class="lead">Peer-reviewed glossary of acoustic signal processing, automated speech recognition (ASR), closed captioning, and accessibility compliance terms.</p>
+        
+        <h2>Featured Technical Definitions</h2>
+        <dl>
+          <dt><strong>Word Error Rate (WER)</strong></dt>
+          <dd>The standard mathematical metric for speech recognition accuracy: WER = (Substitutions + Deletions + Insertions) / Total Reference Words. Lower values denote superior transcription fidelity.</dd>
+          
+          <dt><strong>Diarization Error Rate (DER)</strong></dt>
+          <dd>Measures the fraction of time that speaker identity is misattributed in multi-speaker audio recordings, evaluating missed speech, false alarms, and speaker confusion.</dd>
+          
+          <dt><strong>Nyquist-Shannon Sampling Theorem</strong></dt>
+          <dd>Dictates that a digital audio recording must be sampled at at least twice the highest frequency component (f_s &gt;= 2 * f_max) to prevent acoustic aliasing.</dd>
+          
+          <dt><strong>Characters Per Second (CPS)</strong></dt>
+          <dd>The universal reading speed metric for subtitles and closed captions, typically restricted to 17-20 CPS to prevent cognitive visual overload.</dd>
+          
+          <dt><strong>CEA-608 &amp; CEA-708</strong></dt>
+          <dd>The United States standards for Line 21 analog and ATSC digital television closed captioning mandated under FCC 47 CFR § 79.1 regulations.</dd>
+        </dl>
+      </section>
+    `,
+  },
+  "/guides": {
+    title: "Technical Audio Guides, Empirical Case Studies & Whitepapers — TranscriptG",
+    description: "Peer-reviewed engineering research, empirical acoustic benchmarks, FCC compliance handbooks, and courtroom transcription standards authored by our credentialed editorial board.",
+    keywords: "audio transcription guides, speech recognition case studies, wer acoustic benchmark, fcc closed caption compliance, courtroom transcription protocol, audio codecs speech recognition, subtitle engineering papers",
+    canonicalPath: "/guides",
+    ogType: "website",
+    category: "TechnicalReference",
+    h1: "Technical Audio Guides & Empirical Case Studies",
+    lead: "Flagship engineering papers analyzing acoustic physics, neural ASR architectures, international regulatory compliance, and broadcast standards.",
+    features: [
+      "Empirical Benchmark: Minimizing Word Error Rate (WER) in High-Reverberation Acoustic Environments.",
+      "The 2026 FCC & ADA Caption Compliance Handbook: Reading Speed (CPS), Cues & Safe Title Margins.",
+      "Evidentiary Courtroom & Deposition Transcription Standards: Exact Verbatim vs. Clean Verbatim Protocols.",
+      "Lossless vs. Compressed Audio Codecs for Speech Recognition: WAV, FLAC, MP3, AAC, and Opus Benchmarks.",
+    ],
+    faqs: [
+      {
+        q: "What causes high Word Error Rate in speech recognition?",
+        a: "Acoustic reverberation (RT60 > 0.6s), background noise (SNR < 10dB), overlapping speakers, and low-bitrate codec compression artifacts are the primary causes of degraded ASR transcription accuracy.",
+      },
+      {
+        q: "What is the difference between exact verbatim and clean verbatim?",
+        a: "Exact verbatim captures every utterance, including stutters, filler words ('um', 'uh'), false starts, and coughing, which is mandatory in legal courtroom depositions. Clean verbatim edits out filler words to produce smooth, readable text suitable for executive meetings and journalism.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-guides">
+        <h1>Technical Audio Guides &amp; Empirical Case Studies</h1>
+        <p class="lead">Peer-reviewed whitepapers and engineering case studies authored by our credentialed editorial board covering acoustic physics, closed caption law, and automated transcription architectures.</p>
+        
+        <h2>Flagship Engineering Research Papers</h2>
+        <ul>
+          <li><a href="/blog/transcription-accuracy-tips">Minimizing Word Error Rate (WER) in High-Reverberation Environments</a> (Acoustic physics &amp; DSP benchmarks)</li>
+          <li><a href="/blog/accessibility-ada-wcag-closed-captions">The 2026 FCC &amp; ADA Caption Compliance Handbook</a> (Reading speeds, CPL, and legal mandates)</li>
+          <li><a href="/blog/legal-deposition-court-transcription-standards">Evidentiary Courtroom &amp; Deposition Transcription Standards</a> (Verbatim legal protocols)</li>
+          <li><a href="/blog/audio-formats-codecs-transcription-guide">Lossless vs. Compressed Audio Codecs for Speech Recognition</a> (WAV vs. MP3 vs. Opus benchmarks)</li>
+        </ul>
+      </section>
+    `,
+  },
+  "/seo-checklist": {
+    title: "Google Search Console & AdSense Readiness Hub — TranscriptG",
+    description: "Publisher operations checklist: Sitemap submission, URL inspection, and indexation verification to resolve 'Low-value content' flags and guarantee AdSense approval.",
+    keywords: "adsense approval checklist, google search console sitemap submission, resolve low value content adsense, ads.txt verification transcriptg, googlebot crawling indexing",
+    canonicalPath: "/seo-checklist",
+    ogType: "website",
+    category: "TechnicalReference",
+    h1: "Google Search Console & AdSense Readiness Hub",
+    lead: "Actionable checklist to guarantee Googlebot and AdSense automated reviewers index all high-value interactive tools and editorial guides.",
+    features: [
+      "Dynamic XML sitemap verification at https://transcriptg.com/sitemap.xml.",
+      "High-value URL inspection checklist for Google Search Console.",
+      "Direct Publisher ID ads.txt verification.",
+      "Pre-flight verification protocol prior to requesting AdSense re-review.",
+    ],
+    faqs: [
+      {
+        q: "Why does Google AdSense flag sites with 'Low-value content'?",
+        a: "Google AdSense issues 'Low-value content' flags when a site lacks substantial original text, functions as an empty utility without educational documentation, or is submitted for review before all pages have been crawled and indexed by Google Search Console.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-checklist">
+        <h1>Google Search Console &amp; AdSense Approval Hub</h1>
+        <p class="lead">Audit protocol to verify indexing in Google Search Console, confirm ads.txt publisher credentials, and guarantee site readiness before requesting AdSense re-review.</p>
+        <h2>Essential Publisher Checkpoints</h2>
+        <ol>
+          <li>Submit dynamic XML sitemap (https://transcriptg.com/sitemap.xml) in Google Search Console.</li>
+          <li>Request indexing for high-priority pages using the Search Console URL Inspection tool.</li>
+          <li>Verify ads.txt file contains authorized direct publisher ID (pub-9246342607636743).</li>
+          <li>Ensure zero cumulative layout shift (CLS) on all ad unit containers.</li>
+        </ol>
+      </section>
+    `,
+  },
 };
 
 // Aliases mapping
@@ -946,7 +1075,13 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
             <li><a href="/youtube-transcript" style="color: #ff4d00;">Engine 02: YouTube Transcript Generator</a></li>
             <li><a href="/convert" style="color: #ff4d00;">Engine 03: Subtitle &amp; Format Converter (SRT, VTT, JSON)</a></li>
             <li><a href="/process" style="color: #ff4d00;">Engine 04: AI Text Intelligence &amp; Summarizer</a></li>
+            <li><a href="/tools" style="color: #ff4d00;">Interactive Audio &amp; Caption Utilities Hub</a></li>
+            <li><a href="/glossary" style="color: #ff4d00;">Audio Engineering &amp; Subtitle Glossary (40+ Terms)</a></li>
+            <li><a href="/guides" style="color: #ff4d00;">Technical Case Studies &amp; Empirical Research</a></li>
             <li><a href="/blog" style="color: #ff4d00;">Linguistic Journal &amp; Technical Blog</a></li>
+            <li><a href="/editorial-team" style="color: #ff4d00;">Editorial Board &amp; Peer Review Governance</a></li>
+            <li><a href="/editorial-policy" style="color: #ff4d00;">Editorial Integrity &amp; Fact-Checking Charter</a></li>
+            <li><a href="/seo-checklist" style="color: #ff4d00;">Search Engine Indexing &amp; AdSense Verification Hub</a></li>
             <li><a href="/about" style="color: #ff4d00;">About TranscriptG &amp; Editorial Leadership</a></li>
             <li><a href="/contact" style="color: #ff4d00;">Contact Support &amp; Technical Assistance</a></li>
             <li><a href="/privacy" style="color: #ff4d00;">Privacy Policy &amp; Cookie Disclosure</a></li>

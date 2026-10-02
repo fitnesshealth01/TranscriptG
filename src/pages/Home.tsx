@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { SpectrumTrace } from "../components/SpectrumTrace";
+import { InteractiveDemoPlayer } from "../components/InteractiveDemoPlayer";
 import { SUPPORTED_LANGUAGES } from "../lib/transcript";
 import { TOOLS_REGISTRY } from "../lib/navigation";
 import { BLOG_ARTICLES } from "../data/blogArticles";
@@ -128,6 +129,11 @@ export const Home: React.FC = () => {
                 <span>Format Converter</span>
               </Link>
             </div>
+          </div>
+
+          {/* SECTION 1.5: INTERACTIVE LIVE AUDIO & MULTI-SPEAKER DEMO */}
+          <div className="mt-14 max-w-5xl mx-auto">
+            <InteractiveDemoPlayer />
           </div>
 
           {/* Dynamic Engine Grid from TOOLS_REGISTRY */}
@@ -440,18 +446,30 @@ export const Home: React.FC = () => {
               Every guide, legal deposition framework, and subtitle benchmark published on TranscriptG is reviewed by credentialed authorities holding Ph.D., RPR, CHDS, or CPACC certifications.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <Link
+              to="/glossary"
+              className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold transition-all border border-white/10"
+            >
+              Audio Glossary
+            </Link>
+            <Link
+              to="/guides"
+              className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold transition-all border border-white/10"
+            >
+              Case Studies
+            </Link>
             <Link
               to="/editorial-team"
-              className="px-5 py-3 rounded-xl bg-white hover:bg-neutral-100 text-[#0d0f12] font-mono text-xs font-bold transition-all shadow-md"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-100 text-[#0d0f12] font-mono text-xs font-bold transition-all shadow-md"
             >
-              Meet the Editorial Board →
+              Editorial Board →
             </Link>
             <Link
               to="/tools"
-              className="px-5 py-3 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white font-mono text-xs font-bold transition-all shadow-md"
+              className="px-4 py-2.5 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white font-mono text-xs font-bold transition-all shadow-md"
             >
-              Launch Interactive Utilities
+              Utilities Hub
             </Link>
           </div>
         </div>

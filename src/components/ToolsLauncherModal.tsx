@@ -167,10 +167,31 @@ export const ToolsLauncherModal: React.FC<ToolsLauncherModalProps> = ({
         </div>
 
         {/* Modal Footer / Fast Links */}
-        <div className="p-4 border-t border-black/5 bg-[#faf9f6] flex items-center justify-between text-xs font-mono">
-          <div className="flex items-center gap-1.5 text-neutral-500">
-            <Sparkles className="w-3.5 h-3.5 text-[#ff4d00]" />
-            <span>Zero login, zero data retention</span>
+        <div className="p-4 border-t border-black/5 bg-[#faf9f6] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+          <div className="flex items-center gap-3">
+            <Link
+              to="/tools"
+              onClick={onClose}
+              className="text-[#ff4d00] font-bold hover:underline"
+            >
+              Utilities Hub
+            </Link>
+            <span className="text-neutral-300">•</span>
+            <Link
+              to="/glossary"
+              onClick={onClose}
+              className="text-neutral-600 hover:text-black font-semibold"
+            >
+              Glossary
+            </Link>
+            <span className="text-neutral-300">•</span>
+            <Link
+              to="/guides"
+              onClick={onClose}
+              className="text-neutral-600 hover:text-black font-semibold"
+            >
+              Case Studies
+            </Link>
           </div>
           <Link
             to="/"

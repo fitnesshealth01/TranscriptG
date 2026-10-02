@@ -80,7 +80,17 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/tools" className="text-[#ff4d00] hover:text-white transition-colors flex items-center gap-1 font-bold">
-                  Interactive Utilities
+                  Interactive Utilities Hub
+                </Link>
+              </li>
+              <li>
+                <Link to="/glossary" className="text-neutral-300 hover:text-white transition-colors">
+                  Audio &amp; Caption Glossary
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides" className="text-neutral-300 hover:text-white transition-colors">
+                  Case Studies &amp; Research
                 </Link>
               </li>
               <li>
@@ -96,6 +106,11 @@ export const Footer: React.FC = () => {
               <li>
                 <Link to="/editorial-policy" className="text-neutral-300 hover:text-white transition-colors">
                   Editorial Policy &amp; Ethics
+                </Link>
+              </li>
+              <li>
+                <Link to="/seo-checklist" className="text-emerald-400 hover:text-white transition-colors text-xs font-mono font-bold flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5" /> GSC &amp; AdSense Audit
                 </Link>
               </li>
               <li>

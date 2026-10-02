@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 import { ScrollToTop } from "./ScrollToTop";
 import { CookieConsent } from "./CookieConsent";
 import { ToolsLauncherModal } from "./ToolsLauncherModal";
-import { LayoutGrid, Wand2, BookOpen, ShieldCheck } from "lucide-react";
+import { LayoutGrid, Wand2, BookOpen, ShieldCheck, FileText } from "lucide-react";
 
 export const Layout: React.FC = () => {
   const [isToolsModalOpen, setIsToolsModalOpen] = useState(false);
@@ -33,7 +33,7 @@ export const Layout: React.FC = () => {
         <Logo />
 
         <div className="flex items-center gap-3 text-xs font-mono">
-          <nav className="hidden md:flex items-center gap-4 text-neutral-600 font-semibold mr-2">
+          <nav className="hidden lg:flex items-center gap-4 text-neutral-600 font-semibold mr-2">
             <Link
               to="/tools"
               className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
@@ -44,9 +44,18 @@ export const Layout: React.FC = () => {
               <span>Utilities</span>
             </Link>
             <Link
-              to="/blog"
+              to="/glossary"
               className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
-                location.pathname.startsWith("/blog") ? "text-[#ff4d00] font-bold" : ""
+                location.pathname === "/glossary" ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Glossary</span>
+            </Link>
+            <Link
+              to="/guides"
+              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
+                location.pathname === "/guides" || location.pathname.startsWith("/blog") ? "text-[#ff4d00] font-bold" : ""
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
