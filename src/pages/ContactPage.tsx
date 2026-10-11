@@ -82,29 +82,12 @@ export const ContactPage: React.FC = () => {
                 </div>
               </div>
               <div className="space-y-2 text-xs font-mono">
-                <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
-                  <span className="text-neutral-500 block text-[10px]">Publisher & Lead Architect:</span>
-                  <span className="text-neutral-700 font-bold block">Akash Singh Solanki</span>
-                  <a href="mailto:akashsinghsolanki66@gmail.com" className="font-bold text-[#ff4d00] hover:underline">
-                    akashsinghsolanki66@gmail.com
-                  </a>
-                </div>
-                <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
-                  <span className="text-neutral-500 block text-[10px]">Editorial & Peer Review:</span>
-                  <a href="mailto:editorial@transcriptg.com" className="font-bold text-[#0d0f12] hover:underline">
-                    editorial@transcriptg.com
-                  </a>
-                </div>
-                <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
-                  <span className="text-neutral-500 block text-[10px]">General Support:</span>
-                  <a href="mailto:support@transcriptg.com" className="font-bold text-[#ff4d00] hover:underline">
+                <div className="p-3 rounded-xl bg-neutral-50 border border-black/5">
+                  <span className="text-neutral-500 block text-[10px]">Founder & Developer:</span>
+                  <span className="text-neutral-900 font-bold block mb-1">Akash Singh Solanki</span>
+                  <span className="text-neutral-500 block text-[10px]">Email Support:</span>
+                  <a href="mailto:support@transcriptg.com" className="font-bold text-[#ff4d00] hover:underline block text-sm">
                     support@transcriptg.com
-                  </a>
-                </div>
-                <div className="p-2.5 rounded-xl bg-neutral-50 border border-black/5">
-                  <span className="text-neutral-500 block text-[10px]">Privacy & Data Protection:</span>
-                  <a href="mailto:privacy@transcriptg.com" className="font-bold text-[#0d0f12] hover:underline">
-                    privacy@transcriptg.com
                   </a>
                 </div>
               </div>
@@ -208,12 +191,12 @@ export const ContactPage: React.FC = () => {
                       className="w-full p-3 bg-neutral-50 rounded-xl border border-neutral-200 text-sm text-[#0d0f12] focus:outline-none focus:border-[#ff4d00] disabled:opacity-50"
                     >
                       <option value="General Support">General Support &amp; Technical Help</option>
-                      <option value="Audio Transcriber">Engine 01: Audio &amp; Video Transcriber</option>
-                      <option value="YouTube Transcripts">Engine 02: YouTube Transcript Assistance</option>
-                      <option value="Format Converter">Engine 03: Subtitle Converter (SRT, VTT, JSON)</option>
-                      <option value="Text Intelligence">Engine 04: AI Summarization &amp; Translation</option>
-                      <option value="Editorial & Content">Editorial, Blog &amp; Linguistic Research</option>
-                      <option value="Privacy & Legal">Privacy, GDPR &amp; Ad Compliance</option>
+                      <option value="Audio Transcriber">Audio &amp; Video Transcriber</option>
+                      <option value="YouTube Transcripts">YouTube Transcript Assistance</option>
+                      <option value="Format Converter">Subtitle Converter (SRT, VTT, JSON)</option>
+                      <option value="Text Intelligence">AI Summarization &amp; Translation</option>
+                      <option value="Editorial & Content">Feedback &amp; Guide Corrections</option>
+                      <option value="Privacy & Legal">Privacy, GDPR &amp; Advertising</option>
                     </select>
                   </div>
 

@@ -10,11 +10,9 @@ export const article20_convertM4aToSrt: BlogArticle = {
   readTime: "7 min read",
   date: "September 2026",
   author: "Akash Singh Solanki",
-  authorRole: "Founder & Lead Systems Architect",
+  authorRole: "Founder & Developer",
   authorBio: "Software engineer and linguistic tools architect building zero-retention transcription and subtitle conversion systems.",
-  reviewer: "Elena Rostova",
-  reviewerRole: "Media Accessibility & Standards Lead",
-  summary: "A practical guide to converting voice memos (M4A), podcast audio (MP3), and uncompressed recordings (WAV) into SubRip (.SRT) subtitle files. Covers timeline synchronization, frame rates, and importing into Premiere Pro and DaVinci Resolve.",
+      summary: "A practical guide to converting voice memos (M4A), podcast audio (MP3), and uncompressed recordings (WAV) into SubRip (.SRT) subtitle files. Covers timeline synchronization, frame rates, and importing into Premiere Pro and DaVinci Resolve.",
   tableOfContents: [
     { id: "the-voice-memo-dilemma", title: "1. The iPhone M4A & Voice Memo Workflow" },
     { id: "srt-timecode-specs", title: "2. Understanding SRT Timecode Precision" },

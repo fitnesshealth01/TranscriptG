@@ -837,12 +837,25 @@ Return a strict JSON object:
   }
 });
 
-// 301 Permanent Redirects for canonical URL consolidation
-app.get("/youtube", (_req, res) => {
-  return res.redirect(301, "/youtube-transcript");
-});
-
-const LEGACY_BLOG_REDIRECTS: Record<string, string> = {
+// 301 Permanent Redirects for Phase 2 & canonical URL consolidation
+const URL_301_REDIRECTS: Record<string, string> = {
+  "/youtube": "/youtube-transcript",
+  "/tools/translation": "/video-translator",
+  "/tools/summary": "/youtube-video-summarizer",
+  "/tools/knowledge-graph": "/tools",
+  "/tools/quotes": "/tools",
+  "/tools/blog": "/tools",
+  "/tools/faq": "/tools",
+  "/editorial-team": "/about",
+  "/editorial-board": "/about",
+  "/about-us": "/about",
+  "/privacy-policy": "/privacy",
+  "/guides": "/blog",
+  "/articles/subtitles-srt-masterclass-2026": "/blog/srt-vs-vtt-subtitle-formats",
+  "/articles/the-ultimate-youtube-to-notion-and-chatgpt-workflow-2026": "/blog/youtube-video-captioning-workflow-guide",
+  "/articles/youtube-creator-revenue-calculator-guide": "/blog",
+  "/articles/samsung-galaxy-watch-ultra-2-review-specs-price-release-date": "/blog",
+  "/articles/indexing-pipeline-cold-start": "/blog",
   "/blog/10-tips-for-accurate-audio-transcription": "/blog/transcription-accuracy-tips",
   "/blog/srt-vs-vtt-subtitles-format-guide": "/blog/srt-vs-vtt-subtitle-formats",
   "/blog/legal-deposition-transcription-standards-guide": "/blog/legal-deposition-court-transcription-standards",
@@ -854,15 +867,32 @@ const LEGACY_BLOG_REDIRECTS: Record<string, string> = {
   "/blog/audio-formats-codecs-containers-guide": "/blog/audio-formats-codecs-transcription-guide",
 };
 
-Object.entries(LEGACY_BLOG_REDIRECTS).forEach(([oldPath, newPath]) => {
+Object.entries(URL_301_REDIRECTS).forEach(([oldPath, newPath]) => {
   app.get([oldPath, `${oldPath}/`], (_req, res) => {
     return res.redirect(301, newPath);
   });
 });
 
-// Explicit 404 for removed legacy tools
-app.get(["/parchment", "/parchment-transcript", "/grams-to-cups", "/gramstocups", "/baking-converter"], (_req, res) => {
-  return res.status(404).send(`<!DOCTYPE html><html><head><title>404 Not Found</title><meta name="robots" content="noindex, nofollow" /></head><body style="font-family:sans-serif;text-align:center;padding:4rem 1rem;"><h1>404 — Tool Deprecated &amp; Removed</h1><p>This legacy utility was deprecated and removed. Return to <a href="/">TranscriptG Speech Platform</a>.</p></body></html>`);
+// Wildcard catch-all for any other /articles/* -> /blog
+app.get("/articles/*", (_req, res) => {
+  return res.redirect(301, "/blog");
+});
+
+// 410 Gone for unrelated legacy paths
+const GONE_410_PATHS = [
+  "/parchment",
+  "/parchment-transcript",
+  "/parchment-transcripts",
+  "/grams-to-cups",
+  "/gramstocups",
+  "/baking-converter",
+];
+
+GONE_410_PATHS.forEach((gonePath) => {
+  app.get([gonePath, `${gonePath}/`], (_req, res) => {
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    return res.status(410).send(`<!DOCTYPE html><html><head><title>410 Gone | TranscriptG</title><meta name="robots" content="noindex, nofollow" /></head><body style="font-family:sans-serif;text-align:center;padding:4rem 1rem;"><h1>410 Gone</h1><p>This legacy utility was permanently removed. Return to <a href="/">TranscriptG</a>.</p></body></html>`);
+  });
 });
 
 // Sitemap route
@@ -876,14 +906,14 @@ app.get("/sitemap.xml", (_req, res) => {
     { path: "/youtube-transcript", changefreq: "weekly", priority: "0.9" },
     { path: "/convert", changefreq: "weekly", priority: "0.9" },
     { path: "/process", changefreq: "weekly", priority: "0.9" },
-    { path: "/tools", changefreq: "weekly", priority: "0.9" },
-    { path: "/glossary", changefreq: "weekly", priority: "0.9" },
-    { path: "/guides", changefreq: "weekly", priority: "0.9" },
+    { path: "/video-translator", changefreq: "weekly", priority: "0.9" },
+    { path: "/ai-subtitle-translator", changefreq: "weekly", priority: "0.9" },
+    { path: "/youtube-video-summarizer", changefreq: "weekly", priority: "0.9" },
+    { path: "/tools", changefreq: "weekly", priority: "0.8" },
+    { path: "/glossary", changefreq: "monthly", priority: "0.7" },
     { path: "/blog", changefreq: "daily", priority: "0.9" },
-    { path: "/editorial-team", changefreq: "monthly", priority: "0.8" },
-    { path: "/editorial-policy", changefreq: "monthly", priority: "0.8" },
-    { path: "/seo-checklist", changefreq: "monthly", priority: "0.8" },
-    { path: "/about", changefreq: "monthly", priority: "0.7" },
+    { path: "/editorial-policy", changefreq: "monthly", priority: "0.7" },
+    { path: "/about", changefreq: "monthly", priority: "0.8" },
     { path: "/contact", changefreq: "monthly", priority: "0.7" },
     { path: "/privacy", changefreq: "monthly", priority: "0.5" },
     { path: "/terms", changefreq: "monthly", priority: "0.5" },

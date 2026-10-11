@@ -1,255 +1,189 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { PageHeader } from "../components/PageHeader";
+import { AUTHOR } from "../data/author";
 import {
+  Mail,
   ShieldCheck,
-  Zap,
-  Globe2,
+  Cpu,
+  AlertTriangle,
+  GraduationCap,
+  ArrowRight,
   Sparkles,
   CheckCircle2,
-  Cpu,
-  Lock,
-  Server,
-  FileCode,
-  Users,
-  Building2,
-  Mail,
-  Award
 } from "lucide-react";
 
 export const AboutPage: React.FC = () => {
+  const [imgError, setImgError] = useState(false);
+
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: AUTHOR.name,
+    jobTitle: AUTHOR.role,
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Amity University",
+    },
+    url: "https://transcriptg.com/about",
+    email: AUTHOR.email,
+    ...(AUTHOR.linkedIn ? { sameAs: [AUTHOR.linkedIn] } : {}),
+  };
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <Seo
-        title="About TranscriptG — Free Public-Access Acoustic & Linguistic Engineering Lab"
-        description="Learn about TranscriptG: our public-access speech mission, zero-retention privacy architecture, engineering benchmarks, and commitment to free speech tools."
+        title="About TranscriptG – Free Audio & Video Transcription"
+        description="Learn about TranscriptG: a free, no-login tool built by Akash Singh Solanki to convert, translate, and summarize audio, video, and subtitle files."
         keywords={[
           "about transcriptg",
-          "speech technology laboratory",
-          "acoustic AI mission",
-          "free transcription team",
-          "zero retention audio engineering",
-          "open linguistic laboratory",
+          "akash singh solanki",
+          "free transcription tool",
+          "how transcriptg works",
         ]}
         canonicalPath="/about"
       />
 
-      <PageHeader
-        eyebrow="Company & Engineering Lab"
-        title="Public-Access Precision Linguistic Laboratory"
-        description="We engineer high-throughput speech recognition, subtitle conversion, and text-intelligence utilities accessible to everyone without paywalls or tracking."
+      {/* Embedded Person Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Core Mission Card */}
-        <div className="glass-card p-8 sm:p-12 rounded-3xl border border-black/10 space-y-6 bg-white shadow-xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff4d00]/10 text-[#ff4d00] text-xs font-mono font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" /> Our Foundational Mission
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#0d0f12] tracking-tight">
-            Democratizing Speech Technology & Preserving Data Privacy
+      <PageHeader
+        eyebrow="Background & Purpose"
+        title="About TranscriptG"
+        description="Learn why TranscriptG was built, how the tools process files, and who maintains the platform."
+      />
+
+      <div className="space-y-10 text-neutral-800 leading-relaxed text-sm sm:text-base">
+        {/* Section 2: What it is */}
+        <section className="space-y-3">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#0d0f12]">
+            What TranscriptG Is
           </h2>
-          <p className="text-neutral-700 text-base sm:text-lg leading-relaxed">
-            Spoken language is the most natural, rich medium of human thought. Yet in modern digital workflows, converting voice into structured, searchable, accessible text is frequently gatekept by expensive recurring SaaS subscriptions, mandatory account creation, and invasive user tracking.
+          <p className="text-neutral-700 leading-relaxed">
+            TranscriptG is a free web tool that turns audio and video into text, converts subtitle files (SRT, VTT, JSON, and TXT), translates transcripts and subtitles, and summarizes spoken content using modern AI models. No account creation or sign-up is required.
           </p>
-          <p className="text-neutral-700 text-base sm:text-lg leading-relaxed">
-            <strong>TranscriptG</strong> was established by audio engineers and computational linguists with a single mandate: build a high-precision, sub-second linguistic engine that is 100% public-access, free of mandatory logins, and architected with absolute zero-retention ephemeral privacy.
-          </p>
-        </div>
+        </section>
 
-        {/* 4 Architectural Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="glass-card p-8 rounded-3xl border border-black/10 space-y-4 bg-white shadow-md">
-            <div className="w-12 h-12 rounded-2xl bg-[#ff4d00]/10 text-[#ff4d00] flex items-center justify-center font-bold">
-              <Lock className="w-6 h-6" />
+        {/* Section 3: Why it exists */}
+        <section className="space-y-3">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#0d0f12]">
+            Why It Exists
+          </h2>
+          <p className="text-neutral-700 leading-relaxed">
+            I built TranscriptG to give students, video creators, journalists, and developers a straightforward, free, no-login way to get transcripts, subtitles, translations, and summaries without installing desktop software or dealing with subscription paywalls.
+          </p>
+        </section>
+
+        {/* Section 4: How it works */}
+        <section className="space-y-3">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#0d0f12]">
+            How It Works
+          </h2>
+          <p className="text-neutral-700 leading-relaxed">
+            When you upload an audio or video file or submit a YouTube link, the data is sent securely to our application server and processed using Google's Gemini models. The model analyzes the speech to generate timestamps, transcripts, translations, or summaries, which are returned directly to your browser.
+          </p>
+          <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-xs sm:text-sm text-neutral-700 space-y-1">
+            <strong className="text-[#0d0f12] font-semibold block">Data Handling:</strong>
+            <p>
+              Media files are held in temporary memory buffers only for the duration of the request needed to generate your transcript, and are not saved to persistent server disks or stored in databases.
+            </p>
+          </div>
+        </section>
+
+        {/* Section 5: Limits and accuracy */}
+        <section className="space-y-3">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#0d0f12]">
+            Limits &amp; Accuracy
+          </h2>
+          <p className="text-neutral-700 leading-relaxed">
+            AI speech recognition produces strong results on clear speech, but output can contain mistakes—particularly with heavy background noise, rapid overlapping dialogue, regional accents, or specialized technical and medical terminology. Always review and verify important transcripts before publishing them or relying on them for legal, official, or medical purposes.
+          </p>
+          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-start gap-3 text-xs sm:text-sm text-amber-900">
+            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <p>
+              Uploaded audio files are capped at 25MB per request. For longer recordings, compress the audio to MP3 or split into smaller segments before uploading.
+            </p>
+          </div>
+        </section>
+
+        {/* Section 6: About the author card */}
+        <section className="p-6 sm:p-8 rounded-3xl bg-white border border-black/10 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            {/* Photo or Initials */}
+            {!imgError ? (
+              <img
+                src={AUTHOR.photo}
+                alt={AUTHOR.name}
+                onError={() => setImgError(true)}
+                className="w-20 h-20 rounded-2xl object-cover border border-black/10 shadow-sm shrink-0"
+              />
+            ) : (
+              <div className="w-20 h-20 rounded-2xl bg-[#0d0f12] text-white flex items-center justify-center font-mono font-bold text-xl shrink-0">
+                AS
+              </div>
+            )}
+
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-[#ff4d00] font-bold">
+                Creator &amp; Maintainer
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-[#0d0f12]">
+                {AUTHOR.name}
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-600 font-medium">
+                {AUTHOR.role} · {AUTHOR.education}
+              </p>
             </div>
-            <h3 className="text-xl font-bold text-[#0d0f12]">Zero Data Retention (ZDR)</h3>
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              We process audio streams and text buffers strictly in volatile server RAM. When your HTTP connection completes, buffers are instantly deallocated. Zero disk writes, zero database storage, and zero model training on your data.
+          </div>
+
+          <div className="text-neutral-700 text-sm leading-relaxed space-y-3 pt-2 border-t border-black/5">
+            <p>
+              I'm an Information Technology graduate (B.Tech, Amity University) and the person behind TranscriptG. I build and maintain every tool on this site, from the transcription and subtitle converter to the translation and summary features.
+            </p>
+            <p>
+              I started TranscriptG to give people a quick, free way to turn recordings and videos into text without signing up for anything. I test the tools myself on real audio and video, and I update the guides when the tools change or I find a better way to do something.
+            </p>
+            <p>
+              If something doesn't work or a result looks wrong, email me at{" "}
+              <a
+                href={`mailto:${AUTHOR.email}`}
+                className="text-[#ff4d00] font-bold underline hover:text-[#e04400]"
+              >
+                {AUTHOR.email}
+              </a>{" "}
+              and I'll look into it.
             </p>
           </div>
 
-          <div className="glass-card p-8 rounded-3xl border border-black/10 space-y-4 bg-white shadow-md">
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-600 flex items-center justify-center font-bold">
-              <Zap className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-[#0d0f12]">Sub-Second Neural Execution</h3>
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              Powered by optimized Transformer acoustic models and modern full-stack web architecture, TranscriptG achieves transcription speeds up to 50x faster than real-time audio playback.
-            </p>
-          </div>
-
-          <div className="glass-card p-8 rounded-3xl border border-black/10 space-y-4 bg-white shadow-md">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
-              <Globe2 className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-[#0d0f12]">90+ Languages & Regional Dialects</h3>
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              From global business languages like English, Spanish, Mandarin, and German to regional dialects and low-resource languages, our acoustic models handle accents and code-switching naturally.
-            </p>
-          </div>
-
-          <div className="glass-card p-8 rounded-3xl border border-black/10 space-y-4 bg-white shadow-md">
-            <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold">
-              <FileCode className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-[#0d0f12]">Universal Subtitle Standards</h3>
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              Seamlessly bridge SubRip (.SRT), WebVTT (.VTT), Word (.DOCX), and JSON formats with frame-accurate millisecond timecode conversion compliant with WCAG 2.2 accessibility guidelines.
-            </p>
-          </div>
-        </div>
-
-        {/* Engineering Team & Verified Leadership */}
-        <div className="glass-card p-8 sm:p-12 rounded-3xl border border-black/10 space-y-8 bg-white shadow-xl">
-          <div className="flex items-center gap-3">
-            <Users className="w-6 h-6 text-[#ff4d00]" />
-            <h3 className="text-2xl font-bold text-[#0d0f12]">Leadership & Editorial Board</h3>
-          </div>
-          <p className="text-neutral-700 text-sm sm:text-base leading-relaxed">
-            TranscriptG is built, peer-reviewed, and maintained by a dedicated team of distributed systems architects, computational linguistics researchers, and digital signal processing specialists.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-            <div className="p-6 rounded-2xl bg-neutral-50 border border-black/5 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#ff4d00] text-white flex items-center justify-center font-mono font-bold text-lg">
-                  AS
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-[#0d0f12]">Akash Singh Solanki</h4>
-                  <p className="text-xs font-mono text-[#ff4d00] font-bold">Founder & Lead Systems Architect</p>
-                </div>
-              </div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                Oversees TranscriptG's core acoustic signal pipeline, zero-retention ephemeral memory routing, and web accessibility standards. Leads architecture across multi-format subtitle synchronization and low-latency audio processing.
-              </p>
-              <div className="text-[11px] font-mono text-neutral-500 pt-1">
-                Direct Contact: <a href="mailto:akashsinghsolanki66@gmail.com" className="text-[#ff4d00] hover:underline font-bold">akashsinghsolanki66@gmail.com</a>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-neutral-50 border border-black/5 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#00d9ff] text-black flex items-center justify-center font-mono font-bold text-lg">
-                  ML
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-[#0d0f12]">Dr. Maya Lin, PhD</h4>
-                  <p className="text-xs font-mono text-[#0088a8] font-bold">Principal Computational Linguist</p>
-                </div>
-              </div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                Specializes in multilingual Automatic Speech Recognition (ASR), tokenization models, phoneme acoustic alignment, and dialectal robustness across 90+ global languages and non-native accents.
-              </p>
-              <div className="text-[11px] font-mono text-neutral-500 pt-1">
-                Research Focus: Multimodal Transformers & Low-Resource Language ASR
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-neutral-50 border border-black/5 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#0d0f12] text-white flex items-center justify-center font-mono font-bold text-lg">
-                  MS
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-[#0d0f12]">Marcus Sterling</h4>
-                  <p className="text-xs font-mono text-neutral-600 font-bold">Senior DSP & Audio Mastering Engineer</p>
-                </div>
-              </div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                Focuses on real-time acoustic pre-filtering, spectral noise suppression, Mel-frequency filterbank normalization, and cross-format audio decoders (WAV, FLAC, Opus, AAC).
-              </p>
-              <div className="text-[11px] font-mono text-neutral-500 pt-1">
-                Specialization: Spectral Gating & Acoustic Normalization
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-neutral-50 border border-black/5 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-mono font-bold text-lg">
-                  ER
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-[#0d0f12]">Elena Rostova</h4>
-                  <p className="text-xs font-mono text-emerald-700 font-bold">Media Accessibility & Standards Lead</p>
-                </div>
-              </div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                Guides captioning compliance, SubRip (.SRT) and WebVTT (.VTT) cue conformance, and WCAG 2.2 Level AAA closed-captioning recommendations for broadcasting, podcasting, and education.
-              </p>
-              <div className="text-[11px] font-mono text-neutral-500 pt-1">
-                Specialization: WCAG 2.2 AAA Closed Captions & Video Metadata
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Editorial Standards & Fact-Checking Standard */}
-        <div className="glass-card p-8 sm:p-12 rounded-3xl border border-black/10 space-y-6 bg-white shadow-xl">
-          <div className="flex items-center gap-3">
-            <Award className="w-6 h-6 text-[#ff4d00]" />
-            <h3 className="text-2xl font-bold text-[#0d0f12]">Editorial Policy & Fact-Checking Standard</h3>
-          </div>
-          <p className="text-neutral-700 text-sm sm:text-base leading-relaxed">
-            All technical publications, format guides, and audio processing benchmarks on TranscriptG undergo rigorous empirical verification prior to publication:
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-4 rounded-2xl bg-neutral-50 border border-black/5 space-y-2">
-              <div className="text-xs font-mono font-bold text-[#ff4d00] uppercase">1. Empirical Testing</div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                Word Error Rate (WER) metrics and timing benchmarks are derived from standardized speech corpora (LibriSpeech, Common Voice) and real-world audio datasets.
-              </p>
-            </div>
-            <div className="p-4 rounded-2xl bg-neutral-50 border border-black/5 space-y-2">
-              <div className="text-xs font-mono font-bold text-[#ff4d00] uppercase">2. Peer Review</div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                Articles and engineering documentation are reviewed by at least two engineering staff members to verify technical accuracy and code syntax.
-              </p>
-            </div>
-            <div className="p-4 rounded-2xl bg-neutral-50 border border-black/5 space-y-2">
-              <div className="text-xs font-mono font-bold text-[#ff4d00] uppercase">3. Privacy Compliance</div>
-              <p className="text-xs text-neutral-600 leading-relaxed">
-                We independently verify that all audio processing examples strictly adhere to our zero-retention ephemeral memory architecture.
-              </p>
-            </div>
-          </div>
-
-          <div className="pt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-            <Link
-              to="/editorial-team"
+          <div className="pt-3 border-t border-black/5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-neutral-500">
+            <span>Written and maintained by {AUTHOR.name}</span>
+            <a
+              href={`mailto:${AUTHOR.email}`}
               className="inline-flex items-center gap-1.5 text-[#ff4d00] font-bold hover:underline"
             >
-              <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>Meet the Verified Editorial Board &amp; Reviewers →</span>
-            </Link>
-            <Link
-              to="/editorial-policy"
-              className="text-neutral-600 hover:text-black hover:underline"
-            >
-              Read Complete Editorial Integrity Charter
-            </Link>
+              <Mail className="w-3.5 h-3.5" />
+              <span>{AUTHOR.email}</span>
+            </a>
           </div>
-        </div>
+        </section>
 
-        {/* Contact & Support Callout */}
-        <div className="p-8 rounded-3xl bg-neutral-900 text-white flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center sm:text-left">
-            <h4 className="text-xl font-bold">Have questions or want to partner with us?</h4>
-            <p className="text-xs sm:text-sm text-neutral-400">
-              Our engineering team responds to inquiries within 24 hours.
-            </p>
+        {/* Section 7: Contact link & Last updated */}
+        <section className="pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-black/10 text-xs text-neutral-500 font-mono">
+          <div>
+            Have questions or tool suggestions?{" "}
+            <Link to="/contact" className="text-[#ff4d00] font-bold underline">
+              Contact Page
+            </Link>
           </div>
-          <Link
-            to="/contact"
-            className="px-6 py-3 rounded-2xl bg-[#ff4d00] text-white text-xs font-mono font-bold hover:bg-[#e04400] transition-colors whitespace-nowrap"
-          >
-            Get In Touch With Our Team →
-          </Link>
-        </div>
+          <span>Last updated: October 2026</span>
+        </section>
       </div>
     </div>
   );
 };
+
+export default AboutPage;

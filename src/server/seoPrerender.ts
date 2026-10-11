@@ -24,14 +24,14 @@ const BASE_URL = "https://transcriptg.com";
 
 export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
   "/": {
-    title: "TranscriptG — Free High-Precision Audio Transcription, YouTube Captions & Subtitle Intelligence",
-    description: "No login, zero data retention, 100% free speech-to-text platform. Transcribe audio to text, extract YouTube transcripts with timestamps, convert SRT/VTT subtitles, and summarize speech in 90+ languages.",
-    keywords: "transcription, speech to text, audio to text, free transcription, youtube transcript generator, srt converter, vtt converter, ai summarizer, closed captions, subtitles generator, voice to text",
+    title: "TranscriptG – Free Audio, Video & YouTube Transcription",
+    description: "Free online transcription and video tools. Transcribe audio, convert SRT/VTT subtitles, translate speech, and summarize YouTube videos in 90+ languages.",
+    keywords: "transcription, speech to text, audio to text, free transcription, youtube transcript generator, srt converter, vtt converter, ai video translator, youtube video summarizer",
     canonicalPath: "/",
     ogType: "website",
     category: "MultimediaApplication",
-    h1: "High-Precision Audio Transcription & Speech Intelligence",
-    lead: "TranscriptG is an elite, privacy-first linguistic laboratory for creators, podcasters, filmmakers, journalists, and researchers. Fast, accurate, zero login required, and zero data retained.",
+    h1: "Free Audio, Video & YouTube Transcription",
+    lead: "Turn recordings, videos, and YouTube links into text, subtitles, translations, and summaries. Fast AI processing with no registration required.",
     features: [
       "Speech-to-Text: Transcribe MP3, WAV, M4A, and MP4 files into timecoded transcripts and AI summaries.",
       "YouTube Transcript Generator: Review timestamped dialogue, structured study notes, and chapter summaries for accessibility.",
@@ -282,22 +282,159 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
           <li><strong>Multilingual Translation:</strong> Accurately translates source text into over 90 languages including Spanish, Mandarin, German, French, Hindi, and Japanese.</li>
           <li><strong>Disfluency Cleanup:</strong> Strips conversational filler words ('um', 'uh', 'you know', repeated words) while preserving original speaker intent.</li>
         </ul>
-
-        <h2>How to Process Transcripts &amp; Meeting Notes</h2>
+      </section>
+    `,
+  },
+  "/video-translator": {
+    title: "Free AI Video Translator — Translate Video to English & 90+ Languages",
+    description: "Translate videos and YouTube clips to English and 90+ languages for free. Fast AI speech translation, no signup, no watermark.",
+    keywords: "ai video translator, free video translator, translate video to english, translate youtube video, video subtitle translator, translate video free",
+    canonicalPath: "/video-translator",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "Free AI Video Translator",
+    lead: "Translate audio recordings, video files, or YouTube links into English and 90+ languages. Fast AI translation with zero sign-up required.",
+    features: [
+      "Translate video and audio files (MP4, MOV, WEBM, MP3, WAV) up to 25MB.",
+      "Translate YouTube videos directly from link input.",
+      "Supports translation into English, Spanish, French, German, Japanese, Hindi, and 90+ languages.",
+      "Ephemeral memory processing with zero server retention.",
+      "Export translated text to TXT or copy in one click.",
+    ],
+    faqs: [
+      {
+        q: "How does the AI Video Translator translate video speech?",
+        a: "TranscriptG extracts the audio stream from your video file or retrieves the captions from your YouTube link, recognizes the spoken dialogue in its original language, and translates the text into your chosen target language using Google's Gemini models.",
+      },
+      {
+        q: "Is TranscriptG's video translator free to use?",
+        a: "Yes. TranscriptG is 100% free with no sign-up, no credit card required, and no watermarks on your generated translations or transcripts.",
+      },
+      {
+        q: "What video and audio formats can I upload?",
+        a: "You can upload standard video and audio formats including MP4, MOV, WEBM, MKV, MP3, WAV, AAC, and M4A up to 25MB per upload.",
+      },
+      {
+        q: "How accurate is the AI translation?",
+        a: "Translation quality depends on audio clarity, speaker accents, and background noise. For clear speech, the models deliver high semantic accuracy. We always recommend reviewing translations for specialized legal, technical, or medical terminology.",
+      },
+      {
+        q: "Are my uploaded videos or transcripts stored on your server?",
+        a: "No. Files are held temporarily in memory only while being processed and sent to the Gemini API. Once your translation is returned, media buffers are immediately discarded.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>Free AI Video Translator</h1>
+        <p class="lead">Translate audio recordings, video files, or YouTube links into English and 90+ languages. Fast AI translation with zero sign-up required.</p>
+        <h2>How to Translate a Video in 3 Steps</h2>
         <ol>
-          <li>Paste your raw transcript or text into the input console.</li>
-          <li>Select your desired operation (Summarize, Action Items, Translate, Polish, or Chapter Titles).</li>
-          <li>If translating, pick your target language from 90+ supported options.</li>
-          <li>Click 'Run Engine' to receive immediate, structured intelligence.</li>
-          <li>Export your processed results as Markdown, Plain Text, or Word document.</li>
+          <li>Upload your video/audio file or paste a YouTube link.</li>
+          <li>Choose your target language from 90+ options.</li>
+          <li>Click 'Translate Video Now' to view, copy, or download the translation.</li>
         </ol>
-
-        <h2>Related Guides &amp; Documentation</h2>
-        <ul>
-          <li><a href="/blog/ai-meeting-summarizer-best-practices">AI Meeting Summarizer Best Practices: Action Items &amp; Executive Briefs</a></li>
-          <li><a href="/blog/multilingual-ai-transcription-guide">Multilingual Audio Transcription &amp; Cross-Lingual Speech Workflows</a></li>
-          <li><a href="/transcribe">Audio &amp; Video Speech-to-Text Transcriber</a></li>
-        </ul>
+      </section>
+    `,
+  },
+  "/ai-subtitle-translator": {
+    title: "AI Subtitle Translator — Translate SRT & VTT Subtitles Free",
+    description: "Translate SRT and VTT subtitle files into 90+ languages with preserved timestamps. Fast, free AI subtitle translator with no login.",
+    keywords: "ai subtitle translator, translate srt file, translate vtt subtitles, subtitle translator online, free srt translator, translate captions to english",
+    canonicalPath: "/ai-subtitle-translator",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "AI Subtitle Translator",
+    lead: "Translate SRT and VTT subtitle files into 90+ languages while keeping millisecond timecodes perfectly synchronized. Free and no account needed.",
+    features: [
+      "Translate SubRip (.SRT) and WebVTT (.VTT) subtitle files losslessly.",
+      "Strict preservation of cue numbers, line breaks, and millisecond timecodes.",
+      "Download translated subtitle files ready for YouTube or Premiere Pro.",
+      "Handles full-length documentaries and conferences up to 50,000 words.",
+      "100% free with no account or subscription required.",
+    ],
+    faqs: [
+      {
+        q: "Does this AI subtitle translator preserve timecodes?",
+        a: "Yes. The AI is instructed to retain all cue sequence numbers and exact timestamps (e.g., 00:00:12,345 --> 00:00:15,678) intact while translating only the dialogue text.",
+      },
+      {
+        q: "Which subtitle formats are supported?",
+        a: "You can translate standard SubRip (.SRT) and WebVTT (.VTT) subtitle files, as well as plain text dialogue transcripts.",
+      },
+      {
+        q: "Can I download the translated subtitles directly into an SRT file?",
+        a: "Yes. Once translation completes, click 'Download Subtitles' to immediately save an SRT or VTT file ready for upload to YouTube, Vimeo, Premiere Pro, or DaVinci Resolve.",
+      },
+      {
+        q: "Is there any character limit for subtitle translation?",
+        a: "TranscriptG accepts subtitle files up to approximately 50,000 words in a single translation request, covering full-length movies, documentaries, and conference recordings.",
+      },
+      {
+        q: "Do I need to sign up or create an account?",
+        a: "No. TranscriptG is entirely free with no account creation or credit card requirement.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>AI Subtitle Translator</h1>
+        <p class="lead">Translate SRT and VTT subtitle files into 90+ languages while keeping millisecond timecodes perfectly synchronized. Free and no account needed.</p>
+        <h2>How It Works with Timecode Preservation</h2>
+        <ol>
+          <li>Upload your original SRT or VTT file or paste cue lines.</li>
+          <li>Select target language.</li>
+          <li>Translate and download your localized subtitle file.</li>
+        </ol>
+      </section>
+    `,
+  },
+  "/youtube-video-summarizer": {
+    title: "YouTube Video Summarizer — Free AI Summaries & Key Points",
+    description: "Summarize any YouTube video instantly with AI. Extract key takeaways, chapter breakdowns, and concise notes. 100% free with no login.",
+    keywords: "youtube video summarizer, summarize youtube video, ai youtube summary, youtube transcript summarizer, youtube video to notes, free youtube summarizer",
+    canonicalPath: "/youtube-video-summarizer",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "YouTube Video Summarizer",
+    lead: "Turn long YouTube videos, podcasts, and lectures into actionable bullet points, chapter outlines, or executive summaries in seconds.",
+    features: [
+      "Instant executive summaries, key takeaways, and chapter breakdowns.",
+      "Summarize long YouTube podcasts, tutorials, lectures, and documentaries.",
+      "Download summary notes as clean Markdown (.md) or copy to clipboard.",
+      "Works on public YouTube videos with auto-generated or manual captions.",
+      "No login, no API key, and no paywall required.",
+    ],
+    faqs: [
+      {
+        q: "How does the AI YouTube Video Summarizer work?",
+        a: "TranscriptG extracts the verified transcript track from the YouTube video and processes it with Google's Gemini models to distill the core arguments, key takeaways, and chapter milestones into a concise summary.",
+      },
+      {
+        q: "Can I summarize videos without existing subtitles?",
+        a: "If a video has auto-generated or creator-uploaded captions, TranscriptG can summarize it instantly. For videos without captions, you can download the audio and run it through our Audio Transcriber tool.",
+      },
+      {
+        q: "What summary formats are available?",
+        a: "You can generate: (1) Executive Overview (a structured narrative), (2) Key Takeaways (bulleted actionable points), or (3) Timestamped Chapters & Outlines.",
+      },
+      {
+        q: "Is this YouTube summarizer completely free?",
+        a: "Yes. There are no usage quotas, no required registration, and no credit cards needed.",
+      },
+      {
+        q: "How long can the YouTube video be?",
+        a: "TranscriptG supports long-form YouTube videos including podcasts, interviews, lectures, and documentaries up to several hours in duration.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>YouTube Video Summarizer</h1>
+        <p class="lead">Turn long YouTube videos, podcasts, and lectures into actionable bullet points, chapter outlines, or executive summaries in seconds.</p>
+        <h2>How to Summarize YouTube Videos in 3 Steps</h2>
+        <ol>
+          <li>Paste the public YouTube link.</li>
+          <li>Choose your summary style: Executive Overview, Key Takeaways, or Chapters.</li>
+          <li>Generate and export your summary as Markdown.</li>
+        </ol>
       </section>
     `,
   },
@@ -337,54 +474,48 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
     `,
   },
   "/about": {
-    title: "About TranscriptG — Public-Access Acoustic & Linguistic Engineering Lab",
-    description: "Learn about TranscriptG: our public-access speech mission, zero-retention privacy architecture, engineering benchmarks, and leadership team.",
-    keywords: "about transcriptg, speech technology laboratory, acoustic AI mission, free transcription team, zero retention audio engineering, open linguistic laboratory",
+    title: "About TranscriptG – Free Audio & Video Transcription",
+    description: "Learn about TranscriptG: a free, no-login tool built by Akash Singh Solanki to convert, translate, and summarize audio, video, and subtitle files.",
+    keywords: "about transcriptg, akash singh solanki, free transcription tool, how transcriptg works",
     canonicalPath: "/about",
     ogType: "website",
     category: "AboutPage",
-    h1: "About TranscriptG Engineering Lab",
-    lead: "We engineer high-throughput speech recognition, subtitle conversion, and text-intelligence utilities accessible to everyone without paywalls or tracking.",
+    h1: "About TranscriptG",
+    lead: "TranscriptG is a free web tool that turns audio and video into text, converts subtitle files (SRT, VTT, JSON, and TXT), translates transcripts and subtitles, and summarizes spoken content using AI. No sign-up is required.",
     features: [
-      "Strict Zero Data Retention (ZDR) memory architecture.",
-      "Sub-second neural transcription and cue synchronization.",
-      "Coverage for 90+ languages and regional spoken dialects.",
-      "Universal subtitle standard conformance (SRT, WebVTT, JSON).",
-      "Empirical testing against LibriSpeech and Common Voice corpora.",
+      "Built by Akash Singh Solanki (B.Tech in Information Technology, Amity University).",
+      "Converts audio and video to text, subtitles, translations, and summaries.",
+      "Ephemeral memory processing with zero persistent data retention.",
+      "Completely free with no account creation or credit card required.",
+      "Supports 90+ languages and subtitle formats including SRT and WebVTT.",
     ],
     faqs: [
       {
         q: "Who operates TranscriptG?",
-        a: "TranscriptG is an independent engineering laboratory founded and led by Principal Systems Architect Akash Singh Solanki alongside specialists in digital signal processing and computational linguistics.",
+        a: "TranscriptG is built and maintained by Akash Singh Solanki, an Information Technology graduate (B.Tech, Amity University).",
       },
       {
-        q: "How does TranscriptG guarantee user privacy?",
-        a: "Our systems run on a strict Zero Data Retention architecture. Audio and text streams are processed strictly in volatile RAM and immediately deallocated upon completion. No files are saved to disks or databases.",
+        q: "Does TranscriptG retain or store my audio files?",
+        a: "No. Files are held in temporary memory buffers only while being processed and sent to the Gemini API. Once your transcript is returned, media buffers are immediately discarded.",
       },
     ],
     semanticHtml: `
       <section class="seo-about">
-        <h1>About TranscriptG: Public-Access Linguistic &amp; Acoustic Engineering Lab</h1>
-        <p class="lead">Spoken dialogue is the richest medium of human communication. TranscriptG exists to make high-precision speech-to-text, subtitle formatting, and language intelligence globally accessible with zero paywalls, zero mandatory accounts, and absolute zero-retention privacy.</p>
+        <h1>About TranscriptG</h1>
+        <p class="lead">TranscriptG is a free web tool that turns audio and video into text, converts subtitle files (SRT, VTT, JSON, and TXT), translates transcripts and subtitles, and summarizes spoken content using modern AI models. No account creation or sign-up is required.</p>
         
-        <h2>Architectural Pillars</h2>
-        <ul>
-          <li><strong>Zero Data Retention (ZDR):</strong> Media streams are processed in ephemeral memory buffers. Once transcription completes, buffers are instantly deallocated. No persistent storage, no user profiling, and no model training on user data.</li>
-          <li><strong>Sub-Second Neural Execution:</strong> Modern transformer-based acoustic pipelines deliver transcription speeds up to 50x faster than real-time audio playback.</li>
-          <li><strong>90+ Languages &amp; Dialects:</strong> Comprehensive linguistic coverage across world languages and diverse regional accents.</li>
-          <li><strong>Universal Subtitle Standards:</strong> Frame-accurate millisecond timecode conversion between SubRip (.SRT) and WebVTT (.VTT) adhering to WCAG 2.2 accessibility guidelines.</li>
-        </ul>
+        <h2>Why It Exists</h2>
+        <p>I built TranscriptG to give students, video creators, journalists, and developers a straightforward, free, no-login way to get transcripts, subtitles, translations, and summaries without installing desktop software or dealing with subscription paywalls.</p>
 
-        <h2>Leadership &amp; Editorial Board</h2>
-        <ul>
-          <li><strong>Akash Singh Solanki</strong> — Founder &amp; Lead Systems Architect (direct: akashsinghsolanki66@gmail.com)</li>
-          <li><strong>Dr. Maya Lin, PhD</strong> — Principal Computational Linguist (Multimodal Transformers &amp; ASR)</li>
-          <li><strong>Marcus Sterling</strong> — Senior DSP &amp; Audio Mastering Engineer (Spectral Gating &amp; Acoustic Normalization)</li>
-          <li><strong>Elena Rostova</strong> — Media Accessibility &amp; Standards Lead (WCAG 2.2 AAA Closed Captions)</li>
-        </ul>
+        <h2>How It Works</h2>
+        <p>When you upload an audio or video file or submit a YouTube link, the data is sent securely to our application server and processed using Google's Gemini models. The model analyzes the speech to generate timestamps, transcripts, translations, or summaries, which are returned directly to your browser.</p>
 
-        <h2>Editorial Policy &amp; Empirical Standards</h2>
-        <p>All technical articles, codec benchmarks, and acoustic guides published in the TranscriptG Linguistic Journal undergo rigorous empirical verification against standardized corpora (LibriSpeech, Common Voice) and mandatory multi-engineer peer review.</p>
+        <h2>Limits and Accuracy</h2>
+        <p>AI speech recognition produces strong results on clear speech, but output can contain mistakes—particularly with heavy background noise, rapid overlapping dialogue, regional accents, or specialized technical and medical terminology. Always review and verify important transcripts before publishing them or relying on them for legal, official, or medical purposes.</p>
+
+        <h2>About the Author</h2>
+        <p><strong>Akash Singh Solanki — Founder &amp; Developer</strong><br />
+        I'm an Information Technology graduate (B.Tech, Amity University) and the person behind TranscriptG. I build and maintain every tool on this site, from the transcription and subtitle converter to the translation and summary features. I started TranscriptG to give people a quick, free way to turn recordings and videos into text without signing up for anything. If something doesn't work or a result looks wrong, email me at support@transcriptg.com.</p>
       </section>
     `,
   },
@@ -533,61 +664,38 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
       </section>
     `,
   },
-  "/editorial-team": {
-    title: "Editorial Board & Review Credentials — TranscriptG E-E-A-T",
-    description: "Meet the TranscriptG Editorial Board: Acoustic scientists, certified court reporters (RPR), healthcare documentation specialists (CHDS), and accessibility auditors (CPACC).",
-    keywords: "transcriptg editorial board, speech transcription credentials, audio engineering team, e-e-a-t audio lab, court reporting review, medical transcription hipaa review",
-    canonicalPath: "/editorial-team",
-    ogType: "website",
-    category: "AboutPage",
-    h1: "Editorial Board & Peer Review Credentials",
-    lead: "TranscriptG technical guides, acoustic benchmarks, and transcription standards are authored and peer-reviewed by credentialed audio researchers, certified court reporters, and clinical documentation authorities.",
-    features: [
-      "Dr. Evelyn Vance, Ph.D. — Chief Acoustic Scientist & Editorial Director (MIT Computational Linguistics).",
-      "Marcus Sterling, RPR, CRR — Legal Transcription & Deposition Standards Consultant.",
-      "Elena Rostova, CHDS, AHDI-F — Medical Documentation & HIPAA Compliance Director.",
-      "David K. Chen, CPACC — Digital Accessibility & Subtitling Lead Auditor (IAAP Certified).",
-      "Maya Lin, M.Sc. — Senior Linguistic Engineer & Lead Technical Author (Stanford NLP).",
-    ],
-    faqs: [
-      {
-        q: "What credentials do TranscriptG editors and reviewers hold?",
-        a: "Our editorial directors hold specialized doctorates (Ph.D. in Computational Linguistics), active court reporting credentials (RPR, CRR), certified healthcare documentation credentials (CHDS, AHDI-F), and digital accessibility certifications (CPACC).",
-      },
-    ],
-    semanticHtml: `
-      <section class="seo-editorial-board">
-        <h1>TranscriptG Editorial Board &amp; Peer Review Governance</h1>
-        <p class="lead">Our technical publications adhere to Google Search Quality Rater Guidelines (QRG) and the E-E-A-T framework (Experience, Expertise, Authoritativeness, and Trustworthiness). Every article undergoes mandatory review by credentialed domain authorities.</p>
-      </section>
-    `,
-  },
   "/editorial-policy": {
-    title: "Editorial Policy & Fact-Checking Standards — TranscriptG",
-    description: "TranscriptG editorial integrity charter: empirical benchmarking, mandatory peer review by credentialed specialists, AI oversight standards, and advertising independence.",
-    keywords: "transcriptg editorial policy, fact checking standards, audio benchmarking ethics, peer review policy, advertising independence transcriptg",
+    title: "Editorial Policy & Fact-Checking – TranscriptG",
+    description: "Read TranscriptG's editorial guidelines on authorship, AI assistance, corrections, advertising independence, and practical content standards.",
+    keywords: "transcriptg editorial policy, fact checking policy, ai editorial standards, corrections policy",
     canonicalPath: "/editorial-policy",
     ogType: "website",
     category: "AboutPage",
-    h1: "Editorial Integrity & Fact-Checking Policy",
-    lead: "Our charter governing technical research, acoustic benchmarking, human specialist review, and strict advertising independence.",
+    h1: "Editorial Policy",
+    lead: "Our simple, honest approach to writing guides, testing tools, making corrections, and maintaining advertising independence.",
     features: [
-      "Empirical testing on standardized speech corpora (LibriSpeech, Common Voice).",
-      "Mandatory peer-review by credentialed editorial board members before publication.",
-      "Zero tolerance for unedited autonomous AI content generation.",
-      "Strict advertising independence adhering to Better Ads Standards.",
-      "Public corrections and editorial feedback channels.",
+      "Articles authored and maintained by Akash Singh Solanki.",
+      "Clear testing on real media files and actual tool features.",
+      "Explicit Published and Last Updated timestamps on every guide.",
+      "Clear corrections protocol via support@transcriptg.com.",
+      "Advertising independence: ads never dictate editorial coverage.",
     ],
     faqs: [
       {
-        q: "How can readers submit editorial corrections?",
-        a: "Readers can submit fact-checking corrections directly to editorial@transcriptg.com with technical references. Verified corrections are published with an explicit update timestamp.",
+        q: "How can readers submit corrections?",
+        a: "Readers can submit corrections or feedback directly to support@transcriptg.com. We review every report and update articles promptly.",
       },
     ],
     semanticHtml: `
       <section class="seo-editorial-policy">
-        <h1>TranscriptG Editorial Integrity &amp; Fact-Checking Charter</h1>
-        <p class="lead">Detailed documentation of our empirical benchmarking methodologies, multi-tiered peer review requirements, human oversight policies, and total editorial independence from advertisers.</p>
+        <h1>Editorial Policy</h1>
+        <p class="lead">Our simple, honest approach to writing guides, testing tools, making corrections, and maintaining advertising independence.</p>
+        <h2>1. Authorship &amp; Content Creation</h2>
+        <p>All guides, tutorials, and documentation on TranscriptG are authored and maintained by the site founder, Akash Singh Solanki. AI writing tools may be used to assist with formatting or outlining, but every published piece is manually reviewed, tested, and edited before publication.</p>
+        <h2>2. Corrections &amp; Updates</h2>
+        <p>If you notice an error in a tutorial, email support@transcriptg.com and we will review and update the guide promptly.</p>
+        <h2>3. Advertising Independence</h2>
+        <p>TranscriptG is supported by advertising. Advertising partners have no influence over editorial content, tool descriptions, or tutorials.</p>
       </section>
     `,
   },
@@ -645,78 +753,23 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
       </section>
     `,
   },
-  "/guides": {
-    title: "Technical Audio Guides, Empirical Case Studies & Whitepapers — TranscriptG",
-    description: "Peer-reviewed engineering research, empirical acoustic benchmarks, FCC compliance handbooks, and courtroom transcription standards authored by our credentialed editorial board.",
-    keywords: "audio transcription guides, speech recognition case studies, wer acoustic benchmark, fcc closed caption compliance, courtroom transcription protocol, audio codecs speech recognition, subtitle engineering papers",
-    canonicalPath: "/guides",
-    ogType: "website",
-    category: "TechnicalReference",
-    h1: "Technical Audio Guides & Empirical Case Studies",
-    lead: "Flagship engineering papers analyzing acoustic physics, neural ASR architectures, international regulatory compliance, and broadcast standards.",
-    features: [
-      "Empirical Benchmark: Minimizing Word Error Rate (WER) in High-Reverberation Acoustic Environments.",
-      "The 2026 FCC & ADA Caption Compliance Handbook: Reading Speed (CPS), Cues & Safe Title Margins.",
-      "Evidentiary Courtroom & Deposition Transcription Standards: Exact Verbatim vs. Clean Verbatim Protocols.",
-      "Lossless vs. Compressed Audio Codecs for Speech Recognition: WAV, FLAC, MP3, AAC, and Opus Benchmarks.",
-    ],
-    faqs: [
-      {
-        q: "What causes high Word Error Rate in speech recognition?",
-        a: "Acoustic reverberation (RT60 > 0.6s), background noise (SNR < 10dB), overlapping speakers, and low-bitrate codec compression artifacts are the primary causes of degraded ASR transcription accuracy.",
-      },
-      {
-        q: "What is the difference between exact verbatim and clean verbatim?",
-        a: "Exact verbatim captures every utterance, including stutters, filler words ('um', 'uh'), false starts, and coughing, which is mandatory in legal courtroom depositions. Clean verbatim edits out filler words to produce smooth, readable text suitable for executive meetings and journalism.",
-      },
-    ],
-    semanticHtml: `
-      <section class="seo-guides">
-        <h1>Technical Audio Guides &amp; Empirical Case Studies</h1>
-        <p class="lead">Peer-reviewed whitepapers and engineering case studies authored by our credentialed editorial board covering acoustic physics, closed caption law, and automated transcription architectures.</p>
-        
-        <h2>Flagship Engineering Research Papers</h2>
-        <ul>
-          <li><a href="/blog/transcription-accuracy-tips">Minimizing Word Error Rate (WER) in High-Reverberation Environments</a> (Acoustic physics &amp; DSP benchmarks)</li>
-          <li><a href="/blog/accessibility-ada-wcag-closed-captions">The 2026 FCC &amp; ADA Caption Compliance Handbook</a> (Reading speeds, CPL, and legal mandates)</li>
-          <li><a href="/blog/legal-deposition-court-transcription-standards">Evidentiary Courtroom &amp; Deposition Transcription Standards</a> (Verbatim legal protocols)</li>
-          <li><a href="/blog/audio-formats-codecs-transcription-guide">Lossless vs. Compressed Audio Codecs for Speech Recognition</a> (WAV vs. MP3 vs. Opus benchmarks)</li>
-        </ul>
-      </section>
-    `,
-  },
   "/seo-checklist": {
-    title: "Google Search Console & AdSense Readiness Hub — TranscriptG",
-    description: "Publisher operations checklist: Sitemap submission, URL inspection, and indexation verification to resolve 'Low-value content' flags and guarantee AdSense approval.",
-    keywords: "adsense approval checklist, google search console sitemap submission, resolve low value content adsense, ads.txt verification transcriptg, googlebot crawling indexing",
+    title: "Publisher Checklist — TranscriptG",
+    description: "Internal operations checklist for verifying site tools and indexing.",
+    keywords: "transcriptg checklist",
     canonicalPath: "/seo-checklist",
     ogType: "website",
     category: "TechnicalReference",
-    h1: "Google Search Console & AdSense Readiness Hub",
-    lead: "Actionable checklist to guarantee Googlebot and AdSense automated reviewers index all high-value interactive tools and editorial guides.",
+    h1: "Publisher Verification Checklist",
+    lead: "Internal operations checklist for site tools and verification.",
     features: [
       "Dynamic XML sitemap verification at https://transcriptg.com/sitemap.xml.",
-      "High-value URL inspection checklist for Google Search Console.",
-      "Direct Publisher ID ads.txt verification.",
-      "Pre-flight verification protocol prior to requesting AdSense re-review.",
     ],
-    faqs: [
-      {
-        q: "Why does Google AdSense flag sites with 'Low-value content'?",
-        a: "Google AdSense issues 'Low-value content' flags when a site lacks substantial original text, functions as an empty utility without educational documentation, or is submitted for review before all pages have been crawled and indexed by Google Search Console.",
-      },
-    ],
+    faqs: [],
     semanticHtml: `
       <section class="seo-checklist">
-        <h1>Google Search Console &amp; AdSense Approval Hub</h1>
-        <p class="lead">Audit protocol to verify indexing in Google Search Console, confirm ads.txt publisher credentials, and guarantee site readiness before requesting AdSense re-review.</p>
-        <h2>Essential Publisher Checkpoints</h2>
-        <ol>
-          <li>Submit dynamic XML sitemap (https://transcriptg.com/sitemap.xml) in Google Search Console.</li>
-          <li>Request indexing for high-priority pages using the Search Console URL Inspection tool.</li>
-          <li>Verify ads.txt file contains authorized direct publisher ID (pub-9246342607636743).</li>
-          <li>Ensure zero cumulative layout shift (CLS) on all ad unit containers.</li>
-        </ol>
+        <h1>Publisher Verification Checklist</h1>
+        <p class="lead">Internal checklist for site verification.</p>
       </section>
     `,
   },
@@ -926,20 +979,10 @@ export function buildSchemaOrgJsonLd(config: PageSeoConfig, canonicalUrl: string
       dateModified: new Date().toISOString(),
       author: {
         "@type": "Person",
-        name: config.authorName || "Akash Singh Solanki",
-        jobTitle: config.authorRole || "Lead Systems Architect",
+        name: "Akash Singh Solanki",
+        jobTitle: "Founder & Developer",
         url: `${BASE_URL}/about`,
       },
-      ...(config.reviewerName
-        ? {
-            reviewedBy: {
-              "@type": "Person",
-              name: config.reviewerName,
-              jobTitle: config.reviewerRole || "Technical Reviewer",
-              url: `${BASE_URL}/about`,
-            },
-          }
-        : {}),
       publisher: {
         "@type": "Organization",
         name: "TranscriptG",

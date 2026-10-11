@@ -10,11 +10,9 @@ export const article14_zeroDataRetentionSecurity: BlogArticle = {
   readTime: "15 min read",
   date: "August 2026",
   author: "Akash Singh Solanki",
-  authorRole: "Founder & Lead Systems Architect",
+  authorRole: "Founder & Developer",
   authorBio: "Security engineer and distributed systems architect dedicated to zero-retention memory models, cryptographically verified ephemeral execution, and enterprise privacy guarantees.",
-  reviewer: "Dr. Maya Lin, PhD",
-  reviewerRole: "Principal Computational Linguist",
-  summary: "A technical whitepaper detailing the architecture, threat models, and compliance advantages of Zero Data Retention (ZDR). Learn how volatile RAM computing protects enterprises from data breaches.",
+      summary: "A technical whitepaper detailing the architecture, threat models, and compliance advantages of Zero Data Retention (ZDR). Learn how volatile RAM computing protects enterprises from data breaches.",
   tableOfContents: [
     { id: "the-cloud-storage-liability", title: "1. The Hidden Liability of Persistent Cloud Object Storage" },
     { id: "zdr-architectural-pillars", title: "2. The 4 Pillars of a True Zero Data Retention Architecture" },

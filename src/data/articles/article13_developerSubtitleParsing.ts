@@ -10,11 +10,9 @@ export const article13_developerSubtitleParsing: BlogArticle = {
   readTime: "14 min read",
   date: "August 2026",
   author: "Akash Singh Solanki",
-  authorRole: "Founder & Lead Systems Architect",
+  authorRole: "Founder & Developer",
   authorBio: "Full-stack engineer and distributed systems architect with extensive expertise in TypeScript, WebAssembly, and regex timecode parsers.",
-  reviewer: "Marcus Sterling",
-  reviewerRole: "Senior DSP & Audio Mastering Engineer",
-  summary: "A practical guide for software engineers building subtitle parsers, video editors, and audio synchronization tools. Includes production-ready TypeScript and Python parsers, timecode converters, and regex patterns.",
+      summary: "A practical guide for software engineers building subtitle parsers, video editors, and audio synchronization tools. Includes production-ready TypeScript and Python parsers, timecode converters, and regex patterns.",
   tableOfContents: [
     { id: "subtitle-data-models", title: "1. The Universal Subtitle Data Model" },
     { id: "typescript-srt-parser", title: "2. Building a Robust TypeScript SRT Parser" },

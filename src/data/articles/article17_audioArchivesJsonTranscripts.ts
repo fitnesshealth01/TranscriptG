@@ -10,11 +10,9 @@ export const article17_audioArchivesJsonTranscripts: BlogArticle = {
   readTime: "14 min read",
   date: "August 2026",
   author: "Akash Singh Solanki",
-  authorRole: "Founder & Lead Systems Architect",
+  authorRole: "Founder & Developer",
   authorBio: "Database systems architect specializing in vector index pipelines, large-scale audio corpus extraction, and semantic retrieval architectures.",
-  reviewer: "Marcus Sterling",
-  reviewerRole: "Senior DSP & Audio Mastering Engineer",
-  summary: "A technical blueprint for libraries, broadcast networks, and enterprises digitizing massive audio repositories into structured JSON datasets and vector embeddings for instant semantic search.",
+      summary: "A technical blueprint for libraries, broadcast networks, and enterprises digitizing massive audio repositories into structured JSON datasets and vector embeddings for instant semantic search.",
   tableOfContents: [
     { id: "the-dark-data-archive-problem", title: "1. The 'Dark Data' Crisis in Audio Archives" },
     { id: "structured-json-transcript-schema", title: "2. The Standardized Archive JSON Transcript Schema" },
@@ -43,7 +41,7 @@ export const article17_audioArchivesJsonTranscripts: BlogArticle = {
     "channels": 1
   },
   "speakers": [
-    { "id": "SPK_01", "name": "Dr. Eleanor Vance", "role": "Principal Physicist" },
+    { "id": "SPK_01", "name": "Dr. Eleanor Smith", "role": "Principal Physicist" },
     { "id": "SPK_02", "name": "Marcus Holloway", "role": "Interviewer" }
   ],
   "segments": [

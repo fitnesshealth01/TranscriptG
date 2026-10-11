@@ -31,7 +31,7 @@ export const Seo: React.FC<SeoProps> = ({
   jsonLd,
   canonicalPath,
   canonicalUrl: customCanonicalUrl,
-  author = "TranscriptG Engineering Lab",
+  author = "Akash Singh Solanki",
   datePublished = "2026-08-01",
   dateModified = "2026-08-27",
   applicationCategory = "MultimediaApplication",
@@ -148,13 +148,6 @@ export const Seo: React.FC<SeoProps> = ({
           price: "0",
           priceCurrency: "USD",
         },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          ratingCount: "1420",
-          bestRating: "5",
-          worstRating: "1",
-        },
       },
     ];
 
@@ -211,13 +204,19 @@ export const Seo: React.FC<SeoProps> = ({
         description,
         mainEntityOfPage: canonicalUrl,
         author: {
-          "@type": "Organization",
-          name: author,
+          "@type": "Person",
+          name: "Akash Singh Solanki",
+          jobTitle: "Founder & Developer",
+          url: `${siteUrl}/about`,
         },
         publisher: {
           "@type": "Organization",
           name: "TranscriptG",
           url: siteUrl,
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteUrl}/icon.png`,
+          },
         },
         datePublished,
         dateModified,

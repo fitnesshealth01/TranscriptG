@@ -55,6 +55,7 @@ export const GscChecklistPage: React.FC = () => {
           "googlebot crawling indexing",
         ]}
         canonicalPath="/seo-checklist"
+        noindex={true}
       />
 
       <PageHeader

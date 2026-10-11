@@ -1,5 +1,5 @@
 import React, { Suspense, Component, ErrorInfo, ReactNode } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { Loader2, RefreshCw, AlertCircle } from "lucide-react";
 import { Home } from "./pages/Home";
@@ -46,7 +46,9 @@ const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"), "ContactP
 const BlogIndexPage = lazyWithRetry(() => import("./pages/BlogIndexPage"), "BlogIndexPage");
 const BlogPostDynamic = lazyWithRetry(() => import("./pages/BlogPostDynamic"), "BlogPostDynamic");
 const ToolsHubPage = lazyWithRetry(() => import("./pages/ToolsHubPage"), "ToolsHubPage");
-const EditorialTeamPage = lazyWithRetry(() => import("./pages/EditorialTeamPage"), "EditorialTeamPage");
+const VideoTranslatorPage = lazyWithRetry(() => import("./pages/VideoTranslatorPage"), "VideoTranslatorPage");
+const SubtitleTranslatorPage = lazyWithRetry(() => import("./pages/SubtitleTranslatorPage"), "SubtitleTranslatorPage");
+const YouTubeSummarizerPage = lazyWithRetry(() => import("./pages/YouTubeSummarizerPage"), "YouTubeSummarizerPage");
 const EditorialPolicyPage = lazyWithRetry(() => import("./pages/EditorialPolicyPage"), "EditorialPolicyPage");
 const GlossaryPage = lazyWithRetry(() => import("./pages/GlossaryPage"), "GlossaryPage");
 const GuidesPage = lazyWithRetry(() => import("./pages/GuidesPage"), "GuidesPage");
@@ -131,11 +133,14 @@ export default function App() {
               <Route path="youtube" element={<YouTubeTranscriptPage />} />
               <Route path="convert" element={<ConvertPage />} />
               <Route path="process" element={<ProcessPage />} />
+              <Route path="video-translator" element={<VideoTranslatorPage />} />
+              <Route path="ai-subtitle-translator" element={<SubtitleTranslatorPage />} />
+              <Route path="youtube-video-summarizer" element={<YouTubeSummarizerPage />} />
               <Route path="tools" element={<ToolsHubPage />} />
-              <Route path="editorial-team" element={<EditorialTeamPage />} />
+              <Route path="editorial-team" element={<Navigate to="/about" replace />} />
               <Route path="editorial-policy" element={<EditorialPolicyPage />} />
               <Route path="glossary" element={<GlossaryPage />} />
-              <Route path="guides" element={<GuidesPage />} />
+              <Route path="guides" element={<Navigate to="/blog" replace />} />
               <Route path="seo-checklist" element={<GscChecklistPage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="privacy" element={<PrivacyPage />} />

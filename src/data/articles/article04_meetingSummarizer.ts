@@ -9,12 +9,10 @@ export const article04_meetingSummarizer: BlogArticle = {
   category: "Productivity",
   readTime: "14 min read",
   date: "August 2026",
-  author: "Dr. Maya Lin, PhD",
-  authorRole: "Principal Computational Linguist",
+  author: "Akash Singh Solanki",
+  authorRole: "Founder & Developer",
   authorBio: "Computational linguist specializing in discourse structure extraction, meeting dialogue summarization, and pragmatic NLP models.",
-  reviewer: "Akash Singh Solanki",
-  reviewerRole: "Founder & Lead Systems Architect",
-  summary: "A practical guide to extracting high-leverage business value from team recordings. How to generate executive briefs, delegate clear action items, and ensure compliance without data leaks.",
+      summary: "A practical guide to extracting high-leverage business value from team recordings. How to generate executive briefs, delegate clear action items, and ensure compliance without data leaks.",
   tableOfContents: [
     { id: "the-meeting-overload-crisis", title: "1. The Modern Meeting Overload Crisis" },
     { id: "anatomy-of-executive-summary", title: "2. The Anatomy of an Actionable Executive Summary" },
@@ -61,13 +59,13 @@ export const article04_meetingSummarizer: BlogArticle = {
     </tr>
     <tr>
       <td>Refactor Speech Decoder Memory Buffers</td>
-      <td>Marcus Vance (Lead DSP)</td>
+      <td>Mark V. (Lead DSP)</td>
       <td>September 04, 2026</td>
       <td>Zero disk I/O benchmarks verified in staging</td>
     </tr>
     <tr>
       <td>Draft SOC-2 Type II Compliance Report</td>
-      <td>Elena Rostova (SecOps)</td>
+      <td>the author (SecOps)</td>
       <td>September 15, 2026</td>
       <td>External auditor audit questionnaire completed</td>
     </tr>

@@ -72,19 +72,14 @@ export const GlossaryPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       <Seo
-        title="Audio Engineering, Speech Recognition & Subtitle Terminology Glossary — TranscriptG"
-        description="Authoritative glossary of 40+ speech recognition (ASR), acoustic signal processing, subtitle standards, and closed caption compliance terms (WER, DER, Nyquist, CEA-608, WebVTT)."
+        title="Audio & Subtitle Glossary – TranscriptG"
+        description="Definitions for speech recognition, audio and subtitle terms including WER, sample rates, SRT, WebVTT and closed captioning standards."
         keywords={[
           "audio engineering glossary",
           "speech recognition terminology",
           "wer word error rate definition",
-          "der diarization error rate",
           "webvtt vs srt specifications",
-          "cea-608 closed caption standard",
-          "audio sample rate nyquist",
           "subtitle characters per second",
-          "acoustic signal processing",
-          "fcc closed caption compliance",
         ]}
         canonicalPath="/glossary"
       />
@@ -93,13 +88,13 @@ export const GlossaryPage: React.FC = () => {
       <div className="space-y-4 text-center max-w-3xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff4d00]/10 text-[#ff4d00] font-mono text-xs font-bold border border-[#ff4d00]/20">
           <BookOpen className="w-3.5 h-3.5" />
-          <span>Linguistic &amp; Acoustic Engineering Repository</span>
+          <span>Reference Guide</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-[#0d0f12] tracking-tight">
-          Audio &amp; Caption Terminology Glossary
+          Audio &amp; Subtitle Glossary
         </h1>
         <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
-          Comprehensive, peer-reviewed reference covering mathematical formulations, acoustic signal physics, neural ASR architectures, and international broadcast compliance standards.
+          Clear explanations of common audio signal terms, speech recognition concepts, and subtitle format standards.
         </p>
 
         {/* View Switcher Tabs */}
@@ -310,17 +305,17 @@ export const GlossaryPage: React.FC = () => {
             </div>
           )}
 
-          {/* E-E-A-T Editorial Review & Cross-Links */}
+          {/* Reference & Cross-Links */}
           <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900 text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-xl mt-12">
             <div className="space-y-2 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold">
-                <ShieldCheck className="w-3.5 h-3.5" /> Peer-Reviewed Corpus
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff4d00]/20 text-[#ff4d00] font-mono text-xs font-bold">
+                <BookOpen className="w-3.5 h-3.5" /> Technical Reference
               </div>
               <h3 className="text-lg sm:text-xl font-black text-white">
-                Maintained by the TranscriptG Editorial Board
+                Audio &amp; Subtitle Standards Reference
               </h3>
               <p className="text-xs text-neutral-400 leading-relaxed">
-                All acoustic signal definitions, speech recognition equations, and closed caption compliance metrics are verified by certified court reporters, acoustic scientists, and accessibility auditors.
+                Compiled to help video creators, podcasters, and developers understand subtitle formatting, speech recognition terms, and audio specifications.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
@@ -328,13 +323,13 @@ export const GlossaryPage: React.FC = () => {
                 to="/tools"
                 className="px-4 py-2.5 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white font-mono text-xs font-bold transition-all shadow-md"
               >
-                Test in Tools Hub →
+                Interactive Utilities →
               </Link>
               <Link
-                to="/editorial-team"
+                to="/about"
                 className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold transition-all"
               >
-                Editorial Credentials
+                About TranscriptG
               </Link>
             </div>
           </div>

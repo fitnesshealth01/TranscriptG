@@ -3,6 +3,20 @@ import { Link } from "react-router-dom";
 import { ShieldCheck, X } from "lucide-react";
 
 /**
+ * Updates Google Consent Mode v2 via gtag
+ */
+function updateGtagConsent(granted: boolean) {
+  if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+    (window as any).gtag("consent", "update", {
+      ad_storage: granted ? "granted" : "denied",
+      ad_user_data: granted ? "granted" : "denied",
+      ad_personalization: granted ? "granted" : "denied",
+      analytics_storage: granted ? "granted" : "denied",
+    });
+  }
+}
+
+/**
  * Triggers the Google Certified CMP revocation dialog if active,
  * or re-opens TranscriptG's consent modal.
  */
@@ -26,6 +40,8 @@ export const CookieConsent: React.FC = () => {
       if (!consent) {
         const timer = setTimeout(() => setShow(true), 1200);
         return () => clearTimeout(timer);
+      } else {
+        updateGtagConsent(consent === "accepted");
       }
     } catch {
       // LocalStorage access fail-safe
@@ -42,6 +58,7 @@ export const CookieConsent: React.FC = () => {
     try {
       localStorage.setItem("transcriptg_cookie_consent", preference);
     } catch {}
+    updateGtagConsent(preference === "accepted");
     setShow(false);
   };
 
@@ -69,7 +86,7 @@ export const CookieConsent: React.FC = () => {
         </div>
 
         <p className="text-xs text-neutral-600 leading-relaxed">
-          TranscriptG and advertising partners (such as Google AdSense) use cookies to analyze site traffic and deliver relevant, non-intrusive ads that keep our transcription tools 100% free. You can review your choices anytime in our{" "}
+          TranscriptG uses cookies and analytics to evaluate traffic and deliver non-intrusive ads that keep our transcription tools 100% free. You can review your choices anytime in our{" "}
           <Link to="/privacy" className="text-[#ff4d00] underline font-semibold">
             Privacy Policy
           </Link>{" "}

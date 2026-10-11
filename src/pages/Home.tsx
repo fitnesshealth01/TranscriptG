@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Seo } from "../components/Seo";
 import { SpectrumTrace } from "../components/SpectrumTrace";
 import { InteractiveDemoPlayer } from "../components/InteractiveDemoPlayer";
@@ -26,10 +26,31 @@ import {
   Star,
   BookOpen,
   Clock,
+  Youtube,
+  Languages,
 } from "lucide-react";
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
+  const [heroTab, setHeroTab] = useState<"file" | "youtube">("file");
+  const [heroYoutubeUrl, setHeroYoutubeUrl] = useState("");
+
+  const handleHeroFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      // Navigate to transcribe tool
+      navigate("/transcribe");
+    }
+  };
+
+  const handleHeroYoutubeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (heroYoutubeUrl.trim()) {
+      navigate(`/youtube-transcript?url=${encodeURIComponent(heroYoutubeUrl.trim())}`);
+    } else {
+      navigate("/youtube-transcript");
+    }
+  };
 
   const faqs = [
     {
@@ -42,7 +63,7 @@ export const Home: React.FC = () => {
     },
     {
       q: "How is my privacy protected during processing?",
-      a: "Privacy-first architecture: uploaded audio/video and text files are processed exclusively within your active browser session. Files are never retained on our servers, stored in databases, or used for model training.",
+      a: "Privacy-first architecture: uploaded audio/video and text files are processed exclusively within your active session. Files are never stored on persistent disks, logged in databases, or used for model training.",
     },
     {
       q: "Which languages does TranscriptG support?",
@@ -57,8 +78,8 @@ export const Home: React.FC = () => {
   return (
     <div className="space-y-24">
       <Seo
-        title="TranscriptG — Free Online Audio Transcription, YouTube Captions & Subtitle Converter"
-        description="Zero-retention, 100% free transcription suite. Transcribe MP3, WAV, and MP4 audio to text, extract YouTube video transcripts with timestamps, convert SRT/VTT/JSON, and summarize speech in 90+ languages. No login, no watermark."
+        title="TranscriptG – Free Audio, Video & YouTube Transcription"
+        description="Free online transcription and video tools. Transcribe audio, convert SRT/VTT subtitles, translate speech, and summarize YouTube videos in 90+ languages."
         keywords={[
           "transcription",
           "speech to text",
@@ -66,72 +87,166 @@ export const Home: React.FC = () => {
           "srt converter",
           "vtt converter",
           "audio to text",
-          "video transcription",
+          "ai video translator",
+          "youtube video summarizer",
           "free transcription tool",
-          "subtitles downloader",
-          "ai text summarizer",
-          "no login speech to text",
-          "transcribe audio to text free",
         ]}
         faqs={faqs}
         canonicalPath="/"
       />
 
-      {/* SECTION 1: HERO */}
-      <section className="relative pt-12 pb-20 overflow-hidden bg-grid-pattern border-b border-black/5">
-        {/* Radial thermal backdrop */}
+      {/* SECTION 1: TOOL-FIRST HERO */}
+      <section className="relative pt-8 pb-16 overflow-hidden bg-grid-pattern border-b border-black/5">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#ff4d00]/15 via-[#00d9ff]/5 to-transparent pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto space-y-6">
+          <div className="text-center max-w-4xl mx-auto space-y-5">
             {/* Status Pill */}
             <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white border border-black/10 shadow-sm max-w-full mx-auto">
               <span className="w-2 h-2 rounded-full bg-[#ff4d00] animate-pulse shrink-0" />
               <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-neutral-800">
-                Precision Linguistic Engine
+                Free Speech &amp; Subtitle Tools
               </span>
               <span className="px-2 py-0.5 rounded-full bg-[#00d9ff]/20 text-[#0088a8] text-[9px] sm:text-[10px] font-mono font-bold shrink-0">
-                No Login Required
+                No Sign-Up
               </span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-6xl lg:text-7xl font-black text-[#0d0f12] tracking-[-0.03em] sm:tracking-[-0.04em] leading-[1.1] sm:leading-[1.05] break-words">
-              Transcribe, convert, and think in{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d00] to-amber-500">
-                90+ languages
-              </span>
+            {/* Exactly ONE H1 on page */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0d0f12] tracking-tight leading-tight">
+              Free Audio, Video &amp; YouTube Transcription
             </h1>
 
-            <p className="text-base sm:text-2xl text-neutral-600 max-w-2xl mx-auto font-normal leading-relaxed px-2 sm:px-0">
-              A public-access transcription laboratory that turns sound into knowledge. Zero signups, zero watermarks, session-private.
+            <p className="text-base sm:text-xl text-neutral-600 max-w-2xl mx-auto font-normal leading-relaxed">
+              Turn recordings, videos, and YouTube links into text, subtitles, translations, and summaries. Fast AI processing with no registration required.
             </p>
 
-            {/* Hero Spectrum Trace */}
-            <div className="max-w-md w-full mx-auto my-4 sm:my-6 p-2.5 sm:p-3 bg-white/80 rounded-2xl border border-black/10 shadow-sm overflow-hidden">
-              <SpectrumTrace active={true} barsCount={28} heightClass="h-10" accentColor="mixed" />
+            {/* Above-the-fold Interactive Input Card */}
+            <div className="max-w-2xl mx-auto mt-6 p-6 rounded-3xl bg-white border border-black/10 shadow-xl text-left">
+              <div className="flex border-b border-neutral-200 mb-4">
+                <button
+                  type="button"
+                  onClick={() => setHeroTab("file")}
+                  className={`pb-3 px-4 font-bold text-sm border-b-2 transition-colors flex items-center gap-2 ${
+                    heroTab === "file"
+                      ? "border-[#ff4d00] text-[#ff4d00]"
+                      : "border-transparent text-neutral-500 hover:text-neutral-800"
+                  }`}
+                >
+                  <UploadCloud className="w-4 h-4" />
+                  <span>Upload Media File</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setHeroTab("youtube")}
+                  className={`pb-3 px-4 font-bold text-sm border-b-2 transition-colors flex items-center gap-2 ${
+                    heroTab === "youtube"
+                      ? "border-[#ff4d00] text-[#ff4d00]"
+                      : "border-transparent text-neutral-500 hover:text-neutral-800"
+                  }`}
+                >
+                  <Youtube className="w-4 h-4 text-red-600" />
+                  <span>Paste YouTube Link</span>
+                </button>
+              </div>
+
+              {heroTab === "file" ? (
+                <div className="space-y-4">
+                  <label className="border-2 border-dashed border-neutral-300 hover:border-[#ff4d00] rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer transition-colors bg-neutral-50/50 hover:bg-orange-50/30">
+                    <UploadCloud className="w-8 h-8 text-[#ff4d00] mb-2" />
+                    <span className="font-bold text-neutral-800 text-sm">
+                      Choose audio or video file (MP3, WAV, M4A, MP4)
+                    </span>
+                    <span className="text-xs text-neutral-500 mt-1">Up to 25MB · Zero sign-up</span>
+                    <input
+                      type="file"
+                      accept="audio/*,video/*"
+                      onChange={handleHeroFileSelect}
+                      className="hidden"
+                    />
+                  </label>
+                  <div className="flex justify-end">
+                    <Link
+                      to="/transcribe"
+                      className="px-6 py-2.5 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white text-sm font-bold shadow-md flex items-center gap-2"
+                    >
+                      <span>Open Transcriber</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleHeroYoutubeSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                      YouTube Video URL
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      value={heroYoutubeUrl}
+                      onChange={(e) => setHeroYoutubeUrl(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:border-[#ff4d00] focus:ring-2 focus:ring-[#ff4d00]/20 outline-none text-sm font-mono"
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <button
+                      type="submit"
+                      className="px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-bold shadow-md flex items-center gap-2"
+                    >
+                      <span>Get YouTube Captions</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
 
-            {/* Primary CTA */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            {/* Quick Tasks Buttons */}
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-medium">
+              <span className="text-neutral-500 font-mono text-[11px] uppercase tracking-wider mr-1">
+                Quick Tools:
+              </span>
               <Link
                 to="/transcribe"
-                className="px-8 py-4 rounded-2xl bg-[#ff4d00] hover:bg-[#e04400] text-white text-base font-black tracking-tight shadow-xl thermal-glow flex items-center gap-2 group transition-all duration-300 transform hover:scale-[1.02]"
+                className="px-3.5 py-1.5 rounded-xl bg-white border border-neutral-200 hover:border-[#ff4d00] text-neutral-800 shadow-sm transition-all"
               >
-                <span>Start Transcribing</span>
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                Audio to Text
               </Link>
-
+              <Link
+                to="/youtube-transcript"
+                className="px-3.5 py-1.5 rounded-xl bg-white border border-neutral-200 hover:border-red-500 text-neutral-800 shadow-sm transition-all"
+              >
+                YouTube Captions
+              </Link>
+              <Link
+                to="/video-translator"
+                className="px-3.5 py-1.5 rounded-xl bg-white border border-neutral-200 hover:border-[#ff4d00] text-neutral-800 shadow-sm transition-all"
+              >
+                AI Video Translator
+              </Link>
+              <Link
+                to="/ai-subtitle-translator"
+                className="px-3.5 py-1.5 rounded-xl bg-white border border-neutral-200 hover:border-[#0088a8] text-neutral-800 shadow-sm transition-all"
+              >
+                Subtitle Translator
+              </Link>
+              <Link
+                to="/youtube-video-summarizer"
+                className="px-3.5 py-1.5 rounded-xl bg-white border border-neutral-200 hover:border-red-500 text-neutral-800 shadow-sm transition-all"
+              >
+                YouTube Summarizer
+              </Link>
               <Link
                 to="/convert"
-                className="px-8 py-4 rounded-2xl bg-white hover:bg-neutral-50 text-[#0d0f12] text-base font-bold tracking-tight border border-black/10 shadow-md flex items-center gap-2 transition-all duration-300"
+                className="px-3.5 py-1.5 rounded-xl bg-white border border-neutral-200 hover:border-[#0088a8] text-neutral-800 shadow-sm transition-all"
               >
-                <span>Format Converter</span>
+                Convert SRT / VTT
               </Link>
             </div>
           </div>
 
-          {/* SECTION 1.5: INTERACTIVE LIVE AUDIO & MULTI-SPEAKER DEMO */}
+          {/* SECTION 1.5: INTERACTIVE DEMO (Illustrative Example) */}
           <div className="mt-14 max-w-5xl mx-auto">
             <InteractiveDemoPlayer />
           </div>
@@ -340,13 +455,13 @@ export const Home: React.FC = () => {
           {[
             {
               quote: "TranscriptG converted 45 minutes of audio into an SRT subtitle file in seconds with zero errors in timestamp alignment.",
-              author: "Elena Rostova",
+              author: "Elena R.",
               role: "Documentary Filmmaker",
             },
             {
               quote: "The no-login, session-private guarantee is essential for our legal research team. Fast, precise, and completely privacy-first.",
-              author: "Marcus Vance",
-              role: "Senior Legal Analyst",
+              author: "Marcus V.",
+              role: "Legal Researcher",
             },
             {
               quote: "Having SRT, VTT, and Markdown exports in one click saves our podcast production team hours every week.",
@@ -374,28 +489,28 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 6: EDITORIAL & LINGUISTIC JOURNAL */}
+      {/* SECTION 6: PRACTICAL GUIDES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-[#ff4d00]" />
               <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold">
-                Linguistic Research Lab
+                Practical Tutorials
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-[#0d0f12] tracking-tight mt-2">
-              Featured Research &amp; Engineering Guides
+              Featured Transcription &amp; Video Guides
             </h2>
             <p className="text-neutral-600 text-sm sm:text-base mt-2 max-w-xl">
-              In-depth technical guides on acoustic signal processing, subtitle synchronization, accessibility compliance, and multimodal speech recognition.
+              Practical step-by-step guides on creating subtitles, translating videos, formatting SRT files, and summarizing speech.
             </p>
           </div>
           <Link
             to="/blog"
             className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#ff4d00] hover:text-[#e04400] transition-colors shrink-0"
           >
-            <span>Explore All 20 Technical Guides</span>
+            <span>Explore All Guides</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -433,20 +548,26 @@ export const Home: React.FC = () => {
           ))}
         </div>
 
-        {/* E-E-A-T Editorial Governance Showcase Card */}
+        {/* Clear About & Tools Links */}
         <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-neutral-900 text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-2xl">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold">
-              <ShieldCheck className="w-3.5 h-3.5" /> E-E-A-T Editorial Governance
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ff4d00]/20 text-[#ff4d00] font-mono text-xs font-bold">
+              <ShieldCheck className="w-3.5 h-3.5" /> Built for Creators &amp; Students
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-white">
-              Peer-Reviewed by Acoustic Scientists, Court Reporters &amp; Accessibility Leads
+              Free, Transparent &amp; Private by Design
             </h3>
             <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed">
-              Every guide, legal deposition framework, and subtitle benchmark published on TranscriptG is reviewed by credentialed authorities holding Ph.D., RPR, CHDS, or CPACC certifications.
+              Every tool and tutorial on TranscriptG is maintained by site founder Akash Singh Solanki. No logins required, and files are processed strictly in temporary session memory.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <Link
+              to="/about"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-100 text-[#0d0f12] font-mono text-xs font-bold transition-all shadow-md"
+            >
+              About the Author →
+            </Link>
             <Link
               to="/glossary"
               className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold transition-all border border-white/10"
@@ -454,22 +575,10 @@ export const Home: React.FC = () => {
               Audio Glossary
             </Link>
             <Link
-              to="/guides"
-              className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold transition-all border border-white/10"
-            >
-              Case Studies
-            </Link>
-            <Link
-              to="/editorial-team"
-              className="px-4 py-2.5 rounded-xl bg-white hover:bg-neutral-100 text-[#0d0f12] font-mono text-xs font-bold transition-all shadow-md"
-            >
-              Editorial Board →
-            </Link>
-            <Link
               to="/tools"
               className="px-4 py-2.5 rounded-xl bg-[#ff4d00] hover:bg-[#e04400] text-white font-mono text-xs font-bold transition-all shadow-md"
             >
-              Utilities Hub
+              All Tools
             </Link>
           </div>
         </div>

@@ -10,11 +10,9 @@ export const article01_howTranscriptGWorks: BlogArticle = {
   readTime: "15 min read",
   date: "August 2026",
   author: "Akash Singh Solanki",
-  authorRole: "Founder & Lead Systems Architect",
+  authorRole: "Founder & Developer",
   authorBio: "Systems architect specializing in ephemeral in-memory computing, low-latency audio signal processing, and zero-retention security protocols.",
-  reviewer: "Dr. Maya Lin, PhD",
-  reviewerRole: "Principal Computational Linguist",
-  summary: "Discover how TranscriptG achieves 99%+ linguistic precision, sub-second latency, and strict zero-data-retention security using modern neural acoustic models and ephemeral memory buffers.",
+      summary: "Discover how TranscriptG achieves 99%+ linguistic precision, sub-second latency, and strict zero-data-retention security using modern neural acoustic models and ephemeral memory buffers.",
   tableOfContents: [
     { id: "the-challenge", title: "1. The Dilemma of Modern Cloud Transcription" },
     { id: "ingestion-demuxing", title: "2. Acoustic Ingestion & Codec Demuxing" },

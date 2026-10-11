@@ -33,52 +33,64 @@ export const Layout: React.FC = () => {
         <Logo />
 
         <div className="flex items-center gap-3 text-xs font-mono">
-          <nav className="hidden lg:flex items-center gap-4 text-neutral-600 font-semibold mr-2">
+          <nav className="hidden xl:flex items-center gap-5 text-neutral-600 font-semibold mr-2 text-xs">
             <Link
-              to="/tools"
-              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
-                location.pathname === "/tools" ? "text-[#ff4d00] font-bold" : ""
+              to="/transcribe"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname === "/transcribe" ? "text-[#ff4d00] font-bold" : ""
               }`}
             >
-              <Wand2 className="w-3.5 h-3.5" />
-              <span>Utilities</span>
+              Transcribe
             </Link>
             <Link
-              to="/glossary"
-              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
-                location.pathname === "/glossary" ? "text-[#ff4d00] font-bold" : ""
+              to="/youtube-transcript"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname === "/youtube-transcript" ? "text-[#ff4d00] font-bold" : ""
               }`}
             >
-              <FileText className="w-3.5 h-3.5" />
-              <span>Glossary</span>
+              YouTube Transcript
             </Link>
             <Link
-              to="/guides"
-              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
-                location.pathname === "/guides" || location.pathname.startsWith("/blog") ? "text-[#ff4d00] font-bold" : ""
+              to="/video-translator"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname === "/video-translator" ? "text-[#ff4d00] font-bold" : ""
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Guides</span>
+              Video Translator
             </Link>
             <Link
-              to="/editorial-team"
-              className={`hover:text-[#ff4d00] transition-colors flex items-center gap-1 ${
-                location.pathname === "/editorial-team" ? "text-[#ff4d00] font-bold" : ""
+              to="/convert"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname === "/convert" ? "text-[#ff4d00] font-bold" : ""
               }`}
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Editorial Board</span>
+              Subtitle Converter
+            </Link>
+            <Link
+              to="/process"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname === "/process" ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              Summarizer
+            </Link>
+            <Link
+              to="/blog"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname.startsWith("/blog") ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              Blog
+            </Link>
+            <Link
+              to="/about"
+              className={`hover:text-[#ff4d00] transition-colors ${
+                location.pathname === "/about" ? "text-[#ff4d00] font-bold" : ""
+              }`}
+            >
+              About
             </Link>
           </nav>
-
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-neutral-500 font-semibold">v3.7 Active</span>
-            <span className="px-2 py-0.5 rounded-full bg-[#ff4d00]/10 text-[#ff4d00] font-bold text-[10px]">
-              Public
-            </span>
-          </div>
 
           <button
             type="button"
