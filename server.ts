@@ -965,6 +965,7 @@ User-agent: *
 Allow: /
 Allow: /ads.txt
 Disallow: /api/
+Disallow: /seo-checklist
 
 # Google Ads.txt Verification Crawler
 User-agent: Google-adstxt

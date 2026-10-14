@@ -51,7 +51,6 @@ const SubtitleTranslatorPage = lazyWithRetry(() => import("./pages/SubtitleTrans
 const YouTubeSummarizerPage = lazyWithRetry(() => import("./pages/YouTubeSummarizerPage"), "YouTubeSummarizerPage");
 const EditorialPolicyPage = lazyWithRetry(() => import("./pages/EditorialPolicyPage"), "EditorialPolicyPage");
 const GlossaryPage = lazyWithRetry(() => import("./pages/GlossaryPage"), "GlossaryPage");
-const GuidesPage = lazyWithRetry(() => import("./pages/GuidesPage"), "GuidesPage");
 const GscChecklistPage = lazyWithRetry(() => import("./pages/GscChecklistPage"), "GscChecklistPage");
 const NotFoundPage = lazyWithRetry(() => import("./pages/NotFoundPage"), "NotFoundPage");
 

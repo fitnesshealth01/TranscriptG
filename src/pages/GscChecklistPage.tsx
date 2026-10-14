@@ -34,11 +34,13 @@ export const GscChecklistPage: React.FC = () => {
   const keyUrlsToInspect = [
     { name: "Home Platform", url: "https://transcriptg.com/" },
     { name: "Speech-to-Text Engine", url: "https://transcriptg.com/transcribe" },
+    { name: "YouTube Transcript Generator", url: "https://transcriptg.com/youtube-transcript" },
     { name: "Subtitle & Format Converter", url: "https://transcriptg.com/convert" },
+    { name: "AI Video Translator", url: "https://transcriptg.com/video-translator" },
+    { name: "AI Subtitle Translator", url: "https://transcriptg.com/ai-subtitle-translator" },
+    { name: "YouTube Video Summarizer", url: "https://transcriptg.com/youtube-video-summarizer" },
     { name: "Interactive Utilities Hub", url: "https://transcriptg.com/tools" },
     { name: "Audio Terminology Glossary", url: "https://transcriptg.com/glossary" },
-    { name: "Technical Case Studies & Guides", url: "https://transcriptg.com/guides" },
-    { name: "Editorial Board Credentials", url: "https://transcriptg.com/editorial-team" },
     { name: "Editorial & Fact-Checking Policy", url: "https://transcriptg.com/editorial-policy" },
   ];
 

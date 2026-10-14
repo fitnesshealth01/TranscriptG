@@ -16,6 +16,7 @@ Allow: /contact
 Allow: /privacy
 Allow: /terms
 Disallow: /api/
+Disallow: /seo-checklist
 
 # Google Ads.txt Verification Crawler
 User-agent: Google-adstxt

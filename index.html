@@ -11,14 +11,21 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#0d0f12" />
 
-    <!-- Google Analytics (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BVZ9V3TN4V"></script>
+    <!-- Google Consent Mode v2 Default Configuration (Required for AdSense/GA4 EU User Consent Policy) -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
       gtag('js', new Date());
       gtag('config', 'G-BVZ9V3TN4V');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BVZ9V3TN4V"></script>
 
     <!-- Google AdSense Official Script & Auto-Ads Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9246342607636743" crossorigin="anonymous"></script>
@@ -74,7 +81,7 @@
     <noscript>
       <div style="padding: 32px 20px; max-width: 900px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; color: #111827; line-height: 1.6;">
         <header style="margin-bottom: 28px; border-bottom: 2px solid #ff4d00; padding-bottom: 16px;">
-          <h1 style="font-size: 2rem; font-weight: 900; margin: 0 0 8px 0; color: #0d0f12;">TranscriptG — High-Precision Speech-to-Text &amp; Subtitle Intelligence Platform</h1>
+          <p style="font-size: 2rem; font-weight: 900; margin: 0 0 8px 0; color: #0d0f12; line-height: 1.2;">TranscriptG — High-Precision Speech-to-Text &amp; Subtitle Intelligence Platform</p>
           <p style="font-size: 1.1rem; color: #4b5563; margin: 0;">Public-access acoustic engineering and linguistic laboratory. Free speech-to-text transcription, YouTube caption generation, and multi-format subtitle conversion across 90+ languages.</p>
         </header>
 

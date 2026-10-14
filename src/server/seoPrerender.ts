@@ -1111,22 +1111,22 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
       <main id="ssr-crawler-fallback" style="padding: 32px 20px; max-width: 920px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; color: #111827; line-height: 1.6;">
         ${config.semanticHtml}
         <section style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
-          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">TranscriptG Engineering Lab Navigation</h3>
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">TranscriptG Tools &amp; Navigation</h3>
           <ul style="list-style-type: disc; padding-left: 20px;">
             <li><a href="/" style="color: #ff4d00;">Home — Audio Transcription &amp; Intelligence</a></li>
-            <li><a href="/transcribe" style="color: #ff4d00;">Engine 01: Speech-to-Text Transcriber</a></li>
-            <li><a href="/youtube-transcript" style="color: #ff4d00;">Engine 02: YouTube Transcript Generator</a></li>
-            <li><a href="/convert" style="color: #ff4d00;">Engine 03: Subtitle &amp; Format Converter (SRT, VTT, JSON)</a></li>
-            <li><a href="/process" style="color: #ff4d00;">Engine 04: AI Text Intelligence &amp; Summarizer</a></li>
-            <li><a href="/tools" style="color: #ff4d00;">Interactive Audio &amp; Caption Utilities Hub</a></li>
-            <li><a href="/glossary" style="color: #ff4d00;">Audio Engineering &amp; Subtitle Glossary (40+ Terms)</a></li>
-            <li><a href="/guides" style="color: #ff4d00;">Technical Case Studies &amp; Empirical Research</a></li>
-            <li><a href="/blog" style="color: #ff4d00;">Linguistic Journal &amp; Technical Blog</a></li>
-            <li><a href="/editorial-team" style="color: #ff4d00;">Editorial Board &amp; Peer Review Governance</a></li>
+            <li><a href="/transcribe" style="color: #ff4d00;">Speech-to-Text Transcriber (MP3, WAV, M4A)</a></li>
+            <li><a href="/youtube-transcript" style="color: #ff4d00;">YouTube Transcript Generator</a></li>
+            <li><a href="/convert" style="color: #ff4d00;">Subtitle &amp; Format Converter (SRT, VTT, JSON)</a></li>
+            <li><a href="/video-translator" style="color: #ff4d00;">AI Video Translator</a></li>
+            <li><a href="/ai-subtitle-translator" style="color: #ff4d00;">AI Subtitle Translator</a></li>
+            <li><a href="/youtube-video-summarizer" style="color: #ff4d00;">YouTube Video Summarizer</a></li>
+            <li><a href="/process" style="color: #ff4d00;">AI Text Intelligence &amp; Summarizer</a></li>
+            <li><a href="/tools" style="color: #ff4d00;">Interactive Utilities Hub</a></li>
+            <li><a href="/glossary" style="color: #ff4d00;">Audio &amp; Subtitle Glossary (40+ Terms)</a></li>
+            <li><a href="/blog" style="color: #ff4d00;">Technical Guides &amp; Blog</a></li>
             <li><a href="/editorial-policy" style="color: #ff4d00;">Editorial Integrity &amp; Fact-Checking Charter</a></li>
-            <li><a href="/seo-checklist" style="color: #ff4d00;">Search Engine Indexing &amp; AdSense Verification Hub</a></li>
-            <li><a href="/about" style="color: #ff4d00;">About TranscriptG &amp; Editorial Leadership</a></li>
-            <li><a href="/contact" style="color: #ff4d00;">Contact Support &amp; Technical Assistance</a></li>
+            <li><a href="/about" style="color: #ff4d00;">About TranscriptG &amp; Founder</a></li>
+            <li><a href="/contact" style="color: #ff4d00;">Contact Support</a></li>
             <li><a href="/privacy" style="color: #ff4d00;">Privacy Policy &amp; Cookie Disclosure</a></li>
             <li><a href="/terms" style="color: #ff4d00;">Terms of Service</a></li>
           </ul>
@@ -1134,7 +1134,11 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
       </main>
   `;
 
-  const routeNoscriptContent = `<noscript>${semanticBodyContent}</noscript>`;
+  // Ensure noscript does not duplicate the primary <h1> tag
+  const noscriptBody = semanticBodyContent
+    .replace(/<h1([^>]*)>/gi, '<p style="font-size:1.8rem; font-weight:900; margin:0 0 12px 0; color:#0d0f12;"$1>')
+    .replace(/<\/h1>/gi, '</p>');
+  const routeNoscriptContent = `<noscript>${noscriptBody}</noscript>`;
 
   if (modified.includes("<noscript>")) {
     modified = modified.replace(/<noscript>[\s\S]*?<\/noscript>/i, routeNoscriptContent);
