@@ -15,6 +15,11 @@ Allow: /about
 Allow: /contact
 Allow: /privacy
 Allow: /terms
+Allow: /copyright
+Allow: /editorial-policy
+Allow: /tools
+Allow: /tools/*
+Allow: /glossary
 Disallow: /api/
 Disallow: /seo-checklist
 

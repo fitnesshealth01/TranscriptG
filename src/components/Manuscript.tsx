@@ -8,6 +8,8 @@ interface ManuscriptProps {
   languageDetected?: string;
   onUpdateSegment?: (id: string, newText: string) => void;
   title?: string;
+  currentTime?: number;
+  onSeekToTime?: (seconds: number) => void;
 }
 
 export const Manuscript: React.FC<ManuscriptProps> = ({
@@ -16,8 +18,16 @@ export const Manuscript: React.FC<ManuscriptProps> = ({
   languageDetected,
   onUpdateSegment,
   title = "Manuscript Cues",
+  currentTime,
+  onSeekToTime,
 }) => {
   const [segments, setSegments] = useState<CueSegment[]>(initialSegments);
+
+  // Keep segments in sync with parent when new file or sample is loaded
+  React.useEffect(() => {
+    setSegments(initialSegments);
+  }, [initialSegments]);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -107,19 +117,38 @@ export const Manuscript: React.FC<ManuscriptProps> = ({
             No cues found matching "{searchQuery}".
           </div>
         ) : (
-          filtered.map((seg) => (
-            <div
-              key={seg.id}
-              className="glass-card p-4 sm:p-5 rounded-2xl border border-black/5 hover:border-[#ff4d00]/30 transition-all duration-200 group relative"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
-                {/* Timestamp Pill */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-100 text-[#0d0f12] text-xs font-mono font-bold border border-neutral-200/80">
-                  <Clock className="w-3 h-3 text-[#ff4d00]" />
-                  <span>{formatTimeDisplay(seg.start)}</span>
-                  <span className="text-neutral-400">→</span>
-                  <span>{formatTimeDisplay(seg.end)}</span>
-                </div>
+          filtered.map((seg) => {
+            const isActive =
+              currentTime !== undefined &&
+              currentTime >= seg.start &&
+              currentTime <= seg.end;
+
+            return (
+              <div
+                key={seg.id}
+                className={`p-4 sm:p-5 rounded-2xl transition-all duration-200 group relative border ${
+                  isActive
+                    ? "bg-gradient-to-r from-[#ff5500]/10 via-white to-white border-[#ff5500] shadow-[0_0_20px_rgba(255,85,0,0.18)] scale-[1.01]"
+                    : "glass-card border-black/5 hover:border-[#ff4d00]/30"
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
+                  {/* Timestamp Button */}
+                  <button
+                    type="button"
+                    onClick={() => onSeekToTime && onSeekToTime(seg.start)}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all border ${
+                      isActive
+                        ? "bg-[#ff5500] text-white border-[#ff5500] shadow-sm animate-pulse cursor-pointer"
+                        : "bg-neutral-100 text-[#0d0f12] border-neutral-200/80 hover:bg-[#ff5500]/10 hover:text-[#ff5500] hover:border-[#ff5500]/30 cursor-pointer"
+                    }`}
+                    title="Click to jump audio to this cue"
+                  >
+                    <Clock className={`w-3 h-3 ${isActive ? "text-white" : "text-[#ff4d00]"}`} />
+                    <span>{formatTimeDisplay(seg.start)}</span>
+                    <span className={isActive ? "text-white/70" : "text-neutral-400"}>→</span>
+                    <span>{formatTimeDisplay(seg.end)}</span>
+                  </button>
 
                 {/* Quick actions */}
                 <div className="flex items-center gap-2 opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity">
@@ -163,9 +192,10 @@ export const Manuscript: React.FC<ManuscriptProps> = ({
                 </p>
               )}
             </div>
-          ))
-        )}
-      </div>
+          );
+        })
+      )}
     </div>
-  );
+  </div>
+);
 };

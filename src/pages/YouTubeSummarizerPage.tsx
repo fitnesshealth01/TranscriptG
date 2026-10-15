@@ -121,7 +121,7 @@ export default function YouTubeSummarizerPage() {
     },
     {
       q: "Can I summarize videos without existing subtitles?",
-      a: "If a video has auto-generated or creator-uploaded captions, TranscriptG can summarize it instantly. For videos without captions, you can download the audio and run it through our Audio Transcriber tool.",
+      a: "If a video has auto-generated or creator-uploaded captions, TranscriptG summarizes it immediately. For videos without captions, our YouTube Speech Lab reconstructs dialogue under educational fair use guidelines directly in your browser without requiring external audio downloads.",
     },
     {
       q: "What summary formats are available?",

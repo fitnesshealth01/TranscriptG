@@ -5,7 +5,7 @@ export const article19_youtubeNoCaptionsWorkflow: BlogArticle = {
   title: "How to Transcribe Any YouTube Video When Captions Are Disabled: Step-by-Step Guide",
   metaTitle: "Transcribe YouTube Videos Without Captions Free (2026 Guide)",
   metaDescription: "Step-by-step guide to extract timestamped transcripts and subtitles from YouTube videos and Shorts when creator captions and auto-captions are missing or disabled.",
-  keywords: "transcribe youtube video no captions, extract youtube transcript without subtitles, youtube video to text free, youtube shorts transcript generator, youtube subtitles downloader without login, convert youtube audio to srt",
+  keywords: "transcribe youtube video no captions, extract youtube transcript without subtitles, youtube video to text free, youtube shorts transcript generator, youtube caption extractor without login, convert youtube audio to srt",
   category: "Tutorials",
   readTime: "8 min read",
   date: "September 2026",

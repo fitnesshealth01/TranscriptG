@@ -6,6 +6,8 @@ import { ProcessingView } from "../components/ProcessingView";
 import { Manuscript } from "../components/Manuscript";
 import { ExportSuite } from "../components/ExportSuite";
 import { TranscribeGuide } from "../components/TranscribeGuide";
+import { WaveformPlayer } from "../components/WaveformPlayer";
+import { SAMPLE_AUDIO_ITEMS, SampleAudioItem } from "../data/sampleAudios";
 import {
   CueSegment,
   SUPPORTED_LANGUAGES,
@@ -24,7 +26,9 @@ import {
   Play,
   FileAudio,
   CheckCircle2,
-  FileText
+  FileText,
+  Sliders,
+  Volume2
 } from "lucide-react";
 
 export const TranscribePage: React.FC = () => {
@@ -40,6 +44,71 @@ export const TranscribePage: React.FC = () => {
   const [languageDetected, setLanguageDetected] = useState<string>("");
 
   const [retryStatus, setRetryStatus] = useState<string | null>(null);
+
+  // Audio Workstation Player states
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
+  const [audioFreq, setAudioFreq] = useState<number>(360);
+  const [trackTitle, setTrackTitle] = useState<string>("Master Acoustic Stream");
+  const [speakerLabel, setSpeakerLabel] = useState<string | undefined>(undefined);
+  const [silenceTrimmerActive, setSilenceTrimmerActive] = useState<boolean>(false);
+  const animationFrameRef = React.useRef<number | null>(null);
+  const lastTickRef = React.useRef<number>(0);
+
+  // Compute total duration from segments
+  const totalAudioDuration = React.useMemo(() => {
+    if (!segments || segments.length === 0) return 28;
+    return Math.max(10, Math.ceil(segments[segments.length - 1].end));
+  }, [segments]);
+
+  // Audio Playback Animation Clock
+  React.useEffect(() => {
+    if (!isPlaying) {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      return;
+    }
+
+    lastTickRef.current = performance.now();
+
+    const loop = (now: number) => {
+      const deltaSec = ((now - lastTickRef.current) / 1000) * playbackSpeed;
+      lastTickRef.current = now;
+
+      setCurrentTime((prev) => {
+        let nextTime = prev + deltaSec;
+
+        // Silence Trimmer: jump gaps > 1.2s between segments
+        if (silenceTrimmerActive && segments) {
+          const inAnySegment = segments.some((s) => nextTime >= s.start && nextTime <= s.end);
+          if (!inAnySegment) {
+            const nextUpcoming = segments.find((s) => s.start > nextTime);
+            if (nextUpcoming && (nextUpcoming.start - nextTime) > 1.0) {
+              nextTime = nextUpcoming.start;
+            }
+          }
+        }
+
+        if (nextTime >= totalAudioDuration) {
+          setIsPlaying(false);
+          return 0;
+        }
+        return nextTime;
+      });
+
+      animationFrameRef.current = requestAnimationFrame(loop);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isPlaying, playbackSpeed, totalAudioDuration, silenceTrimmerActive, segments]);
 
   const handleFileSelect = async (selectedFile: File) => {
     setFile(selectedFile);
@@ -116,11 +185,17 @@ export const TranscribePage: React.FC = () => {
     setIsLoading(false);
   };
 
-  const handleLoadSample = () => {
-    setFile(new File(["sample-audio-bytes"], "Sample_Engineering_Podcast.mp3", { type: "audio/mp3" }));
-    setSegments(SAMPLE_SEGMENTS);
-    setSummary(SAMPLE_SUMMARY);
+  const handleLoadSample = (sampleItem?: SampleAudioItem) => {
+    const chosen = sampleItem || SAMPLE_AUDIO_ITEMS[0];
+    setFile(new File(["sample-audio-bytes"], `${chosen.id}.mp3`, { type: "audio/mp3" }));
+    setSegments(chosen.segments);
+    setSummary(chosen.summary);
     setLanguageDetected("English (US)");
+    setTrackTitle(chosen.title);
+    setAudioFreq(chosen.audioFreq);
+    setSpeakerLabel(chosen.category);
+    setCurrentTime(0);
+    setIsPlaying(false);
     setError(null);
   };
 
@@ -131,6 +206,8 @@ export const TranscribePage: React.FC = () => {
     setLanguageDetected("");
     setError(null);
     setIsLoading(false);
+    setIsPlaying(false);
+    setCurrentTime(0);
   };
 
   const transcribeFaqs = [
@@ -220,7 +297,7 @@ export const TranscribePage: React.FC = () => {
                     </label>
 
                     <button
-                      onClick={handleLoadSample}
+                      onClick={() => handleLoadSample()}
                       className="px-3 py-1.5 rounded-xl bg-neutral-100 hover:bg-[#ff4d00]/10 text-neutral-700 hover:text-[#ff4d00] text-xs font-mono font-bold transition-colors border border-neutral-200 flex items-center gap-1.5"
                     >
                       <Play className="w-3 h-3 text-[#ff4d00]" /> Try Sample Demo
@@ -239,44 +316,52 @@ export const TranscribePage: React.FC = () => {
                   isLoading={isLoading}
                 />
 
-                {/* Pre-Rendered Crawler-Accessible Sample Showcase (Solves Empty Shell Issue) */}
+                {/* Preloaded Multi-Scenario Sample Showcase */}
                 <div className="glass-card p-6 sm:p-8 rounded-3xl border border-black/10 bg-neutral-50/80 space-y-5">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#0d0f12] uppercase tracking-wider">
-                      <FileAudio className="w-4 h-4 text-[#ff4d00]" /> Pre-Loaded Interactive Output Demonstration
+                      <FileAudio className="w-4 h-4 text-[#ff4d00]" /> Instant 1-Click Interactive Audio Demonstrations
                     </div>
-                    <button
-                      onClick={handleLoadSample}
-                      className="text-xs font-mono font-bold text-[#ff4d00] hover:underline flex items-center gap-1"
-                    >
-                      Load into Interactive Editor →
-                    </button>
+                    <span className="text-[11px] font-mono text-neutral-500">
+                      Test audio scrubbing &amp; speaker cues without uploading
+                    </span>
                   </div>
 
                   <p className="text-xs text-neutral-600 leading-relaxed">
-                    Review this pre-rendered sample output demonstrating millisecond timecode alignment, speaker turn formatting, and automated executive summarization generated by Engine 01:
+                    Select any preloaded acoustic scenario to load its audio waveform, synchronized speaker cues, and executive summary directly into the workstation:
                   </p>
 
-                  <div className="space-y-3">
-                    <div className="p-4 rounded-2xl bg-white border border-black/5 space-y-1.5">
-                      <div className="text-[11px] font-mono font-bold text-[#ff4d00] uppercase">
-                        AI Executive Summary:
-                      </div>
-                      <p className="text-xs text-neutral-700 italic leading-relaxed">
-                        "{SAMPLE_SUMMARY}"
-                      </p>
-                    </div>
-
-                    <div className="space-y-2">
-                      {SAMPLE_SEGMENTS.map((seg) => (
-                        <div key={seg.id} className="p-3 rounded-xl bg-white border border-black/5 flex items-start gap-3 text-xs">
-                          <span className="font-mono font-bold text-[#ff4d00] whitespace-nowrap pt-0.5">
-                            [{formatTimeDisplay(seg.start)} - {formatTimeDisplay(seg.end)}]
-                          </span>
-                          <span className="text-neutral-800 leading-relaxed font-sans">{seg.text}</span>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+                    {SAMPLE_AUDIO_ITEMS.map((item) => (
+                      <div
+                        key={item.id}
+                        className="p-4 rounded-2xl bg-white border border-black/10 shadow-xs hover:border-[#ff4d00] hover:shadow-md transition-all flex flex-col justify-between space-y-3 group"
+                      >
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between text-[11px] font-mono">
+                            <span className="px-2 py-0.5 rounded-md bg-[#ff4d00]/10 text-[#ff4d00] font-bold">
+                              {item.category}
+                            </span>
+                            <span className="text-neutral-500 font-bold">{item.durationSeconds}s</span>
+                          </div>
+                          <h4 className="text-xs font-bold text-[#0d0f12] group-hover:text-[#ff4d00] transition-colors leading-snug">
+                            {item.title}
+                          </h4>
+                          <p className="text-[11px] text-neutral-500 line-clamp-2 leading-relaxed">
+                            {item.description}
+                          </p>
                         </div>
-                      ))}
-                    </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleLoadSample(item)}
+                          className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-neutral-100 hover:bg-[#ff4d00] text-neutral-800 hover:text-white text-xs font-mono font-bold transition-all border border-neutral-200 cursor-pointer"
+                        >
+                          <Play className="w-3 h-3 fill-current" />
+                          Launch Demo →
+                        </button>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -327,11 +412,31 @@ export const TranscribePage: React.FC = () => {
                   </button>
                 </div>
 
+                {/* Interactive Studio Waveform Player */}
+                <WaveformPlayer
+                  duration={totalAudioDuration}
+                  currentTime={currentTime}
+                  isPlaying={isPlaying}
+                  onPlayPause={() => setIsPlaying(!isPlaying)}
+                  onSeek={(t) => setCurrentTime(t)}
+                  audioFreq={audioFreq}
+                  trackTitle={trackTitle}
+                  speakerLabel={speakerLabel}
+                  onSpeedChange={(speed) => setPlaybackSpeed(speed)}
+                  silenceTrimmerActive={silenceTrimmerActive}
+                  onToggleSilenceTrimmer={() => setSilenceTrimmerActive(!silenceTrimmerActive)}
+                />
+
                 <Manuscript
                   segments={segments}
                   summary={summary}
                   languageDetected={languageDetected}
                   title={file?.name || "Audio Transcript"}
+                  currentTime={currentTime}
+                  onSeekToTime={(t) => {
+                    setCurrentTime(t);
+                    setIsPlaying(true);
+                  }}
                   onUpdateSegment={(id, newText) => {
                     setSegments((prev) =>
                       prev ? prev.map((s) => (s.id === id ? { ...s, text: newText } : s)) : null

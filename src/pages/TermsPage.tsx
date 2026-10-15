@@ -61,13 +61,16 @@ export const TermsPage: React.FC = () => {
           <section className="space-y-3">
             <div className="flex items-center gap-2">
               <Copyright className="w-5 h-5 text-[#ff4d00]" />
-              <h2 className="text-xl font-bold text-[#0d0f12]">3. Intellectual Property Rights & Ownership</h2>
+              <h2 className="text-xl font-bold text-[#0d0f12]">3. Intellectual Property, Fair Use & DMCA Safe Harbor</h2>
             </div>
             <p>
               <strong>You retain 100% exclusive ownership</strong> of all audio recordings, video files, text inputs, generated transcripts, and converted subtitles processed through TranscriptG.
             </p>
             <p>
               TranscriptG claims zero copyright, ownership, license, or distribution rights over your content. Furthermore, because we do not retain files in persistent storage, we do not store copies of your intellectual property.
+            </p>
+            <p>
+              TranscriptG complies strictly with Title 17 U.S. Code § 107 (Fair Use) and § 512 (DMCA Safe Harbor). We do not rip, download, or host third-party video streams. Video playback utilizes official YouTube embedded players in compliance with platform policies. To review our formal DMCA Notice & Takedown procedure or contact our Designated Agent, review our dedicated <a href="/copyright" className="text-[#ff4d00] font-bold underline">Copyright &amp; DMCA Policy</a>.
             </p>
           </section>
 

@@ -1,4 +1,4 @@
-import { LucideIcon, Mic, FileText, Cpu, GraduationCap, Youtube, Home, Sparkles, Wand2, Layers, Music, FileCode2, Search, ChefHat, Globe2 } from "lucide-react";
+import { LucideIcon, Mic, FileText, Cpu, GraduationCap, Youtube, Home, Sparkles, Wand2, Layers, Music, FileCode2, Search, ChefHat, Globe2, HardDrive, Clock, Gauge } from "lucide-react";
 
 export interface ToolItem {
   id: string;
@@ -136,6 +136,51 @@ export const TOOLS_REGISTRY: ToolItem[] = [
     accentBg: "bg-emerald-500/10",
     accentText: "text-emerald-600",
     keywords: ["validator", "srt", "vtt", "wpm", "speech rate", "bitrate", "audio size", "calculator", "telemetry"],
+  },
+  {
+    id: "bitrate-calculator",
+    name: "Audio Bitrate & File Size Calculator",
+    shortName: "Bitrate Calc",
+    path: "/tools/bitrate-calculator",
+    icon: HardDrive,
+    description: "Calculate uncompressed WAV/PCM and compressed MP3/FLAC storage sizes and streaming bitrates.",
+    category: "Utilities",
+    badge: "Audio Calc",
+    badgeType: "amber",
+    dockPriority: 9,
+    accentBg: "bg-amber-500/10",
+    accentText: "text-amber-600",
+    keywords: ["bitrate", "wav size", "audio calculator", "flac", "mp3 size", "bandwidth", "sample rate", "pcm"],
+  },
+  {
+    id: "subtitle-sync",
+    name: "Subtitle Sync & Offset Calibrator",
+    shortName: "Subtitle Sync",
+    path: "/tools/subtitle-sync",
+    icon: Clock,
+    description: "Shift SRT and WebVTT timestamps by milliseconds or convert frame rates (23.976 to 25 fps PAL).",
+    category: "Subtitles & Formats",
+    badge: "Timecode",
+    badgeType: "cyan",
+    dockPriority: 10,
+    accentBg: "bg-[#00d9ff]/15",
+    accentText: "text-[#0088a8]",
+    keywords: ["subtitle sync", "shift srt", "delay", "offset", "vtt sync", "framerate drift", "pal speedup"],
+  },
+  {
+    id: "speech-rate-calculator",
+    name: "Speech Rate & WPM Analyzer",
+    shortName: "WPM Analyzer",
+    path: "/tools/speech-rate-calculator",
+    icon: Gauge,
+    description: "Measure words per minute (WPM), speech velocity, and estimate duration for presentations and videos.",
+    category: "Audio & Speech",
+    badge: "WPM Pacer",
+    badgeType: "orange",
+    dockPriority: 11,
+    accentBg: "bg-[#ff4d00]/10",
+    accentText: "text-[#ff4d00]",
+    keywords: ["wpm", "speech rate", "speaking speed", "duration planner", "words per minute", "ted talk pace"],
   },
 ];
 

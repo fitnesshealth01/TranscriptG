@@ -47,7 +47,7 @@ export const YouTubeTranscriptPage: React.FC = () => {
           "youtube video to text",
           "youtube transcript with timestamps",
           "transcribe youtube video no captions",
-          "youtube subtitles downloader",
+          "youtube caption extractor",
           "youtube to srt converter",
           "youtube video summarizer",
           "youtube shorts transcript",

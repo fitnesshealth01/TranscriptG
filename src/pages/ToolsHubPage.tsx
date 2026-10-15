@@ -32,6 +32,7 @@ import {
   Layers,
   HardDrive,
   Radio,
+  Gauge,
 } from "lucide-react";
 
 const SAMPLE_SRT_WITH_ISSUES = `1
@@ -777,6 +778,89 @@ export const ToolsHubPage: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* Dedicated Standalone Calculators & Precision Workstations */}
+        <div className="pt-8 border-t border-black/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div className="text-xs font-mono uppercase tracking-[0.2em] text-[#ff4d00] font-bold flex items-center gap-2">
+              <Sparkles className="w-4 h-4" /> Dedicated High-Precision Workstations
+            </div>
+            <span className="text-[11px] font-mono text-neutral-500">
+              Engineered for audio engineers, subtitle editors &amp; podcasters
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Link
+              to="/tools/bitrate-calculator"
+              className="p-5 rounded-2xl bg-white border border-black/10 hover:border-amber-500 hover:shadow-lg transition-all group space-y-2 relative overflow-hidden"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold">
+                  <HardDrive className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700">
+                  Bitrate &amp; Size
+                </span>
+              </div>
+              <h4 className="font-bold text-sm text-[#0d0f12] group-hover:text-amber-600 transition-colors">
+                Audio Bitrate &amp; Size Calculator
+              </h4>
+              <p className="text-xs text-neutral-500 leading-relaxed">
+                Calculate storage footprints, sample rates, bit depths, and compression for PCM, FLAC, MP3, AAC, and Opus.
+              </p>
+              <div className="pt-2 flex items-center text-xs font-mono font-bold text-amber-600 group-hover:translate-x-1 transition-transform">
+                Open Bitrate Calc <ArrowRight className="w-3.5 h-3.5 ml-1" />
+              </div>
+            </Link>
+
+            <Link
+              to="/tools/subtitle-sync"
+              className="p-5 rounded-2xl bg-white border border-black/10 hover:border-blue-500 hover:shadow-lg transition-all group space-y-2 relative overflow-hidden"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center font-bold">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700">
+                  Delay &amp; Offset
+                </span>
+              </div>
+              <h4 className="font-bold text-sm text-[#0d0f12] group-hover:text-blue-600 transition-colors">
+                Subtitle Timecode Sync &amp; Offset
+              </h4>
+              <p className="text-xs text-neutral-500 leading-relaxed">
+                Fix audio desynchronization, shift SRT &amp; VTT cue timestamps with millisecond precision, and convert FPS.
+              </p>
+              <div className="pt-2 flex items-center text-xs font-mono font-bold text-blue-600 group-hover:translate-x-1 transition-transform">
+                Open Sync Tool <ArrowRight className="w-3.5 h-3.5 ml-1" />
+              </div>
+            </Link>
+
+            <Link
+              to="/tools/speech-rate-calculator"
+              className="p-5 rounded-2xl bg-white border border-black/10 hover:border-emerald-500 hover:shadow-lg transition-all group space-y-2 relative overflow-hidden"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
+                  <Gauge className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700">
+                  WPM &amp; Pace
+                </span>
+              </div>
+              <h4 className="font-bold text-sm text-[#0d0f12] group-hover:text-emerald-600 transition-colors">
+                Speech Rate &amp; WPM Analyzer
+              </h4>
+              <p className="text-xs text-neutral-500 leading-relaxed">
+                Measure spoken words per minute, plan presentation duration, and benchmark pacing against historical orators.
+              </p>
+              <div className="pt-2 flex items-center text-xs font-mono font-bold text-emerald-600 group-hover:translate-x-1 transition-transform">
+                Open WPM Analyzer <ArrowRight className="w-3.5 h-3.5 ml-1" />
+              </div>
+            </Link>
+          </div>
+        </div>
 
         {/* Quick Launch Cards to Main Production Engines */}
         <div className="pt-8 border-t border-black/10">

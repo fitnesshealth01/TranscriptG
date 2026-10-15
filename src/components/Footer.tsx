@@ -108,6 +108,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/copyright" className="text-neutral-300 hover:text-white transition-colors">
+                  Copyright &amp; DMCA Policy
+                </Link>
+              </li>
+              <li>
                 <button
                   type="button"
                   onClick={openCookieConsent}
@@ -127,6 +132,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link to="/privacy" className="hover:text-neutral-300 transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-neutral-300 transition-colors">Terms</Link>
+            <Link to="/copyright" className="hover:text-neutral-300 transition-colors">DMCA</Link>
             <button
               type="button"
               onClick={openCookieConsent}

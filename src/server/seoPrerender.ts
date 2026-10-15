@@ -410,7 +410,7 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
       },
       {
         q: "Can I summarize videos without existing subtitles?",
-        a: "If a video has auto-generated or creator-uploaded captions, TranscriptG can summarize it instantly. For videos without captions, you can download the audio and run it through our Audio Transcriber tool.",
+        a: "If a video has auto-generated or creator-uploaded captions, TranscriptG summarizes it immediately. For videos without captions, our YouTube Speech Lab reconstructs dialogue under educational fair use guidelines directly in your browser without requiring external audio downloads.",
       },
       {
         q: "What summary formats are available?",
@@ -591,6 +591,47 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
       </section>
     `,
   },
+  "/copyright": {
+    title: "Copyright, DMCA Safe Harbor & Fair Use Policy — TranscriptG",
+    description: "Official Copyright Policy, DMCA 17 U.S.C. § 512 Notice & Takedown guidelines, Fair Use educational standards, and Designated Copyright Agent contact information for TranscriptG.",
+    keywords: "transcriptg copyright policy, dmca safe harbor transcriptg, fair use transcript policy, designated dmca agent, youtube developer compliance, intellectual property policy",
+    canonicalPath: "/copyright",
+    ogType: "website",
+    category: "WebPage",
+    h1: "Copyright, DMCA Safe Harbor & Fair Use Policy",
+    lead: "TranscriptG is committed to intellectual property rights, educational fair use (17 U.S.C. § 107), and statutory compliance with the Digital Millennium Copyright Act (17 U.S.C. § 512).",
+    features: [
+      "Strict compliance with 17 U.S.C. § 512(c) Notice & Takedown statutory standards.",
+      "Clear educational and accessibility Fair Use doctrine guidelines (17 U.S.C. § 107).",
+      "Publicly designated DMCA Copyright Agent contact information and submission instructions.",
+      "Explicit declaration of platform independence: no video ripping or unauthorized stream storage.",
+      "100% intellectual property retention for users on all uploaded content.",
+    ],
+    faqs: [
+      {
+        q: "Does TranscriptG download, store, or stream YouTube videos?",
+        a: "No. TranscriptG does not download, stream-rip, store, or distribute YouTube audio or video files. Video playback is rendered exclusively via YouTube's official embedded player in full compliance with YouTube Developer Terms of Service.",
+      },
+      {
+        q: "What is Fair Use under 17 U.S.C. § 107?",
+        a: "Fair Use is a legal doctrine under United States copyright law that permits limited use of copyrighted material without requiring permission from the rights holder for purposes such as criticism, comment, news reporting, teaching, scholarship, and research.",
+      },
+      {
+        q: "How do I submit a DMCA takedown notice?",
+        a: "Submit a written notification under 17 U.S.C. § 512(c)(3) to our designated DMCA Agent at akashsinghsolanki66@gmail.com with identification of the copyrighted work, URL location, and authorized signature.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-copyright">
+        <h1>Copyright, DMCA Safe Harbor &amp; Fair Use Policy</h1>
+        <p class="lead">TranscriptG is dedicated to respecting intellectual property rights, adhering strictly to Title 17 of the United States Code (17 U.S.C. § 107 &amp; § 512), and supporting educational accessibility under international fair use standards.</p>
+        <h2>Designated DMCA Agent</h2>
+        <p>Agent: Akash Singh Solanki<br/>Email: <a href="mailto:akashsinghsolanki66@gmail.com">akashsinghsolanki66@gmail.com</a><br/>Turnaround: 24–48 hours</p>
+        <h2>Educational Fair Use Standards (17 U.S.C. § 107)</h2>
+        <p>Our tools operate under 17 U.S.C. § 107 for personal education, academic study, hearing accessibility, and critical commentary. Video playback occurs exclusively through official embedded players.</p>
+      </section>
+    `,
+  },
   "/contact": {
     title: "Contact & Technical Support — TranscriptG Engineering Lab",
     description: "Get in touch with the TranscriptG engineering team for technical support, subtitle conversion feedback, partnership inquiries, and API assistance.",
@@ -660,6 +701,128 @@ export const STATIC_PAGES_SEO: Record<string, PageSeoConfig> = {
           <li><strong>Subtitle Syntax &amp; Timecode Validator:</strong> Comprehensive inspection of SubRip (.SRT) and WebVTT (.VTT) timestamps, CPS reading speed warnings, and line length violations.</li>
           <li><strong>Speech Rate &amp; WPM Pacer:</strong> Computes exact delivery speed, syllable count, Flesch-Kincaid reading ease, and features a live teleprompter pacer.</li>
           <li><strong>Audio Bitrate &amp; Size Estimator:</strong> Calculates bandwidth and memory requirements for WAV, FLAC, MP3, AAC, and Opus audio codecs.</li>
+        </ul>
+      </section>
+    `,
+  },
+  "/tools/bitrate-calculator": {
+    title: "Audio Bitrate & File Size Calculator — MP3, WAV, FLAC, AAC & Opus | TranscriptG",
+    description: "Calculate audio file size, bitrate, and bandwidth consumption in seconds. Compare uncompressed PCM WAV, lossless FLAC, MP3, AAC, and Opus formats with precision data rates.",
+    keywords: "audio bitrate calculator, audio file size calculator, wav file size calculator, mp3 bitrate calculator, flac compression calculator, calculate audio storage, audio bandwidth calculator, sample rate bit depth file size",
+    canonicalPath: "/tools/bitrate-calculator",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "Audio Bitrate & File Size Calculator",
+    lead: "Interactive digital audio calculation workstation. Compute exact storage footprints, bitrates, streaming bandwidth, and compression ratios for uncompressed PCM WAV, lossless FLAC, broadcast MP3, AAC, and Opus codecs.",
+    features: [
+      "Precision PCM formulas: Sample Rate × Bit Depth × Channels.",
+      "Instant multi-format benchmark table comparing uncompressed WAV to FLAC, MP3 320k/192k/128k, AAC, and Opus.",
+      "Custom audio duration scrubber and presets (30s, 3m, 15m, 1hr, 2hr podcast).",
+      "Bandwidth and data transfer rate calculator in KB/s and MB/min.",
+      "Comprehensive codec engineering guide with sample rate references (44.1kHz, 48kHz, 96kHz, 192kHz).",
+    ],
+    faqs: [
+      {
+        q: "How is audio uncompressed WAV file size calculated?",
+        a: "Uncompressed PCM WAV file size is calculated using the formula: File Size (Bytes) = Sample Rate (Hz) × (Bit Depth / 8) × Number of Audio Channels × Duration (seconds). For example, 1 minute of stereo CD quality (44,100 Hz, 16-bit) equals 44,100 × 2 × 2 × 60 = 10,584,000 bytes (~10.09 MB).",
+      },
+      {
+        q: "What is the recommended bitrate for podcast distribution?",
+        a: "For spoken word podcasts and audiobooks, a 128 kbps to 192 kbps Constant Bitrate (CBR) MP3 or 96 kbps AAC/Opus file delivers pristine acoustic intelligibility while maintaining lightweight download sizes for mobile listeners.",
+      },
+      {
+        q: "Why does FLAC achieve smaller file sizes without audio quality loss?",
+        a: "FLAC (Free Lossless Audio Codec) uses linear prediction and Huffman/Rice entropy coding to compress redundant acoustic audio data by 40% to 60% without discarding any harmonic frequency content.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>Audio Bitrate &amp; File Size Calculator</h1>
+        <p class="lead">Interactive digital audio calculation workstation. Compute exact storage footprints, bitrates, streaming bandwidth, and compression ratios for uncompressed PCM WAV, lossless FLAC, broadcast MP3, AAC, and Opus codecs.</p>
+        <h2>Digital Audio Codec Specifications &amp; Formulas</h2>
+        <p>Uncompressed PCM Bitrate Formula: <code>Bitrate (bps) = Sample Rate (Hz) × Bit Depth (bits) × Channels</code>.</p>
+        <p>File Size Calculation: <code>Total Size (MB) = (Bitrate in kbps × Duration in seconds) / 8000</code>.</p>
+      </section>
+    `,
+  },
+  "/tools/subtitle-sync": {
+    title: "Subtitle Timecode Sync & Offset Calibrator — Fix SRT & VTT Delay Online | TranscriptG",
+    description: "Shift, recalibrate, and synchronize subtitle timestamps online. Fix out-of-sync audio delay, stretch or compress framerates (23.976, 24, 25, 29.97 fps), and preview timecodes in real-time.",
+    keywords: "subtitle sync tool, shift srt subtitles online, fix subtitle delay, recalibrate vtt timestamps, srt time shifter, adjust subtitle timing, sync subtitles with audio, 23.976 to 25 fps subtitle converter",
+    canonicalPath: "/tools/subtitle-sync",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "Subtitle Timecode Synchronizer & Offset Calibrator",
+    lead: "Precision timecode calibration workstation for SubRip (.SRT) and WebVTT (.VTT) subtitle tracks. Offset cue timestamps, correct audio desynchronization, and convert framerates with zero server upload.",
+    features: [
+      "Millisecond-precision timecode offsetting with instant visual adjustment (+/- 50ms, 100ms, 500ms, 1s, 5s).",
+      "Framerate stretch/compress conversion: 23.976 fps to 25 fps PAL, 25 fps to 23.976 fps, and 24 to 25 fps.",
+      "Live dual-pane diff comparison highlighting original vs calibrated subtitle cues in real-time.",
+      "Direct 1-click export to synchronized .SRT or clean .VTT formats.",
+      "100% client-side privacy: your subtitles and video transcripts never leave your browser.",
+    ],
+    faqs: [
+      {
+        q: "Why do subtitles become progressively out of sync over time?",
+        a: "Progressive desynchronization occurs when the subtitle file was timed to video with a different frame rate than the video being watched (e.g., 23.976 fps NTSC vs 25.000 fps PAL), causing subtitles to drift by approximately 4.1% or roughly 2.5 seconds every minute.",
+      },
+      {
+        q: "How do I fix subtitles that appear 2 seconds before the audio?",
+        a: "If subtitles appear 2 seconds before the actors speak, apply a positive offset of +2000 milliseconds (+2.000s) to delay each cue so the text aligns precisely with speech.",
+      },
+      {
+        q: "Does this subtitle synchronizer support both SRT and WebVTT formats?",
+        a: "Yes. The calibrator automatically parses SubRip (.SRT) format using comma millisecond delimiters and WebVTT (.VTT) format using period delimiters.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>Subtitle Timecode Synchronizer &amp; Offset Calibrator</h1>
+        <p class="lead">Precision timecode calibration workstation for SubRip (.SRT) and WebVTT (.VTT) subtitle tracks. Offset cue timestamps, correct audio desynchronization, and convert framerates with zero server upload.</p>
+        <h2>How Subtitle Time Shifting Works</h2>
+        <p>Subtitle synchronization shifts every timestamp (start and end cue) by a specified offset in milliseconds: <code>T_new = max(0, T_original + Offset)</code>.</p>
+      </section>
+    `,
+  },
+  "/tools/speech-rate-calculator": {
+    title: "Speech Rate & Words Per Minute (WPM) Calculator — Speaking Pace Analyzer | TranscriptG",
+    description: "Measure your exact speaking rate in Words Per Minute (WPM) and syllables. Plan presentation duration, podcast delivery, and speech timing with real-time pacing feedback.",
+    keywords: "speech rate calculator, words per minute calculator, wpm speaking rate, calculate speech duration, presentation timing calculator, audio speech pace, podcast wpm meter, speaking speed analyzer",
+    canonicalPath: "/tools/speech-rate-calculator",
+    ogType: "website",
+    category: "MultimediaApplication",
+    h1: "Speech Rate & Words Per Minute (WPM) Calculator",
+    lead: "Acoustic speaking pace analysis engine. Calculate Words Per Minute (WPM), target delivery durations, and syllable cadence for keynote presentations, podcasting, audiobooks, and video voiceovers.",
+    features: [
+      "Dual calculation modes: Word Count + Duration to WPM, or Target Duration to Ideal Script Word Count.",
+      "Interactive color-coded pace meter with benchmark comprehension zones (Conversational, Technical, Broadcast).",
+      "Automatic syllable estimation, Words Per Sentence (WPS), and Flesch-Kincaid readability scoring.",
+      "Curated historical speech benchmarks: Steve Jobs 2005 Stanford Speech, MLK I Have a Dream, Churchill We Shall Fight, and TED Keynotes.",
+      "Direct workflow connection to TranscriptG's Speech-to-Text audio transcription engine.",
+    ],
+    faqs: [
+      {
+        q: "What is an ideal speaking rate for keynote presentations and webinars?",
+        a: "The ideal speaking rate for keynote presentations and webinars is between 130 and 150 Words Per Minute (WPM). This pacing allows listeners to absorb complex ideas and retain visual slide content without cognitive fatigue.",
+      },
+      {
+        q: "What is the standard speaking rate for audiobooks and podcasts?",
+        a: "Professional audiobook narrators (Audible/ACX standards) speak at 140 to 160 WPM. Podcasts typically range between 150 and 175 WPM, while technical tutorials and lectures are best delivered at 120 to 140 WPM.",
+      },
+      {
+        q: "How many words are needed for a 5-minute speech?",
+        a: "At a standard, natural conversational pace of 140 Words Per Minute (WPM), a 5-minute speech requires approximately 700 words. If incorporating pauses for laughter or slides, plan for 650 words.",
+      },
+    ],
+    semanticHtml: `
+      <section class="seo-tool-guide">
+        <h1>Speech Rate &amp; Words Per Minute (WPM) Calculator</h1>
+        <p class="lead">Acoustic speaking pace analysis engine. Calculate Words Per Minute (WPM), target delivery durations, and syllable cadence for keynote presentations, podcasting, audiobooks, and video voiceovers.</p>
+        <h2>Speaking Speed Benchmarks</h2>
+        <ul>
+          <li><strong>Slow &amp; Deliberate:</strong> 100 - 120 WPM (Audiobooks for beginners, medical lectures, language learning).</li>
+          <li><strong>Natural Conversational:</strong> 130 - 150 WPM (Keynotes, podcasts, TED talks, executive briefings).</li>
+          <li><strong>Dynamic &amp; Fast:</strong> 160 - 180 WPM (Broadcast news, commentary, high-energy storytelling).</li>
         </ul>
       </section>
     `,
@@ -1122,6 +1285,9 @@ export function injectSeoIntoHtml(htmlTemplate: string, reqPath: string): { html
             <li><a href="/youtube-video-summarizer" style="color: #ff4d00;">YouTube Video Summarizer</a></li>
             <li><a href="/process" style="color: #ff4d00;">AI Text Intelligence &amp; Summarizer</a></li>
             <li><a href="/tools" style="color: #ff4d00;">Interactive Utilities Hub</a></li>
+            <li><a href="/tools/bitrate-calculator" style="color: #ff4d00;">Audio Bitrate &amp; File Size Calculator</a></li>
+            <li><a href="/tools/subtitle-sync" style="color: #ff4d00;">Subtitle Timecode Sync &amp; Offset Calibrator</a></li>
+            <li><a href="/tools/speech-rate-calculator" style="color: #ff4d00;">Speech Rate &amp; WPM Analyzer</a></li>
             <li><a href="/glossary" style="color: #ff4d00;">Audio &amp; Subtitle Glossary (40+ Terms)</a></li>
             <li><a href="/blog" style="color: #ff4d00;">Technical Guides &amp; Blog</a></li>
             <li><a href="/editorial-policy" style="color: #ff4d00;">Editorial Integrity &amp; Fact-Checking Charter</a></li>

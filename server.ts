@@ -910,6 +910,9 @@ app.get("/sitemap.xml", (_req, res) => {
     { path: "/ai-subtitle-translator", changefreq: "weekly", priority: "0.9" },
     { path: "/youtube-video-summarizer", changefreq: "weekly", priority: "0.9" },
     { path: "/tools", changefreq: "weekly", priority: "0.8" },
+    { path: "/tools/bitrate-calculator", changefreq: "weekly", priority: "0.85" },
+    { path: "/tools/subtitle-sync", changefreq: "weekly", priority: "0.85" },
+    { path: "/tools/speech-rate-calculator", changefreq: "weekly", priority: "0.85" },
     { path: "/glossary", changefreq: "monthly", priority: "0.7" },
     { path: "/blog", changefreq: "daily", priority: "0.9" },
     { path: "/editorial-policy", changefreq: "monthly", priority: "0.7" },
@@ -917,6 +920,7 @@ app.get("/sitemap.xml", (_req, res) => {
     { path: "/contact", changefreq: "monthly", priority: "0.7" },
     { path: "/privacy", changefreq: "monthly", priority: "0.5" },
     { path: "/terms", changefreq: "monthly", priority: "0.5" },
+    { path: "/copyright", changefreq: "monthly", priority: "0.5" },
   ];
 
   const blogRoutes = BLOG_ARTICLES.map((a) => ({

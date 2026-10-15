@@ -46,10 +46,14 @@ const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"), "ContactP
 const BlogIndexPage = lazyWithRetry(() => import("./pages/BlogIndexPage"), "BlogIndexPage");
 const BlogPostDynamic = lazyWithRetry(() => import("./pages/BlogPostDynamic"), "BlogPostDynamic");
 const ToolsHubPage = lazyWithRetry(() => import("./pages/ToolsHubPage"), "ToolsHubPage");
+const BitrateCalculatorPage = lazyWithRetry(() => import("./pages/BitrateCalculatorPage"), "BitrateCalculatorPage");
+const SubtitleSyncPage = lazyWithRetry(() => import("./pages/SubtitleSyncPage"), "SubtitleSyncPage");
+const SpeechRateCalculatorPage = lazyWithRetry(() => import("./pages/SpeechRateCalculatorPage"), "SpeechRateCalculatorPage");
 const VideoTranslatorPage = lazyWithRetry(() => import("./pages/VideoTranslatorPage"), "VideoTranslatorPage");
 const SubtitleTranslatorPage = lazyWithRetry(() => import("./pages/SubtitleTranslatorPage"), "SubtitleTranslatorPage");
 const YouTubeSummarizerPage = lazyWithRetry(() => import("./pages/YouTubeSummarizerPage"), "YouTubeSummarizerPage");
 const EditorialPolicyPage = lazyWithRetry(() => import("./pages/EditorialPolicyPage"), "EditorialPolicyPage");
+const CopyrightPage = lazyWithRetry(() => import("./pages/CopyrightPage"), "CopyrightPage");
 const GlossaryPage = lazyWithRetry(() => import("./pages/GlossaryPage"), "GlossaryPage");
 const GscChecklistPage = lazyWithRetry(() => import("./pages/GscChecklistPage"), "GscChecklistPage");
 const NotFoundPage = lazyWithRetry(() => import("./pages/NotFoundPage"), "NotFoundPage");
@@ -136,6 +140,9 @@ export default function App() {
               <Route path="ai-subtitle-translator" element={<SubtitleTranslatorPage />} />
               <Route path="youtube-video-summarizer" element={<YouTubeSummarizerPage />} />
               <Route path="tools" element={<ToolsHubPage />} />
+              <Route path="tools/bitrate-calculator" element={<BitrateCalculatorPage />} />
+              <Route path="tools/subtitle-sync" element={<SubtitleSyncPage />} />
+              <Route path="tools/speech-rate-calculator" element={<SpeechRateCalculatorPage />} />
               <Route path="editorial-team" element={<Navigate to="/about" replace />} />
               <Route path="editorial-policy" element={<EditorialPolicyPage />} />
               <Route path="glossary" element={<GlossaryPage />} />
@@ -144,6 +151,7 @@ export default function App() {
               <Route path="about" element={<AboutPage />} />
               <Route path="privacy" element={<PrivacyPage />} />
               <Route path="terms" element={<TermsPage />} />
+              <Route path="copyright" element={<CopyrightPage />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="blog" element={<BlogIndexPage />} />
               <Route path="blog/:slug" element={<BlogPostDynamic />} />
